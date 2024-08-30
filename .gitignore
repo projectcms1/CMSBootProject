@@ -5,14 +5,14 @@ target/
 !**/src/test/**/target/
 
 ### STS ###
-CmsBootProject/.apt_generated
-CmsBootProject/.classpath
-CmsBootProject/.factorypath
-CmsBootProject/.project
-CmsBootProject/.settings
-CmsBootProject/.springBeans
-CmsBootProject/.sts4-cache
-CmsBootProject/src/main/resources/application.properties
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+src/main/resources/application.properties
 
 ### IntelliJ IDEA ###
 .idea
