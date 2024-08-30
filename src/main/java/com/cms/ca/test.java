@@ -16,7 +16,6 @@ public class test {
 	public String testok() {
 		List<test_dto> result = this.repo.findAll();
 		System.out.println(result);
-		
-		return "/testok";
+		return "test";
 	}
 }
