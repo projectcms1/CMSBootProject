@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>빈페이지 레이아웃</title>
+  <title>상담관리</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -28,7 +28,16 @@
 
   <!-- Template Main CSS File -->
   <link href="/assets/css/style.css" rel="stylesheet">
+<<<<<<< HEAD
 
+=======
+  <style>
+    .btn-counsel {
+      width: 100px;
+      height: 38px;
+    }
+  </style>
+>>>>>>> branch 'portal' of https://github.com/projectcms1/CMSBootProject.git
   <!-- =======================================================
   * Template Name: NiceAdmin
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -41,6 +50,7 @@
 <body>
 
   <!-- ======= Header ======= -->
+<<<<<<< HEAD
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
@@ -155,6 +165,9 @@
 
       </ul>
     </nav><!-- End Icons Navigation -->
+=======
+  <header th:replace="~{/student/std_header :: std_header}">
+>>>>>>> branch 'portal' of https://github.com/projectcms1/CMSBootProject.git
 
   </header><!-- End Header -->
 
@@ -166,37 +179,54 @@
       <li class="nav-heading">진로지도상담 및 일반상담</li>
       
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="/student/counsel_loglist">
           <i class="bi bi-grid"></i>
           <span>상담이력 조회</span>
         </a>
-      </li><!-- End Dashboard Nav -->
+      </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-faq.html">
-          <i class="bi bi-question-circle"></i>
-          <span>상담예약 관리</span>
+        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-layout-text-window-reverse"></i><span>상담예약 관리</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-      </li><!-- End F.A.Q Page Nav -->
+        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="/student/cnsl_reserlist">
+              <i class="bi bi-circle"></i><span>내 상담예약 조회</span>
+            </a>
+          </li>
+          <li>
+            <a href="/student/counsel_reservation">
+              <i class="bi bi-circle"></i><span>상담 예약</span>
+            </a>
+          </li>
+        </ul>
+      </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-contact.html">
+        <a class="nav-link collapsed" href="/student/chat_counsel">
           <i class="bi bi-envelope"></i>
           <span>채팅상담</span>
         </a>
-      </li><!-- End Contact Page Nav -->
+      </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-register.html">
+        <a class="nav-link collapsed" href="/student/slfpsy_testlist">
           <i class="bi bi-card-list"></i>
           <span>자가심리검사</span>
         </a>
+<<<<<<< HEAD
       </li><!-- End Register Page Nav -->
+=======
+      </li>
+
+>>>>>>> branch 'portal' of https://github.com/projectcms1/CMSBootProject.git
     </ul>
   </aside>
 
   <main id="main" class="main">
     <section class="section">
+<<<<<<< HEAD
       <div class="row">
         <div class="col-lg-12">
           <div class="card">
@@ -205,10 +235,113 @@
               <div class="row">
                 <span class="col-lg-4">학년도</span>
               </div>
+=======
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">상담이력 검색</h5>
+                        
+                        <div class="row">
+                            <span class="col-lg-2">학년도</span>
+                            <select class="col-lg-2">
+                                <option value="">---전체---</option>
+                                <option>1969</option>
+                            </select>
+
+                            <span class="col-lg-2">학기</span>
+                            <select class="col-lg-2">
+                                <option value="">---전체---</option>
+                                <option>1학기</option>
+                                <option>2학기</option>
+                            </select>
+
+                            <span class="col-lg-1">학년</span>
+                            <select class="col-lg-2">
+                                <option value="">---전체---</option>
+                                <option>1학년</option>
+                                <option>2학년</option>
+                                <option>3학년</option>
+                                <option>4학년</option>
+                                <option>5학년</option>
+                            </select>
+                        </div>
+
+                        <div class="row">
+                            <span class="col-lg-2">상담종류</span>
+                            <select class="col-lg-2">
+                                <option value="">---전체---</option>
+                                <option>1969</option>
+                            </select>
+                            <span class="col-lg-2">상담일</span>
+                            <input type="date" class="col-lg-1">~<input type="date" class="col-lg-1">
+                        </div>
+
+                        <div class="row">
+                            <button type="button" class="btn btn-primary btn-counsel" style="margin-left: auto;">조회</button>
+                            <button type="button" class="btn btn-primary btn-counsel" style="margin-left: 10px;">초기화</button>
+                        </div>
+
+                        <br><br>
+
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">학년도</th>
+                                        <th scope="col">학기</th>
+                                        <th scope="col">학년</th>
+                                        <th scope="col">상담종류</th>
+                                        <th scope="col">상담자</th>
+                                        <th scope="col">상담일</th>
+                                        <th scope="col">상담방법</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">2019</th>
+                                        <td>1학기</td>
+                                        <td>3학년</td>
+                                        <td>진로상담</td>
+                                        <td>상담사</td>
+                                        <td>2019-03-01</td>
+                                        <td>오프라인</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2019</th>
+                                        <td>1학기</td>
+                                        <td>3학년</td>
+                                        <td>진로상담</td>
+                                        <td>상담사</td>
+                                        <td>2019-03-01</td>
+                                        <td>오프라인</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2019</th>
+                                        <td>1학기</td>
+                                        <td>3학년</td>
+                                        <td>진로상담</td>
+                                        <td>상담사</td>
+                                        <td>2019-03-01</td>
+                                        <td>오프라인</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+>>>>>>> branch 'portal' of https://github.com/projectcms1/CMSBootProject.git
             </div>
+<<<<<<< HEAD
           </div>
         </div>
       </div>
+=======
+
+        </div>
+>>>>>>> branch 'portal' of https://github.com/projectcms1/CMSBootProject.git
     </section>
 
   </main><!-- End #main -->
