@@ -1,16 +1,15 @@
 package com.cms.ca.portalmain;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import com.cms.ca.test_repo;
 
 @Controller
 public class portalmain {
 	
-	@Autowired
-	test_repo repo;
+	@GetMapping("/blank")
+	public String path_blank() {
+		return "page_blank";
+	}
 	
 	@GetMapping("/")
 	public String portalMain() {
