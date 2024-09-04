@@ -18,5 +18,14 @@ public class test {
 		System.out.println(result);
 		return "test";
 	}
-
+	
+	@GetMapping("/")
+	public String portalMain() {
+		return "default-header";
+	}
+	
+	@GetMapping("/blank")
+	public String page_blank() {
+		return "page_blank";
+	}
 }

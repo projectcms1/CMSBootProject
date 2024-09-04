@@ -1,0 +1,51 @@
+.reser-calendar {
+    width: 800px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar-header button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.calendar-header button:hover {
+    background-color: #0056b3;
+}
+
+#calendarTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#calendarTable th,
+#calendarTable td {
+    width: 14.28%;
+    height: 80px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+#calendarTable td:hover {
+    background-color: #f0f8ff;
+    cursor: pointer;
+}
+
+/* 비활성화된 날짜 스타일 */
+.disabled {
+    color: #ccc;
+    pointer-events: none; /* 마우스 이벤트를 비활성화 */
+}
