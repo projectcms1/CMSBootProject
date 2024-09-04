@@ -29,6 +29,36 @@
   <!-- Template Main CSS File -->
   <link href="/assets/css/style.css" rel="stylesheet">
   <link href="/assets/css/calendar.css" rel="stylesheet">
+  <style>
+  	.counsel-optn-box {
+  		border: 1px solid #000000;
+  		border-radius: 5px;
+  		padding-top: 20px;
+  	}
+  	.counsel-optn-box p {
+  		text-align: center;
+  	}
+  	.counsel-optn-box ul {
+  		list-style-type: none;
+  		padding-right: 30px;
+  	}
+  	.counsel-optn-box ul li {
+		font-size: 25px;
+		margin-bottom: 10px;
+  	}
+  	.counsel-optn-box ul li div {
+  		font-size: 16px;
+  		border: 1px solid #DDDDDD;
+  		border-radius: 5px;
+  		height: 38px;
+  		padding-top: 5px;
+  		padding-left: 10px;
+  	}
+  	.counsel-optn-box ul li button {
+  		width: 100%;
+  		margin-top: 30px;
+  	}
+  </style>
 
   <!-- =======================================================
   * Template Name: NiceAdmin
@@ -138,61 +168,147 @@
                   </ul>
                   <div class="tab-content pt-2" id="borderedTabContent">
                     <div class="tab-pane fade show active" id="bordered-home" role="tabpanel" aria-labelledby="home-tab">
-
-                      <div class="col-lg-6">
-                        <select class="form-select">
-                          <option>전체</option>
-                          <option>상담사1</option>
-                          <option>상담사2</option>
-                          <option>상담사3</option>
-                          <option>상담사4</option>
-                          <option>상담사5</option>
-                        </select>
+                      
+                      <div class="row">
+	                      <div class="col-md-6" style="display: flex; flex-wrap: wrap;">
+		                    <div>
+		                      <select class="form-select">
+		                        <option>전체</option>
+		                        <option>상담사1</option>
+		                        <option>상담사2</option>
+		                        <option>상담사3</option>
+		                        <option>상담사4</option>
+		                        <option>상담사5</option>
+		                      </select>
+							  <p>* 상담사를 선택하시면 해당 상담사의 일정만 표시됩니다.</p>
+		                    </div>
+	
+		                    <div class="reser-calendar">
+		                      <div class="calendar-header">
+		                        <button id="prevMonth">&lt;</button>
+		                        <h2 id="monthAndYear"></h2>
+		                        <button id="nextMonth">&gt;</button>
+		                      </div>
+		                      <table id="calendarTable">
+		                        <thead id="calendarHeader">
+		                          <!-- 요일 헤더는 JavaScript에서 동적으로 추가됩니다 -->
+		                        </thead>
+		                        <tbody id="calendarBody">
+		                          <!-- 달력 날짜가 여기에 표시됩니다 -->
+		                        </tbody>
+		                      </table>
+		                    </div>
+	                      </div>
+	
+	                      <div class="col-md-4 counsel-optn-box">
+	                      	<p>희망 날짜를 선택한 후, 아래 내용을 선택해주세요.</p>
+	                        <hr>
+	                        <ul>
+	                          <li><i class="bx bx-check"></i>상담사</li>
+	                          <li><div id="">전체</div></li>
+	                          <li><i class="bx bx-check"></i>예약시간</li>
+	                          <li><div id=""></div></li>
+	                          <li><i class="bx bx-check"></i>시간 구분</li>
+	                          <li>
+	                            <select class="form-select">
+	                              <option>뭐가</option>
+	                              <option>필요</option>
+	                              <option>하지</option>
+	                            </select>
+	                          </li>
+	                          <li><i class="bx bx-check"></i>상담 종류</li>
+	                          <li>
+	                            <select class="form-select">
+	                              <option>진로</option>
+	                              <option>학업</option>
+	                              <option>블라블라</option>
+	                            </select>
+	                          </li>
+	                          <li><i class="bx bx-check"></i>상담 방식</li>
+	                          <li>
+	                            <select class="form-select">
+	                              <option>대면</option>
+	                              <option>화상</option>
+	                              <option>전화</option>
+	                              <option>채팅</option>
+	                            </select>
+	                          </li>
+	                          <li><button type="button" class="btn btn-primary btn-lg">신청하기</button></li>
+	                        </ul>
+	                      </div>
                       </div>
-
-                      <div class="reser-calendar">
-                        <div class="calendar-header">
-                          <button id="prevMonth">&lt;</button>
-                          <h2 id="monthAndYear"></h2>
-                          <button id="nextMonth">&gt;</button>
-                        </div>
-                        <table id="calendarTable">
-                          <thead id="calendarHeader">
-                              <!-- 요일 헤더는 JavaScript에서 동적으로 추가됩니다 -->
-                          </thead>
-                          <tbody id="calendarBody">
-                              <!-- 달력 날짜가 여기에 표시됩니다 -->
-                          </tbody>
-                        </table>
-                      </div>
-
-
-
-
                     </div>
                     <div class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
-                      지도교수 상담 신청 파트
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="col-md-4 counsel-optn-box">
+	                        <ul>
+	                          <li><i class="bx bx-check"></i>시간 구분</li>
+	                          <li>
+	                          	<input type="date">
+	                          </li>
+	                          <li><i class="bx bx-check"></i>시간 구분</li>
+	                          <li>
+	                            <select class="form-select">
+	                              <option>뭐가</option>
+	                              <option>필요</option>
+	                              <option>하지</option>
+	                            </select>
+	                          </li>
+	                          <li><i class="bx bx-check"></i>상담 종류</li>
+	                          <li>
+	                            <select class="form-select">
+	                              <option>진로</option>
+	                              <option>학업</option>
+	                              <option>블라블라</option>
+	                            </select>
+	                          </li>
+	                          <li><i class="bx bx-check"></i>상담 방식</li>
+	                          <li>
+	                            <select class="form-select">
+	                              <option>대면</option>
+	                              <option>화상</option>
+	                              <option>전화</option>
+	                              <option>채팅</option>
+	                            </select>
+	                          </li>
+	                          <li><button type="button" class="btn btn-primary btn-lg">신청하기</button></li>
+	                        </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     </div>
                   </div><!-- End Bordered Tabs -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                  <hr>
-
                 </div>
             </div>
 

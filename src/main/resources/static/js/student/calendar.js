@@ -17,6 +17,24 @@ const monthNames = [
 
 const dayNames = ["일", "월", "화", "수", "목", "금", "토"];
 
+// 공휴일 목록 (월, 일 형식)
+const publicHolidays = [
+    { month: 0, day: 1 },   // 1월 1일
+    { month: 2, day: 1 },   // 3월 1일
+    { month: 4, day: 1 },   // 5월 1일
+    { month: 5, day: 6 },   // 6월 6일
+    { month: 7, day: 15 },  // 8월 15일
+    { month: 9, day: 3 },   // 10월 3일
+    { month: 11, day: 25 }  // 12월 25일
+];
+
+function isPublicHoliday(date) {
+    const month = date.getMonth();
+    const day = date.getDate();
+    
+    return publicHolidays.some(holiday => holiday.month === month && holiday.day === day);
+}
+
 function showCalendar(year, month) {
     const firstDay = new Date(year, month).getDay();
     const daysInMonth = 32 - new Date(year, month, 32).getDate();
@@ -41,6 +59,7 @@ function showCalendar(year, month) {
 
         for (let j = 0; j < 7; j++) {
             let cell = document.createElement("td");
+            const currentDate = new Date(year, month, date);
 
             if (i === 0 && j < firstDay) {
                 cell.innerHTML = "";
@@ -55,6 +74,11 @@ function showCalendar(year, month) {
                     (year === todayYear && month < todayMonth) ||
                     (year === todayYear && month === todayMonth && date < todayDate)
                 ) {
+                    cell.classList.add("disabled");
+                }
+
+                // 주말과 공휴일 비활성화 처리
+                if (j === 0 || j === 6 || isPublicHoliday(currentDate)) {
                     cell.classList.add("disabled");
                 }
 
