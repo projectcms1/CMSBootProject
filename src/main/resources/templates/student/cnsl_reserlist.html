@@ -49,60 +49,13 @@
 <body>
 
   <!-- ======= Header ======= -->
-  <header th:replace="~{/student/std_header :: std_header}">
-
-  </header><!-- End Header -->
-
-  <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
-
-    <ul class="sidebar-nav" id="sidebar-nav">
-
-      <li class="nav-heading">진로지도상담 및 일반상담</li>
-      
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/student/counsel_loglist">
-          <i class="bi bi-grid"></i>
-          <span>상담이력 조회</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-layout-text-window-reverse"></i><span>상담예약 관리</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="/student/cnsl_reserlist">
-              <i class="bi bi-circle"></i><span>내 상담예약 조회</span>
-            </a>
-          </li>
-          <li>
-            <a href="/student/counsel_reservation">
-              <i class="bi bi-circle"></i><span>상담 예약</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/student/chat_counsel">
-          <i class="bi bi-envelope"></i>
-          <span>채팅상담</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/student/slfpsy_testlist">
-          <i class="bi bi-card-list"></i>
-          <span>자가심리검사</span>
-        </a>
-      </li>
-
-    </ul>
-
-  </aside>
-
+  <div th:replace="~{/student/std_header :: std_header}"></div>		
+  <!-- End Header -->
+  
+  <!-- ======= Counsel_Sidebar ======= -->
+  <div th:replace="~{/student/counsel_sidebar :: counsel_sidebar}"></div>	
+  <!-- End Counsel_Sidebar -->
+  
   <main id="main" class="main">
 
     <section class="section">
