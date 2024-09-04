@@ -1,11 +1,13 @@
-package com.cms.ca;
+package com.cms.ca.portalmain;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.cms.ca.test_repo;
+
 @Controller
-public class main {
+public class portalmain {
 	
 	@Autowired
 	test_repo repo;
