@@ -11,11 +11,6 @@ public class EmployeeController {
 	@Autowired
 	test_repo repo;
 	
-	@GetMapping("/login")
-	public String loginPage() {
-		return "login";
-	}
-	
 	@GetMapping("/empy_info")
 	public String employeeInfoPage() {
 		return "employee/empy_info";
