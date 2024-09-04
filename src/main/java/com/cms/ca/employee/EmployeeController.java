@@ -10,11 +10,6 @@ import com.cms.ca.test_repo;
 public class EmployeeController {
 	@Autowired
 	test_repo repo;
-
-	@GetMapping("/")
-	public String portalMain() {
-		return "default-header";
-	}
 	
 	@GetMapping("/login")
 	public String loginPage() {
