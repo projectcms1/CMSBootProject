@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+	<title>포털 공지사항 수정</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap">
+	<link rel="stylesheet" href="/assets/css/indexstyles.css">
+	<style>
+		/* 추가 스타일 */
+		
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="notices">
+			<h2>공지사항</h2><br>
+			<div class="notice-header">
+				<div class="category-tabs">
+					<button class="category active" data-category="total">전체</button>
+					<button class="category" data-category="academic">학사</button>
+					<button class="category" data-category="scholarship">장학</button>
+					<button class="category" data-category="volunteer">봉사</button>
+					<button class="category" data-category="international">국제교류</button>
+					<button class="category" data-category="events">비교과·행사</button>
+					<button class="category" data-category="employee">교직원</button>
+				</div>
+			</div>
+
+			<!-- Notices Lists -->
+			<ul class="notice-list" id="total" th:each="notice : ${notices}">
+				<li class="notice-item">
+					<div>
+						<a href="#" th:text="${notice.title}">공지사항 제목</a>
+						<span class="date" th:text="${notice.date}">2024-09-02</span>
+					</div>
+					<button class="edit-btn" 
+						th:data-title="${notice.title}" 
+						th:data-date="${notice.date}">수정</button>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<!-- 공지사항 수정 폼 -->
+	<div class="notice-edit" id="editForm">
+		<h3>공지사항 수정</h3>
+		<form>
+			<label for="title">제목</label><br>
+			<input type="text" id="title" name="title"><br><br>
+			<label for="date">날짜</label><br>
+			<input type="date" id="date" name="date"><br><br>
+			<label for="content">내용</label><br>
+			<textarea id="content" name="content" rows="5"></textarea><br><br>
+			<button type="submit">수정 완료</button>
+		</form>
+	</div>
+
+	<script>
+		// 모든 카테고리 버튼에 대해 클릭 이벤트를 설정합니다.
+		document.querySelectorAll('.category').forEach(button => {
+			button.addEventListener('click', function () {
+				// 모든 카테고리 버튼에서 'active' 클래스를 제거합니다.
+				document.querySelectorAll('.category').forEach(btn => btn.classList.remove('active'));
+
+				// 클릭한 카테고리 버튼에 'active' 클래스를 추가합니다.
+				this.classList.add('active');
+
+				// 클릭한 카테고리 확인
+				const category = this.getAttribute('data-category');
+
+				// 전체 카테고리가 선택된 경우 모든 공지사항 리스트를 보여줍니다.
+				if (category === 'total') {
+					document.querySelectorAll('.notice-list').forEach(list => {
+						list.classList.remove('hidden');
+						list.classList.add('fade-in'); // 전환 효과 추가
+					});
+				} else {
+					// 다른 카테고리가 선택된 경우 해당 카테고리의 리스트만 표시하고 나머지는 숨깁니다.
+					document.querySelectorAll('.notice-list').forEach(list => {
+						list.classList.add('hidden');
+						list.classList.remove('fade-in'); // 이전에 적용된 전환 효과 제거
+					});
+
+					// 선택한 카테고리 리스트를 표시하고 전환 효과 추가
+					const activeList = document.getElementById(category);
+					activeList.classList.remove('hidden');
+					activeList.classList.add('fade-in'); // 전환 효과 추가
+				}
+			});
+		});
+
+		// 수정 버튼 클릭 시 수정 폼 열기
+		document.querySelectorAll('.edit-btn').forEach(button => {
+			button.addEventListener('click', function () {
+				const title = this.getAttribute('data-title');
+				const date = this.getAttribute('data-date');
+
+				// 폼에 클릭한 공지사항 데이터 입력
+				document.getElementById('title').value = title;
+				document.getElementById('date').value = date;
+
+				// 수정 폼 보이기
+				document.getElementById('editForm').classList.add('active');
+			});
+		});
+	</script>
+</body>
+
+</html>

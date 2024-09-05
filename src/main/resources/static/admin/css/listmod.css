@@ -1,0 +1,42 @@
+
+/*사용자 리스트 페이지 */
+  /* 테이블 정렬 및 스타일링 */
+  table th, table td {
+      text-align: center; /* 중앙 정렬 */
+      vertical-align: middle; /* 수직 정렬 */
+      padding: 10px; /* 셀 간의 간격 조정 */
+  }
+
+  /* 이름 열의 이미지 및 텍스트 정렬 */
+  table td img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+      vertical-align: middle;
+  }
+
+  /* 버튼 스타일 조정 */
+  button.btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+  }
+
+      /* 반응형을 위한 추가 스타일 */
+	  @media (max-width: 768px) {
+        .prod_1i .col-sm-12 {
+            margin-top: 10px; /* 작은 화면에서 여백 추가 */
+        }
+    }
+
+.buttton_1{
+background:#046cdb;
+border:1px solid #046cdb;
+color:#fff;
+display: inline-block;
+padding: 10px 20px 10px 20px!important;
+font-weight:normal;
+border-radius:3px;
+}
+

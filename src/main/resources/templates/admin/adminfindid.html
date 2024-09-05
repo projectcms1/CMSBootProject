@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Admin Console - Login</title>
+	<!-- Bootstrap core CSS -->
+	<link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/admin/css/font-awesome.min.css" rel="stylesheet">
+	<link href="/admin/css/style.css" rel="stylesheet">
+	<link href="/admin/css/nav.css" rel="stylesheet">
+	<link href="/admin/css/authentication.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+	<!--로그인 css-->
+	<link href="/admin/css/admin_login.css" rel="stylesheet">
+</head>
+
+<body>
+	<section>
+		<div class="container">
+			<div class="aulog_l">
+				<h5 class="mb-0 text-center">
+					<img src="/admin/img/calogo.png" alt="Logo" width="50" height="50">
+					중앙정보대학교 관리자 정보 찾기
+				</h5>
+				<br><br>
+				<!-- 탭 버튼 -->
+				<ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+					<li class="nav-item" role="presentation">
+						<a class="nav-link active" id="id-tab" data-bs-toggle="tab" href="#id" role="tab"
+							aria-controls="id" aria-selected="true">아이디 찾기</a>
+					</li>
+					<li class="nav-item" role="presentation">
+						<a class="nav-link" id="password-tab" data-bs-toggle="tab" href="#password" role="tab"
+							aria-controls="password" aria-selected="false">비밀번호 찾기</a>
+					</li>
+				</ul>
+				<!-- 탭 내용 -->
+				<div class="tab-content" id="myTabContent">
+					<!-- 아이디 찾기 -->
+					<div class="tab-pane fade show active" id="id" role="tabpanel" aria-labelledby="id-tab">
+						<h6 class="mt-4">관리자 이메일</h6>
+						<input class="form-control" placeholder="관리자 이메일을 입력하세요." type="text">
+						<a class="buttton_1" href="#"><i class="fa fa-sign-in"></i> 아이디 찾기</a>
+					</div>
+
+					<!-- 비밀번호 찾기 -->
+					<div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+						<h6 class="mt-4">관리자 아이디</h6>
+						<input class="form-control" placeholder="관리자 아이디를 입력하세요." type="text">
+						<h6 class="mt-4">관리자 이메일</h6>
+						<input class="form-control" placeholder="관리자 이메일을 입력하세요." type="email">
+						<a class="buttton_1" href="#"><i class="fa fa-sign-in"></i> 비밀번호 찾기</a>
+					</div>
+				</div>
+
+				<div class="forgot-password">
+					<a class="buttton" href="./login"><i class="fa fa-reply"></i>&nbsp;&nbsp;로그인 사이트로 가기
+					</a></h6>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="/admin/js/bootstrap.bundle.min.js"></script>
+	<script src="/admin/js/global.js"></script>
+
+</body>
+
+</html>
