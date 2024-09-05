@@ -150,3 +150,106 @@ body {
 		.notice-edit.active {
 			display: block;
 		}
+
+		.notice-item {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.notice-item button {
+			margin-left: 10px;
+			padding: 5px 10px;
+			border: none;
+			background-color: #007bff;
+			color: white;
+			cursor: pointer;
+		}
+
+		.notice-item button:hover {
+			background-color: #0056b3;
+		}
+
+		.notice-edit {
+			width: 30%;
+			position: fixed;
+			top: 10%;
+			right: 0;
+			background-color: #f9f9f9;
+			padding: 20px;
+			box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+			display: none;
+			/* 처음에는 보이지 않도록 */
+		}
+
+		.notice-edit.active {
+			display: block;
+		}
+		
+		/* 화면을 전체화면으로 설정 */
+		.container {
+			width: 100vw;
+			height: 100vh;
+			padding: 20px;
+			box-sizing: border-box;
+		}
+
+		.notice-item {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 10px;
+		}
+
+		.notice-item div {
+			flex-grow: 1;
+		}
+
+		.notice-item button {
+			margin-left: 10px;
+			padding: 5px 10px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		.notice-item .edit-btn {
+			background-color: #007bff;
+			color: white;
+		}
+
+		.notice-item .edit-btn:hover {
+			background-color: #0056b3;
+		}
+
+		.notice-item .delete-btn {
+			background-color: #ff4d4d;
+			color: white;
+		}
+
+		.notice-item .delete-btn:hover {
+			background-color: #e60000;
+		}
+
+		.notice-list {
+			width: 100%;
+		}
+
+		.notice-edit {
+			width: 30%;
+			position: fixed;
+			top: 10%;
+			right: 0;
+			background-color: #f9f9f9;
+			padding: 20px;
+			box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+			display: none;
+			/* 처음에는 보이지 않도록 */
+		}
+
+		.notice-edit.active {
+			display: block;
+		}
+		
+		
+		

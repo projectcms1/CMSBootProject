@@ -8,44 +8,135 @@
 	<link rel="stylesheet"
 		href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap">
 	<link rel="stylesheet" href="/assets/css/indexstyles.css">
-	<style>
-		/* 추가 스타일 */
-		.notice-item {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-		}
-
-		.notice-item button {
-			margin-left: 10px;
-			padding: 5px 10px;
-			border: none;
-			background-color: #007bff;
-			color: white;
-			cursor: pointer;
-		}
-
-		.notice-item button:hover {
-			background-color: #0056b3;
-		}
-
-		.notice-edit {
-			width: 30%;
-			position: fixed;
-			top: 10%;
-			right: 0;
-			background-color: #f9f9f9;
-			padding: 20px;
-			box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-			display: none;
-			/* 처음에는 보이지 않도록 */
-		}
-
-		.notice-edit.active {
-			display: block;
-		}
-	</style>
 </head>
+<style>
+	/* 화면을 전체화면으로 설정 */
+	.container {
+		width: 100vw;
+		height: 100vh;
+		padding: 20px;
+		box-sizing: border-box;
+	}
+
+	.notice-item {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 10px;
+	}
+
+	.notice-item div {
+		flex-grow: 1;
+	}
+
+	.notice-item button {
+		margin-left: 10px;
+		padding: 5px 10px;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+
+	.notice-item .edit-btn {
+		background-color: #007bff;
+		color: white;
+	}
+
+	.notice-item .edit-btn:hover {
+		background-color: #0056b3;
+	}
+
+	.notice-item .delete-btn {
+		background-color: #ff4d4d;
+		color: white;
+	}
+
+	.notice-item .delete-btn:hover {
+		background-color: #e60000;
+	}
+
+	.notice-list {
+		width: 100%;
+	}
+
+	/* 수정 폼 스타일 */
+	.notice-edit {
+		width: 600px;
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background-color: white;
+		padding: 30px;
+		border-radius: 10px;
+		box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+		z-index: 1000;
+		display: none;
+	}
+
+	.notice-edit.active {
+		display: block;
+	}
+
+	/* 모달 창이 열릴 때 배경 어둡게 */
+	.modal-overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background-color: rgba(0, 0, 0, 0.5);
+		z-index: 999;
+		display: none;
+	}
+
+	.modal-overlay.active {
+		display: block;
+	}
+
+	/* 폼 스타일 */
+	.notice-edit form {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.notice-edit label {
+		margin-bottom: 5px;
+		font-weight: bold;
+	}
+
+	.notice-edit input,
+	.notice-edit textarea,
+	.notice-edit select {
+		margin-bottom: 10px;
+		padding: 10px;
+		border-radius: 5px;
+		border: 1px solid #ccc;
+	}
+
+	.notice-edit input[type="checkbox"] {
+		width: auto;
+	}
+
+	.notice-edit button {
+		background-color: #007bff;
+		color: white;
+		padding: 10px;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+
+	.notice-edit button:hover {
+		background-color: #0056b3;
+	}
+
+	/* 첨부파일 스타일 */
+	.notice-edit input[type="file"] {
+		padding: 5px;
+		border: none;
+	}
+</style>
 
 <body>
 	<div class="container">
@@ -68,6 +159,7 @@
 				<li class="notice-item">
 					<div><a href="#">2024-2학기 온라인 강좌 증원 추가 안내</a> <span class="date">2024-09-02</span></div>
 					<button class="edit-btn" data-title="2024-2학기 온라인 강좌 증원 추가 안내" data-date="2024-09-02">수정</button>
+					<button class="delete-btn" data-title="2024-2학기 온라인 강좌 증원 추가 안내">삭제</button>
 				</li>
 			</ul>
 
@@ -75,42 +167,83 @@
 				<li class="notice-item">
 					<div><a href="#">2024-2학기 소그룹채플 안내</a> <span class="date">2024-08-30</span></div>
 					<button class="edit-btn" data-title="2024-2학기 소그룹채플 안내" data-date="2024-08-30">수정</button>
+					<button class="delete-btn" data-title="2024-2학기 소그룹채플 안내">삭제</button>
 				</li>
 			</ul>
 
 			<ul class="notice-list hidden" id="scholarship">
-				<li><a href="#">2024-장학금 신청 안내</a> <span class="date">2024-08-25</span></li>
-				<button class="edit-btn" data-title="2024-장학금 신청 안내" data-date="2024-08-25">수정</button>
+				<li class="notice-item">
+					<div><a href="#">2024-장학금 신청 안내</a> <span class="date">2024-08-25</span></div>
+					<button class="edit-btn" data-title="2024-장학금 신청 안내" data-date="2024-08-25">수정</button>
+					<button class="delete-btn" data-title="2024-장학금 신청 안내">삭제</button>
+				</li>
 			</ul>
 
 			<ul class="notice-list hidden" id="volunteer">
-				<li><a href="#">봉사활동 참가 신청 안내</a> <span class="date">2024-08-20</span></li>
-				<button class="edit-btn" data-title="봉사활동 참가 신청 안내" data-date="2024-08-20">수정</button>
+				<li class="notice-item">
+					<div><a href="#">봉사활동 참가 신청 안내</a> <span class="date">2024-08-20</span></div>
+					<button class="edit-btn" data-title="봉사활동 참가 신청 안내" data-date="2024-08-20">수정</button>
+					<button class="delete-btn" data-title="봉사활동 참가 신청 안내">삭제</button>
+				</li>
 			</ul>
 
 			<ul class="notice-list hidden" id="international">
-				<li><a href="#">2024-2학기 국제교류 프로그램 안내</a> <span class="date">2024-08-18</span></li>
-				<button class="edit-btn" data-title="2024-2학기 국제교류 프로그램 안내" data-date="2024-08-18">수정</button>
+				<li class="notice-item">
+					<div><a href="#">2024-2학기 국제교류 프로그램 안내</a> <span class="date">2024-08-18</span></div>
+					<button class="edit-btn" data-title="2024-2학기 국제교류 프로그램 안내" data-date="2024-08-18">수정</button>
+					<button class="delete-btn" data-title="2024-2학기 국제교류 프로그램 안내">삭제</button>
+				</li>
 			</ul>
 
 			<ul class="notice-list hidden" id="events">
-				<li><a href="#">비교과 행사 안내</a> <span class="date">2024-08-10</span></li>
-				<button class="edit-btn" data-title="비교과 행사 안내" data-date="2024-08-10">수정</button>
+				<li class="notice-item">
+					<div><a href="#">비교과 행사 안내</a> <span class="date">2024-08-10</span></div>
+					<button class="edit-btn" data-title="비교과 행사 안내" data-date="2024-08-10">수정</button>
+					<button class="delete-btn" data-title="비교과 행사 안내">삭제</button>
+				</li>
 			</ul>
 
 		</div>
 	</div>
 
+	<!-- 모달 배경 -->
+	<div class="modal-overlay" id="modalOverlay"></div>
+
 	<!-- 공지사항 수정 폼 -->
 	<div class="notice-edit" id="editForm">
 		<h3>공지사항 수정</h3>
 		<form>
-			<label for="title">제목</label><br>
-			<input type="text" id="title" name="title"><br><br>
-			<label for="date">날짜</label><br>
-			<input type="date" id="date" name="date"><br><br>
+			<label for="id">공지사항 일련번호</label>
+			<input type="text" id="id" name="id" readonly>
+
+			<label for="title">공지사항 제목</label>
+			<input type="text" id="title" name="title">
+
+			<label for="category">공지 분류명</label>
+			<select id="category" name="category">
+				<option value="academic">학사</option>
+				<option value="scholarship">장학</option>
+				<option value="volunteer">봉사</option>
+				<option value="international">국제교류</option>
+				<option value="events">비교과·행사</option>
+				<option value="employee">교직원</option>
+			</select>
+
+			<label for="author">작성자명</label>
+			<input type="text" id="author" name="author" readonly>
+
+			<label for="date">작성일시</label>
+			<input type="text" id="date" name="date" readonly>
+			
 			<label for="content">내용</label><br>
 			<textarea id="content" name="content" rows="5"></textarea><br><br>
+
+			<label for="fix">공지 고정
+			<input type="checkbox" id="fix" name="fix"></label>
+
+			<label for="file">첨부파일</label>
+			<input type="file" id="file" name="file"><br>
+
 			<button type="submit">수정 완료</button>
 		</form>
 	</div>
@@ -160,9 +293,16 @@
 				document.getElementById('title').value = title;
 				document.getElementById('date').value = date;
 
-				// 수정 폼 보이기
+				// 수정 폼과 모달 배경 보이기
 				document.getElementById('editForm').classList.add('active');
+				document.getElementById('modalOverlay').classList.add('active');
 			});
+		});
+
+		// 모달 창을 닫기 위해 배경 클릭 시 수정 폼 닫기
+		document.getElementById('modalOverlay').addEventListener('click', function () {
+			document.getElementById('editForm').classList.remove('active');
+			document.getElementById('modalOverlay').classList.remove('active');
 		});
 	</script>
 </body>
