@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+	<title>공지사항 관리</title>
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap">
+	<link rel="stylesheet" href="/admin/css/noticemod.css">
+</head>
+
+<body>
+	<div class="header">
+		<h5>공지사항 관리</h5>
+	</div>
+
+	<div class="notices">
+		<h2>공지사항</h2><br>
+		<div class="notice-header">
+			<div class="category-tabs">
+				<button class="category active" data-category="total">전체</button>
+				<button class="category" data-category="academic">학사</button>
+				<button class="category" data-category="scholarship">장학</button>
+				<button class="category" data-category="volunteer">봉사</button>
+				<button class="category" data-category="international">국제교류</button>
+				<button class="category" data-category="events">비교과·행사</button>
+				<button class="category" data-category="employee">교직원</button>
+			</div>
+		</div>
+
+		<!-- Notices Lists -->
+		<ul class="notice-list" id="total">
+			<li class="notice-item">
+				<div><a href="#">2024-2학기 온라인 강좌 증원 추가 안내</a> <span class="date">2024-09-02</span></div>
+				<button class="edit-btn" data-title="2024-2학기 온라인 강좌 증원 추가 안내" data-date="2024-09-02">수정</button>
+				<button class="delete-btn" data-title="2024-2학기 온라인 강좌 증원 추가 안내">삭제</button>
+			</li>
+		</ul>
+
+		<ul class="notice-list hidden" id="academic">
+			<li class="notice-item">
+				<div><a href="#">2024-2학기 소그룹채플 안내</a> <span class="date">2024-08-30</span></div>
+				<button class="edit-btn" data-title="2024-2학기 소그룹채플 안내" data-date="2024-08-30">수정</button>
+				<button class="delete-btn" data-title="2024-2학기 소그룹채플 안내">삭제</button>
+			</li>
+		</ul>
+
+		<ul class="notice-list hidden" id="scholarship">
+			<li class="notice-item">
+				<div><a href="#">2024-장학금 신청 안내</a> <span class="date">2024-08-25</span></div>
+				<button class="edit-btn" data-title="2024-장학금 신청 안내" data-date="2024-08-25">수정</button>
+				<button class="delete-btn" data-title="2024-장학금 신청 안내">삭제</button>
+			</li>
+		</ul>
+
+		<ul class="notice-list hidden" id="volunteer">
+			<li class="notice-item">
+				<div><a href="#">봉사활동 참가 신청 안내</a> <span class="date">2024-08-20</span></div>
+				<button class="edit-btn" data-title="봉사활동 참가 신청 안내" data-date="2024-08-20">수정</button>
+				<button class="delete-btn" data-title="봉사활동 참가 신청 안내">삭제</button>
+			</li>
+		</ul>
+
+		<ul class="notice-list hidden" id="international">
+			<li class="notice-item">
+				<div><a href="#">2024-2학기 국제교류 프로그램 안내</a> <span class="date">2024-08-18</span></div>
+				<button class="edit-btn" data-title="2024-2학기 국제교류 프로그램 안내" data-date="2024-08-18">수정</button>
+				<button class="delete-btn" data-title="2024-2학기 국제교류 프로그램 안내">삭제</button>
+			</li>
+		</ul>
+
+		<ul class="notice-list hidden" id="events">
+			<li class="notice-item">
+				<div><a href="#">비교과 행사 안내</a> <span class="date">2024-08-10</span></div>
+				<button class="edit-btn" data-title="비교과 행사 안내" data-date="2024-08-10">수정</button>
+				<button class="delete-btn" data-title="비교과 행사 안내">삭제</button>
+			</li>
+		</ul>
+
+	</div>
+
+	<!-- 모달 배경 -->
+	<div class="modal-overlay" id="modalOverlay"></div>
+
+	<!-- 공지사항 수정 폼 -->
+	<div class="notice-edit" id="editForm">
+		<h3>공지사항 수정</h3>
+		<form>
+			<label for="id">공지사항 일련번호</label>
+			<input type="text" id="id" name="id" readonly>
+
+			<label for="title">공지사항 제목</label>
+			<input type="text" id="title" name="title">
+
+			<label for="category">공지 분류명</label>
+			<select id="category" name="category">
+				<option value="academic">학사</option>
+				<option value="scholarship">장학</option>
+				<option value="volunteer">봉사</option>
+				<option value="international">국제교류</option>
+				<option value="events">비교과·행사</option>
+				<option value="employee">교직원</option>
+			</select>
+
+			<label for="author">작성자명</label>
+			<input type="text" id="author" name="author" readonly>
+
+			<label for="date">작성일시</label>
+			<input type="text" id="date" name="date" readonly>
+
+			<label for="content">내용</label>
+			<textarea id="content" name="content" style="height:150px"></textarea>
+
+			<label for="fix">공지 고정
+				<input type="checkbox" id="fix" name="fix"></label>
+
+			<label for="file">첨부파일</label>
+			<input type="file" id="file" name="file">
+
+			<button type="submit">수정 완료</button>
+		</form>
+	</div>
+
+	<div class="footer"></div>
+	<script src="/admin/js/ptnoticemod.js"></script>
+
+</body>
+
+</html>

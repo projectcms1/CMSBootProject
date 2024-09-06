@@ -6,7 +6,7 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
-	<title>사용자 정보 관리(최고관리자)_교직원정보관리</title>
+	<title>비교과 프로그램 관리</title>
 	<!-- Bootstrap core CSS -->
 	<link href="/admin/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/admin/css/font-awesome.min.css" rel="stylesheet">
@@ -27,8 +27,8 @@
 	<!--header끝-->
 
 	<section id="menu_big" class="sticky-top" th:insert="~{/admin/nav :: admin_nav}">
-	<!--nav시작 -->
-	<!--nav끝 -->
+		<!--nav시작 -->
+		<!--nav끝 -->
 	</section>
 
 	<div class="container-fluid">
@@ -39,7 +39,7 @@
 				<div class="row crm_1">
 					<div class="col-md-3">
 						<div class="analytic_1l">
-							<h5 class="mb-0">교직원 정보 관리</h5>
+							<h5 class="mb-0">비교과 프로그램 관리</h5>
 						</div>
 					</div>
 					<div class="col-md-9">
@@ -61,19 +61,8 @@
 								<!-- 교직원 분류 select -->
 								<select class="form-select form-select-sm ms-2 me-2" id="categorySelect"
 									style="width: 150px; height:38px;" onchange="toggleFields()">
-									<option value="">교번</option>
-									<option value="staff">교직원 분류</option>
-									<option value="">이름</option>
-									<option value="">소속기관</option>
-									<option value="">소속부서</option>
-									<option value="status">상태</option> <!-- 상태를 선택하면 라디오 버튼 표시 -->
-								</select>
-
-								<!-- 교수/상담사 select (기본적으로 숨김 처리) -->
-								<select class="form-select form-select-sm ms-2 me-2" id="staffTypeSelect"
-									style="width: 150px; height:38px; display: none;">
-									<option value="">교수</option>
-									<option value="">상담사</option>
+									<option value="">프로그램명</option>
+									<option value="status">접수상태</option>
 								</select>
 
 								<!-- 라디오 버튼을 포함하는 div (기본적으로 숨김 처리) -->
@@ -84,14 +73,20 @@
 										<label class="form-check-label" for="all">전체</label>
 									</div>
 									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="statusOptions" id="preactive"
+											value="active">
+										<label class="form-check-label" for="preactive">접수중</label>
+									</div>
+
+									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="radio" name="statusOptions" id="active"
 											value="active">
-										<label class="form-check-label" for="active">활성화</label>
+										<label class="form-check-label" for="active">운영중</label>
 									</div>
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="radio" name="statusOptions" id="inactive"
 											value="inactive">
-										<label class="form-check-label" for="inactive">비활성화</label>
+										<label class="form-check-label" for="inactive">마감</label>
 									</div>
 								</div>
 							</div>
@@ -116,7 +111,7 @@
 					<div class="d-flex justify-content-end">
 						<a class="buttton_1" href="#"
 							style="height:38px; display:flex; align-items:center; justify-content: center;">
-							사용자 추가 <i class="fa fa-plus-circle ms-2"></i>
+							프로그램 추가 <i class="fa fa-plus-circle ms-2"></i>
 						</a>
 					</div>
 
@@ -132,10 +127,11 @@
 											class="form-check-input dt-checkboxes"><label
 											class="form-check-label">&nbsp;</label></div>
 								</th>
-								<th scope="col">이름</th>
-								<th scope="col">소속대학</th>
-								<th scope="col">소속부서</th>
-								<th scope="col">교번</th>
+								<th scope="col">프로그램명</th>
+								<th scope="col">담당기관</th>
+								<th scope="col">접수기간</th>
+								<th scope="col">운영기간</th>
+								<th scope="col">최대인원</th>
 								<th scope="col">상태</th>
 								<th scope="col">상세보기</th>
 							</tr>
@@ -151,20 +147,23 @@
 								</td>
 
 								<td>
-									<h6 class="font_14 col_3">홍길동</h6>
+									<h6 class="font_14 col_3">2024 재학생 '멘토스' [멘티 모집]</h6>
 								</td>
 
 								<td>
-									<h6 class="font_14 col_3">공과대학</h6>
+									<h6 class="font_14 col_3">상담센터</h6>
 								</td>
 								<td>
-									<h6 class="font_14 col_3">컴퓨터공학과</h6>
+									<h6 class="font_14 col_3">2024.09.08(일) 23:45</h6>
 								</td>
 								<td>
-									<h6 class="font_14 col_3">20241234</h6>
+									<h6 class="font_14 col_3">2024.09.13(금) 16:00 ~ 2024.10.17(목) 19:30</h6>
 								</td>
 								<td>
-									<h6 class="bg_3 text-center font_12 p-1 mb-0">활성화</h6>
+									<h6 class="bg_3 text-center font_12 p-1 mb-0">15명</h6>
+								</td>
+								<td>
+									<h6 class="bg_3 text-center font_12 p-1 mb-0">접수중</h6>
 								</td>
 								<td>
 									<button type="submit" class="btn btn-primary bg_1">
