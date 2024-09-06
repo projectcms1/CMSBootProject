@@ -22,9 +22,9 @@ public class AdminController {
 		return "admin/stlistmod";
 	}
 	
-	@GetMapping("/prolistmod")
-	public String prolist_mod() {
-		return "admin/prolistmod";
+	@GetMapping("/emlistmod")
+	public String emlist_mod() {
+		return "admin/emlistmod";
 	}
 	
 	@GetMapping("/adminlistmod")
@@ -32,14 +32,24 @@ public class AdminController {
 		return "admin/adminlistmod";
 	}
 	
-	@GetMapping("/proinfo")
+	@GetMapping("/pro_info")
 	public String pro_info() {
-		return "admin/proinfo";
+		return "admin/pro_info";
 	}
 	
-	@GetMapping("/ptnoticemod")
+	@GetMapping("/pro_info2")
+	public String pro_info2() {
+		return "admin/pro_info2";
+	}
+	
+	@GetMapping("/noticemod")
 	public String portalnotice_mod() {
-		return "admin/ptnoticemod";
+		return "admin/noticemod";
+	}
+	
+	@GetMapping("/extraculist")
+	public String extra_notice() {
+		return "admin/extraculist";
 	}
 
 	@GetMapping("/counsel/{n}")
