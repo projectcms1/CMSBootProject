@@ -2,6 +2,7 @@ package com.cms.ca.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class AdminController {
@@ -41,5 +42,24 @@ public class AdminController {
 		return "admin/ptnoticemod";
 	}
 
+	@GetMapping("/counsel/{n}")
+	public String counsel(@PathVariable int n) {
+		String result = null;
+		
+		switch(n) {
+			case 0 -> result="admin/counsel_all";
+			case 1 -> result="admin/counsel_student";
+			case 2 -> result="admin/counsel_professor";
+			case 3 -> result="admin/counsel_counselor";
+			default -> result="/error";
+		} 
+		
+		return result;
+	}
+
+	@GetMapping("/error")
+	public String error() {
+		return "error";
+	}
 
 }
