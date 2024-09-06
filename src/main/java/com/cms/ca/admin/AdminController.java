@@ -52,6 +52,7 @@ public class AdminController {
 		return "admin/extraculist";
 	}
 
+
 	@GetMapping("/counsel/{n}")
 	public String counsel(@PathVariable int n) {
 		String result = null;
@@ -71,5 +72,6 @@ public class AdminController {
 	public String error() {
 		return "error";
 	}
+	
 
 }
