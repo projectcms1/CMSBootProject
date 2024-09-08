@@ -8,6 +8,17 @@
 	<link rel="stylesheet"
 		href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap">
 	<link rel="stylesheet" href="/admin/css/noticemod.css">
+	<!-- Bootstrap core CSS -->
+	<link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/admin/css/font-awesome.min.css" rel="stylesheet">
+	<link href="/admin/css/style.css" rel="stylesheet">
+	<link href="/admin/css/nav.css" rel="stylesheet">
+	<link href="/admin/css/shCoreEclipse.css" type="text/css" rel="stylesheet" />
+	<link href="/admin/css/shThemeEclipse.css" type="text/css" rel="Stylesheet" />
+	<link href="/admin/css/global.css" rel="stylesheet">
+	<link href="/admin/css/baseui.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+	<link href="/admin/css/listmod.css" rel="stylesheet">
 </head>
 
 <body>
@@ -118,12 +129,17 @@
 			<label for="file">첨부파일</label>
 			<input type="file" id="file" name="file">
 
-			<button type="submit">수정 완료</button>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">수정 완료</button>
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+			</div>
 		</form>
 	</div>
 
 	<div class="footer"></div>
 	<script src="/admin/js/ptnoticemod.js"></script>
+	<script src="/admin/js/bootstrap.bundle.min.js"></script>
+	<script src="/admin/js/global.js"></script>
 
 </body>
 
