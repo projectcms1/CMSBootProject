@@ -54,7 +54,7 @@ border-radius:3px;
     align-items: center;
     justify-content: center;
     min-height: 100vh; /* 화면 전체 높이에서 중앙에 배치 */
-    margin: 0;
+    margin-left: 10%;
     width: 80vw; /* 가로 크기를 화면 너비의 80%로 설정 */
     height: 80vh; /* 세로 크기를 화면 높이의 80%로 설정 */
 }
