@@ -2,22 +2,26 @@
 <html lang="ko">
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="">
-	<title>전체 상담 관리</title>
-	<!-- Bootstrap core CSS -->
-	<link href="/admin/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/admin/css/font-awesome.min.css" rel="stylesheet">
-	<link href="/admin/css/style.css" rel="stylesheet">
-	<link href="/admin/css/nav.css" rel="stylesheet">
-	<link href="/admin/css/shCoreEclipse.css" type="text/css" rel="stylesheet" />
-	<link href="/admin/css/shThemeEclipse.css" type="text/css" rel="Stylesheet" />
-	<link href="/admin/css/global.css" rel="stylesheet">
-	<link href="/admin/css/baseui.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
-	<link href="/admin/css/listmod.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<title>전체 상담 관리</title>
+<!-- Bootstrap core CSS -->
+<link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+<link href="/admin/css/font-awesome.min.css" rel="stylesheet">
+<link href="/admin/css/style.css" rel="stylesheet">
+<link href="/admin/css/nav.css" rel="stylesheet">
+<link href="/admin/css/shCoreEclipse.css" type="text/css"
+	rel="stylesheet" />
+<link href="/admin/css/shThemeEclipse.css" type="text/css"
+	rel="Stylesheet" />
+<link href="/admin/css/global.css" rel="stylesheet">
+<link href="/admin/css/baseui.css" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap"
+	rel="stylesheet">
+<link href="/admin/css/listmod.css" rel="stylesheet">
 </head>
 
 <body>
@@ -27,7 +31,8 @@
 	<div th:replace="~{/admin/header :: admin_header}"></div>
 	<!--header끝-->
 
-	<section id="menu_big" class="sticky-top" th:insert="~{/admin/nav :: admin_nav}">
+	<section id="menu_big" class="sticky-top"
+		th:insert="~{/admin/nav :: admin_nav}">
 		<!--nav시작 -->
 		<!--nav끝 -->
 	</section>
@@ -39,89 +44,78 @@
 				<div class="row crm_1">
 					<div class="col-md-3">
 						<div class="analytic_1l">
-							<h5 class="mb-0">전체 상담 관리</h5>
+							<h5 class="mb-0">상담 관리</h5>
 						</div>
 					</div>
 					<div class="col-md-9">
 						<div class="crm_1r pull-right">
 							<ul>
 								<li class="col_3 d-inline-block"><a href="#">상담관리</a> <i
-										style="margin-left:5px; vertical-align:middle;" class="fa fa-chevron-right"></i>
-								</li>
-								<li class="col_3 d-inline-block">전체 상담 관리</li>
+									style="margin-left: 5px; vertical-align: middle;"
+									class="fa fa-chevron-right"></i></li>
+								<li class="col_3 d-inline-block">상담내역</li>
 							</ul>
 						</div>
 					</div>
 				</div>
 
-
 				<div class="prod_1i mt-3 row">
-					<div class="col-lg-12 col-md-12 col-sm-12">
-						<div class="prod_1il d-flex align-items-center w-100 flex-wrap">
-							<!-- 필터 체크박스들 -->
-							<h5>검색필터</h5>
-							<div class="filter-box bg-light p-3 rounded shadow-sm w-100 d-flex justify-content-between align-items-center">
-								<div class="d-flex flex-wrap">
-									<div class="form-check form-check-inline me-4">
-										<input type="checkbox" class="form-check-input" id="filterByName" value="name">
-										<label class="form-check-label" for="filterByName">이름</label>
-									</div>
-									<div class="form-check form-check-inline me-4">
-										<input type="checkbox" class="form-check-input" id="filterById" value="id">
-										<label class="form-check-label" for="filterById">교번/학번</label>
-									</div>
-									<div class="form-check form-check-inline me-4">
-										<input type="checkbox" class="form-check-input" id="filterByDate" value="date">
-										<label class="form-check-label" for="filterByDate">상담일자</label>
-									</div>
-									<div class="form-check form-check-inline me-4">
-										<input type="checkbox" class="form-check-input" id="filterByType" value="type">
-										<label class="form-check-label" for="filterByType">상담종류</label>
-									</div>
-									<div class="form-check form-check-inline me-4">
-										<input type="checkbox" class="form-check-input" id="filterByMethod"
-											value="method">
-										<label class="form-check-label" for="filterByMethod">상담방식</label>
-									</div>
-								</div>
-								<a class="btn btn-primary bg_1" href="#"
-									style="height:38px; padding: 0 20px; display:flex; align-items:center; justify-content: center;">
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-										class="bi bi-search" viewBox="0 0 16 16">
-										<path
+					<div class="col-lg-6 col-md-8 col-sm-12">
+						<div class="prod_1il d-flex align-items-center w-100">
+							<div class="d-flex align-items-center">
+								<!-- 관리자 분류 select -->
+								<select class="form-select form-select-sm ms-2 me-2"
+									id="categorySelect" style="width: 150px; height: 38px;"
+									onchange="toggleFields()">
+									<option value="">내담자명</option>
+									<option value="">상담사명</option>
+									<option value="">학번</option>
+									<option value="">교번</option>
+									<option value="">상담일시</option>
+								</select> <input class="form-control ms-2" id="searchInput" type="text"
+									style="flex-grow: 1; width: 100%; min-width: 200px; height: 38px;">
+
+								<!-- 검색 버튼 -->
+								<a class="btn btn-primary bg_1 ms-3" href="#"
+									style="height: 38px; padding: 0 20px; display: flex; align-items: center; justify-content: center;">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+										fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+									<path
 											d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-									</svg>
+								</svg>
 								</a>
 							</div>
-
 						</div>
+					</div>
+
+
+					<div class="d-flex justify-content-end">
+						<a class="buttton_1" href="#"
+							style="height: 38px; display: flex; align-items: center; justify-content: center;">
+							상담 추가 <i class="fa fa-plus-circle ms-2"></i>
+						</a>
 					</div>
 				</div>
 
 
 
 				<div class="table-responsive">
-					<table class="table table-responsive table-striped table-borderless m-0 mt-2">
+					<table
+						class="table table-responsive table-striped table-borderless m-0 mt-2">
 						<thead>
 							<tr>
 								<th scope="col">
-									<div class="form-check"><input type="checkbox"
-											class="form-check-input dt-checkboxes"><label
-											class="form-check-label">&nbsp;</label></div>
+									<div class="form-check">
+										<input type="checkbox" class="form-check-input dt-checkboxes"><label
+											class="form-check-label">&nbsp;</label>
+									</div>
 								</th>
-								<th scope="col">신청일련번호</th>
-								<th scope="col">이전신청번호</th>
 								<th scope="col">내담자</th>
 								<th scope="col">상담사</th>
 								<th scope="col">학번</th>
 								<th scope="col">교번</th>
 								<th scope="col">상담일시</th>
 								<th scope="col">시간구분</th>
-								<th scope="col">장소</th>
-								<th scope="col">상담방식</th>
-								<th scope="col">상담종류</th>
-								<th scope="col">상담코드</th>
-								<th scope="col">학년</th>
 								<th scope="col">상세보기</th>
 							</tr>
 						</thead>
@@ -139,49 +133,26 @@
 									<h6 class="font_14 col_3">홍길동</h6>
 								</td>
 								<td>
-									<h6 class="font_14 col_3">공과대학</h6>
+									<h6 class="font_14 col_3">강감찬</h6>
 								</td>
 								<td>
-									<h6 class="font_14 col_3">컴퓨터공학과</h6>
+									<h6 class="font_14 col_3">20241001</h6>
 								</td>
 								<td>
-									<h6 class="font_14 col_3">20241234</h6>
+									<h6 class="font_14 col_3">1001234</h6>
 								</td>
 								<td>
-									<h6 class="font_14 col_3">01024358376</h6>
+									<h6 class="font_14 col_3">2024.09.09</h6>
 								</td>
 								<td>
-									<h6 class="font_14 col_3">hong@cau.co.kr</h6>
+									<h6 class="font_14 col_3">14:00-15:00</h6>
 								</td>
 								<td>
-									<h6 class="font_14 col_3">h</h6>
-								</td>
-								<td>
-									<h6 class="font_14 col_3">h</h6>
-								</td>
-								<td>
-									<h6 class="font_14 col_3">h</h6>
-								</td>
-								<td>
-									<h6 class="font_14 col_3">ho</h6>
-								</td>
-								<td>
-									<h6 class="font_14 col_3">ho</h6>
-								</td>
-								<td>
-									<h6 class="font_14 col_3">ho</h6>
-								</td>
-								<td>
-									<h6 class="font_14 col_3">ho</h6>
-								</td>
-								<td>
-									<form th:action="@{/pro_info}" method="get">
-										<button type="submit" class="btn btn-primary bg_1">
-											<i class="fa fa-cog"> 상세보기</i>
-										</button>
-									</form>
-									<!--<button type="submit" class="btn btn-primary bg_1" >
-										<i class="fa fa-cog"> 상세보기</i></button>-->
+									<!-- 모달 트리거 버튼 -->
+									<button type="button" class="btn btn-primary bg_1"
+										data-bs-toggle="modal" data-bs-target="#detailModal">
+										<i class="fa fa-cog"> 상세보기</i>
+									</button>
 								</td>
 							</tr>
 						</tbody>
@@ -196,7 +167,7 @@
 						</div>
 					</div>
 					<div class="col-md-6">
-						<div class="prod_1i1r pages" style="text-align:right;">
+						<div class="prod_1i1r pages" style="text-align: right;">
 							<ul class="mb-0">
 								<li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
 								<li class="act"><a href="#">1</a></li>
@@ -213,6 +184,119 @@
 		</div>
 		</main>
 	</div>
+	</div>
+
+	<!-- 모달 -->
+	<div class="modal fade" id="detailModal" tabindex="-1"
+		aria-labelledby="detailModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="detailModalLabel">상세 정보</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<!-- 상세 정보를 여기에 추가 -->
+					<!-- 상세 정보 -->
+					<section class="section">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="card">
+									<div class="card-body">
+										<h5 class="card-title">상담이력 검색</h5>
+
+										<div class="row align-items-center mb-3">
+											<span class="col-lg-2">학년도</span> <select class="col-lg-2">
+												<option value="">---전체---</option>
+												<option>1969</option>
+											</select> <span class="col-lg-2">학기</span> <select class="col-lg-2">
+												<option value="">---전체---</option>
+												<option>1학기</option>
+												<option>2학기</option>
+											</select> <span class="col-lg-2">학년</span> <select class="col-lg-2">
+												<option value="">---전체---</option>
+												<option>1학년</option>
+												<option>2학년</option>
+												<option>3학년</option>
+												<option>4학년</option>
+												<option>5학년</option>
+											</select>
+										</div>
+
+										<div class="row align-items-center mb-3">
+											<span class="col-lg-2">상담종류</span> <select class="col-lg-2">
+												<option value="">---전체---</option>
+												<option>1969</option>
+											</select> <span class="col-lg-2">상담일</span>
+											<div class="col-lg-4 d-inline-block" style="padding: 0px;">
+												<input type="date" class="col-lg-4"> ~ <input
+													type="date" class="col-lg-4">
+											</div>
+										</div>
+
+										<div class="row justify-content-end mb-3">
+											<button type="button" class="btn btn-primary btn-counsel">조회</button>
+											<button type="button"
+												class="btn btn-primary btn-counsel ms-2">초기화</button>
+										</div>
+
+										<div class="card-body">
+											<table class="table">
+												<thead>
+													<tr>
+														<th scope="col">학년도</th>
+														<th scope="col">학기</th>
+														<th scope="col">학년</th>
+														<th scope="col">상담종류</th>
+														<th scope="col">상담자</th>
+														<th scope="col">상담일</th>
+														<th scope="col">상담방법</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<th scope="row">2019</th>
+														<td>1학기</td>
+														<td>3학년</td>
+														<td>진로상담</td>
+														<td>상담사</td>
+														<td>2019-03-01</td>
+														<td>오프라인</td>
+													</tr>
+													<tr>
+														<th scope="row">2019</th>
+														<td>1학기</td>
+														<td>3학년</td>
+														<td>진로상담</td>
+														<td>상담사</td>
+														<td>2019-03-01</td>
+														<td>오프라인</td>
+													</tr>
+													<tr>
+														<th scope="row">2019</th>
+														<td>1학기</td>
+														<td>3학년</td>
+														<td>진로상담</td>
+														<td>상담사</td>
+														<td>2019-03-01</td>
+														<td>오프라인</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">닫기</button>
+				</div>
+			</div>
+		</div>
 	</div>
 
 

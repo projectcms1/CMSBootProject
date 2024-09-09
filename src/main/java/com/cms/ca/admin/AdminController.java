@@ -53,19 +53,9 @@ public class AdminController {
 	}
 
 
-	@GetMapping("/counsel/{n}")
-	public String counsel(@PathVariable int n) {
-		String result = null;
-		
-		switch(n) {
-			case 0 -> result="admin/counsel_all";
-			case 1 -> result="admin/counsel_student";
-			case 2 -> result="admin/counsel_professor";
-			case 3 -> result="admin/counsel_counselor";
-			default -> result="/error";
-		} 
-		
-		return result;
+	@GetMapping("/allcounselmod")
+	public String allcounselmod() {
+		return "admin/allcounselmod";
 	}
 
 	@GetMapping("/error")
