@@ -64,33 +64,22 @@
 
 <body>
 	<div th:replace="~{/employee/empy_header :: empy_header}"></div>	<!-- 교직원 header -->
-	
-	<!-- ======= Sidebar ======= -->
-	<aside id="sidebar" class="sidebar" th:fragment="empy_sidebar">
-		<ul class="sidebar-nav" id="sidebar-nav">
-			<li class="nav-heading">교직원정보</li>
-			<li class="nav-item">
-				<a class="nav-link collapsed" href="/empy_info">
-					<i class="bi bi-grid"></i> 
-					<span>기본정보</span>
-				</a>
-			</li>
-		</ul>
-	</aside>
-	<!-- End Sidebar -->
+	<div th:replace="~{/employee/empy_sidebar :: empy_sidebar}"></div>	<!-- Sidebar -->
 
-<main id="main" class="main">
-    <!-- ======= Page Title ======= -->
-    <div class="pagetitle">
-      <h1>교직원정보</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/empy_info">교직원정보</a></li>
-          <li class="breadcrumb-item active">기본정보</li>
-        </ol>
-      </nav>
-    </div> 
-    <!-- End Page Title -->
+	<main id="main" class="main">
+    
+    	<!-- ======= Page Title ======= -->
+    	<div class="pagetitle">
+      		<h1>교직원정보</h1>
+      		<nav>
+        		<ol class="breadcrumb">
+          			<li class="breadcrumb-item"><a href="/empy_info">교직원정보</a></li>
+          			<li class="breadcrumb-item active">기본정보</li>
+        		</ol>
+     	 	</nav>
+    	</div> 
+    	<!-- End Page Title -->
+		
 		<section class="section">
 			<div class="row">
 				<div class="col-lg-12">
@@ -141,6 +130,12 @@
 											<input type="text" class="form-control" value="상담실" disabled>
 										</div>
 									</div>
+									<div class="row mb-1">
+										<label class="col-sm-4 col-form-label right-tag">직급</label>
+										<div class="col-sm-5 right-tag">
+											<input type="text" class="form-control" value="상담팀장" disabled>
+										</div>
+									</div>
 								</div>
 								<div class="col-md-4 col-lg-6">
 									<div class="row mb-1">
@@ -182,10 +177,10 @@
 								</div>
 							</div>
 							
-							<button type="button" class="btn btn-outline-info float-end">
+							<button type="button" class="btn btn-outline-success float-end" style="margin-left: 5px;">
 								<i class="ri-save-3-line"></i> 저장
 							</button>
-							<button type="button" class="btn btn-outline-primary float-end">
+							<button type="button" class="btn btn-outline-primary float-end" style="margin-left: auto;">
 								<i class="ri-edit-2-line"></i> 입력
 							</button>
 							
@@ -220,10 +215,10 @@
 								</div>
 							</div>
 							
-							<button type="button" class="btn btn-outline-info float-end">
+							<button type="button" class="btn btn-outline-success float-end"style="margin-left: 5px;">
 								<i class="ri-save-3-line"></i> 저장
 							</button>
-							<button type="button" class="btn btn-outline-primary float-end">
+							<button type="button" class="btn btn-outline-primary float-end" style="margin-left: auto;">
 								<i class="ri-edit-2-line"></i> 입력
 							</button>
 							
@@ -250,10 +245,10 @@
 								</div>
 							</div>
 							
-							<button type="button" class="btn btn-outline-info float-end">
+							<button type="button" class="btn btn-outline-success float-end" style="margin-left: 5px;">
 								<i class="ri-save-3-line"></i> 저장
 							</button>
-							<button type="button" class="btn btn-outline-primary float-end">
+							<button type="button" class="btn btn-outline-primary float-end" style="margin-left: auto;">
 								<i class="ri-edit-2-line"></i> 입력
 							</button>
 							
@@ -268,5 +263,11 @@
 	
 	<div th:replace="~{/employee/empy_footer :: empy_footer}"></div>	<!-- 교직원 footer -->
 </body>
-
+<script>
+window.onload=function(){
+	document.getElementById('info-nav').className = 'nav-link';
+	document.getElementById('info-nav1').className += ' show';
+    document.getElementById('info-nav-1').className += ' active';	
+}
+</script>
 </html>

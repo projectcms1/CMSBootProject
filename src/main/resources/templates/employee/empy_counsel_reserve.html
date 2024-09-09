@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+<title>상담관리</title>
+<meta content="" name="description">
+<meta content="" name="keywords">
+
+<!-- Favicons -->
+<link href="/assets/img/favicon.png" rel="icon">
+<link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+<!-- Google Fonts -->
+<link href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+<!-- Vendor CSS Files -->
+<link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+<link href="/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+<link href="/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+<link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+<link href="/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+<!-- Template Main CSS File -->
+<link href="/assets/css/style.css" rel="stylesheet">
+<link href="/assets/css/empy.css" rel="stylesheet">
+<link href="/assets/vendor/simple-daatatables/datatable.css" rel="stylesheet">
+<!-- =======================================================
+  * Template Name: NiceAdmin
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Updated: Apr 20 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+	<div th:replace="~{/employee/empy_header :: empy_header}"></div>	<!-- 교직원 header -->
+	<div th:replace="~{/employee/empy_sidebar :: empy_sidebar}"></div>	<!-- Sidebar -->
+	
+	<main id="main" class="main">
+	   
+	    <!-- ======= Page Title ======= -->
+	    <div class="pagetitle">
+	      	<h1>상담관리</h1>
+	      	<nav>
+	        	<ol class="breadcrumb">
+	          		<li class="breadcrumb-item"><a href="/empy_counsel_index">상담관리</a></li>
+	          		<li class="breadcrumb-item active">상담예약관리</li>
+	        	</ol>
+	      	</nav>
+	    </div> 
+	    <!-- End Page Title -->
+			
+	    <section class="section">
+	      <div class="row">
+	        <div class="col-lg-12">
+	        
+	          <!-- ======= 대기중 상담 Card ======= -->
+	          <div class="card">
+	            <div class="card-body">
+	              <h5 class="card-title">대기중 상담</h5>
+			      <table id="waiting_table">	
+	                <thead>
+	                  <tr>
+	                    <th>상담일시</th>
+	                    <th>학생이름</th>
+	                    <th>학생학번</th>
+	                    <th>상담종류</th>
+	                    <th>상담방식</th>
+	                  </tr>
+	                </thead>
+	                <tbody>
+	                  <tr>
+	                    <td>2021/02/11</td>
+	                    <td>김하나</td>
+	                    <td>20201423</td>
+	                    <td>학업상담</td>
+	                    <td>
+	                    	채팅상담
+	                    	<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">미승인</button>
+		                    <button type="button" class="btn btn-primary btn-sm rounded-pill" style="float: right; margin-left: 5px;">승인</button>
+	                    </td>
+	                  </tr>
+	                  <tr>
+	                    <td>2021/02/14</td>
+	                    <td>이지혜</td>
+	                    <td>20181423</td>
+	                    <td>진로상담</td>
+	                    <td>
+	                    	대면상담
+	                    	<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">미승인</button>
+		                    <button type="button" class="btn btn-primary btn-sm rounded-pill" style="float: right; margin-left: 5px;">승인</button>
+	                    </td>
+	                  </tr>
+	                  <tr>
+	                    <td>2021/07/24</td>
+	                    <td>김하나</td>
+	                    <td>20201423</td>
+	                    <td>진로상담</td>
+	                    <td>
+	                    	화상상담
+	                    	<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">미승인</button>
+		                    <button type="button" class="btn btn-primary btn-sm rounded-pill" style="float: right; margin-left: 5px;">승인</button>
+		                </td>
+	                  </tr>
+	                  <tr>
+	                    <td>2017/04/21</td>
+	                    <td>허준</td>
+	                    <td>20051231</td>
+	                    <td>진로상담</td>
+	                    <td>
+	                    	대면상담
+	                    	<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">미승인</button>
+		                    <button type="button" class="btn btn-primary btn-sm rounded-pill" style="float: right; margin-left: 5px;">승인</button>
+	                    </td>
+	                  </tr>
+	                </tbody>
+	              </table>
+	            </div>
+	          </div>
+	          <!-- End 대기중 상담 Card -->
+	          
+	          <!-- ======= 확정 상담 Card ======= -->
+	          <div class="card">
+	            <div class="card-body">
+	              <h5 class="card-title">확정 상담</h5>
+			      <table id="ok_table">	
+	                <thead>
+	                  <tr>
+	                    <th>상담일시</th>
+	                    <th>학생이름</th>
+	                    <th>학생학번</th>
+	                    <th>상담종류</th>
+	                    <th>상담방식</th>
+	                  </tr>
+	                </thead>
+	                <tbody>
+	                  <tr>
+	                    <td>2021/07/24</td>
+	                    <td>김하나</td>
+	                    <td>20201423</td>
+	                    <td>진로상담</td>
+	                    <td>
+	                    	화상상담
+	                    	<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
+		                    <button type="button" class="btn btn-primary btn-sm rounded-pill" style="float: right; margin-left: 5px;">완료</button>
+	                    </td>
+	                  </tr>
+	                  <tr>
+	                    <td>2017/04/21</td>
+	                    <td>허준</td>
+	                    <td>20051231</td>
+	                    <td>진로상담</td>
+	                    <td>
+	                    	대면상담
+	                    	<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
+		                    <button type="button" class="btn btn-primary btn-sm rounded-pill" style="float: right; margin-left: 5px;">완료</button>
+	                    </td>
+	                  </tr>
+	                </tbody>
+	              </table>
+	            </div>
+	          </div>
+	          <!-- End 확정 상담 Card -->
+	          
+	          <!-- ======= 지난 상담 Card ======= -->
+	          <div class="card">
+	            <div class="card-body">
+	              <h5 class="card-title">지난 상담</h5>
+			      <table id="last_table">	
+	                <thead>
+	                  <tr>
+	                    <th>상담일시</th>
+	                    <th>학생이름</th>
+	                    <th>학생학번</th>
+	                    <th>상담종류</th>
+	                    <th>상담상태</th>
+	                  </tr>
+	                </thead>
+	                <tbody>
+	                  <tr>
+	                    <td>2021/07/24</td>
+	                    <td>김하나</td>
+	                    <td>20201423</td>
+	                    <td>진로상담</td>
+	                    <td>취소</td>
+	                  </tr>
+	                  <tr>
+	                    <td>2017/04/21</td>
+	                    <td>허준</td>
+	                    <td>20051231</td>
+	                    <td>진로상담</td>
+	                    <td>완료</td>
+	                  </tr>
+	                </tbody>
+	              </table>
+	            </div>
+	          </div>
+	          <!-- End 지난 상담 Card -->
+	          
+	        </div>
+	      </div>
+	    </section>           
+	</main>
+	<!-- End #main -->
+	
+	<div th:replace="~{/employee/empy_footer :: empy_footer}"></div>	<!-- 교직원 footer -->
+	
+	<!-- Vendor JS Files -->
+  	<script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
+  	<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  	<script src="/assets/vendor/chart.js/chart.umd.js"></script>
+  	<script src="/assets/vendor/echarts/echarts.min.js"></script>
+  	<script src="/assets/vendor/quill/quill.js"></script>
+  	<script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
+  	<script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+  	<script src="/assets/vendor/php-email-form/validate.js"></script>
+
+	<!-- Template Main JS File -->
+	<script src="/assets/js/main.js"></script>
+	<script type="module">
+    	import {DataTable} from "/assets/vendor/simple-datatables/simple-datatables.js"
+       	window.dt = new DataTable("#waiting_table", {
+			perPageSelect: [10, 5, ["All", -1]],
+			columns: [
+           		{
+            		select: 2,
+                    sortSequence: ["asc", "desc"]
+                }
+            ],
+            tableRender: (_data, table, type) => {
+                if (type === "print") {
+                    return table
+                }
+                const tHead = table.childNodes[0]
+                const filterHeaders = {
+                    nodeName: "TR",
+                    childNodes: tHead.childNodes[0].childNodes.map(
+                        (_th, index) => ({nodeName: "TH",
+                            childNodes: [
+                                {
+                                    nodeName: "INPUT",
+                                    attributes: {
+                                        class: "datatable-input",
+                                        type: "search",
+                                        "data-columns": `[${index}]`
+                                    }
+                                }
+                            ]})
+                    )
+                }
+                tHead.childNodes.push(filterHeaders)
+                return table
+            }
+        })
+
+		window.dt = new DataTable("#ok_table", {
+			perPageSelect: [5, 10, ["All", -1]],
+			columns: [
+           		{
+            		select: 2,
+                    sortSequence: ["asc", "desc"]
+                }
+            ],
+            tableRender: (_data, table, type) => {
+                if (type === "print") {
+                    return table
+                }
+                const tHead = table.childNodes[0]
+                const filterHeaders = {
+                    nodeName: "TR",
+                    childNodes: tHead.childNodes[0].childNodes.map(
+                        (_th, index) => ({nodeName: "TH",
+                            childNodes: [
+                                {
+                                    nodeName: "INPUT",
+                                    attributes: {
+                                        class: "datatable-input",
+                                        type: "search",
+                                        "data-columns": `[${index}]`
+                                    }
+                                }
+                            ]})
+                    )
+                }
+                tHead.childNodes.push(filterHeaders)
+                return table
+            }
+        })
+		
+		window.dt = new DataTable("#last_table", {
+			perPageSelect: [5, 10, 15, ["All", -1]],
+			columns: [
+           		{
+            		select: 2,
+                    sortSequence: ["asc", "desc"]
+                }
+            ],
+            tableRender: (_data, table, type) => {
+                if (type === "print") {
+                    return table
+                }
+                const tHead = table.childNodes[0]
+                const filterHeaders = {
+                    nodeName: "TR",
+                    childNodes: tHead.childNodes[0].childNodes.map(
+                        (_th, index) => ({nodeName: "TH",
+                            childNodes: [
+                                {
+                                    nodeName: "INPUT",
+                                    attributes: {
+                                        class: "datatable-input",
+                                        type: "search",
+                                        "data-columns": `[${index}]`
+                                    }
+                                }
+                            ]})
+                    )
+                }
+                tHead.childNodes.push(filterHeaders)
+                return table
+            }
+        })
+    </script>
+    
+</body>
+<script>
+window.onload=function(){
+	document.getElementById('counsel-nav').className = 'nav-link';
+	document.getElementById('counsel-nav1').className += ' show';
+    document.getElementById('counsel-nav-2').className += ' active';	
+}
+</script>
+</html>
