@@ -1,9 +1,11 @@
 package com.cms.ca;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-public class student_dto {
+@Getter
+@Setter
+ class student_dto {
 
 	private Integer user_no, univ_prd;
 	private String stdnt_no, stdnt_flnm, user_eml_addr, user_telno, user_zip, user_addr, user_daddr, user_photo;
