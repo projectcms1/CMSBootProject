@@ -1,5 +1,5 @@
 <!-- ======= Sidebar ======= -->
-	<aside id="sidebar" class="sidebar" th:fragment="empy_sidebar">
+	<aside id="sidebar" class="sidebar" th:fragment="std_sidebar">
 		<ul class="sidebar-nav" id="sidebar-nav">
 			<!-- ======= Home Nav ======= -->
 			<li class="nav-item">
@@ -10,23 +10,23 @@
       		</li>
 			<!-- End Home Nav -->
 			
-			<!-- ======= 교직원정보 Nav ======= -->
+			<!-- ======= 학적정보 Nav ======= -->
 			<li class="nav-item">
-        		<a id="info-nav" class="nav-link collapsed" data-bs-target="#info-nav1" data-bs-toggle="collapse" href="/empy_info">
+        		<a id="info-nav" class="nav-link collapsed" data-bs-target="#info-nav1" data-bs-toggle="collapse" href="/student/std_info">
           			<i class="bi bi-person-bounding-box"></i>
-          			<span>교직원정보</span>
+          			<span>학적정보</span>
           			<i class="bi bi-chevron-down ms-auto"></i>
         		</a>
         		<ul id="info-nav1" class="nav-content collapse" data-bs-parent="#sidebar-nav">
           			<li>
-            			<a href="/empy_info" id="info-nav-1">
+            			<a href="/student/std_info" id="info-nav-1">
               				<i class="bi bi-circle"></i>
               				<span>기본정보</span>
             			</a>
           			</li>
           		</ul>
       		</li>
-      		<!-- End 교직원정보 Nav -->
+      		<!-- End 학적정보 Nav -->
       		
 			<!-- ======= 학사관리 Nav ======= -->
 			<li class="nav-item">
@@ -39,34 +39,40 @@
 			
 			<!-- ======= 상담관리 Nav ======= -->
 			<li class="nav-item">
-				<a id="counsel-nav" class="nav-link collapsed" data-bs-target="#counsel-nav1" data-bs-toggle="collapse" href="#">
+				<a id="counsel-nav" class="nav-link collapsed" data-bs-target="#counsel-nav1" data-bs-toggle="collapse" href="/student/std_counsel_list">
 					<i class="bi bi-chat-left-dots"></i> 
 					<span>상담관리</span> 
 					<i class="bi bi-chevron-down ms-auto"></i>
 				</a>
 				<ul id="counsel-nav1" class="nav-content collapse" data-bs-parent="#sidebar-nav">
 					<li>
-						<a href="/empy_counsel_index"  id="counsel-nav-1"> 
+						<a href="/student/std_counsel_list"  id="counsel-nav-1"> 
 							<i class="bi bi-circle"></i>
 							<span>상담이력조회</span>
 						</a>
 					</li>
 					<li>
-						<a href="/empy_counsel_reserve" id="counsel-nav-2"> 
+						<a href="/student/std_counsel_reservelist" id="counsel-nav-2"> 
 							<i class="bi bi-circle"></i>
-							<span>상담예약관리</span>
+							<span>상담예약조회</span>
 						</a>
 					</li>
 					<li>
-						<a href="/empy_counsel_add" id="counsel-nav-3"> 
+						<a href="/student/std_counsel_reserve" id="counsel-nav-3"> 
 							<i class="bi bi-circle"></i>
-							<span>상담추가</span>
+							<span>상담예약</span>
 						</a>
 					</li>
 					<li>
-						<a href="/empy_counsel_chatting" id="counsel-nav-4"> 
+						<a href="/student/std_counsel_chatting" id="counsel-nav-4"> 
 							<i class="bi bi-circle"></i>
 							<span>채팅상담</span>
+						</a>
+					</li>
+					<li>
+						<a href="/student/std_counsel_selftestlist" id="counsel-nav-5"> 
+							<i class="bi bi-circle"></i>
+							<span>자가심리검사</span>
 						</a>
 					</li>
 				</ul>

@@ -53,17 +53,18 @@
 </head>
 
 <body>
-	<div th:replace="~{/employee/empy_header :: empy_header}"></div>	<!-- Empy Header -->
-	<div th:replace="~{/employee/empy_sidebar :: empy_sidebar}"></div>	<!-- Empy Sidebar -->
+	<div th:replace="~{/student/std_header :: std_header}"></div>	<!-- Std Header -->
+	<div th:replace="~{/student/std_sidebar :: std_sidebar}"></div>	<!-- Std Sidebar -->
 
 	<main id="main" class="main">
     
     	<!-- ======= Page Title ======= -->
     	<div class="pagetitle">
-      		<h1>교직원정보</h1>
+      		<h1>학적정보</h1>
       		<nav>
         		<ol class="breadcrumb">
-          			<li class="breadcrumb-item"><a href="/empy_info">교직원정보</a></li>
+          			<li class="breadcrumb-item"><a href="/">Home</a></li>
+          			<li class="breadcrumb-item">학적정보</li>
           			<li class="breadcrumb-item active">기본정보</li>
         		</ol>
      	 	</nav>
@@ -85,13 +86,13 @@
 								</div>
 								<div class="col-md-4 col-lg-4">
 									<div class="row mb-1">
-										<label class="col-sm-4 col-form-label right-tag">입사년도</label>
+										<label class="col-sm-4 col-form-label right-tag">입학년도</label>
 										<div class="col-sm-5 right-tag">
 											<input type="text" class="form-control" value="2017" disabled>
 										</div>
 									</div>
 									<div class="row mb-1">
-										<label class="col-sm-4 col-form-label right-tag">교번</label>
+										<label class="col-sm-4 col-form-label right-tag">학번</label>
 										<div class="col-sm-5 right-tag">
 											<input type="text" class="form-control" value="20171234" disabled>
 										</div>
@@ -99,7 +100,7 @@
 									<div class="row mb-1">
 										<label class="col-sm-4 col-form-label right-tag">이름</label>
 										<div class="col-sm-5 right-tag">
-											<input type="text" class="form-control" value="교직원a" disabled>
+											<input type="text" class="form-control" value="학생C" disabled>
 										</div>
 									</div>
 									<div class="row mb-1">
@@ -109,47 +110,47 @@
 										</div>
 									</div>
 									<div class="row mb-1">
-										<label class="col-sm-4 col-form-label right-tag">소속기관(단과대학)</label>
+										<label class="col-sm-4 col-form-label right-tag">학년</label>
 										<div class="col-sm-5 right-tag">
-											<input type="text" class="form-control" value="심리상담센터" disabled>
+											<input type="text" class="form-control" value="2학년" disabled>
 										</div>
 									</div>
 									<div class="row mb-1">
-										<label class="col-sm-4 col-form-label right-tag">소속부서(학과)</label>
+										<label class="col-sm-4 col-form-label right-tag">학기</label>
 										<div class="col-sm-5 right-tag">
-											<input type="text" class="form-control" value="상담실" disabled>
+											<input type="text" class="form-control" value="3학기" disabled>
 										</div>
 									</div>
 									<div class="row mb-1">
-										<label class="col-sm-4 col-form-label right-tag">직급</label>
+										<label class="col-sm-4 col-form-label right-tag">학적구분</label>
 										<div class="col-sm-5 right-tag">
-											<input type="text" class="form-control" value="상담팀장" disabled>
+											<input type="text" class="form-control" value="재학" disabled>
 										</div>
 									</div>
 								</div>
 								<div class="col-md-4 col-lg-6">
 									<div class="row mb-1">
-										<label class="col-sm-4 col-form-label right-tag">교직(전공)</label>
+										<label class="col-sm-4 col-form-label right-tag">대학(원)</label>
 										<div class="col-sm-6 right-tag">
-											<input type="text" class="form-control" value="성인심리학" disabled>
+											<input type="text" class="form-control" value="IT대" disabled>
 										</div>
 									</div>
 									<div class="row mb-1">
-										<label class="col-sm-4 col-form-label right-tag">선발일자</label>
+										<label class="col-sm-4 col-form-label right-tag">학과(부)</label>
 										<div class="col-sm-6 right-tag">
-											<input type="text" class="form-control" value="20170812" disabled>
+											<input type="text" class="form-control" value="컴퓨터학과" disabled>
 										</div>
 									</div>
 									<div class="row mb-1">
-										<label class="col-sm-4 col-form-label right-tag">교원자격증번호</label>
+										<label class="col-sm-4 col-form-label right-tag">전공</label>
 										<div class="col-sm-6 right-tag">
-											<input type="text" class="form-control" value="123456" disabled>
+											<input type="text" class="form-control" value="정보보안전공" disabled>
 										</div>
 									</div>
 									<div class="row mb-1">
-										<label class="col-sm-4 col-form-label right-tag">교원자격증발급일자</label>
+										<label class="col-sm-4 col-form-label right-tag">분반</label>
 										<div class="col-sm-6 right-tag">
-											<input type="text" class="form-control" value="20140712" disabled>
+											<input type="text" class="form-control" value="-" disabled>
 										</div>
 									</div>
 									<div class="row mb-1">
@@ -251,7 +252,7 @@
 	</main>
 	<!-- End #main -->
 	
-	<div th:replace="~{/employee/empy_footer :: empy_footer}"></div>	<!-- 교직원 footer -->
+	<div th:replace="~{/student/std_footer :: std_footer}"></div>	<!-- 학생 footer -->
 </body>
 <script>
 window.onload=function(){

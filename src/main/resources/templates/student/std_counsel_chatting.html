@@ -39,54 +39,57 @@
 </head>
 
 <body>
+	<div th:replace="~{/student/std_header :: std_header}"></div>	<!-- Std Header -->
+	<div th:replace="~{/student/std_sidebar :: std_sidebar}"></div>	<!-- Std Sidebar -->
 
-  <!-- ======= Header ======= -->
-  <div th:replace="~{/student/std_header :: std_header}"></div>		
-  <!-- End Header -->
-  
-  <!-- ======= Counsel_Sidebar ======= -->
-  <div th:replace="~{/student/counsel_sidebar :: counsel_sidebar}"></div>	
-  <!-- End Counsel_Sidebar -->
-  
-  <main id="main" class="main">
+	<main id="main" class="main">
+	
+	    <!-- ======= Page Title ======= -->
+	    <div class="pagetitle">
+	      	<h1>상담관리</h1>
+	      	<nav>
+	        	<ol class="breadcrumb">
+	          		<li class="breadcrumb-item"><a href="/">Home</a></li>
+	          		<li class="breadcrumb-item">상담관리</li>
+	          		<li class="breadcrumb-item active">채팅 상담</li>
+	        	</ol>
+	      	</nav>
+	    </div> 
+	    <!-- End Page Title -->
+			
+	    <section class="section">
+	      <div class="row">
+	        <div class="col-lg-12">
+	        
+	          <!-- ======= Chatting Counsel Card ======= -->
+	          <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
+               	채팅 상담 링크 수정해야함.
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+    	      	<div class="card">
+        	  		<div class="card-body">
+            	  		<h5 class="card-title">채팅상담</h5>
+       	 	      		<h6 class="card-subtitle mb-2 text-muted">채팅상담이란?</h6>
+              			<p class="card-text">
+              				채팅상담은 상담 방식의 일종으로 상담을 신청하실 때 채팅상담으로 신청하실 수 있습니다.<br>
+              				신청한 상담사 및 지도교수와의 채팅방은 시스템에서 자동으로 생성됩니다.
+              			</p>
+              			<p class="card-text">
+              				<a href="#" class="btn btn-info"><i class="ri-chat-1-fill"></i>채팅상담 바로가기</a>
+              			</p>
+            		</div>
+          		</div>
+          		<!-- End Chatting Counsel Card -->
+	          
+	          <!-- End 대기중 상담 Card -->
+	          
+	        </div>
+	      </div>
+	    </section>           
+	</main>
+	<!-- End #main -->
 
-    <!-- Start Page Title -->
-    <div class="pagetitle">
-      <h1>1:1 채팅 상담</h1>
-    </div> <!-- End Page Title -->
-
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <p>설명은 나중에</p>
-                    <button type="button" class="btn btn-outline-primary"><i class="bx bx-caret-right"></i>채팅상담 바로가기</button>
-                </div>
-            </div>
-
-        </div>
-
-      </div>
-    </section>
-
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
-    <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-    </div>
-    <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-    </div>
-  </footer><!-- End Footer -->
-
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <div th:replace="~{/student/std_footer :: std_footer}"></div>	<!-- 학생 footer -->
 
   <!-- Vendor JS Files -->
   <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -102,5 +105,13 @@
   <script src="/assets/js/main.js"></script>
 
 </body>
+
+<script>
+window.onload=function(){
+	document.getElementById('counsel-nav').className = 'nav-link';
+	document.getElementById('counsel-nav1').className += ' show';
+    document.getElementById('counsel-nav-4').className += ' active';	
+}
+</script>
 
 </html>
