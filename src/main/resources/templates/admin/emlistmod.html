@@ -142,7 +142,7 @@
 						</thead>
 
 						<tbody>
-							<tr>
+							<tr th:each="employee_data : ${employee_list}">
 								<td>
 									<div class="form-check">
 										<input type="checkbox" class="form-check-input dt-checkboxes">
@@ -151,20 +151,20 @@
 								</td>
 
 								<td>
-									<h6 class="font_14 col_3">홍길동</h6>
+									<h6 class="font_14 col_3" th:text="${employee_data.getEmp_flnm()}"></h6>
 								</td>
 
 								<td>
-									<h6 class="font_14 col_3">공과대학</h6>
+									<h6 class="font_14 col_3" th:text="${employee_data.getOgdp_inst_nm()}"></h6>
 								</td>
 								<td>
-									<h6 class="font_14 col_3">컴퓨터공학과</h6>
+									<h6 class="font_14 col_3" th:text="${employee_data.getOgdp_dept_nm()}"></h6>
 								</td>
 								<td>
-									<h6 class="font_14 col_3">20241234</h6>
+									<h6 class="font_14 col_3" th:text="${employee_data.getEmp_no()}"></h6>
 								</td>
 								<td>
-									<h6 class="bg_3 text-center font_12 p-1 mb-0">활성화</h6>
+									<h6 class="bg_3 text-center font_12 p-1 mb-0" th:text="${employee_data.getAcnt_stts()}"></h6>
 								</td>
 								<td>
 									<!-- 모달 트리거 버튼 -->

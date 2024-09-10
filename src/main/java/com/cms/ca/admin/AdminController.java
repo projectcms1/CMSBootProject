@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.cms.ca.counsel_dto;
+import com.cms.ca.employee_dto;
 import com.cms.ca.student_dto;
 
 @Controller
@@ -16,6 +18,11 @@ public class AdminController {
 	@Autowired
 	private stuser_service stuser_service;
 	
+	@Autowired
+	private emuser_service emuser_service;
+	
+	@Autowired
+	private counsel_service counsel_service;
 	
 	
 	@GetMapping("/login")
@@ -38,10 +45,23 @@ public class AdminController {
 	}
 	
 	@GetMapping("/emlistmod")
-	public String emlist_mod() {
+	public String emlist_mod(Model m) {
+		
+		List<employee_dto> employee_list_data = this.emuser_service.employee_list();
+		m.addAttribute("employee_list", employee_list_data);
+		
 		return "admin/emlistmod";
 	}
-	
+
+	@GetMapping("/allcounselmod")
+	public String allcounselmod(Model m) {
+		
+		List<counsel_dto> counsel_list_data = this.counsel_service.counsel_list();
+		m.addAttribute("counsel_list", counsel_list_data);
+		
+		return "admin/allcounselmod";
+	}
+
 	@GetMapping("/adminlistmod")
 	public String adminlist_mod() {
 		return "admin/adminlistmod";
@@ -52,10 +72,6 @@ public class AdminController {
 		return "admin/pro_info";
 	}
 	
-	@GetMapping("/pro_info2")
-	public String pro_info2() {
-		return "admin/pro_info2";
-	}
 	
 	@GetMapping("/noticemod")
 	public String portalnotice_mod() {
@@ -68,10 +84,6 @@ public class AdminController {
 	}
 
 
-	@GetMapping("/allcounselmod")
-	public String allcounselmod() {
-		return "admin/allcounselmod";
-	}
 
 	@GetMapping("/error")
 	public String error() {

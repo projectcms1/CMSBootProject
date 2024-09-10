@@ -8,3 +8,5 @@ public interface stuser_service {
 	List<student_dto> student_list();
 	
 }
+
+

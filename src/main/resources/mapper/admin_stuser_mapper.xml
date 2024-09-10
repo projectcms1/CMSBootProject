@@ -4,12 +4,4 @@
 <select id="student_list" resultType="com.cms.ca.student_dto" >
 select * from STDNT_INFO order by STDNT_NO desc
 </select>
-
-<select id="professor_list" resultType="com.cms.ca.employee_dto" >
-select * from EMP_INFO
-<where>
-MNG_AUTHRT!=''
-</where>
-order by EMP_NO desc
-</select>
 </mapper>

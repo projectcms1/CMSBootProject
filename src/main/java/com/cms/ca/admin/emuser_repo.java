@@ -4,10 +4,11 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.cms.ca.employee_dto;
 import com.cms.ca.student_dto;
 
 @Mapper
-public interface stuser_repo {
+public interface emuser_repo {
 	
-	List<student_dto> student_list();
+	List<employee_dto> employee_list();
 }
