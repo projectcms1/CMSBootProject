@@ -2,6 +2,7 @@ package com.cms.ca.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.cms.ca.student_dto;
@@ -18,10 +19,18 @@ public class StudentController {
 	private StudentService stdSrvc;
 	
 	@GetMapping("/student/std_info")
-	public String academy_info() throws Exception {
+	public String academy_info(Model m) throws Exception {
 		try {
 			student_dto onedata = this.stdSrvc.getOneStudent(std_number);
-			//onedata == null
+			if (onedata == null) { // 사용자 데이터 없음 (없는 학번)
+				// 에러 페이지 추가 후 수정
+				System.out.println("이게 뭐야");
+			}
+			else {
+				onedata.setGrade();
+				m.addAttribute("std_data", onedata);
+				viewName = "student/std_info";
+			}
 		} catch (Exception e) {
 			viewName = "page_blank";
 		}

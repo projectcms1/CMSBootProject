@@ -88,37 +88,37 @@
 									<div class="row mb-1">
 										<label class="col-sm-4 col-form-label right-tag">입학년도</label>
 										<div class="col-sm-5 right-tag">
-											<input type="text" class="form-control" value="2017" disabled>
+											<input type="text" class="form-control" th:value="${ std_data.getStdnt_no().substring(0, 4) }" disabled>
 										</div>
 									</div>
 									<div class="row mb-1">
 										<label class="col-sm-4 col-form-label right-tag">학번</label>
 										<div class="col-sm-5 right-tag">
-											<input type="text" class="form-control" value="20171234" disabled>
+											<input type="text" class="form-control" th:value="${ std_data.getStdnt_no() }" disabled>
 										</div>
 									</div>
 									<div class="row mb-1">
 										<label class="col-sm-4 col-form-label right-tag">이름</label>
 										<div class="col-sm-5 right-tag">
-											<input type="text" class="form-control" value="학생C" disabled>
+											<input type="text" class="form-control" th:value="${ std_data.getStdnt_flnm() }" disabled>
 										</div>
 									</div>
 									<div class="row mb-1">
 										<label class="col-sm-4 col-form-label right-tag">생년월일</label>
 										<div class="col-sm-5 right-tag">
-											<input type="text" class="form-control" value="891212" disabled>
+											<input type="text" class="form-control" th:value="${ std_data.getBrdt().substring(2) }" disabled>
 										</div>
 									</div>
 									<div class="row mb-1">
 										<label class="col-sm-4 col-form-label right-tag">학년</label>
 										<div class="col-sm-5 right-tag">
-											<input type="text" class="form-control" value="2학년" disabled>
+											<input type="text" class="form-control" th:value="${ std_data.getStd_grade() }" disabled>
 										</div>
 									</div>
 									<div class="row mb-1">
 										<label class="col-sm-4 col-form-label right-tag">학기</label>
 										<div class="col-sm-5 right-tag">
-											<input type="text" class="form-control" value="3학기" disabled>
+											<input type="text" class="form-control" th:value="${ std_data.getUniv_prd() }" disabled>
 										</div>
 									</div>
 									<div class="row mb-1">
