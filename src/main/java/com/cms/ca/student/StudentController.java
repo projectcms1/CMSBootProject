@@ -28,6 +28,7 @@ public class StudentController {
 			}
 			else {
 				onedata.setGrade();
+				onedata.setDashInTelNumber();
 				m.addAttribute("std_data", onedata);
 				viewName = "student/std_info";
 			}
