@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cms.ca.test_repo">
-<select id="findAll" resultType="com.cms.ca.test_dto">
-select * from img
+<select id="stuser_list" resultType="com.cms.ca.stuser_dto">
+
 </select>
 </mapper>

@@ -12,6 +12,8 @@ public class AdminController {
 		return "admin/login";
 	}
 	
+	
+	
 	@GetMapping("/adminfindid")
 	public String find_id() {
 		return "admin/adminfindid";
