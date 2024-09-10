@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cms.ca.student.StudentRepository">
+
+	<select id="getOneStudent" resultType="com.cms.ca.student_dto" parameterType="String">
+		select * from STDNT_INFO where STDNT_NO = #{stdnt_no}
+	</select>
+
+
+</mapper>
