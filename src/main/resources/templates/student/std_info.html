@@ -121,48 +121,42 @@
 											<input type="text" class="form-control" th:value="${ std_data.getUniv_prd() }" disabled>
 										</div>
 									</div>
-									<div class="row mb-1">
-										<label class="col-sm-4 col-form-label right-tag">학적구분</label>
-										<div class="col-sm-5 right-tag">
-											<input type="text" class="form-control" value="재학" disabled>
-										</div>
-									</div>
 								</div>
 								<div class="col-md-4 col-lg-6">
 									<div class="row mb-1">
 										<label class="col-sm-4 col-form-label right-tag">대학(원)</label>
 										<div class="col-sm-6 right-tag">
-											<input type="text" class="form-control" value="IT대" disabled>
+											<input type="text" class="form-control" th:value="${ std_data.getOgdp_univ() }" disabled>
 										</div>
 									</div>
 									<div class="row mb-1">
 										<label class="col-sm-4 col-form-label right-tag">학과(부)</label>
 										<div class="col-sm-6 right-tag">
-											<input type="text" class="form-control" value="컴퓨터학과" disabled>
+											<input type="text" class="form-control" th:value="${ std_data.getOgdp_scsbjt() }" disabled>
 										</div>
 									</div>
 									<div class="row mb-1">
 										<label class="col-sm-4 col-form-label right-tag">전공</label>
 										<div class="col-sm-6 right-tag">
-											<input type="text" class="form-control" value="정보보안전공" disabled>
+											<input type="text" class="form-control" th:value="${ std_data.getMjr() }" disabled>
 										</div>
 									</div>
 									<div class="row mb-1">
-										<label class="col-sm-4 col-form-label right-tag">분반</label>
+										<label class="col-sm-4 col-form-label right-tag">학적구분</label>
 										<div class="col-sm-6 right-tag">
-											<input type="text" class="form-control" value="-" disabled>
+											<input type="text" class="form-control" th:value="${ std_data.getStdnt_stts_se() }" disabled>
 										</div>
 									</div>
 									<div class="row mb-1">
 										<label class="col-sm-4 col-form-label right-tag">이메일</label>
 										<div class="col-sm-6 right-tag">
-											<input type="text" class="form-control" value="capybara@cauniv.com">
+											<input type="text" class="form-control" th:value="${ std_data.getUser_eml_addr() }">
 										</div>
 									</div>
 									<div class="row mb-3">
 										<label class="col-sm-4 col-form-label right-tag">전화번호</label>
 										<div class="col-sm-6 right-tag">
-											<input type="text" class="form-control" value="010-1234-5678">
+											<input type="text" class="form-control" th:value="${ std_data.getUser_telno() }">
 										</div>
 									</div>
 								</div>
@@ -187,7 +181,7 @@
 								<div class="row mb-2">
 									<label class="col-sm-2 col-form-label pd-left-3">우편번호</label>
 									<div class="col-sm-2">
-										<input type="text" class="form-control">
+										<input type="text" class="form-control" disabled>
 									</div>
 									<button type="button" class="btn btn-primary"
 										style="width: 100px; height: 38px;">주소 검색</button>
@@ -195,7 +189,7 @@
 								<div class="row mb-1">
 									<label class="col-sm-2 col-form-label pd-left-3">주소</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control">
+										<input type="text" class="form-control" disabled>
 									</div>
 								</div>
 								<div class="row mb-3">
