@@ -35,4 +35,5 @@ public class EmployeeController {
 	public String employeeCounselChattingPage() {
 		return "employee/empy_counsel_chatting";
 	}
+	
 }

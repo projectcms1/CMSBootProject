@@ -6,3 +6,11 @@
 .pd-left-3{
 	padding-left: 3%;
 }
+
+#demo-table > tbody > tr > td{
+	padding-left: 15px;
+}
+
+#demo-table > thead > tr > th > button{
+	cursor: default;
+}

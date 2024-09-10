@@ -40,52 +40,53 @@
 </head>
 
 <body>
+
 	<div th:replace="~{/employee/empy_header :: empy_header}"></div>	<!-- Empy Header -->
 	<div th:replace="~{/employee/empy_sidebar :: empy_sidebar}"></div>	<!-- Empy Sidebar -->
 		
+	<!-- main -->	
 	<main id="main" class="main">
 	
-	    <!-- ======= Page Title ======= -->
 	    <div class="pagetitle">
 	      	<h1>상담관리</h1>
 	      	<nav>
 	        	<ol class="breadcrumb">
-	          		<li class="breadcrumb-item"><a href="/empy_counsel_index">상담관리</a></li>
+       	  			<li class="breadcrumb-item"><a href="/">Home</a></li>
+	          		<li class="breadcrumb-item">상담관리</li>
 	          		<li class="breadcrumb-item active">채팅 상담</li>
 	        	</ol>
 	      	</nav>
 	    </div> 
-	    <!-- End Page Title -->
 			
 	    <section class="section">
-	      <div class="row">
-	        <div class="col-lg-12">
+	      	<div class="row">
+	        	<div class="col-lg-12">
 	        
-	          <!-- ======= Chatting Counsel Card ======= -->
-	          <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
-               	채팅 상담 링크 수정해야함.
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>
-    	      	<div class="card">
-        	  		<div class="card-body">
-            	  		<h5 class="card-title">채팅상담</h5>
-       	 	      		<h6 class="card-subtitle mb-2 text-muted">채팅상담이란?</h6>
-              			<p class="card-text">
-              				채팅상담은 상담 방식의 일종으로 상담을 신청하실 때 채팅상담으로 신청하실 수 있습니다.<br>
-              				신청한 상담학생과의 채팅방은 시스템에서 자동으로 생성됩니다.
-              			</p>
-              			<p class="card-text">
-              				<a href="#" class="btn btn-info"><i class="ri-chat-1-fill"></i>채팅상담 바로가기</a>
-              			</p>
-            		</div>
-          		</div>
-          		<!-- End Chatting Counsel Card -->
+	          		<div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
+               			채팅 상담 링크 수정해야함.
+                		<button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+              		</div>
+              		
+		        	<!-- ======= Chatting Counsel Card ======= -->
+    	      		<div class="card">
+        	  			<div class="card-body">
+            	  			<h5 class="card-title">채팅상담</h5>
+       	 	      			<h6 class="card-subtitle mb-2 text-muted">채팅상담이란?</h6>
+              				<p class="card-text">
+              					채팅상담은 상담 방식의 일종으로 상담을 신청하실 때 채팅상담으로 신청하실 수 있습니다.<br>
+              					신청한 상담학생과의 채팅방은 시스템에서 자동으로 생성됩니다.
+              				</p>
+              				<p class="card-text">
+              					<a href="#" class="btn btn-info"><i class="ri-chat-1-fill"></i>채팅상담 바로가기</a>
+              				</p>
+            			</div>
+          			</div>
+          			<!-- End Chatting Counsel Card -->
 	          
-	          <!-- End 대기중 상담 Card -->
-	          
-	        </div>
-	      </div>
-	    </section>           
+	        	</div>
+	      	</div>
+		</section>    
+		       
 	</main>
 	<!-- End #main -->
 	
@@ -105,11 +106,13 @@
 	<script src="/assets/js/main.js"></script>
 	
 </body>
-<script>
-window.onload=function(){
-	document.getElementById('counsel-nav').className = 'nav-link';
-	document.getElementById('counsel-nav1').className += ' show';
-    document.getElementById('counsel-nav-4').className += ' active';	
-}
+
+<script>	//Sidebar 현재 선택 페이지 선택되게 처리
+	window.onload=function(){ 
+		document.getElementById('counsel-nav').className = 'nav-link';
+		document.getElementById('counsel-nav1').className += ' show';
+    	document.getElementById('counsel-nav-4').className += ' active';	
+	}
 </script>
+
 </html>
