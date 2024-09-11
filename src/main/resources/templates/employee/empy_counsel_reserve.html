@@ -65,7 +65,7 @@
             		<div class="card-body">
               			<h5 class="card-title">대기중 상담</h5>
 		              	
-		              	<!-- 상담이력 Table-->
+		              	<!-- 대기중상담 Table-->
 				     	<div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
 				     		
 				     		<div class="datatable-top">
@@ -73,11 +73,10 @@
 		    					<div class="datatable-dropdown">
 		            				<label>
 		                				<select class="datatable-selector" name="per-page">
-		                					<option value="5" selected>5</option>
-		                					<option value="10">10</option>
-		                					<option value="15">15</option>
-		                					<option value="-1">All</option>
-		                				</select> 개씩 보기
+		                					<option value="5" selected>5개씩 보기</option>
+		                					<option value="10">10개씩 보기</option>
+		                					<option value="-1">전체 보기</option>
+		                				</select>
 		            				</label>
 		        				</div>
 		        				<!-- End per-page Dropdown -->
@@ -85,7 +84,15 @@
 		        				<!-- Search Bar -->
 			    				<div class="search-bar ">
 						      		<form class="search-form d-flex align-items-center" method="POST" action="#">
-						        		<input type="text" name="query" placeholder="Search" title="Enter search keyword">
+					                  	<select id="inputState" class="form-select" style="width: 180px;">
+					                    	<option selected>전체</option>
+					                    	<option>상담일자</option>
+					                    	<option>학생이름</option>
+					                    	<option>학생학번</option>
+					                    	<option>상담종류</option>
+					                    	<option>상담방식</option>
+					                  	</select>
+				                  		<input type="text" class="form-control" placeholder="Search" style="margin-left: 5px;">
 						        		<button type="submit" title="Search" class="btn" style="border-color: g"><i class="bi bi-search"></i></button>
 						      		</form>
 						    	</div>
@@ -189,18 +196,18 @@
 							
 							</div>
 						</div>
-		             	<!-- End 상담이력 Table-->
+		             	<!-- End 대기중상담 Table-->
 		
             		</div>
           		</div>
 				<!-- End 대기중 상담 Card -->
 				
-				<!-- ======= 확정 상담 Card ======= -->
+				<!-- ======= 확정상담 Card ======= -->
           		<div class="card">
             		<div class="card-body">
               			<h5 class="card-title">확정 상담</h5>
 		              	
-		              	<!-- 상담이력 Table-->
+		              	<!-- 확정상담 Table-->
 				     	<div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
 				     		
 				     		<div class="datatable-top">
@@ -208,11 +215,10 @@
 		    					<div class="datatable-dropdown">
 		            				<label>
 		                				<select class="datatable-selector" name="per-page">
-		                					<option value="5" selected>5</option>
-		                					<option value="10">10</option>
-		                					<option value="15">15</option>
-		                					<option value="-1">All</option>
-		                				</select> 개씩 보기
+		                					<option value="5" selected>5개씩 보기</option>
+		                					<option value="10">10개씩 보기</option>
+		                					<option value="-1">전체 보기</option>
+		                				</select>
 		            				</label>
 		        				</div>
 		        				<!-- End per-page Dropdown -->
@@ -220,7 +226,15 @@
 		        				<!-- Search Bar -->
 			    				<div class="search-bar ">
 						      		<form class="search-form d-flex align-items-center" method="POST" action="#">
-						        		<input type="text" name="query" placeholder="Search" title="Enter search keyword">
+					                  	<select id="inputState" class="form-select" style="width: 180px;">
+					                    	<option selected>전체</option>
+					                    	<option>상담일자</option>
+					                    	<option>학생이름</option>
+					                    	<option>학생학번</option>
+					                    	<option>상담종류</option>
+					                    	<option>상담방식</option>
+					                  	</select>
+				                  		<input type="text" class="form-control" placeholder="Search" style="margin-left: 5px;">
 						        		<button type="submit" title="Search" class="btn" style="border-color: g"><i class="bi bi-search"></i></button>
 						      		</form>
 						    	</div>
@@ -306,14 +320,14 @@
 		
             		</div>
           		</div>
-				<!-- End 대기중 상담 Card -->
+				<!-- End 확정상담 Card -->
 				
-				<!-- ======= 지난 상담 Card ======= -->
+				<!-- ======= 지난상담 Card ======= -->
           		<div class="card">
             		<div class="card-body">
               			<h5 class="card-title">지난 상담</h5>
 		              	
-		              	<!-- 상담이력 Table-->
+		              	<!-- 지난상담 Table-->
 				     	<div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
 				     		
 				     		<div class="datatable-top">
@@ -321,11 +335,10 @@
 		    					<div class="datatable-dropdown">
 		            				<label>
 		                				<select class="datatable-selector" name="per-page">
-		                					<option value="5" selected>5</option>
-		                					<option value="10">10</option>
-		                					<option value="15">15</option>
-		                					<option value="-1">All</option>
-		                				</select> 개씩 보기
+		                					<option value="5" selected>5개씩 보기</option>
+		                					<option value="10">10개씩 보기</option>
+		                					<option value="-1">전체 보기</option>
+		                				</select>
 		            				</label>
 		        				</div>
 		        				<!-- End per-page Dropdown -->
@@ -333,7 +346,15 @@
 		        				<!-- Search Bar -->
 			    				<div class="search-bar ">
 						      		<form class="search-form d-flex align-items-center" method="POST" action="#">
-						        		<input type="text" name="query" placeholder="Search" title="Enter search keyword">
+					                  	<select id="inputState" class="form-select" style="width: 180px;">
+					                    	<option selected>전체</option>
+					                    	<option>상담일자</option>
+					                    	<option>학생이름</option>
+					                    	<option>학생학번</option>
+					                    	<option>상담종류</option>
+					                    	<option>상담방식</option>
+					                  	</select>
+				                  		<input type="text" class="form-control" placeholder="Search" style="margin-left: 5px;">
 						        		<button type="submit" title="Search" class="btn" style="border-color: g"><i class="bi bi-search"></i></button>
 						      		</form>
 						    	</div>
@@ -407,11 +428,11 @@
 							
 							</div>
 						</div>
-		             	<!-- End 상담이력 Table-->
+		             	<!-- End 지난상담 Table-->
 		
             		</div>
           		</div>
-				<!-- End 대기중 상담 Card -->
+				<!-- End 지난상담 Card -->
 				
 			</div>
 	    </div>
