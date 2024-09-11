@@ -87,43 +87,43 @@
 								<div class="row mb-1">
 									<label class="col-sm-4 col-form-label right-tag">입사년도</label>
 									<div class="col-sm-5 right-tag">
-										<input type="text" class="form-control" value="2017" disabled>
+										<input type="text" class="form-control" th:value="${ empy_info.getEmp_no().substring(0,4) }"  disabled>
 									</div>
 								</div>
 								<div class="row mb-1">
 									<label class="col-sm-4 col-form-label right-tag">교번</label>
 									<div class="col-sm-5 right-tag">
-										<input type="text" class="form-control" value="20171234" disabled>
+										<input type="text" class="form-control" th:value="${ empy_info.getEmp_no() }" disabled>
 									</div>
 								</div>
 								<div class="row mb-1">
 									<label class="col-sm-4 col-form-label right-tag">이름</label>
 									<div class="col-sm-5 right-tag">
-										<input type="text" class="form-control" value="교직원a" disabled>
+										<input type="text" class="form-control" th:value="${ empy_info.getEmp_flnm() }" disabled>
 									</div>
 								</div>
 								<div class="row mb-1">
 									<label class="col-sm-4 col-form-label right-tag">생년월일</label>
 									<div class="col-sm-5 right-tag">
-										<input type="text" class="form-control" value="891212" disabled>
+										<input type="text" class="form-control" th:value="${ empy_info.getBrdt() }" disabled>
 									</div>
 								</div>
 								<div class="row mb-1">
 									<label class="col-sm-4 col-form-label right-tag">소속기관(단과대학)</label>
 									<div class="col-sm-5 right-tag">
-										<input type="text" class="form-control" value="심리상담센터" disabled>
+										<input type="text" class="form-control" th:value="${ empy_info.getOgdp_inst_nm() }" disabled>
 									</div>
 								</div>
 								<div class="row mb-1">
 									<label class="col-sm-4 col-form-label right-tag">소속부서(학과)</label>
 									<div class="col-sm-5 right-tag">
-										<input type="text" class="form-control" value="상담실" disabled>
+										<input type="text" class="form-control" th:value="${ empy_info.getOgdp_dept_nm() }" disabled>
 									</div>
 								</div>
 								<div class="row mb-1">
 									<label class="col-sm-4 col-form-label right-tag">직급</label>
 									<div class="col-sm-5 right-tag">
-										<input type="text" class="form-control" value="상담팀장" disabled>
+										<input type="text" class="form-control" th:value="${ empy_info.getJbgd_nm() }" disabled>
 									</div>
 								</div>
 							</div>
@@ -131,37 +131,37 @@
 								<div class="row mb-1">
 									<label class="col-sm-4 col-form-label right-tag">교직(전공)</label>
 									<div class="col-sm-6 right-tag">
-										<input type="text" class="form-control" value="성인심리학" disabled>
+										<input type="text" class="form-control" th:value="${ empy_info.getMjr() }" disabled>
 									</div>
 								</div>
 								<div class="row mb-1">
 									<label class="col-sm-4 col-form-label right-tag">선발일자</label>
 									<div class="col-sm-6 right-tag">
-										<input type="text" class="form-control" value="20170812" disabled>
+										<input type="text" class="form-control" th:value="${ empy_info.getEmp_no() }" disabled>
 									</div>
 								</div>
 								<div class="row mb-1">
 									<label class="col-sm-4 col-form-label right-tag">교원자격증번호</label>
 									<div class="col-sm-6 right-tag">
-										<input type="text" class="form-control" value="123456" disabled>
+										<input type="text" class="form-control" th:value="${ empy_info.getEdu_crtfct_no() }" disabled>
 									</div>
 								</div>
 								<div class="row mb-1">
 									<label class="col-sm-4 col-form-label right-tag">교원자격증발급일자</label>
 									<div class="col-sm-6 right-tag">
-										<input type="text" class="form-control" value="20140712" disabled>
+										<input type="text" class="form-control" th:value="${ empy_info.getEdu_crtfct_issu_ymd() }" disabled>
 									</div>
 								</div>
 								<div class="row mb-1">
 									<label class="col-sm-4 col-form-label right-tag">이메일</label>
 									<div class="col-sm-6 right-tag">
-										<input type="text" class="form-control" value="capybara@cauniv.com" disabled required>
+										<input type="text" class="form-control" th:value="${ empy_info.getEmp_eml_addr() }" disabled required>
 									</div>
 								</div>
 								<div class="row mb-3">
 									<label class="col-sm-4 col-form-label right-tag">전화번호</label>
 									<div class="col-sm-6 right-tag">
-										<input type="text" class="form-control" value="010-1234-5678" disabled required>
+										<input type="text" class="form-control" th:value="${ empy_info.getEmp_telno() }" disabled required>
 									</div>
 								</div>
 							</div>
@@ -186,20 +186,20 @@
 							<div class="row mb-2" style="margin-left: 5%;">
 								<label class="col-sm-1 col-form-label pd-left-3">우편번호</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" disabled required>
+									<input type="text" class="form-control" th:value="${ empy_info.getEmp_zip() }" disabled required>
 								</div>
 								<button type="button" class="btn btn-primary" style="width: 150px; height: 38px;">우편번호 검색</button>
 							</div>
 							<div class="row mb-2" style="margin-left: 5%;">
 								<label class="col-sm-1 col-form-label pd-left-3">주소</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" disabled required>
+									<input type="text" class="form-control" th:value="${ empy_info.getEmp_addr() }" disabled required>
 								</div>
 							</div>
 							<div class="row mb-3" style="margin-left: 5%;">
 								<label class="col-sm-1 col-form-label pd-left-3">상세주소</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" disabled required>
+									<input type="text" class="form-control" th:value="${ empy_info.getEmp_daddr() }" disabled required>
 								</div>
 							</div>
 						</div>
@@ -222,15 +222,15 @@
 						<div class="row mb-3" style="margin-left: 5%;">
 							<label class="col-sm-1 col-form-label pd-left-3">은행명</label>
 							<div class="col-sm-2">
-								<input type="text" class="form-control" disabled required>
+								<input type="text" class="form-control" th:value="${ empy_info.getDlng_bank_nm() }" disabled required>
 							</div>
 							<label class="col-sm-1 col-form-label pd-left-3">계좌번호</label>
 							<div class="col-sm-3">
-								<input type="text" class="form-control" disabled required>
+								<input type="text" class="form-control" th:value="${ empy_info.getDlng_actno() }" disabled required>
 							</div>
 							<label class="col-sm-1 col-form-label pd-left-3">예금주</label>
 							<div class="col-sm-2">
-								<input type="text" class="form-control" disabled required>
+								<input type="text" class="form-control" th:value="${ empy_info.getDpstr_nm() }" disabled required>
 							</div>
 						</div>
 						
