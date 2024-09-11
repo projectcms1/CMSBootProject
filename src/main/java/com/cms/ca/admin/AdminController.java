@@ -35,7 +35,7 @@ public class AdminController {
 		return "admin/adminfindid";
 	}
 	
-	@GetMapping("/")
+	@GetMapping("/stlistmod")
 	public String stlist_mod(Model m) {
 		
 		List<student_dto> student_list_Data = this.stuser_service.student_list();
