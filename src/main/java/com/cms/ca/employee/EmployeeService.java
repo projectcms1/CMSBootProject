@@ -4,5 +4,5 @@ import com.cms.ca.employee_dto;
 
 public interface EmployeeService {
 
-	employee_dto getOneEmployee(String emp_no);
+	employee_dto getEmployeeInfo(String emp_no);
 }

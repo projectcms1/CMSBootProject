@@ -15,9 +15,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private EmployeeRepository empyRepo;
 
 	@Override
-	public employee_dto getOneEmployee(String emp_no) {
+	public employee_dto getEmployeeInfo(String emp_no) {
 
-		return this.empyRepo.getOneEmployee(emp_no);
+		return this.empyRepo.getEmployeeInfo(emp_no);
 	}
 	
 	

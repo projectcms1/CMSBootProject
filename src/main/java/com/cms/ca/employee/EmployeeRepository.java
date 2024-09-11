@@ -9,5 +9,5 @@ import com.cms.ca.employee_dto;
 @Repository("empy_repo")
 public interface EmployeeRepository {
 
-	employee_dto getOneEmployee(String emp_no);
+	employee_dto getEmployeeInfo(String emp_no);
 }
