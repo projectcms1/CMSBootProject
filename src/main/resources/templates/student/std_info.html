@@ -81,8 +81,7 @@
 							<div class="row mb-1">
 								<!-- row 1 -->
 								<div class="col-md-2 col-lg-2">
-									<img src="/assets/img/3.jpeg" alt="Profile" class="rounded-4" style="margin-left: 25%;"
-										width="80%" height="225px">
+									<img src="/assets/img/3.jpeg" alt="Profile" class="rounded-4" style="margin-left: 25%;" width="80%" height="225px">
 								</div>
 								<div class="col-md-4 col-lg-4">
 									<div class="row mb-1">
@@ -150,13 +149,13 @@
 									<div class="row mb-1">
 										<label class="col-sm-4 col-form-label right-tag">이메일</label>
 										<div class="col-sm-6 right-tag">
-											<input type="text" class="form-control" th:value="${ std_data.getUser_eml_addr() }" readonly="readonly">
+											<input type="text" class="form-control" th:value="${ std_data.getUser_eml_addr() }" disabled required>
 										</div>
 									</div>
 									<div class="row mb-3">
 										<label class="col-sm-4 col-form-label right-tag">전화번호</label>
 										<div class="col-sm-6 right-tag">
-											<input type="text" class="form-control" th:value="${ std_data.getUser_telno() }" readonly="readonly">
+											<input type="text" class="form-control" th:value="${ std_data.getUser_telno() }" disabled required>
 										</div>
 									</div>
 								</div>
@@ -178,24 +177,24 @@
 						<div class="card-body">	
 							<h5 class="card-title">거주지 정보</h5>
 							<div class="col-md-12">
-								<div class="row mb-2">
-									<label class="col-sm-2 col-form-label pd-left-3">우편번호</label>
+								<div class="row mb-2" style="margin-left: 5%;">
+									<label class="col-sm-1 col-form-label pd-left-3">우편번호</label>
 									<div class="col-sm-2">
-										<input type="text" class="form-control" id="sample2_postcode" th:value="${ std_data.getUser_zip() }" disabled>
+										<input type="text" class="form-control" id="sample2_postcode" th:value="${ std_data.getUser_zip() }" disabled required>
 									</div>
 									<button type="button" class="btn btn-primary" onclick="sample2_execDaumPostcode()"
-										style="width: 100px; height: 38px;">주소 검색</button>
+										style="width: 150px; height: 38px;">우편번호 검색</button>
 								</div>
-								<div class="row mb-1">
-									<label class="col-sm-2 col-form-label pd-left-3">주소</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" id="sample2_address" th:value="${ std_data.getUser_addr() }" disabled>
+								<div class="row mb-2" style="margin-left: 5%;">
+									<label class="col-sm-1 col-form-label pd-left-3">주소</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" id="sample2_address" th:value="${ std_data.getUser_addr() }" disabled required>
 									</div>
 								</div>
-								<div class="row mb-3">
-									<label class="col-sm-2 col-form-label pd-left-3">상세주소</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" id="sample2_detailAddress" th:value="${ std_data.getUser_daddr() }" readonly="readonly">
+								<div class="row mb-3" style="margin-left: 5%;">
+									<label class="col-sm-1 col-form-label pd-left-3">상세주소</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" id="sample2_detailAddress" th:value="${ std_data.getUser_daddr() }" disabled required>
 									</div>
 								</div>
 							</div>
@@ -218,18 +217,18 @@
 					<div class="card">
 						<div class="card-body">	
 							<h5 class="card-title">계좌 정보</h5>
-							<div class="row mb-3">
+							<div class="row mb-3" style="margin-left: 5%;">
 								<label class="col-sm-1 col-form-label pd-left-3">은행명</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" th:value="${ std_data.getDlng_bank_nm() }" readonly="readonly">
+									<input type="text" class="form-control" th:value="${ std_data.getDlng_bank_nm() }" disabled required>
 								</div>
 								<label class="col-sm-1 col-form-label pd-left-3">계좌번호</label>
 								<div class="col-sm-3">
-									<input type="text" class="form-control" th:value="${ std_data.getDlng_actno() }" readonly="readonly">
+									<input type="text" class="form-control" th:value="${ std_data.getDlng_actno() }" disabled required>
 								</div>
 								<label class="col-sm-1 col-form-label pd-left-3">예금주</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" th:value="${ std_data.getDpstr_nm() }" readonly="readonly">
+									<input type="text" class="form-control" th:value="${ std_data.getDpstr_nm() }" disabled required>
 								</div>
 							</div>
 							
