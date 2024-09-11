@@ -90,7 +90,7 @@
 
 
 					<div class="d-flex justify-content-end">
-						<a class="buttton_1" href="#"
+						<a class="buttton_1" data-bs-toggle="modal" data-bs-target="#addcounselModal"
 							style="height: 38px; display: flex; align-items: center; justify-content: center;">
 							상담 추가 <i class="fa fa-plus-circle ms-2"></i>
 						</a>
@@ -131,16 +131,12 @@
 
 								<td>
 									<h6 class="font_14 col_3"
-										th:text="${counsel_data.getStdnt_flnm()}"></h6>
+										th:text="학생이름(뷰테이블)"></h6>
 								</td>
 
 								<td>
 									<h6 class="font_14 col_3"
-										th:text="${counsel_data.getOgdp_univ()}"></h6>
-								</td>
-								<td>
-									<h6 class="font_14 col_3"
-										th:text="${counsel_data.getOgdp_scsbjt()}"></h6>
+										th:text="상담자이름 (뷰테이블)"></h6>
 								</td>
 								<td>
 									<h6 class="font_14 col_3"
@@ -148,11 +144,15 @@
 								</td>
 								<td>
 									<h6 class="font_14 col_3"
-										th:text="${counsel_data.getStdnt_no()}"></h6>
+										th:text="${counsel_data.getEmp_no()}"></h6>
 								</td>
 								<td>
-									<h6 class="bg_3 text-center font_12 p-1 mb-0"
-										th:text="${counsel_data.getStdnt_stts_se()}"></h6>
+									<h6 class="font_14 col_3"
+										th:text="${counsel_data.getAply_dt()}"></h6>
+								</td>
+								<td>
+									<h6 class="font_14 col_3"
+										th:text="${counsel_data.getHr_se()}"></h6>
 								</td>
 								<td>
 									<!-- 모달 트리거 버튼 -->
@@ -193,7 +193,103 @@
 	</div>
 	</div>
 
-	<!-- 모달 -->
+	<!-- 상담추가 모달 -->
+	<div class="modal fade" id="addcounselModal" tabindex="-1"
+		aria-labelledby="detailModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="detailModalLabel">상세 정보</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<!-- 상세 정보를 여기에 추가 -->
+					<!-- 상세 정보 -->
+
+					<section class="section">
+						<div class="row">
+					    	<div class="col-lg-12">
+					    	
+					    	<div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
+					    	   	상담이 추가되었습니다!
+					        	<button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+					      	</div>
+					      	
+								<!-- 상담 추가 Card -->
+								<div class="card">
+							  		<div class="card-body">
+										<h5 class="card-title">상담추가</h5>
+								  		
+					      				<form>
+						                	<div class="row mb-3" align="center" style="margin-left: 5%;">
+						                  		<label for="inputText" class="col-sm-1 col-form-label">학생이름</label>
+						                  		<div class="col-sm-4">
+						                    		<input type="text" class="form-control">
+						                  		</div>
+						                  		<label for="inputEmail" class="col-sm-1 col-form-label">학생학번</label>
+						                  		<div class="col-sm-4">
+						                    		<input type="email" class="form-control">
+						                  		</div>
+						                	</div>
+						                	<div class="row mb-3" align="center" style="margin-left: 5%;">
+						                  		<label for="inputDate" class="col-sm-1 col-form-label">상담일자</label>
+						                  		<div class="col-sm-4">
+						                    		<input type="date" class="form-control">
+						                  		</div>
+						                  		<label for="inputTime" class="col-sm-1 col-form-label">상담시간</label>
+						                  		<div class="col-sm-4">
+						                    		<input type="time" class="form-control">
+						                  		</div>
+						                	</div>
+						                	<div class="row mb-3" align="center" style="margin-left: 5%;">
+						                  		<label class="col-sm-1 col-form-label">상담종류</label>
+						                 	 	<div class="col-sm-4">
+						                    		<select class="form-select" aria-label="Default select example">
+						                      			<option selected>상담 종류를 선택해주세요</option>
+						                      			<option value="1">학업</option>
+						                      			<option value="2">진로</option>
+						                      			<option value="3">심리</option>
+						                    		</select>
+						                  		</div>
+						                  		<label class="col-sm-1 col-form-label">상담방식</label>
+						                  		<div class="col-sm-4">
+						                    		<select class="form-select" aria-label="Default select example">
+						                      			<option selected>상담 방식을 선택해주세요</option>
+						                      			<option value="1">대면</option>
+						                      			<option value="2">채팅</option>
+						                      			<option value="3">화상</option>
+						                      			<option value="3">전화</option>
+						                    		</select>
+						                  		</div>
+						                	</div>
+						                	<div class="row mb-3" align="right" style="margin-left: 5%;">
+						                  		<div class="col-sm-10">
+						                    		<button type="submit" class="btn btn-primary" style="align-items: flex-end;">추가</button>
+						                  		</div>
+					        				</div>
+					      				</form>
+									</div>
+								</div>
+								<!-- End 상담 추가 Card --->
+						
+							</div>
+						</div>
+					</section>       
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">닫기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	
+	
+	<!-- 상세정보 모달 -->
 	<div class="modal fade" id="detailModal" tabindex="-1"
 		aria-labelledby="detailModalLabel" aria-hidden="true">
 		<div class="modal-dialog">

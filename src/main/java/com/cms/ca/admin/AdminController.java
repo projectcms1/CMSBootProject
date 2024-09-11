@@ -25,7 +25,7 @@ public class AdminController {
 	private counsel_service counsel_service;
 	
 	
-	@GetMapping("/login")
+	@GetMapping("/adminlogin")
 	public String admin_login() {
 		return "admin/login";
 	}
