@@ -1,14 +1,17 @@
 package com.cms.ca.student;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.cms.ca.student_dto;
 
+import jakarta.annotation.Resource;
+
 @Service
+@Repository("stdnt_service")
 public class StudentServiceImpl implements StudentService {
 
-	@Autowired
+	@Resource(name = "stdnt_repo")
 	private StudentRepository stdRepo;
 	
 	@Override
