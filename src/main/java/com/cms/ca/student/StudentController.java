@@ -20,7 +20,7 @@ public class StudentController {
 	private StudentService stdSrvc;
 	
 	@GetMapping("/student/std_info")
-	public String academy_info(Model m) throws Exception {
+	public String std_info(Model m) throws Exception {
 		try {
 			student_dto onedata = this.stdSrvc.getOneStudent(std_number);
 			if (onedata == null) { // 사용자 데이터 없음 (없는 학번)
@@ -40,27 +40,27 @@ public class StudentController {
 	}
 	
 	@GetMapping("/student/std_counsel_list")
-	public String counsel_loglist() {
+	public String std_counsel_loglist() {
 		return "student/std_counsel_list";
 	}
 	
 	@GetMapping("/student/std_counsel_reservelist")
-	public String cnsl_reserlist() {
+	public String std_counsel_reservelist() {
 		return "student/std_counsel_reservelist";
 	}
 	
 	@GetMapping("/student/std_counsel_reserve")
-	public String counsel_reservation() {
+	public String std_counsel_reserve() {
 		return "student/std_counsel_reserve";
 	}
 	
 	@GetMapping("/student/std_counsel_chatting")
-	public String chat_counsel() {
+	public String std_counsel_chatting() {
 		return "student/std_counsel_chatting";
 	}
 	
 	@GetMapping("/student/std_counsel_selftestlist")
-	public String slfpsy_testlist() {
+	public String std_counsel_selftestlist() {
 		return "student/std_counsel_selftestlist";
 	}
 }
