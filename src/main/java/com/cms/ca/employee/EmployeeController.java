@@ -3,6 +3,7 @@ package com.cms.ca.employee;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.cms.ca.employee_dto;
 
@@ -11,32 +12,70 @@ import jakarta.annotation.Resource;
 @Controller
 public class EmployeeController {
 	
-	String emp_no="2023006";
+	String emp_no="2013800";
 	String viewName = "/employee/empy_blankpage";
+	employee_dto oneData=null;
 	
 	@Resource(name = "empy_service")
 	private EmployeeService empyService;
 	
-	@GetMapping("/employee/empy_info")
-	public String employeeInfoPage(Model m) {
+	private void employeeInfo(String emp_no) {
 		try {
-			employee_dto onedata = this.empyService.getEmployeeInfo(this.emp_no);
-			if (onedata == null) { // 교번과 매칭되는 사람이 없을시
+			this.oneData = this.empyService.getEmployeeInfo(emp_no);
+			
+			if (this.oneData.getEmp_no()==null) { // 교번과 매칭되는 사람이 없을시
 				// 에러 페이지 추가 후 수정
 				System.out.println("empy_info Error");
 			}
 			else {
-				if((onedata.getEdu_crtfct_issu_ymd()==null) || (onedata.getEdu_crtfct_no()==null)) {
-					onedata.setEdu_crtfct_issu_ymd("-");
-					onedata.setEdu_crtfct_no("-");
+				if((this.oneData.getEdu_crtfct_issu_ymd().equals("")) || (this.oneData.getEdu_crtfct_no().equals(""))) {	//교원자격증번호 및 발급일자가 null(교수가 아닐 때)
+					this.oneData.setEdu_crtfct_issu_ymd("-");
+					this.oneData.setEdu_crtfct_no("-");
 				}
-				m.addAttribute("empy_info", onedata);
+				else {
+					this.oneData.setDateWithDot();		//교원자격증 발급일자 출력 형태 변경					
+				}
+				this.oneData.setDashInTelNumber();	//전화번호 출력 형태 변경
 				viewName = "employee/empy_info";
 			}
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			e.printStackTrace();
-			viewName = "page_blank";
+			viewName = "/employee/empy_blankpage";
 		}
+		
+	}
+	
+	@GetMapping("/employee/empy_info")	//교직원 정보창에 들어갈 때: GetMapping 처리
+	public String employeeInfoPage(Model m) {
+		employeeInfo(this.emp_no);
+		m.addAttribute("empy_info", this.oneData);
+		return viewName;
+	}
+	
+	@PostMapping("/employee/empy_info")	//교직원 정보창에서 데이터 수정할 때
+	public String employeeInfoSave(Model m, employee_dto changedData) {
+		int updateck=0;
+		
+		//각각 개인정보, 거주지 정보, 은행 정보 update
+		if(!changedData.getEmp_eml_addr().equals("") && !changedData.getEmp_telno().equals("")) {	
+			updateck=this.empyService.updatePersonalEmployeeInfo(changedData);
+		}
+		else if(!changedData.getEmp_zip().equals("") && !changedData.getEmp_addr().equals("") && !changedData.getEmp_daddr().equals("")) {
+			updateck=this.empyService.updateAddrEmployeeInfo(changedData);
+		}
+		else if(!changedData.getDlng_bank_nm().equals("") && !changedData.getDlng_actno().equals("") && !changedData.getDpstr_nm().equals("")) {
+			updateck=this.empyService.updateBankEmployeeInfo(changedData);
+		}
+		
+		if(updateck>0) {
+			employeeInfo(changedData.getEmp_no());
+			m.addAttribute("empy_info", this.oneData);
+		}
+		else {
+			System.out.println("empy_info update error");
+		}
+		
 		return viewName;
 	}
 	
