@@ -19,6 +19,24 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 		return this.empyRepo.getEmployeeInfo(emp_no);
 	}
+
+	@Override
+	public int updatePersonalEmployeeInfo(employee_dto emp_dto) {
+
+		return this.empyRepo.updatePersonalEmployeeInfo(emp_dto);
+	}
+
+	@Override
+	public int updateAddrEmployeeInfo(employee_dto emp_dto) {
+
+		return this.empyRepo.updateAddrEmployeeInfo(emp_dto);
+	}
+
+	@Override
+	public int updateBankEmployeeInfo(employee_dto emp_dto) {
+
+		return this.empyRepo.updateBankEmployeeInfo(emp_dto);
+	}
 	
 	
 
