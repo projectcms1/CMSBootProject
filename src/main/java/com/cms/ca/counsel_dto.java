@@ -1,5 +1,8 @@
 package com.cms.ca;
 
+import lombok.Data;
+
+@Data
 public class counsel_dto {
 
 	private Integer aply_sn, bfr_aply_sn, hr_se;

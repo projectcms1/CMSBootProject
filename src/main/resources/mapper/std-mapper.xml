@@ -6,5 +6,21 @@
 		select * from STDNT_INFO where STDNT_NO = #{stdnt_no}
 	</select>
 
+	<select id="getEmpID" resultType="String" parameterType="String">
+		select EMP_NO from STDNT_ACAVSR_INFO where STDNT_NO = #{stdnt_no}
+	</select>
+
+	<select id="getAllCounseler" resultType="com.cms.ca.employee_dto">
+		select EMP_NO, EMP_FLNM from EMP_INFO where MNG_AUTHRT = 'C'
+	</select>
+
+	<select id="getPrfsTimes" resultType="com.cms.ca.counsel_dto" parameterType="String">
+		select * from DSCSN_APLY where EMP_NO = #{emp_no} and TKCG_YN = 'Y'
+	</select>
+
+	<insert id="addCounselReservation" parameterType="com.cms.ca.counsel_dto">
+		insert into DSCSN_APLY (aply_sn, stdnt_no, emp_no, stts_cd, plc, hr_se, rsvt_dt, aply_dt, dscsn_mthd, dscsn_knd)
+		values ('0', #{stdnt_no}, #{emp_no}, #{stts_cd}, #{plc}, #{hr_se}, #{rsvt_dt}, now(), #{dscsn_mthd}, #{dscsn_knd})
+	</insert>
 
 </mapper>
