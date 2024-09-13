@@ -11,7 +11,6 @@ function personal_input(){
 	
 	dlng_bank_nm.disabled=true;
 	dlng_actno.disabled=true;
-	dpstr_nm.disabled=true;
 }
 
 function personal_save(){ 
@@ -28,7 +27,7 @@ function personal_save(){
 		alert("전화번호 11자리 숫자를 모두 입력해주세요.");
 	}
 	else{
-		alert("개인정보가 정상적으로 변경되셨습니다.")
+		alert("개인정보가 정상적으로 변경되셨습니다.");
 		personal_info.submit();
 	}
 }
@@ -47,10 +46,10 @@ function addr_input(){
 	
 	dlng_bank_nm.disabled=true;
 	dlng_actno.disabled=true;
-	dpstr_nm.disabled=true;
 }
 
 function addr_save(){
+	alert("거주지 정보가 정상적으로 변경되셨습니다.");
 	addr_info.submit();
 }
 
@@ -65,10 +64,12 @@ function bank_input(){
 	
 	dlng_bank_nm.disabled=false;
 	dlng_actno.disabled=false;
-	dpstr_nm.disabled=false;
 	
 }
 
 function bank_save(){
+	alert("계좌 정보가 정상적으로 변경되셨습니다.");
 	bank_info.submit();
 }
+
+

@@ -58,13 +58,13 @@ public class EmployeeController {
 		int updateck=0;
 		
 		//각각 개인정보, 거주지 정보, 은행 정보 update
-		if(!changedData.getEmp_eml_addr().equals("") && !changedData.getEmp_telno().equals("")) {	
+		if(changedData.getEmp_eml_addr()!=null && changedData.getEmp_telno()!=null) {	
 			updateck=this.empyService.updatePersonalEmployeeInfo(changedData);
 		}
-		else if(!changedData.getEmp_zip().equals("") && !changedData.getEmp_addr().equals("") && !changedData.getEmp_daddr().equals("")) {
+		else if(changedData.getEmp_zip()!=null && changedData.getEmp_addr()!=null && changedData.getEmp_daddr()!=null) {
 			updateck=this.empyService.updateAddrEmployeeInfo(changedData);
 		}
-		else if(!changedData.getDlng_bank_nm().equals("") && !changedData.getDlng_actno().equals("") && !changedData.getDpstr_nm().equals("")) {
+		else if(changedData.getDlng_bank_nm()!=null&& changedData.getDlng_actno()!=null) {
 			updateck=this.empyService.updateBankEmployeeInfo(changedData);
 		}
 		

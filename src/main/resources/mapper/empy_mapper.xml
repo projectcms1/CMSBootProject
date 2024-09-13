@@ -20,7 +20,7 @@
 	
 	<update id="updateBankEmployeeInfo" parameterType="com.cms.ca.employee_dto">
 		update EMP_INFO 
-		set dlng_bank_nm =#{dlng_bank_nm}, dlng_actno=#{dlng_actno}, dpstr_nm=#{dpstr_nm}
+		set dlng_bank_nm =#{dlng_bank_nm}, dlng_actno=#{dlng_actno}
 		where emp_no=#{emp_no}
 	</update>
 	
