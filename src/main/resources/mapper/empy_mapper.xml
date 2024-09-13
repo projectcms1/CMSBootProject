@@ -3,7 +3,25 @@
 <mapper namespace="com.cms.ca.employee.EmployeeRepository">
 
 	<select id="getEmployeeInfo" resultType="com.cms.ca.employee_dto" parameterType="String">
-		select * from EMP_INFO where EMP_NO = #{emp_no}
+		select * from EMP_INFO where emp_no = #{emp_no}
 	</select>
 
+	<update id="updatePersonalEmployeeInfo" parameterType="com.cms.ca.employee_dto">
+		update EMP_INFO 
+		set emp_eml_addr =#{emp_eml_addr}, emp_telno=#{emp_telno}
+		where emp_no=#{emp_no}
+	</update>
+	
+	<update id="updateAddrEmployeeInfo" parameterType="com.cms.ca.employee_dto">
+		update EMP_INFO 
+		set emp_zip =#{emp_zip}, emp_addr=#{emp_addr}, emp_daddr=#{emp_daddr}
+		where emp_no=#{emp_no}
+	</update>
+	
+	<update id="updateBankEmployeeInfo" parameterType="com.cms.ca.employee_dto">
+		update EMP_INFO 
+		set dlng_bank_nm =#{dlng_bank_nm}, dlng_actno=#{dlng_actno}
+		where emp_no=#{emp_no}
+	</update>
+	
 </mapper>
