@@ -51,6 +51,19 @@ public class StudentController {
 		return this.viewName;
 	}
 	
+	@PostMapping("/student/update_std_info")
+	public void update_std_info(ServletResponse res) {
+		res.setContentType("text/html; charset=UTF-8");
+		try {
+			this.pw = res.getWriter();
+		} catch (Exception e) {
+			System.out.println(e);
+			this.pw.print("<script>location.href = '/blank';</script>");
+		} finally {
+			this.pw.close();
+		}
+	}
+	
 	@GetMapping("/student/std_counsel_list")
 	public String std_counsel_loglist() {
 		try {
