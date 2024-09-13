@@ -52,10 +52,19 @@ public class StudentController {
 	}
 	
 	@PostMapping("/student/update_std_info")
-	public void update_std_info(ServletResponse res) {
+	public void update_std_info(@ModelAttribute student_dto sdto, ServletResponse res) {
 		res.setContentType("text/html; charset=UTF-8");
 		try {
 			this.pw = res.getWriter();
+			sdto.setStdnt_no(this.STD_NUMBER);
+			int result = this.stdSrvc.updateStudentInfo(sdto);
+			if (result > 0) {
+				this.pw.print("<script> alert('성공적으로 정보가 변경되었습니다.');"
+						+ "location.href = './std_info';</script>");
+			}
+			else {
+				this.pw.print("<script> alert('오류가 발생하여 예약이 실패하였습니다.'); history.go(-1);</script>");
+			}
 		} catch (Exception e) {
 			System.out.println(e);
 			this.pw.print("<script>location.href = '/blank';</script>");
@@ -115,21 +124,10 @@ public class StudentController {
 		System.out.println(professor_number);
 		try {
 			boolean ck = false;
-			this.pw = res.getWriter();
 			cdto.setStdnt_no(this.STD_NUMBER);
-			if (professor_number != null && counseler_number == null) {
-				cdto.setEmp_no(professor_number);
-				cdto = new PickCounselInfo().updateCnslInfo_Professor(cdto);
-				ck = true;
-			}
-			else if (counseler_number != null && professor_number == null) {
-				cdto.setEmp_no(counseler_number);
-				cdto = new PickCounselInfo().updateCnslInfo_Counseler(cdto);
-				ck = true;
-			}
+			this.pw = res.getWriter();
 			
-			int result = (ck) ? this.stdSrvc.addCounselReservation(cdto) : 0;
-			
+			int result = this.stdSrvc.addCounselReservation(cdto, professor_number, counseler_number);
 			if (result > 0) {
 				this.pw.print("<script> alert('성공적으로 예약이 완료되었습니다.');"
 						+ "location.href = './std_counsel_reservelist';</script>");

@@ -10,7 +10,9 @@ public interface StudentService {
 
 	student_dto getOneStudent(String stdnt_no);
 	
-	int addCounselReservation(counsel_dto dto);
+	int updateStudentInfo(student_dto dto);
+	
+	int addCounselReservation(counsel_dto dto, String professor_number, String counseler_number);
 	
 	String getProfessorNumber(String std_no);
 	

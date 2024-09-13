@@ -1,6 +1,7 @@
 package com.cms.ca.student;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -22,4 +23,6 @@ public interface StudentRepository {
 	List<counsel_dto> getPrfsTimes(String emp_no);
 	
 	int addCounselReservation(counsel_dto dto);
+	
+	int setStudentInfo(Map<String, String> keymap);
 }

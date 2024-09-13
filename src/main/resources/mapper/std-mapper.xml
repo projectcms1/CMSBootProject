@@ -23,4 +23,18 @@
 		values ('0', #{stdnt_no}, #{emp_no}, #{stts_cd}, #{plc}, #{hr_se}, #{rsvt_dt}, now(), #{dscsn_mthd}, #{dscsn_knd})
 	</insert>
 
+	<update id="setStudentInfo" parameterType="Map">
+		update STDNT_INFO set 
+		<if test='part=="1"'>
+			USER_EML_ADDR = #{user_eml_addr}, USER_TELNO = #{user_telno} 
+		</if>
+		<if test='part=="2"'>
+			USER_ZIP = #{user_zip}, USER_ADDR = #{user_addr}, USER_DADDR = #{user_daddr} 
+		</if>
+		<if test='part=="3"'>
+			DLNG_BANK_NM = #{dlng_bank_nm}, DLNG_ACTNO = #{dlng_actno} 
+		</if>
+		where STDNT_NO = #{stdnt_no}
+	</update>
+
 </mapper>

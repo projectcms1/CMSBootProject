@@ -93,6 +93,7 @@ function input_disable(selectedBtn) {
 	if (selectedBtn == "1") {
 		personal_frm.user_eml_addr.disabled = false;
 		personal_frm.user_telno.disabled = false;
+		personal_frm.user_telno.value = personal_frm.user_telno.value.replaceAll("-", "");
 	}
 	else if (selectedBtn == "2") {
 		address_frm.user_zip.readOnly = true;
@@ -112,22 +113,22 @@ function input_disable(selectedBtn) {
 }
 
 function input_submit(selectedBtn) {
-	if (selectedBtn == "1") {
+	if (selectedBtn == "1" && !personal_frm.user_eml_addr.disabled) {
 		personal_frm.method = "POST";
 		personal_frm.action = "./update_std_info";
 		personal_frm.submit();
 	}
-	else if (selectedBtn == "2") {
+	else if (selectedBtn == "2" && !address_frm.user_zip.disabled) {
 		address_frm.method = "POST";
 		address_frm.action = "./update_std_info";
 		address_frm.submit();
 	}
-	else if (selectedBtn == "3") {
+	else if (selectedBtn == "3" && !acount_frm.dlng_bank_nm.disabled) {
 		acount_frm.method = "POST";
 		acount_frm.action = "./update_std_info";
 		acount_frm.submit();
 	}
 	else {
-		alert("잘못된 접근입니다.");
+		alert("입력을 먼저 눌러주세요.");
 	}
 }

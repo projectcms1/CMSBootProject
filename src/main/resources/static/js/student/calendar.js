@@ -1,3 +1,16 @@
+(function ajax_empTimeTable() {
+	fetch('./api/professor_time', {
+		method : "GET",
+		headers : { "content-type" : "application/json" }
+	}).then(function(result_data) {
+		return result_data.text();
+	}).then(function(result_res) {
+		console.log(result_res);
+	}).catch(function(error) {
+		console.log(error);
+	});
+}());
+
 const monthAndYear = document.getElementById("monthAndYear");
 const calendarBody = document.getElementById("calendarBody");
 const prevMonthBtn = document.getElementById("prevMonth");
@@ -59,6 +72,7 @@ function showCalendar(year, month) {
 
         for (let j = 0; j < 7; j++) {
             let cell = document.createElement("td");
+
             const currentDate = new Date(year, month, date);
 
             if (i === 0 && j < firstDay) {
@@ -67,7 +81,9 @@ function showCalendar(year, month) {
                 break;
             } else {
                 cell.innerHTML = date;
-
+                
+                cell.setAttribute("datedata", setDateInTDTag(year, month, date));
+                
                 // 오늘 이전의 날짜를 비활성화(disable) 처리
                 if (
                     (year < todayYear) ||
@@ -88,6 +104,16 @@ function showCalendar(year, month) {
         }
         calendarBody.appendChild(row);
     }
+    search_tdtag();
+}
+
+function setDateInTDTag(y, m, d) {
+	var result = "";
+	var fm = m + 1;
+	var fmonth = (fm > 9) ? fm : "0" + fm;
+	var fdate = (d > 9) ? d : "0" + d;
+	result = y + "" + fmonth + "" + fdate;
+	return result;
 }
 
 function initCalendar() {
@@ -103,6 +129,7 @@ prevMonthBtn.addEventListener("click", () => {
         currentYear--;
     }
     showCalendar(currentYear, currentMonth);
+    
 });
 
 nextMonthBtn.addEventListener("click", () => {
@@ -114,4 +141,73 @@ nextMonthBtn.addEventListener("click", () => {
     showCalendar(currentYear, currentMonth);
 });
 
+function updateCnslrName(empNo) {
+	var emp_name = document.querySelector('select[name="counseler_number"] > option:checked').innerText;
+	document.getElementById("selectedCnslrName").innerText = emp_name;
+	frmCounseler.emp_no.value = empNo;
+	frmCounseler.rsvt_dt.value = "";
+}
+
+function reservate_counsel(empType) {
+	if (empType == "cslr") {
+		if (frmCounseler.rsvt_dt.value == "") {
+			alert("상담 신청 날짜를 선택해주세요.");
+		}
+		else if (frmCounseler.hr_se.value == "") {
+			alert("상담 신청 시간을 선택해주세요.");
+		}
+		else if (frmCounseler.dscsn_knd.value == "") {
+			alert("신청할 상담의 종류를 선택해주세요.");
+		}
+		else if (frmCounseler.dscsn_mthd.value == "") {
+			alert("신청할 상담의 방식을 선택해주세요.");
+		}
+		else {
+			if (confirm("아래 내용으로 지도 교수 상담을 신청하시겠습니까?")) {
+				frmCounseler.method = "POST";
+				frmCounseler.action = "./insert_counsel_reservation";
+				frmCounseler.submit();
+			}
+		}
+	}
+	else if (empType == "prfs") {
+		if (frmProfessor.rsvt_dt.value == "") {
+			alert("상담 신청 날짜를 선택해주세요.");
+		}
+		else if (frmProfessor.hr_se.value == "") {
+			alert("상담 신청 시간을 선택해주세요.");
+		}
+		else if (frmProfessor.dscsn_knd.value == "") {
+			alert("신청할 상담의 종류를 선택해주세요.");
+		}
+		else if (frmProfessor.dscsn_mthd.value == "") {
+			alert("신청할 상담의 방식을 선택해주세요.");
+		}
+		else {
+			if (confirm("아래 내용으로 지도 교수 상담을 신청하시겠습니까?")) {
+				frmProfessor.method = "POST";
+				frmProfessor.action = "./insert_counsel_reservation";
+				frmProfessor.submit();
+			}
+		}
+	}
+	else {
+		alert("잘못된 접근입니다.");
+	}
+}
+
 initCalendar();
+
+function search_tdtag() {
+	var td_data = document.querySelectorAll("td:not(.disabled)");
+	td_data.forEach((data) => {
+		data.addEventListener('click', function(e) {
+			var datedata = e.currentTarget.getAttribute("datedata");
+			frmCounseler.rsvt_dt.value = datedata;
+			
+			var dateview = datedata.substring(0, 4) + "년 " + datedata.substring(4, 6) + "월 " + datedata.substring(6, 8) + "일";
+			
+			document.getElementById("selectedCnslDate").innerText = dateview;
+		});
+	});
+}
