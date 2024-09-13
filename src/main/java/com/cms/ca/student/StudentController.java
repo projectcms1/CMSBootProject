@@ -123,7 +123,6 @@ public class StudentController {
 		System.out.println(cdto);
 		System.out.println(professor_number);
 		try {
-			boolean ck = false;
 			cdto.setStdnt_no(this.STD_NUMBER);
 			this.pw = res.getWriter();
 			
