@@ -200,7 +200,6 @@
 		                            </select>
 		                          </li>
 		                          <li>
-		                          	<input type="hidden" name="emp_no">
 		                          	<input type="hidden" name="rsvt_dt">
 		                          	<input type="hidden" name="counseler_number">
 		                          	<button type="button" onclick="reservate_counsel('cslr')" class="btn btn-primary btn-lg">신청하기</button>
@@ -219,17 +218,12 @@
 		                        <ul>
 		                          <li><i class="bx bx-check"></i>예약 날짜</li>
 		                          <li>
-		                          	<input type="date" name="rsvt_dt" id="" class="form-control">
+		                          	<input type="date" name="rsvt_dt" id="prfsSelectDate" class="form-control" onchange="setTimeSelecter(this.value)">
 		                          </li>
 		                          <li><i class="bx bx-check"></i>시간 구분</li>
 		                          <li>
-		                            <select class="form-select" name="hr_se">
-		                              <option value="">시간 선택</option>
-		                              <option value="1">1교시(09:00~10:15)</option>
-		                              <option value="2">2교시(10:30~11:45)</option>
-		                              <option value="3">3교시(13:00~14:15)</option>
-		                              <option value="4">4교시(14:30~15:45)</option>
-		                              <option value="5">5교시(16:00~17:15)</option>
+		                            <select class="form-select" name="hr_se" id="prfsSelectTime">
+		                              <option value="">날짜를 먼저 선택해주세요.</option>
 		                            </select>
 		                          </li>
 		                          <li><i class="bx bx-check"></i>상담 종류</li>
@@ -289,7 +283,7 @@
   <!-- Template Main JS File -->
   <script src="/assets/js/main.js"></script>
   
-  <script src="/js/student/calendar.js?v=3"></script>
+  <script src="/js/student/calendar.js?v=6"></script>
 </body>
 <script>
 window.onload=function(){

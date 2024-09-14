@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -78,12 +79,19 @@ public class StudentServiceImpl implements StudentService {
 	@Override // 지도 교수 시간표 SELECT
 	public String getPrfsTimeTable(String std_no) {
 		String empNo = this.getProfessorNumber(std_no);
+		JSONObject jo = new JSONObject();
+		JSONArray ja = new JSONArray();
 		List<counsel_dto> ptt_list = this.stdRepo.getPrfsTimes(empNo);
+		System.out.println(ptt_list);
 		for (counsel_dto cdto : ptt_list) {
-			JSONObject jo = new JSONObject();
-			//jo.put("", "")
+			JSONObject jo_dump = new JSONObject();
+			jo_dump.put("aply_sn", cdto.getAply_sn());
+			jo_dump.put("rsvt_dt", cdto.getRsvt_dt());
+			jo_dump.put("hr_se", cdto.getHr_se());
+			ja.put(jo_dump);
 		}
-		return null;
+		jo.put("prfs", ja);
+		return jo.toString();
 	}
 
 	@Override

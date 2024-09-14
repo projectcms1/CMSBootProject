@@ -100,28 +100,12 @@ public class StudentController {
 		return this.viewName;
 	}
 	
-	// 지도 교수 시간표 SELECT - AJAX
-	@GetMapping("/student/api/professor_time")
-	public String professor_time() {
-		String callback = "";
-		try {
-			//System.out.println("ajax-api 작동");
-			this.stdSrvc.getPrfsTimeTable(this.STD_NUMBER);
-			callback = "ok";
-		} catch (Exception e) {
-			callback = "error";
-		}
-		return callback;
-	}
-	
 	// 상담 신청
 	@PostMapping("/student/insert_counsel_reservation")
 	public void insert_counsel_reservation(@ModelAttribute counsel_dto cdto, ServletResponse res,
 			@RequestParam(value = "", required = false) String professor_number,
 			@RequestParam(value = "", required = false) String counseler_number) {
 		res.setContentType("text/html; charset=UTF-8");
-		System.out.println(cdto);
-		System.out.println(professor_number);
 		try {
 			cdto.setStdnt_no(this.STD_NUMBER);
 			this.pw = res.getWriter();

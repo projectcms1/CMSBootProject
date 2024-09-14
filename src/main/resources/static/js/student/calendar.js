@@ -1,15 +1,4 @@
-(function ajax_empTimeTable() {
-	fetch('./api/professor_time', {
-		method : "GET",
-		headers : { "content-type" : "application/json" }
-	}).then(function(result_data) {
-		return result_data.text();
-	}).then(function(result_res) {
-		console.log(result_res);
-	}).catch(function(error) {
-		console.log(error);
-	});
-}());
+let exreservData = new Object();
 
 const monthAndYear = document.getElementById("monthAndYear");
 const calendarBody = document.getElementById("calendarBody");
@@ -21,6 +10,28 @@ const today = new Date();
 const todayDate = today.getDate();
 const todayMonth = today.getMonth();
 const todayYear = today.getFullYear();
+
+const prfsSelectDate = document.getElementById("prfsSelectDate");
+const prfsSelectTime = document.getElementById("prfsSelectTime");
+prfsSelectDate.setAttribute("min", today.toISOString().split("T")[0]);
+
+const TimeTableList = ["<option value=''>시간 선택</option>", "<option value='1'>1교시(09:00~10:15)</option>",
+		"<option value='2'>2교시(10:30~11:45)</option>", "<option value='3'>3교시(13:00~14:15)</option>",
+		"<option value='4'>4교시(14:30~15:45)</option>", "<option value='5'>5교시(16:00~17:15)</option>"
+];
+
+(function ajax_empTimeTable() {
+	fetch('./api/professor_time', {
+		method : "GET",
+		headers : { "content-type" : "application/json" }
+	}).then(function(result_data) {
+		return result_data.json();
+	}).then(function(result_res) {
+		exreservData = result_res;
+	}).catch(function(error) {
+		console.log(error);
+	});
+}());
 
 // 한국어 월 이름과 요일 이름 배열
 const monthNames = [
@@ -144,8 +155,10 @@ nextMonthBtn.addEventListener("click", () => {
 function updateCnslrName(empNo) {
 	var emp_name = document.querySelector('select[name="counseler_number"] > option:checked').innerText;
 	document.getElementById("selectedCnslrName").innerText = emp_name;
-	frmCounseler.emp_no.value = empNo;
+	frmCounseler.counseler_number.value = empNo;
+	
 	frmCounseler.rsvt_dt.value = "";
+	document.getElementById("selectedCnslDate").innerText = "";
 }
 
 function reservate_counsel(empType) {
@@ -210,4 +223,22 @@ function search_tdtag() {
 			document.getElementById("selectedCnslDate").innerText = dateview;
 		});
 	});
+}
+
+function setTimeSelecter(selectedDate) {
+	prfsSelectTime.innerHTML = "";
+	var timeList = [];
+	var html = "";
+	var time_data = exreservData['prfs'];
+	time_data.forEach(function(data) {
+		if (selectedDate == data.rsvt_dt.split(" ")[0]) {
+			timeList.push(data.hr_se);
+		}
+	});
+	TimeTableList.forEach(function(data, node) {
+		if (!timeList.includes(node)) {
+			html += data;
+		}
+	});
+	prfsSelectTime.innerHTML = html;
 }

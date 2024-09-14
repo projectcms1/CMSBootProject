@@ -7,15 +7,19 @@
 	</select>
 
 	<select id="getEmpID" resultType="String" parameterType="String">
-		select EMP_NO from STDNT_ACAVSR_INFO where STDNT_NO = #{stdnt_no}
+		select EMP_NO from STDNT_ACAVSR_INFO where STDNT_NO = #{stdnt_no} and TKCG_YN = 'Y' order by STDNT_NO desc
 	</select>
 
 	<select id="getAllCounseler" resultType="com.cms.ca.employee_dto">
-		select EMP_NO, EMP_FLNM from EMP_INFO where MNG_AUTHRT = 'C'
+		select EMP_NO, EMP_FLNM from EMP_INFO where MNG_AUTHRT = 'C' order by EMP_NO desc
 	</select>
 
 	<select id="getPrfsTimes" resultType="com.cms.ca.counsel_dto" parameterType="String">
-		select * from DSCSN_APLY where EMP_NO = #{emp_no} and TKCG_YN = 'Y'
+		select * from DSCSN_APLY where EMP_NO = #{emp_no} and (STTS_CD = '미승인' OR STTS_CD = '승인') order by APLY_SN desc
+	</select>
+
+	<select id="getListCounsel" parameterType="com.cms.ca.view_counsel_dto">
+		select * from VIEW_DSCSN_APLY where STDNT_NO = #{stdnt_no} and STTS_CD != '완료' order by APLY_SN desc
 	</select>
 
 	<insert id="addCounselReservation" parameterType="com.cms.ca.counsel_dto">
