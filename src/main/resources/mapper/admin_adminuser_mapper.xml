@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cms.ca.admin.aduser_repo">
+<select id="admin_list" resultType="com.cms.ca.employee_dto" >
+select * from EMP_INFO where MNG_AUTHRT = 'A' order by EMP_NO desc
+</select>
+</mapper>

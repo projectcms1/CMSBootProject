@@ -22,7 +22,11 @@ public class AdminController {
 	private emuser_service emuser_service;
 	
 	@Autowired
+	private aduser_service aduser_service;
+
+	@Autowired
 	private counsel_service counsel_service;
+	
 	
 	
 	@GetMapping("/login")
@@ -35,7 +39,7 @@ public class AdminController {
 		return "admin/adminfindid";
 	}
 	
-	@GetMapping("/")
+	@GetMapping("/stlistmod")
 	public String stlist_mod(Model m) {
 		
 		List<student_dto> student_list_Data = this.stuser_service.student_list();
@@ -53,6 +57,16 @@ public class AdminController {
 		return "admin/emlistmod";
 	}
 
+
+	@GetMapping("/adminlistmod")
+	public String adminlist_mod(Model m) {
+		
+		List<employee_dto> admin_list_data = this.aduser_service.admin_list();
+		m.addAttribute("admin_list", admin_list_data);
+		
+		return "admin/adminlistmod";
+	}
+	
 	@GetMapping("/allcounselmod")
 	public String allcounselmod(Model m) {
 		
@@ -62,11 +76,6 @@ public class AdminController {
 		return "admin/allcounselmod";
 	}
 
-	@GetMapping("/adminlistmod")
-	public String adminlist_mod() {
-		return "admin/adminlistmod";
-	}
-	
 	@GetMapping("/pro_info")
 	public String pro_info() {
 		return "admin/pro_info";

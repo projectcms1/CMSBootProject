@@ -14,11 +14,11 @@ import com.cms.ca.student_dto;
 public class emuser_service_impl implements emuser_service{
 
 	@Autowired
-	private emuser_repo prouser_repo;
+	private emuser_repo emuser_repo;
 	
 	@Override
 	public List<employee_dto> employee_list() {
-		List<employee_dto> employeelist_data = this.prouser_repo.employee_list();
+		List<employee_dto> employeelist_data = this.emuser_repo.employee_list();
 		return employeelist_data;
 	}
 	

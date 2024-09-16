@@ -1,0 +1,213 @@
+<div th:fragment="emlistmod_userdetailmodal" class="modal fade"
+	id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel"
+	aria-hidden="true"></div>
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title" id="detailModalLabel">상세 정보</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal"
+				aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+			<!-- 상세 정보를 여기에 추가 -->
+			<!-- ======= Page Title ======= -->
+			<div class="pagetitle">
+				<h1>교직원정보</h1>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/empy_info">교직원정보</a></li>
+						<li class="breadcrumb-item active">기본정보</li>
+					</ol>
+				</nav>
+			</div>
+			<!-- End Page Title -->
+			<section class="section">
+				<div class="row">
+					<div class="col-lg-12">
+						<!-- ======= 개인정보 Card ======= -->
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">개인정보(한글은 폰트 적용X)</h5>
+								<div class="row mb-1">
+									<!-- row 1 -->
+									<div class="col-md-2 col-lg-2">
+										<img src="/assets/img/3.jpeg" alt="Profile" class="rounded-4"
+											style="margin-left: 25%" width="80%" height="225px">
+									</div>
+									<div class="col-md-4 col-lg-4">
+										<div class="row mb-1">
+											<label class="col-sm-4 col-form-label right-tag">입사년도</label>
+											<div class="col-sm-5 right-tag">
+												<input type="text" class="form-control" value="2017"
+													disabled>
+											</div>
+										</div>
+										<div class="row mb-1">
+											<label class="col-sm-4 col-form-label right-tag">교번</label>
+											<div class="col-sm-5 right-tag">
+												<input type="text" class="form-control" value="20171234"
+													disabled>
+											</div>
+										</div>
+										<div class="row mb-1">
+											<label class="col-sm-4 col-form-label right-tag">이름</label>
+											<div class="col-sm-5 right-tag">
+												<input type="text" class="form-control" value="교직원a"
+													disabled>
+											</div>
+										</div>
+										<div class="row mb-1">
+											<label class="col-sm-4 col-form-label right-tag">생년월일</label>
+											<div class="col-sm-5 right-tag">
+												<input type="text" class="form-control" value="891212"
+													disabled>
+											</div>
+										</div>
+										<div class="row mb-1">
+											<label class="col-sm-4 col-form-label right-tag">소속기관(단과대학)</label>
+											<div class="col-sm-5 right-tag">
+												<input type="text" class="form-control" value="심리상담센터"
+													disabled>
+											</div>
+										</div>
+										<div class="row mb-1">
+											<label class="col-sm-4 col-form-label right-tag">소속부서(학과)</label>
+											<div class="col-sm-5 right-tag">
+												<input type="text" class="form-control" value="상담실" disabled>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4 col-lg-6">
+										<div class="row mb-1">
+											<label class="col-sm-4 col-form-label right-tag">교직(전공)</label>
+											<div class="col-sm-6 right-tag">
+												<input type="text" class="form-control" value="성인심리학"
+													disabled>
+											</div>
+										</div>
+										<div class="row mb-1">
+											<label class="col-sm-4 col-form-label right-tag">선발일자</label>
+											<div class="col-sm-6 right-tag">
+												<input type="text" class="form-control" value="20170812"
+													disabled>
+											</div>
+										</div>
+										<div class="row mb-1">
+											<label class="col-sm-4 col-form-label right-tag">교원자격증번호</label>
+											<div class="col-sm-6 right-tag">
+												<input type="text" class="form-control" value="123456"
+													disabled>
+											</div>
+										</div>
+										<div class="row mb-1">
+											<label class="col-sm-4 col-form-label right-tag">교원자격증발급일자</label>
+											<div class="col-sm-6 right-tag">
+												<input type="text" class="form-control" value="20140712"
+													disabled>
+											</div>
+										</div>
+										<div class="row mb-1">
+											<label class="col-sm-4 col-form-label right-tag">이메일</label>
+											<div class="col-sm-6 right-tag">
+												<input type="text" class="form-control"
+													value="capybara@cauniv.com">
+											</div>
+										</div>
+										<div class="row mb-3">
+											<label class="col-sm-4 col-form-label right-tag">전화번호</label>
+											<div class="col-sm-6 right-tag">
+												<input type="text" class="form-control"
+													value="010-1234-5678">
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<button type="button" class="btn btn-outline-info float-end">
+									<i class="ri-save-3-line"></i> 저장
+								</button>
+								<button type="button" class="btn btn-outline-primary float-end">
+									<i class="ri-edit-2-line"></i> 입력
+								</button>
+
+							</div>
+						</div>
+						<!-- End 개인 정보 Card -->
+
+						<!-- ======= 거주지 정보 Card ======= -->
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">거주지 정보</h5>
+								<div class="col-md-12">
+									<div class="row mb-2">
+										<label class="col-sm-2 col-form-label pd-left-3">우편번호</label>
+										<div class="col-sm-2">
+											<input type="text" class="form-control">
+										</div>
+										<button type="button" class="btn btn-primary"
+											style="width: 100px; height: 38px;">주소 검색</button>
+									</div>
+									<div class="row mb-1">
+										<label class="col-sm-2 col-form-label pd-left-3">주소</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control">
+										</div>
+									</div>
+									<div class="row mb-3">
+										<label class="col-sm-2 col-form-label pd-left-3">상세주소</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control">
+										</div>
+									</div>
+								</div>
+
+								<button type="button" class="btn btn-outline-info float-end">
+									<i class="ri-save-3-line"></i> 저장
+								</button>
+								<button type="button" class="btn btn-outline-primary float-end">
+									<i class="ri-edit-2-line"></i> 입력
+								</button>
+
+							</div>
+						</div>
+						<!-- End 거주지 정보 Card -->
+
+						<!-- ======= 계좌 정보 Card ======= -->
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">계좌 정보</h5>
+								<div class="row mb-3">
+									<label class="col-sm-1 col-form-label pd-left-3">은행명</label>
+									<div class="col-sm-2">
+										<input type="text" class="form-control">
+									</div>
+									<label class="col-sm-1 col-form-label pd-left-3">계좌번호</label>
+									<div class="col-sm-3">
+										<input type="text" class="form-control">
+									</div>
+									<label class="col-sm-1 col-form-label pd-left-3">예금주</label>
+									<div class="col-sm-1">
+										<input type="text" class="form-control">
+									</div>
+								</div>
+
+								<button type="button" class="btn btn-outline-info float-end">
+									<i class="ri-save-3-line"></i> 저장
+								</button>
+								<button type="button" class="btn btn-outline-primary float-end">
+									<i class="ri-edit-2-line"></i> 입력
+								</button>
+
+							</div>
+						</div>
+						<!-- End 계좌 정보 Card -->
+					</div>
+				</div>
+			</section>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary"
+				data-bs-dismiss="modal">닫기</button>
+		</div>
+	</div>
+</div>

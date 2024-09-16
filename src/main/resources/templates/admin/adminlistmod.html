@@ -133,7 +133,7 @@
 						</thead>
 
 						<tbody>
-							<tr>
+							<tr th:each="admin_data : ${admin_list}">
 								<td>
 									<div class="form-check">
 										<input type="checkbox" class="form-check-input dt-checkboxes">
@@ -142,25 +142,24 @@
 								</td>
 
 								<td>
-									<h6 class="font_14 col_3">관리자1</h6>
+									<h6 class="font_14 col_3" th:text="${admin_data.getEmp_flnm()}"></h6>
 								</td>
 
 								<td>
-									<h6 class="font_14 col_3">대학본부</h6>
+									<h6 class="font_14 col_3" th:text="${admin_data.getEmp_no()}"></h6>
 								</td>
 								<td>
-									<h6 class="font_14 col_3">운영팀</h6>
+									<h6 class="bg_3 text-center font_12 p-1 mb-0" th:text="${admin_data.getAcnt_stts()}"></h6>
 								</td>
 								<td>
 									<!-- 모달 트리거 버튼 -->
 									<button type="button" class="btn btn-primary bg_1" data-bs-toggle="modal"
 										data-bs-target="#detailModal">
 										<i class="fa fa-cog"> 상세보기</i></button>
-								</td>>
-								<td>
 								</td>
 							</tr>
 						</tbody>
+
 
 					</table>
 				</div>
