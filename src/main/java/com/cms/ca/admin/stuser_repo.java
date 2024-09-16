@@ -10,4 +10,5 @@ import com.cms.ca.student_dto;
 public interface stuser_repo {
 	
 	List<student_dto> student_list();
+	
 }

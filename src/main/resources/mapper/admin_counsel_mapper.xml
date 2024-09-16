@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cms.ca.admin.counsel_repo">
+<select id="counsel_list" resultType="com.cms.ca.counsel_dto" >
+select * from DSCSN_APLY order by APLY_SN desc
+</select>
 </mapper>

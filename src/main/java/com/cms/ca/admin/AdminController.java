@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import com.cms.ca.counsel_dto;
 import com.cms.ca.employee_dto;
@@ -29,7 +28,8 @@ public class AdminController {
 	
 	
 	
-	@GetMapping("/login")
+
+	@GetMapping("/adminlogin")
 	public String admin_login() {
 		return "admin/login";
 	}
