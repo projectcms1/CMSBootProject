@@ -6,9 +6,4 @@
 <select id="student_list" resultType="com.cms.ca.student_dto" >
 select * from STDNT_INFO order by STDNT_NO desc
 </select>
-
-<!--학생 정보 검색 (학번 기준)-->
-<select id="findby_studentnumber" resultType="com.cms.ca.student_dto">
-select * from STDNT_INFO where STDNT_NO=#{STDNT_NO};
-</select>
 </mapper>
