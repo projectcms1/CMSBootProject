@@ -11,4 +11,5 @@ select * from STDNT_INFO order by STDNT_NO desc
 <select id="findby_studentnumber" resultType="com.cms.ca.student_dto">
 select * from STDNT_INFO where STDNT_NO=#{STDNT_NO};
 </select>
+
 </mapper>
