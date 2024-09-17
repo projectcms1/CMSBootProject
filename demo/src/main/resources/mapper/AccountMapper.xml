@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.secu.test.demo.mapper.AccountMapper">
+    <resultMap id="AccountResultMap" type="com.secu.test.demo.model.Account">
+        <id column="USER_NO" property="userNo" />
+        <result column="LGN_ID" property="lgnId" />
+        <result column="PSWD" property="pswd" />
+        <result column="LAST_LGN_DT" property="lastLgnDt" />
+        <result column="ACNT_LCK_YN" property="acntLckYn" />
+        <result column="REG_DT" property="regDt" />
+    </resultMap>
+    <!-- 사용자 이름(lgnId)으로 계정 정보 조회 -->
+    <select id="findAccountByUsername" parameterType="String" resultMap="AccountResultMap">
+        SELECT * FROM LGN_ACNT_INFO WHERE LGN_ID = #{lgnId}
+    </select>
+
+    <!-- USER_NO로 임직원 정보 조회 -->
+    <select id="findEmployeeByAccountId" parameterType="int" resultType="com.secu.test.demo.model.Employee">
+        SELECT * FROM EMP_INFO WHERE USER_NO = #{userNo}
+    </select>
+
+    <!-- USER_NO로 학생 정보 조회 -->
+    <select id="findStudentByAccountId" parameterType="int" resultType="com.secu.test.demo.model.Student">
+        SELECT * FROM STDNT_INFO WHERE USER_NO = #{userNo}
+    </select>
+
+    <!-- 계정 정보 삽입 -->
+    <insert id="insertAccount" parameterType="com.secu.test.demo.model.Account">
+        INSERT INTO LGN_ACNT_INFO (USER_NO, LGN_ID, PSWD, LAST_LGN_DT, ACNT_LCK_YN, REG_DT)
+        VALUES (#{userNo}, #{lgnId}, #{pswd}, #{lastLgnDt}, #{acntLckYn}, #{regDt})
+    </insert>
+
+    <!-- 계정 정보 업데이트 -->
+    <update id="updateAccount" parameterType="com.secu.test.demo.model.Account">
+        UPDATE LGN_ACNT_INFO
+        SET LGN_ID = #{lgnId}, PSWD = #{pswd}, LAST_LGN_DT = #{lastLgnDt}, ACNT_LCK_YN = #{acntLckYn}, REG_DT = #{regDt}
+        WHERE USER_NO = #{userNo}
+    </update>
+
+    <!-- 계정 정보 삭제 -->
+    <delete id="deleteAccount" parameterType="int">
+        DELETE FROM LGN_ACNT_INFO WHERE USER_NO = #{userNo}
+    </delete>
+
+    <!-- 학생 정보 삽입 -->
+    <insert id="insertStudent" parameterType="com.secu.test.demo.model.Student">
+        INSERT INTO STDNT_INFO (
+        STDNT_NO, STDNT_FLNM, USER_NO, USER_EML_ADDR, USER_TELNO,
+        USER_ZIP, USER_ADDR, USER_DADDR, USER_PHOTO, BRDT,
+        DLNG_BANK_NM, DLNG_ACTNO, DPSTR_NM, UNIV_PRD, OGDP_UNIV,
+        OGDP_SCSBJT, MJR, STDNT_STTS_SE
+        ) VALUES (
+        #{stdntNo}, #{stdntFlnm}, #{userNo}, #{userEmlAddr}, #{userTelno},
+        #{userZip}, #{userAddr}, #{userDaddr}, #{userPhoto}, #{brdt},
+        #{dlngBankNm}, #{dlngActno}, #{dpstrNm}, #{univPrd}, #{ogdpUniv},
+        #{ogdpScsbjt}, #{mjr}, #{stdntSttsSe}
+        )
+    </insert>
+
+    <!-- 학생 정보 업데이트 -->
+    <update id="updateStudent" parameterType="com.secu.test.demo.model.Student">
+        UPDATE STDNT_INFO
+        SET
+        STDNT_FLNM = #{stdntFlnm},
+        USER_NO = #{userNo},
+        USER_EML_ADDR = #{userEmlAddr},
+        USER_TELNO = #{userTelno},
+        USER_ZIP = #{userZip},
+        USER_ADDR = #{userAddr},
+        USER_DADDR = #{userDaddr},
+        USER_PHOTO = #{userPhoto},
+        BRDT = #{brdt},
+        DLNG_BANK_NM = #{dlngBankNm},
+        DLNG_ACTNO = #{dlngActno},
+        DPSTR_NM = #{dpstrNm},
+        UNIV_PRD = #{univPrd},
+        OGDP_UNIV = #{ogdpUniv},
+        OGDP_SCSBJT = #{ogdpScsbjt},
+        MJR = #{mjr},
+        STDNT_STTS_SE = #{stdntSttsSe}
+        WHERE STDNT_NO = #{stdntNo}
+    </update>
+
+    <!-- 학생 정보 삭제 -->
+    <delete id="deleteStudent" parameterType="int">
+        DELETE FROM STDNT_INFO WHERE USER_NO = #{userNo}
+    </delete>
+
+    <!-- 임직원 정보 삽입 -->
+    <insert id="insertEmployee" parameterType="com.secu.test.demo.model.Employee">
+        INSERT INTO EMP_INFO (
+        EMP_NO, EMP_FLNM, USER_NO, EMP_EML_ADDR, EMP_TELNO,
+        EMP_ZIP, EMP_ADDR, EMP_DADDR, EMP_PHOTO, EDU_CRTFCT_NO,
+        EDU_CRTFCT_ISSU_YMD, BRDT, DLNG_BANK_NM, DLNG_ACTNO, DPSTR_NM,
+        OGDP_INST_NM, OGDP_DEPT_NM, JBGD_NM, MJR, ACNT_STTS, MNG_AUTHRT
+        ) VALUES (
+        #{empNo}, #{empFlnm}, #{userNo}, #{empEmlAddr}, #{empTelno},
+        #{empZip}, #{empAddr}, #{empDaddr}, #{empPhoto}, #{eduCrtfctNo},
+        #{eduCrtfctIssuYmd}, #{brdt}, #{dlngBankNm}, #{dlngActno}, #{dpstrNm},
+        #{ogdpInstNm}, #{ogdpDeptNm}, #{jbgdNm}, #{mjr}, #{acntStts}, #{mngAuthrt}
+        )
+    </insert>
+
+    <!-- 임직원 정보 업데이트 -->
+    <update id="updateEmployee" parameterType="com.secu.test.demo.model.Employee">
+        UPDATE EMP_INFO
+        SET
+        EMP_FLNM = #{empFlnm},
+        USER_NO = #{userNo},
+        EMP_EML_ADDR = #{empEmlAddr},
+        EMP_TELNO = #{empTelno},
+        EMP_ZIP = #{empZip},
+        EMP_ADDR = #{empAddr},
+        EMP_DADDR = #{empDaddr},
+        EMP_PHOTO = #{empPhoto},
+        EDU_CRTFCT_NO = #{eduCrtfctNo},
+        EDU_CRTFCT_ISSU_YMD = #{eduCrtfctIssuYmd},
+        BRDT = #{brdt},
+        DLNG_BANK_NM = #{dlngBankNm},
+        DLNG_ACTNO = #{dlngActno},
+        DPSTR_NM = #{dpstrNm},
+        OGDP_INST_NM = #{ogdpInstNm},
+        OGDP_DEPT_NM = #{ogdpDeptNm},
+        JBGD_NM = #{jbgdNm},
+        MJR = #{mjr},
+        ACNT_STTS = #{acntStts},
+        MNG_AUTHRT = #{mngAuthrt}
+        WHERE EMP_NO = #{empNo}
+    </update>
+
+    <!-- 임직원 정보 삭제 -->
+    <delete id="deleteEmployee" parameterType="int">
+        DELETE FROM EMP_INFO WHERE USER_NO = #{userNo}
+    </delete>
+</mapper>

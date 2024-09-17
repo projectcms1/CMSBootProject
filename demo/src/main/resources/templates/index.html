@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index Page</title>
+</head>
+<body>
+<h2>Welcome to the Index Page</h2>
+
+<!-- 현재 인증된 사용자 정보 표시 -->
+<p>Welcome, <span th:text="${#authentication.name}">[User]</span>!</p>
+
+<!-- ROLE_SUPER_ADMIN 권한이 있는 경우 -->
+<div th:if="${#authorization.expression('hasRole(''SUPER_ADMIN'')')}">
+    <h3>Super Admin Dashboard</h3>
+    <p>관리자 도구 및 설정에 접근할 수 있습니다.</p>
+    <a href="/superadmin/dashboard">Go to Super Admin Dashboard</a>
+</div>
+
+<!-- ROLE_ADMIN 권한이 있는 경우 -->
+<div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+    <h3>Admin Dashboard</h3>
+    <p>관리자 도구에 접근할 수 있습니다.</p>
+    <a href="/admin/dashboard">Go to Admin Dashboard</a>
+</div>
+
+<!-- ROLE_PROFESSOR 권한이 있는 경우 -->
+<div th:if="${#authorization.expression('hasRole(''PROFESSOR'')')}">
+    <h3>Professor Section</h3>
+    <p>교수 전용 섹션에 접근할 수 있습니다.</p>
+    <a href="/professor/home">Go to Professor Home</a>
+</div>
+
+<!-- ROLE_COUNSELOR 권한이 있는 경우 -->
+<div th:if="${#authorization.expression('hasRole(''COUNSELOR'')')}">
+    <h3>Counselor Section</h3>
+    <p>상담사 전용 섹션에 접근할 수 있습니다.</p>
+    <a href="/counselor/home">Go to Counselor Home</a>
+</div>
+
+<!-- ROLE_STAFF 권한이 있는 경우 -->
+<div th:if="${#authorization.expression('hasRole(''STAFF'')')}">
+    <h3>Staff Section</h3>
+    <p>교내 일반 직원 전용 섹션에 접근할 수 있습니다.</p>
+    <a href="/staff/home">Go to Staff Home</a>
+</div>
+
+<!-- ROLE_USER 권한이 있는 경우 (기본 사용자) -->
+<div th:if="${#authorization.expression('hasRole(''USER'')')}">
+    <h3>General User Section</h3>
+    <p>일반 사용자 전용 섹션에 접근할 수 있습니다.</p>
+</div>
+
+</body>
+</html>
