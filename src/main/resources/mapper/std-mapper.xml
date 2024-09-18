@@ -24,6 +24,9 @@
 
 	<select id="getListCounsel" resultType="com.cms.ca.view_counsel_dto" parameterType="Map">
 		select * from VIEW_DSCSN_APLY where STDNT_NO = #{stdnt_no}
+		<if test='part=="0"'>
+			and now() > RSVT_DT and (STTS_CD = '취소' or STTS_CD = '완료') and ${search_part} like concat('%', #{search_word}, '%')
+		</if>
 		<if test='part=="1"'>
 			and now() > RSVT_DT and (STTS_CD = '취소' or STTS_CD = '완료')
 		</if>
@@ -37,6 +40,9 @@
 			and RSVT_DT >= now() and (STTS_CD = '취소' or STTS_CD = '완료')
 		</if>
 		order by APLY_SN desc
+		<if test='part=="0" or part=="1"'>
+			limit ${pageno}, ${datano}
+		</if>
 	</select>
 
 	<insert id="addCounselReservation" parameterType="com.cms.ca.counsel_dto">

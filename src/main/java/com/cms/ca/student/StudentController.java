@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cms.ca.counsel_dto;
@@ -19,6 +20,7 @@ import jakarta.annotation.Resource;
 import jakarta.servlet.ServletResponse;
 
 @Controller
+@RequestMapping("/student")
 public class StudentController {
 
 	// ==== 로그인 구현 이전, 세션의 임시 학번 데이터 ======
@@ -31,7 +33,7 @@ public class StudentController {
 	@Resource(name = "stdnt_service")
 	private StudentService stdSrvc;
 	
-	@GetMapping("/student/std_info")
+	@GetMapping("/std_info")
 	public String std_info(Model m) throws Exception {
 		try {
 			student_dto onedata = this.stdSrvc.getOneStudent(this.STD_NUMBER);
@@ -52,7 +54,7 @@ public class StudentController {
 		return this.viewName;
 	}
 	
-	@PostMapping("/student/update_std_info")
+	@PostMapping("/update_std_info")
 	public void update_std_info(@ModelAttribute student_dto sdto, ServletResponse res) {
 		res.setContentType("text/html; charset=UTF-8");
 		try {
@@ -74,18 +76,28 @@ public class StudentController {
 		}
 	}
 	
-	@GetMapping("/student/std_counsel_list")
-	public String std_counsel_loglist(Model m) {
+	@GetMapping("/std_counsel_list")
+	public String std_counsel_loglist(Model m,
+			@RequestParam(value = "", required = false) String search_part,
+			@RequestParam(value = "", required = false) String search_word,
+			@RequestParam(value = "", required = false) Integer page) {
 		try {
-			m.addAttribute("counselList", this.stdSrvc.getAllListCounsel(this.STD_NUMBER));
+			page = (page == null) ? 1 : page;
+			if (search_part == null || search_word == null || search_part.equals("") || search_word.equals("")) {
+				m.addAttribute("counselList", this.stdSrvc.getAllListCounsel(this.STD_NUMBER, ((page - 1) * 15), 15));
+			}
+			else {
+				m.addAttribute("counselList", this.stdSrvc.getAllListCounselSearch(this.STD_NUMBER, ((page - 1) * 15), 15, search_part, search_word));
+			}
 			this.viewName = "student/std_counsel_list";
 		} catch (Exception e) {
+			e.printStackTrace();
 			this.viewName = "page_blank";
 		}
 		return this.viewName;
 	}
 	
-	@GetMapping("/student/std_counsel_reservelist")
+	@GetMapping("/std_counsel_reservelist")
 	public String std_counsel_reservelist(Model m) {
 		try {
 			m.addAttribute("napproveList", this.stdSrvc.getAllListNonApproveCounsel(this.STD_NUMBER));
@@ -98,7 +110,7 @@ public class StudentController {
 		return this.viewName;
 	}
 	
-	@GetMapping("/student/std_counsel_reserve")
+	@GetMapping("/std_counsel_reserve")
 	public String std_counsel_reserve(Model m) {
 		try {
 			m.addAttribute("counseler_list", this.stdSrvc.getAllCounseler());
@@ -111,7 +123,7 @@ public class StudentController {
 	}
 	
 	// 상담 신청
-	@PostMapping("/student/insert_counsel_reservation")
+	@PostMapping("/insert_counsel_reservation")
 	public void insert_counsel_reservation(@ModelAttribute counsel_dto cdto, ServletResponse res,
 			@RequestParam(value = "", required = false) String professor_number,
 			@RequestParam(value = "", required = false) String counseler_number) {
@@ -136,12 +148,12 @@ public class StudentController {
 		}
 	}
 	
-	@GetMapping("/student/std_counsel_chatting")
+	@GetMapping("/std_counsel_chatting")
 	public String std_counsel_chatting() {
 		return "student/std_counsel_chatting";
 	}
 	
-	@GetMapping("/student/std_counsel_selftestlist")
+	@GetMapping("/std_counsel_selftestlist")
 	public String std_counsel_selftestlist() {
 		return "student/std_counsel_selftestlist";
 	}

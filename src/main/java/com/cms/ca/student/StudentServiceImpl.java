@@ -114,10 +114,28 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public List<view_counsel_dto> getAllListCounsel(String stdnt_no) {
+	public List<view_counsel_dto> getAllListCounsel(String stdnt_no, Integer pno, Integer dno) {
 		this.keymap = new HashMap<>();
 		this.keymap.put("part", "1");
 		this.keymap.put("stdnt_no", stdnt_no);
+		this.keymap.put("pageno", String.valueOf(pno));
+		this.keymap.put("datano", String.valueOf(dno));
+		List<view_counsel_dto> result = this.stdRepo.getListCounsel(this.keymap);
+		for (view_counsel_dto vcdto : result) {
+			vcdto.setGrade();
+		}
+		return result;
+	}
+
+	@Override
+	public List<view_counsel_dto> getAllListCounselSearch(String stdnt_no, Integer pno, Integer dno, String search_part, String search_word) {
+		this.keymap = new HashMap<>();
+		this.keymap.put("part", "0");
+		this.keymap.put("stdnt_no", stdnt_no);
+		this.keymap.put("pageno", String.valueOf(pno));
+		this.keymap.put("datano", String.valueOf(dno));
+		this.keymap.put("search_part", search_part);
+		this.keymap.put("search_word", search_word);
 		List<view_counsel_dto> result = this.stdRepo.getListCounsel(this.keymap);
 		for (view_counsel_dto vcdto : result) {
 			vcdto.setGrade();

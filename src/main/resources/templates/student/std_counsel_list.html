@@ -92,17 +92,17 @@
 		        				
 		        				<!-- Search Bar -->
 			    				<div class="search-bar ">
-						      		<form class="search-form d-flex align-items-center" method="POST" action="#">
-					                  	<select id="inputState" class="form-select" style="width: 180px;">
-					                    	<option selected>전체</option>
-					                    	<option>상담일자</option>
+						      		<form id="frmSearch" class="search-form d-flex align-items-center" th:onsubmit="return list_search()">
+					                  	<select name="search_part" id="inputState" class="form-select" style="width: 180px;">
+					                    	<option value="all" selected>전체</option>
+					                    	<option value="RSVT_DT">상담일자</option>
 					                    	<option>학년</option>
-					                    	<option>학기</option>
-					                    	<option>상담자</option>
-					                    	<option>상담종류</option>
+					                    	<option value="UNIV_PRD">학기</option>
+					                    	<option value="EMP_FLNM">상담자</option>
+					                    	<option value="DSCSN_KND">상담종류</option>
 					                  	</select>
-				                  		<input type="text" class="form-control" placeholder="Search" style="margin-left: 5px;">
-						        		<button type="submit" title="Search" class="btn" style="border-color: g"><i class="bi bi-search"></i></button>
+				                  		<input type="text" name="search_word" class="form-control" placeholder="Search" style="margin-left: 5px;">
+						        		<button type="submit" title="찾기" class="btn" style="border-color: g"><i class="bi bi-search"></i></button>
 						      		</form>
 						    	</div>
 						    	<!-- End Search Bar -->
@@ -199,6 +199,7 @@
 
   <!-- Template Main JS File -->
   <script src="/assets/js/main.js"></script>
+  <script src="/js/student/counsel_list.js"></script>
 </body>
 <script>
 window.onload=function(){
