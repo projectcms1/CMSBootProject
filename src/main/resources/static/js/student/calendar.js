@@ -15,6 +15,10 @@ const prfsSelectDate = document.getElementById("prfsSelectDate");
 const prfsSelectTime = document.getElementById("prfsSelectTime");
 prfsSelectDate.setAttribute("min", today.toISOString().split("T")[0]);
 
+const cnslrSelectTime = document.getElementById("cnslrSelectTime");
+
+var cnslrDateTimeList = [];
+
 const TimeTableList = ["<option value=''>시간 선택</option>", "<option value='1'>1교시(09:00~10:15)</option>",
 		"<option value='2'>2교시(10:30~11:45)</option>", "<option value='3'>3교시(13:00~14:15)</option>",
 		"<option value='4'>4교시(14:30~15:45)</option>", "<option value='5'>5교시(16:00~17:15)</option>"
@@ -28,8 +32,6 @@ const TimeTableList = ["<option value=''>시간 선택</option>", "<option value
 		return result_data.json();
 	}).then(function(result_res) {
 		exreservData = result_res;
-	}).catch(function(error) {
-		console.log(error);
 	});
 }());
 
@@ -108,6 +110,9 @@ function showCalendar(year, month) {
                 if (j === 0 || j === 6 || isPublicHoliday(currentDate)) {
                     cell.classList.add("disabled");
                 }
+                
+                // 예약 가능한 교시가 없을 때 날짜 비활성화 처리
+                //if (cnslrDateTimeList)
 
                 date++;
             }
@@ -153,12 +158,22 @@ nextMonthBtn.addEventListener("click", () => {
 });
 
 function updateCnslrName(empNo) {
-	var emp_name = document.querySelector('select[name="counseler_number"] > option:checked').innerText;
+	var emp_name = document.querySelector('#counseler_number > option:checked').innerText;
 	document.getElementById("selectedCnslrName").innerText = emp_name;
 	frmCounseler.counseler_number.value = empNo;
 	
 	frmCounseler.rsvt_dt.value = "";
 	document.getElementById("selectedCnslDate").innerText = "";
+	
+	cnslrDateTimeList = [];
+	exreservData['cnslr'].forEach(function(data) {
+		if (empNo == data['emp_no']) {
+			var dt_dump = data['rsvt_dt'].replaceAll("-", "");
+			var dt_data = {'rsvt_dt' : dt_dump, 'hr_se' : data['hr_se']};
+			cnslrDateTimeList.push(dt_data);
+		}
+	});
+	initCalendar();
 }
 
 function reservate_counsel(empType) {
@@ -176,7 +191,7 @@ function reservate_counsel(empType) {
 			alert("신청할 상담의 방식을 선택해주세요.");
 		}
 		else {
-			if (confirm("아래 내용으로 지도 교수 상담을 신청하시겠습니까?")) {
+			if (confirm("아래 내용으로 상담을 신청하시겠습니까?")) {
 				frmCounseler.method = "POST";
 				frmCounseler.action = "./insert_counsel_reservation";
 				frmCounseler.submit();
@@ -197,7 +212,7 @@ function reservate_counsel(empType) {
 			alert("신청할 상담의 방식을 선택해주세요.");
 		}
 		else {
-			if (confirm("아래 내용으로 지도 교수 상담을 신청하시겠습니까?")) {
+			if (confirm("아래 내용으로 상담을 신청하시겠습니까?")) {
 				frmProfessor.method = "POST";
 				frmProfessor.action = "./insert_counsel_reservation";
 				frmProfessor.submit();
@@ -221,17 +236,33 @@ function search_tdtag() {
 			var dateview = datedata.substring(0, 4) + "년 " + datedata.substring(4, 6) + "월 " + datedata.substring(6, 8) + "일";
 			
 			document.getElementById("selectedCnslDate").innerText = dateview;
+			
+			cnslrSelectTime.innerHTML = "";
+			var timeList = [];
+			var html = "";
+			cnslrDateTimeList.forEach(function(data) {
+				if (datedata == data.rsvt_dt) {
+					timeList.push(data.hr_se);
+				}
+			});
+			TimeTableList.forEach(function(data, node) {
+				if (!timeList.includes(node)) {
+					html += data;
+				}
+			});
+			cnslrSelectTime.innerHTML = html;
 		});
 	});
 }
 
-function setTimeSelecter(selectedDate) {
+function setTimeSelecter2(selectedDate) {
 	prfsSelectTime.innerHTML = "";
 	var timeList = [];
 	var html = "";
+	var sdate = selectedDate.replaceAll("-", "");
 	var time_data = exreservData['prfs'];
 	time_data.forEach(function(data) {
-		if (selectedDate == data.rsvt_dt.split(" ")[0]) {
+		if (sdate == data.rsvt_dt) {
 			timeList.push(data.hr_se);
 		}
 	});

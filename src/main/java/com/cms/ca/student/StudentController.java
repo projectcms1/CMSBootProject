@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cms.ca.counsel_dto;
 import com.cms.ca.student_dto;
+import com.cms.ca.view_counsel_dto;
 
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletResponse;
@@ -74,8 +75,9 @@ public class StudentController {
 	}
 	
 	@GetMapping("/student/std_counsel_list")
-	public String std_counsel_loglist() {
+	public String std_counsel_loglist(Model m) {
 		try {
+			m.addAttribute("counselList", this.stdSrvc.getAllListCounsel(this.STD_NUMBER));
 			this.viewName = "student/std_counsel_list";
 		} catch (Exception e) {
 			this.viewName = "page_blank";
@@ -84,8 +86,16 @@ public class StudentController {
 	}
 	
 	@GetMapping("/student/std_counsel_reservelist")
-	public String std_counsel_reservelist() {
-		return "student/std_counsel_reservelist";
+	public String std_counsel_reservelist(Model m) {
+		try {
+			m.addAttribute("napproveList", this.stdSrvc.getAllListNonApproveCounsel(this.STD_NUMBER));
+			m.addAttribute("approveList", this.stdSrvc.getAllListApproveCounsel(this.STD_NUMBER));
+			m.addAttribute("counselingList", this.stdSrvc.getAllListCounseling(this.STD_NUMBER));
+			this.viewName = "student/std_counsel_reservelist";
+		} catch (Exception e) {
+			this.viewName = "page_blank";
+		}
+		return this.viewName;
 	}
 	
 	@GetMapping("/student/std_counsel_reserve")

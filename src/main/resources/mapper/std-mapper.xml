@@ -14,12 +14,29 @@
 		select EMP_NO, EMP_FLNM from EMP_INFO where MNG_AUTHRT = 'C' order by EMP_NO desc
 	</select>
 
+	<select id="getAllCnslrTimes" resultType="com.cms.ca.view_counsel_dto">
+		select * from VIEW_DSCSN_APLY where MNG_AUTHRT = 'C' and (STTS_CD = '미승인' OR STTS_CD = '승인') order by APLY_SN desc
+	</select>
+
 	<select id="getPrfsTimes" resultType="com.cms.ca.counsel_dto" parameterType="String">
 		select * from DSCSN_APLY where EMP_NO = #{emp_no} and (STTS_CD = '미승인' OR STTS_CD = '승인') order by APLY_SN desc
 	</select>
 
-	<select id="getListCounsel" parameterType="com.cms.ca.view_counsel_dto">
-		select * from VIEW_DSCSN_APLY where STDNT_NO = #{stdnt_no} and STTS_CD != '완료' order by APLY_SN desc
+	<select id="getListCounsel" resultType="com.cms.ca.view_counsel_dto" parameterType="Map">
+		select * from VIEW_DSCSN_APLY where STDNT_NO = #{stdnt_no}
+		<if test='part=="1"'>
+			and now() > RSVT_DT and (STTS_CD = '취소' or STTS_CD = '완료')
+		</if>
+		<if test='part=="2"'>
+			and RSVT_DT >= now() and STTS_CD = '미승인'
+		</if>
+		<if test='part=="3"'>
+			and RSVT_DT >= now() and STTS_CD = '승인'
+		</if>
+		<if test='part=="4"'>
+			and RSVT_DT >= now() and (STTS_CD = '취소' or STTS_CD = '완료')
+		</if>
+		order by APLY_SN desc
 	</select>
 
 	<insert id="addCounselReservation" parameterType="com.cms.ca.counsel_dto">

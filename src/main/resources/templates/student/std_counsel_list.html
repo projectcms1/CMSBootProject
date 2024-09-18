@@ -130,23 +130,14 @@
 				                    	</tr>
 				                    </thead>
 				                    <tbody>
-					                  <tr>
-					                    <td>2021/02/11</td>
-					                    <td>1학년</td>
-					                    <td>2학기</td>
-					                    <td>교수A</td>
+				                      <tr th:if="${counselList.size() == 0 }" align="center"><td colspan="5">상담 이력이 존재하지 않습니다.</td></tr>
+					                  <tr th:each="counselData : ${ counselList }">
+					                    <td>[[${ counselData.getRsvt_dt() }]]</td>
+					                    <td>[[${ counselData.getStd_grade() }]]학년</td>
+					                    <td>[[${ counselData.getUniv_prd() }]]학기</td>
+					                    <td>[[${ counselData.getEmp_flnm() }]]</td>
 					                    <td>
-					                    	학업상담
-											<button type="button" class="btn btn-outline-info btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable" style="float: right; margin-left: 5px;">상세보기</button>
-					                    </td>
-					                  </tr>
-					                  <tr>
-					                    <td>2023/06/24</td>
-					                    <td>3학년</td>
-					                    <td>6학기</td>
-					                    <td>상담사B</td>
-					                    <td>
-					                    	진로상담
+					                    	[[${ counselData.getDscsn_knd() }]]상담
 											<button type="button" class="btn btn-outline-info btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable" style="float: right; margin-left: 5px;">상세보기</button>
 					                    </td>
 					                  </tr>

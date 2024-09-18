@@ -15,14 +15,12 @@ public class AjaxController {
 	@Resource(name = "stdnt_service")
 	private StudentService stdSrvc;
 	
-	// 지도 교수 시간표 SELECT - AJAX
+	// 상담사+지도교수 시간표 SELECT - AJAX
 	@GetMapping("/student/api/professor_time")
 	public String professor_time() {
 		String callback = "";
 		try {
-			System.out.println("ajax-api 작동");
-			
-			callback = this.stdSrvc.getPrfsTimeTable(this.STD_NUMBER);
+			callback = this.stdSrvc.getAllEmpTimeTable(this.STD_NUMBER);
 		} catch (Exception e) {
 			callback = "error";
 		}

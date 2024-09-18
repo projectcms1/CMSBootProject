@@ -133,45 +133,16 @@
 				                    	</tr>
 				                    </thead>
 				                    <tbody>
-					                  	<tr>
-					                    	<td>2012/08/14</td>
-						                    <td>3학년</td>
-						                    <td>6학기</td>
-						                    <td>허준</td>
+					                  	<tr th:if="${napproveList.size() == 0 }" align="center"><td colspan="5">대기 중인 상담이 존재하지 않습니다.</td></tr>
+					                  	<tr th:each="counselData : ${ napproveList }">
+					                    	<td>[[${ counselData.getRsvt_dt() }]]</td>
+						                    <td>[[${ counselData.getStd_grade() }]]학년</td>
+						                    <td>[[${ counselData.getUniv_prd() }]]학기</td>
+						                    <td>[[${ counselData.getEmp_flnm() }]]</td>
 						                    <td>
-						                    	채팅상담
+					                    		[[${ counselData.getDscsn_mthd() }]]상담
 				                    			<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
 				                    		</td>
-					                  	</tr>
-					                  	<tr>
-					                    	<td>2012/08/14</td>
-						                    <td>3학년</td>
-						                    <td>6학기</td>
-						                    <td>허준</td>
-						                    <td>
-						                    	화상상담
-				                    			<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
-					                    	</td>
-					                  	</tr>
-					                  	<tr>
-					                    	<td>2012/08/14</td>
-						                    <td>3학년</td>
-						                    <td>6학기</td>
-						                    <td>허준</td>
-						                    <td>
-						                    	대면상담
-				                    			<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
-					                    	</td>
-					                  	</tr>
-					                  	<tr>
-					                    	<td>2012/08/14</td>
-						                    <td>3학년</td>
-						                    <td>6학기</td>
-						                    <td>허준</td>
-						                    <td>
-						                    	채팅상담
-				                    			<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
-					                    	</td>
 					                  	</tr>
 					                </tbody>
 				                </table>
@@ -179,7 +150,7 @@
 				            
 							<div class="datatable-bottom">
 		    					<div class="datatable-info">
-		    						총 n 개 중 i ~ j 개
+		    						총 [[${ napproveList.size() }]] 개
 		    					</div>
 		    					
 		    					<!-- 페이징 Div-->
@@ -271,23 +242,14 @@
 				                    	</tr>
 				                    </thead>
 				                    <tbody>
-						               	<tr>
-						                    <td>2021/04/21</td>
-						                    <td>2학년</td>
-						                    <td>3학기</td>
-						                    <td>김하나</td>
+						               	<tr th:if="${approveList.size() == 0 }" align="center"><td colspan="5">확정된 상담이 존재하지 않습니다.</td></tr>
+					                  	<tr th:each="counselData : ${ approveList }">
+						                    <td>[[${ counselData.getRsvt_dt() }]]</td>
+						                    <td>[[${ counselData.getStd_grade() }]]학년</td>
+						                    <td>[[${ counselData.getUniv_prd() }]]학기</td>
+						                    <td>[[${ counselData.getEmp_flnm() }]]</td>
 						                    <td>
-						                    	대면상담
-						                    	<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
-						                    </td>
-						                </tr>
-						                <tr>
-						                    <td>2012/08/14</td>
-						                    <td>3학년</td>
-						                    <td>6학기</td>
-						                    <td>허준</td>
-						                    <td>
-						                    	대면상담
+					                    		[[${ counselData.getDscsn_mthd() }]]상담
 						                    	<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
 						                    </td>
 						                </tr>
@@ -297,7 +259,7 @@
 				            
 							<div class="datatable-bottom">
 		    					<div class="datatable-info">
-		    						총 n 개 중 i ~ j 개
+		    						총 [[${ approveList.size() }]] 개
 		    					</div>
 		    					
 		    					<!-- 페이징 Div-->
@@ -389,19 +351,13 @@
 				                    	</tr>
 				                    </thead>
 				                    <tbody>
-						                <tr>
-						                    <td>2021/04/21</td>
-						                    <td>2학년</td>
-						                    <td>3학기</td>
-						                    <td>김하나</td>
-						                    <td>대면상담</td>
-						                </tr>
-						                <tr>
-						                    <td>2012/08/14</td>
-						                    <td>3학년</td>
-						                    <td>6학기</td>
-						                    <td>허준</td>
-						                    <td>대면상담</td>
+						                <tr th:if="${ counselingList.size() == 0 }" align="center"><td colspan="5">지난 상담이 존재하지 않습니다.</td></tr>
+					                  	<tr th:each="counselData : ${ counselingList }">
+						                    <td>[[${ counselData.getRsvt_dt() }]]</td>
+						                    <td>[[${ counselData.getStd_grade() }]]학년</td>
+						                    <td>[[${ counselData.getUniv_prd() }]]학기</td>
+						                    <td>[[${ counselData.getEmp_flnm() }]]</td>
+						                    <td>[[${ counselData.getDscsn_mthd() }]]상담</td>
 						                </tr>
 					                </tbody>
 				                </table>
@@ -409,7 +365,7 @@
 				            
 							<div class="datatable-bottom">
 		    					<div class="datatable-info">
-		    						총 n 개 중 i ~ j 개
+		    						총 [[${ counselingList.size() }]] 개
 		    					</div>
 		    					
 		    					<!-- 페이징 Div-->

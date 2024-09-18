@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.cms.ca.counsel_dto;
 import com.cms.ca.employee_dto;
 import com.cms.ca.student_dto;
+import com.cms.ca.view_counsel_dto;
 
 import jakarta.annotation.Resource;
 
@@ -22,6 +23,8 @@ public class StudentServiceImpl implements StudentService {
 	@Resource(name = "stdnt_repo")
 	private StudentRepository stdRepo;
 	
+	Map<String, String> keymap = null;
+	
 	@Override
 	public student_dto getOneStudent(String stdnt_no) {
 		return this.stdRepo.getOneStudent(stdnt_no);
@@ -30,28 +33,28 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public int updateStudentInfo(student_dto dto) {
 		boolean ck = false;
-		Map<String, String> keymap = new HashMap<>();
+		this.keymap = new HashMap<>();
 		if (dto.getUser_eml_addr() != null && dto.getUser_telno() != null) {
-			keymap.put("part", "1");
-			keymap.put("user_eml_addr", dto.getUser_eml_addr());
-			keymap.put("user_telno", dto.getUser_telno());
+			this.keymap.put("part", "1");
+			this.keymap.put("user_eml_addr", dto.getUser_eml_addr());
+			this.keymap.put("user_telno", dto.getUser_telno());
 			ck = true;
 		}
 		else if (dto.getUser_zip() != null && dto.getUser_addr() != null) {
-			keymap.put("part", "2");
-			keymap.put("user_zip", dto.getUser_zip());
-			keymap.put("user_addr", dto.getUser_addr());
-			keymap.put("user_daddr", dto.getUser_daddr());
+			this.keymap.put("part", "2");
+			this.keymap.put("user_zip", dto.getUser_zip());
+			this.keymap.put("user_addr", dto.getUser_addr());
+			this.keymap.put("user_daddr", dto.getUser_daddr());
 			ck = true;
 		}
 		else if (dto.getDlng_bank_nm() != null && dto.getDlng_actno() != null) {
-			keymap.put("part", "3");
-			keymap.put("dlng_bank_nm", dto.getDlng_bank_nm());
-			keymap.put("dlng_actno", dto.getDlng_actno());
+			this.keymap.put("part", "3");
+			this.keymap.put("dlng_bank_nm", dto.getDlng_bank_nm());
+			this.keymap.put("dlng_actno", dto.getDlng_actno());
 			ck = true;
 		}
-		keymap.put("stdnt_no", dto.getStdnt_no());
-		int result = (ck) ? this.stdRepo.setStudentInfo(keymap) : 0;
+		this.keymap.put("stdnt_no", dto.getStdnt_no());
+		int result = (ck) ? this.stdRepo.setStudentInfo(this.keymap) : 0;
 		return result;
 	}
 
@@ -72,31 +75,90 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public String getProfessorNumber(String std_no) {
-		return this.stdRepo.getEmpID(std_no);
+	public String getProfessorNumber(String stdnt_no) {
+		return this.stdRepo.getEmpID(stdnt_no);
 	}
 
 	@Override // 지도 교수 시간표 SELECT
-	public String getPrfsTimeTable(String std_no) {
-		String empNo = this.getProfessorNumber(std_no);
+	public String getAllEmpTimeTable(String stdnt_no) {
+		String empNo = this.getProfessorNumber(stdnt_no);
 		JSONObject jo = new JSONObject();
-		JSONArray ja = new JSONArray();
+		JSONArray ja_c = new JSONArray();
+		List<view_counsel_dto> ctt_list = this.stdRepo.getAllCnslrTimes();
+		for (view_counsel_dto vdto : ctt_list) {
+			JSONObject jo_dump = new JSONObject();
+			jo_dump.put("aply_sn", vdto.getAply_sn());
+			jo_dump.put("emp_no", vdto.getEmp_no());
+			jo_dump.put("emp_flnm", vdto.getEmp_flnm());
+			jo_dump.put("rsvt_dt", vdto.getRsvt_dt());
+			jo_dump.put("hr_se", vdto.getHr_se());
+			ja_c.put(jo_dump);
+		}
+		jo.put("cnslr", ja_c);
+		JSONArray ja_p = new JSONArray();
 		List<counsel_dto> ptt_list = this.stdRepo.getPrfsTimes(empNo);
-		System.out.println(ptt_list);
 		for (counsel_dto cdto : ptt_list) {
 			JSONObject jo_dump = new JSONObject();
 			jo_dump.put("aply_sn", cdto.getAply_sn());
 			jo_dump.put("rsvt_dt", cdto.getRsvt_dt());
 			jo_dump.put("hr_se", cdto.getHr_se());
-			ja.put(jo_dump);
+			ja_p.put(jo_dump);
 		}
-		jo.put("prfs", ja);
+		jo.put("prfs", ja_p);
 		return jo.toString();
 	}
 
 	@Override
 	public List<employee_dto> getAllCounseler() {
 		return this.stdRepo.getAllCounseler();
+	}
+
+	@Override
+	public List<view_counsel_dto> getAllListCounsel(String stdnt_no) {
+		this.keymap = new HashMap<>();
+		this.keymap.put("part", "1");
+		this.keymap.put("stdnt_no", stdnt_no);
+		List<view_counsel_dto> result = this.stdRepo.getListCounsel(this.keymap);
+		for (view_counsel_dto vcdto : result) {
+			vcdto.setGrade();
+		}
+		return result;
+	}
+
+	@Override
+	public List<view_counsel_dto> getAllListNonApproveCounsel(String stdnt_no) {
+		this.keymap = new HashMap<>();
+		this.keymap.put("part", "2");
+		this.keymap.put("stdnt_no", stdnt_no);
+		List<view_counsel_dto> result = this.stdRepo.getListCounsel(this.keymap);
+		for (view_counsel_dto vcdto : result) {
+			vcdto.setGrade();
+		}
+		return result;
+	}
+
+	@Override
+	public List<view_counsel_dto> getAllListApproveCounsel(String stdnt_no) {
+		this.keymap = new HashMap<>();
+		this.keymap.put("part", "3");
+		this.keymap.put("stdnt_no", stdnt_no);
+		List<view_counsel_dto> result = this.stdRepo.getListCounsel(this.keymap);
+		for (view_counsel_dto vcdto : result) {
+			vcdto.setGrade();
+		}
+		return result;
+	}
+
+	@Override
+	public List<view_counsel_dto> getAllListCounseling(String stdnt_no) {
+		this.keymap = new HashMap<>();
+		this.keymap.put("part", "4");
+		this.keymap.put("stdnt_no", stdnt_no);
+		List<view_counsel_dto> result = this.stdRepo.getListCounsel(this.keymap);
+		for (view_counsel_dto vcdto : result) {
+			vcdto.setGrade();
+		}
+		return result;
 	}
 
 }
