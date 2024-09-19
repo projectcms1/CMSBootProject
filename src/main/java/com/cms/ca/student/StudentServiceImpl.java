@@ -31,6 +31,11 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
+	public int getCountData(String stdnt_no) {
+		return this.stdRepo.getCountData(stdnt_no);
+	}
+
+	@Override
 	public int updateStudentInfo(student_dto dto) {
 		boolean ck = false;
 		this.keymap = new HashMap<>();
@@ -158,7 +163,6 @@ public class StudentServiceImpl implements StudentService {
 		List<view_counsel_dto> result = this.stdRepo.getListCounsel(this.keymap);
 		for (view_counsel_dto vcdto : result) {
 			vcdto.setRsvt_dt(vcdto.getRsvt_dt().substring(0, 4) + "/" + vcdto.getRsvt_dt().substring(4, 6) + "/" + vcdto.getRsvt_dt().substring(6,8));
-			vcdto.setRoundCount(this.stdRepo.getCountRound(vcdto.getAply_sn()));
 		}
 		return result;
 	}
@@ -171,7 +175,6 @@ public class StudentServiceImpl implements StudentService {
 		List<view_counsel_dto> result = this.stdRepo.getListCounsel(this.keymap);
 		for (view_counsel_dto vcdto : result) {
 			vcdto.setRsvt_dt(vcdto.getRsvt_dt().substring(0, 4) + "/" + vcdto.getRsvt_dt().substring(4, 6) + "/" + vcdto.getRsvt_dt().substring(6,8));
-			vcdto.setRoundCount(this.stdRepo.getCountRound(vcdto.getAply_sn()));
 		}
 		return result;
 	}
@@ -184,7 +187,7 @@ public class StudentServiceImpl implements StudentService {
 		List<view_counsel_dto> result = this.stdRepo.getListCounsel(this.keymap);
 		for (view_counsel_dto vcdto : result) {
 			vcdto.setRsvt_dt(vcdto.getRsvt_dt().substring(0, 4) + "/" + vcdto.getRsvt_dt().substring(4, 6) + "/" + vcdto.getRsvt_dt().substring(6,8));
-			vcdto.setRoundCount(this.stdRepo.getCountRound(vcdto.getAply_sn()));
+			//vcdto.setRoundCount(this.stdRepo.getCountRound(vcdto.getAply_sn()));
 		}
 		return result;
 	}

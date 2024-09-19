@@ -7,3 +7,7 @@ function list_search() {
 			+ search_frm.search_word.value;
 	return true;
 }
+
+function move_page(e) {
+	console.log("test" + e);
+}

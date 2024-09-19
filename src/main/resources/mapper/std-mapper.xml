@@ -23,7 +23,7 @@
 	</select>
 
 	<select id="getListCounsel" resultType="com.cms.ca.view_counsel_dto" parameterType="Map">
-		select * from VIEW_DSCSN_APLY where STDNT_NO = #{stdnt_no}
+		select APLY_SN, RSVT_DT, HR_SE, EMP_FLNM, DSCSN_MTHD, DSCSN_KND, STTS_CD from VIEW_DSCSN_APLY where STDNT_NO = #{stdnt_no}
 		<if test='part=="0"'>
 			and BFR_APLY_SN IS NULL and STTS_CD = '완료' and ${search_part} like concat('%', #{search_word}, '%')
 		</if>
@@ -43,6 +43,10 @@
 		<if test='part=="0" or part=="1"'>
 			limit ${pageno}, ${datano}
 		</if>
+	</select>
+
+	<select id="getCountData" resultType="int" parameterType="String">
+		select count(APLY_SN) from VIEW_DSCSN_APLY where STDNT_NO = #{stdnt_no} and BFR_APLY_SN IS NULL and STTS_CD = '완료'
 	</select>
 
 	<select id="getCountRound" resultType="int" parameterType="int">

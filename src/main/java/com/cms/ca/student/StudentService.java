@@ -11,6 +11,8 @@ public interface StudentService {
 
 	student_dto getOneStudent(String stdnt_no);
 	
+	int getCountData(String stdnt_no);
+	
 	int updateStudentInfo(student_dto dto);
 	
 	int updateCounselCancel(String cancel_aply_sn);

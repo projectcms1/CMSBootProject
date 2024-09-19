@@ -85,12 +85,19 @@ public class StudentController {
 			@RequestParam(value = "", required = false) String search_word,
 			@RequestParam(value = "", required = false) Integer page) {
 		try {
+			int datacount = 20;
 			page = (page == null) ? 1 : page;
 			if (search_part == null || search_word == null || search_part.equals("") || search_word.equals("")) {
-				m.addAttribute("counselList", this.stdSrvc.getAllListCounsel(this.STD_NUMBER, ((page - 1) * 15), 15));
+				int listCount = this.stdSrvc.getCountData(this.STD_NUMBER);
+				
+				m.addAttribute("dataCount", listCount);
+				m.addAttribute("pageCount", Math.ceil((double) listCount / datacount));
+				m.addAttribute("counselList", this.stdSrvc.getAllListCounsel(this.STD_NUMBER, ((page - 1) * datacount), datacount));
 			}
 			else {
-				m.addAttribute("counselList", this.stdSrvc.getAllListCounselSearch(this.STD_NUMBER, ((page - 1) * 15), 15, search_part, search_word));
+				m.addAttribute("search_part", search_part);
+				m.addAttribute("search_word", search_word);
+				m.addAttribute("counselList", this.stdSrvc.getAllListCounselSearch(this.STD_NUMBER, ((page - 1) * datacount), datacount, search_part, search_word));
 			}
 			this.viewName = "student/std_counsel_list";
 		} catch (Exception e) {
