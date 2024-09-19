@@ -21,6 +21,11 @@ public class stuser_service_impl implements stuser_service{
 		return studentlist_data;
 	}
 	
-	
+	@Override
+	public List<student_dto> student_one_list(String stdnt_no) {
+		List<student_dto> studentlist_one_data = this.stuser_repo.student_one_list(stdnt_no);
+		return studentlist_one_data;
+	}
 	
 }
+

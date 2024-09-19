@@ -9,4 +9,5 @@ public class counsel_dto {
 	private String stdnt_no, emp_no, stts_cd, plc, rsvt_dt, aply_dt, dscsn_mthd, dscsn_knd;
 	
 	private String dscsn_cn;
+	
 }

@@ -34,7 +34,6 @@
 	<div class="container-fluid">
 		<div class="row">
 
-
 			<main class="col-md-9 ms-sm-auto common col-lg-10 px-md-4">
 				<div class="row crm_1">
 					<div class="col-md-3">
@@ -167,7 +166,7 @@
 									<h6 class="bg_3 text-center font_12 p-1 mb-0" th:text="${employee_data.getAcnt_stts()}"></h6>
 								</td>
 								<td>
-									<!-- 모달 트리거 버튼 -->
+									<!-- 상세보기 모달 버튼 -->
 									<button type="button" class="btn btn-primary bg_1" data-bs-toggle="modal"
 										data-bs-target="#detailModal">
 										<i class="fa fa-cog"> 상세보기</i></button>
@@ -207,7 +206,7 @@
 	</div>
 
 	<!-- detail modal start -->
-	<div th:replace="~{/admin/emlistmod_userdetailmodal :: emlistmod_userdetailmodal}"></div>
+	<div th:replace="~{/admin/emlistmod_userdetailmodal :: employee_userdetailmodal}"></div>
 	<!-- detail modal end -->
 	
 

@@ -59,31 +59,35 @@
 					</div>
 				</div>
 
+				<!-- 검색기능 -->
 				<div class="prod_1i mt-3 row">
 					<div class="col-lg-6 col-md-8 col-sm-12">
 						<div class="prod_1il d-flex align-items-center w-100">
 							<div class="d-flex align-items-center">
-								<!-- 관리자 분류 select -->
+								<form id="frmSearch" class="search-form d-flex align-items-center" th:onsubmit="return list_search()">
 								<select class="form-select form-select-sm ms-2 me-2"
 									id="categorySelect" style="width: 150px; height: 38px;"
 									onchange="toggleFields()">
-									<option value="">내담자명</option>
-									<option value="">상담사명</option>
+									<option value="all" selected>전체</option>
+									<option value="STDNT_FLNM">내담자명</option>
+									<option value="EMP_FLNM">상담사명</option>
 									<option value="">학번</option>
 									<option value="">교번</option>
-									<option value="">상담일시</option>
-								</select> <input class="form-control ms-2" id="searchInput" type="text"
+									<option value="RSVT_DT">상담일시</option>
+								</select>
+								
+								<input class="form-control ms-2" id="search_word" type="text" name="search_word"
 									style="flex-grow: 1; width: 100%; min-width: 200px; height: 38px;">
+									<button type="submit" title="찾기" class="btn" style="border-color: g"><i class="bi bi-search"></i></button>
 
 								<!-- 검색 버튼 -->
-								<a class="btn btn-primary bg_1 ms-3" href="#"
-									style="height: 38px; padding: 0 20px; display: flex; align-items: center; justify-content: center;">
+								<a class="btn btn-primary bg_1 ms-3" style="height: 38px; padding: 0 20px; display: flex; align-items: center; justify-content: center;">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 										fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-									<path
-											d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+									<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
 								</svg>
 								</a>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -130,12 +134,12 @@
 								</td>
 								<td>
 									<h6 class="font_14 col_3"
-									></h6>
+									th:text="${counsel_data.getStdnt_flnm()}"></h6>
 								</td>
 
 								<td>
 									<h6 class="bg_3 text-center font_12 p-1 mb-0"
-									></h6>
+									th:text="${counsel_data.getEmp_flnm()}"></h6>
 								</td>
 								<td>
 									<h6 class="font_14 col_3"
@@ -289,118 +293,7 @@
 	
 	
 	<!-- 상세정보 모달 -->
-	<div class="modal fade" id="detailModal" tabindex="-1"
-		aria-labelledby="detailModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="detailModalLabel">상세 정보</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<!-- 상세 정보를 여기에 추가 -->
-					<!-- 상세 정보 -->
-					<section class="section">
-						<div class="row">
-							<div class="col-lg-12">
-								<div class="card">
-									<div class="card-body">
-										<h5 class="card-title">상담이력 검색</h5>
-
-										<div class="row align-items-center mb-3">
-											<span class="col-lg-2">학년도</span> <select class="col-lg-2">
-												<option value="">---전체---</option>
-												<option>1969</option>
-											</select> <span class="col-lg-2">학기</span> <select class="col-lg-2">
-												<option value="">---전체---</option>
-												<option>1학기</option>
-												<option>2학기</option>
-											</select> <span class="col-lg-2">학년</span> <select class="col-lg-2">
-												<option value="">---전체---</option>
-												<option>1학년</option>
-												<option>2학년</option>
-												<option>3학년</option>
-												<option>4학년</option>
-												<option>5학년</option>
-											</select>
-										</div>
-
-										<div class="row align-items-center mb-3">
-											<span class="col-lg-2">상담종류</span> <select class="col-lg-2">
-												<option value="">---전체---</option>
-												<option>1969</option>
-											</select> <span class="col-lg-2">상담일</span>
-											<div class="col-lg-4 d-inline-block" style="padding: 0px;">
-												<input type="date" class="col-lg-4"> ~ <input
-													type="date" class="col-lg-4">
-											</div>
-										</div>
-
-										<div class="row justify-content-end mb-3">
-											<button type="button" class="btn btn-primary btn-counsel">조회</button>
-											<button type="button"
-												class="btn btn-primary btn-counsel ms-2">초기화</button>
-										</div>
-
-										<div class="card-body">
-											<table class="table">
-												<thead>
-													<tr>
-														<th scope="col">학년도</th>
-														<th scope="col">학기</th>
-														<th scope="col">학년</th>
-														<th scope="col">상담종류</th>
-														<th scope="col">상담자</th>
-														<th scope="col">상담일</th>
-														<th scope="col">상담방법</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<th scope="row">2019</th>
-														<td>1학기</td>
-														<td>3학년</td>
-														<td>진로상담</td>
-														<td>상담사</td>
-														<td>2019-03-01</td>
-														<td>오프라인</td>
-													</tr>
-													<tr>
-														<th scope="row">2019</th>
-														<td>1학기</td>
-														<td>3학년</td>
-														<td>진로상담</td>
-														<td>상담사</td>
-														<td>2019-03-01</td>
-														<td>오프라인</td>
-													</tr>
-													<tr>
-														<th scope="row">2019</th>
-														<td>1학기</td>
-														<td>3학년</td>
-														<td>진로상담</td>
-														<td>상담사</td>
-														<td>2019-03-01</td>
-														<td>오프라인</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</section>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">닫기</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
+	<div th:replace="~{/admin/allcounselmod_userdetailmodal :: counsel_userdetailmodal}"></div>
 
 	<!--footer시작 -->
 	<div th:replace="~{/admin/footer :: admin_footer}"></div>
@@ -408,6 +301,20 @@
 
 	<script src="/admin/js/bootstrap.bundle.min.js"></script>
 	<script src="/admin/js/global.js"></script>
+	
+	
+	<script>
+	//리스트 검색기능
+	function list_search() {
+		console.log("test");
+		frmSearch.method = "GET";
+		frmSearch.action = "./allcounselmod?search_part="
+				+ frmSearch.inputState.value
+				+ "&search_word="
+				+ search_frm.search_word.value;
+		return true;
+	}
+	</script>
 
 
 </body>

@@ -6,4 +6,15 @@
 <select id="student_list" resultType="com.cms.ca.student_dto" >
 select * from STDNT_INFO order by STDNT_NO desc
 </select>
+
+<!-- 학생별 상세정보 출력 -->
+<select id="student_one_list" resultType="com.cms.ca.student_dto">
+select * from STDNT_INFO where STDNT_NO = #{stdnt_no}
+</select>
+
+<!-- 학생 사용자 추가 -->
+<insert id="add_student" parameterType="com.cms.ca.student_dto">
+insert into STDNT_INFO (stdnt_no, stdnt_flnm, user_no, user_eml_addr, user_telno, user_zip, user_addr, user_daddr, user_photo, brdt, dlng_bank_nm, dlng_actno, dpstr_nm, univ_prd, ogdp_univ, ogdp_scsbjt, mjr, stdnt_stts_se)
+values ('0', #{stdnt_no}, #{emp_no}, #{stts_cd}, #{plc}, #{hr_se}, #{rsvt_dt}, now(), #{dscsn_mthd}, #{dscsn_knd})
+</insert>
 </mapper>

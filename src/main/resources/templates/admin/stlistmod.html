@@ -2,22 +2,29 @@
 <html lang="ko">
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="">
-	<title>사용자 정보 관리_학생정보관리</title>
-	<!-- Bootstrap core CSS -->
-	<link href="/admin/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/admin/css/font-awesome.min.css" rel="stylesheet">
-	<link href="/admin/css/style.css" rel="stylesheet">
-	<link href="/admin/css/nav.css" rel="stylesheet">
-	<link href="/admin/css/shCoreEclipse.css" type="text/css" rel="stylesheet" />
-	<link href="/admin/css/shThemeEclipse.css" type="text/css" rel="Stylesheet" />
-	<link href="/admin/css/global.css" rel="stylesheet">
-	<link href="/admin/css/baseui.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
-	<link href="/admin/css/listmod.css" rel="stylesheet">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<title>사용자 정보 관리_학생정보관리</title>
+<!-- Bootstrap core CSS -->
+<link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+<link href="/admin/css/font-awesome.min.css" rel="stylesheet">
+<link href="/admin/css/style.css" rel="stylesheet">
+<link href="/admin/css/nav.css" rel="stylesheet">
+<link href="/admin/css/shCoreEclipse.css" type="text/css"
+	rel="stylesheet" />
+<link href="/admin/css/shThemeEclipse.css" type="text/css"
+	rel="Stylesheet" />
+<link href="/admin/css/global.css" rel="stylesheet">
+<link href="/admin/css/baseui.css" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap"
+	rel="stylesheet">
+<link href="/admin/css/listmod.css" rel="stylesheet">
 </head>
+
+<!-- 사용사 추가 모달 중 이미지 로드시 미리보기 기능 -->
+<script src="/admin/js/stlistmod_useraddimg.js"></script>
 
 <body>
 
@@ -25,11 +32,12 @@
 	<div th:replace="~{/admin/header :: admin_header}"></div>
 	<!--header끝-->
 
-	<section id="menu_big" class="sticky-top" th:insert="~{/admin/nav :: admin_nav}">
-		<!--nav시작 -->
-		<!--nav끝 -->
-	</section>
+	<!--nav시작 -->
+	<section id="menu_big" class="sticky-top"
+		th:insert="~{/admin/nav :: admin_nav}"></section>
+	<!--nav끝 -->
 
+	<!-- main시작 -->
 	<div class="container-fluid">
 		<div class="row">
 			<main class="col-md-9 ms-sm-auto common col-lg-10 px-md-4">
@@ -43,8 +51,8 @@
 						<div class="crm_1r pull-right">
 							<ul>
 								<li class="col_3 d-inline-block"><a href="#">사용자 정보 관리</a>
-									<i style="margin-left:5px; vertical-align:middle;" class="fa fa-chevron-right"></i>
-								</li>
+									<i style="margin-left: 5px; vertical-align: middle;"
+									class="fa fa-chevron-right"></i></li>
 								<li class="col_3 d-inline-block">학생 정보 관리</li>
 							</ul>
 						</div>
@@ -54,57 +62,49 @@
 				<div class="prod_1i mt-3 row">
 					<div class="col-lg-6 col-md-8 col-sm-12">
 						<div class="prod_1il d-flex align-items-center w-100">
-							<select class="form-select form-select-sm ms-2 me-2" style="width: 150px; height:38px;">
-								<option value="학번">학번</option>
+							<select class="form-select form-select-sm ms-2 me-2"
+								style="width: 150px; height: 38px;">
 								<option value="이름">이름</option>
 								<option value="대학">대학</option>
 								<option value="학과">학과</option>
-							</select>
-
-							<input class="form-control ms-2" id="searchInput" type="text"
-								style="flex-grow: 1; width: 100%; min-width: 200px; height:38px;">
+								<option value="학번">학번</option>
+							</select> <input class="form-control ms-2" id="searchInput" type="text"
+								style="flex-grow: 1; width: 100%; min-width: 200px; height: 38px;">
 
 							<a class="btn btn-primary bg_1 ms-3" href="#"
-								style="height:38px; padding: 0 20px; display:flex; align-items:center; justify-content: center;">
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-									class="bi bi-search" viewBox="0 0 16 16">
+								style="height: 38px; padding: 0 20px; display: flex; align-items: center; justify-content: center;">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+									fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
 									<path
 										d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
 								</svg>
 							</a>
 
-							<!-- 검색기능gpt 알려준 것 (onclick-ajax 사)
-							<button onclick="searchStudents()" class="btn btn-primary bg_1 ms-3"
-							               style="height:38px; padding: 0 20px; display:flex; align-items:center; justify-content: center;">
-							               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-							                   class="bi bi-search" viewBox="0 0 16 16">
-							                   <path
-							                       d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-							               </svg>
-							           </button> -->
-							
-							
 						</div>
 					</div>
 
+					<!-- 사용자 추가 버튼 -->
 					<div class="d-flex justify-content-end">
-						<a class="buttton_1" data-bs-toggle="modal" data-bs-target="#addstuserModal"
-							style="height:38px; display:flex; align-items:center; justify-content: center;">
+						<a class="buttton_1" data-bs-toggle="modal"
+							data-bs-target="#addstuserModal"
+							style="height: 38px; display: flex; align-items: center; justify-content: center;">
 							사용자 추가 <i class="fa fa-plus-circle ms-2"></i>
 						</a>
 					</div>
 
 				</div>
 
-
+				<!-- 학생리스트 -->
 				<div class="table-responsive">
-					<table class="table table-responsive table-striped table-borderless m-0 mt-2">
+					<table
+						class="table table-responsive table-striped table-borderless m-0 mt-2">
 						<thead>
 							<tr>
 								<th scope="col">
-									<div class="form-check"><input type="checkbox"
-											class="form-check-input dt-checkboxes"><label
-											class="form-check-label">&nbsp;</label></div>
+									<div class="form-check">
+										<input type="checkbox" class="form-check-input dt-checkboxes"><label
+											class="form-check-label">&nbsp;</label>
+									</div>
 								</th>
 								<th scope="col">이름</th>
 								<th scope="col">대학</th>
@@ -125,34 +125,42 @@
 								</td>
 
 								<td>
-									<h6 class="font_14 col_3" th:text="${student_data.getStdnt_flnm()}"></h6>
-								</td>
-
-								<td>
-									<h6 class="font_14 col_3" th:text="${student_data.getOgdp_univ()}"></h6>
+									<h6 class="font_14 col_3"
+										th:text="${student_data.getStdnt_flnm()}"></h6>
 								</td>
 								<td>
-									<h6 class="font_14 col_3" th:text="${student_data.getOgdp_scsbjt()}"></h6>
+									<h6 class="font_14 col_3"
+										th:text="${student_data.getOgdp_univ()}"></h6>
 								</td>
 								<td>
-									<h6 class="font_14 col_3" th:text="${student_data.getStdnt_no()}"></h6>
+									<h6 class="font_14 col_3"
+										th:text="${student_data.getOgdp_scsbjt()}"></h6>
+								</td>
+								<td>
+									<h6 class="font_14 col_3"
+										th:text="${student_data.getStdnt_no()}"></h6>
 								</td>
 								<td>
 									<h6 class="bg_3 text-center font_12 p-1 mb-0"
 										th:text="${student_data.getStdnt_stts_se()}"></h6>
 								</td>
 								<td>
-									<!-- 모달 트리거 버튼 -->
-									<button type="button" class="btn btn-primary bg_1" data-bs-toggle="modal"
-										data-bs-target="#detailModal">
-										<i class="fa fa-cog"> 상세보기</i></button>
+									<!-- 학생별 상세정보 모달 버튼 -->
+									<button type="button" class="btn btn-primary bg_1"
+										data-bs-toggle="modal"
+										data-bs-target="#detailModal"
+										th:value="${student_data.getStdnt_no()}"
+										onclick="student_detail_modal(this.value)"
+										>
+										<i class="fa fa-cog"> 상세보기</i>
+									</button>
 								</td>
 							</tr>
 						</tbody>
-
 					</table>
 				</div>
 
+				<!-- 페이징처리 > 아직못함 -->
 				<div class="prod_1i1 mt-3 row">
 					<div class="col-md-6">
 						<div class="prod_1i1l">
@@ -160,7 +168,7 @@
 						</div>
 					</div>
 					<div class="col-md-6">
-						<div class="prod_1i1r pages" style="text-align:right;">
+						<div class="prod_1i1r pages" style="text-align: right;">
 							<ul class="mb-0">
 								<li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
 								<li class="act"><a href="#">1</a></li>
@@ -168,7 +176,6 @@
 								<li><a href="#">3</a></li>
 								<li><a href="#">4</a></li>
 								<li><a href="#">5</a></li>
-								<li><a href="#">6</a></li>
 								<li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
 							</ul>
 						</div>
@@ -179,476 +186,43 @@
 	</div>
 	</div>
 
-	<!-- 학생사용자 추가 모달 -->
-	<div class="modal fade" id="addstuserModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="detailModalLabel">상세 정보</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<!-- 상세 정보를 여기에 추가 -->
-					<!-- 상세 정보 -->
+	<!-- 학생사용자 추가 모달 시작 -->
+	<div th:replace="~{/admin/stlistmod_addusermodal :: student_addusermodal}"></div>
+	<!-- 학생사용자 추가 모달 끝 -->
 
 
-					<section class="section">
-						<div class="row">
-							<div class="col-lg-12">
-								<!-- ======= 개인정보 Card ======= -->
-								<div class="card">
-									<div class="card-body">
-										<h5 class="card-title">개인정보(한글은 폰트 적용X)</h5>
-										<div class="row mb-1">
-											<!-- row 1 -->
-											<div class="col-md-2 col-lg-2">
-												<img src="/assets/img/3.jpeg" alt="Profile" class="rounded-4"
-													style="margin-left: 25%;" width="80%" height="225px">
-											</div>
-											<div class="col-md-4 col-lg-4">
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">입학년도</label>
-													<div class="col-sm-5 right-tag">
-														<input type="text" class="form-control" disabled>
-													</div>
-												</div>
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">학번</label>
-													<div class="col-sm-5 right-tag">
-														<input type="text" class="form-control" disabled>
-													</div>
-												</div>
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">이름</label>
-													<div class="col-sm-5 right-tag">
-														<input type="text" class="form-control" disabled>
-													</div>
-												</div>
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">생년월일</label>
-													<div class="col-sm-5 right-tag">
-														<input type="text" class="form-control" disabled>
-													</div>
-												</div>
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">학년</label>
-													<div class="col-sm-5 right-tag">
-														<input type="text" class="form-control" disabled>
-													</div>
-												</div>
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">학기</label>
-													<div class="col-sm-5 right-tag">
-														<input type="text" class="form-control" disabled>
-													</div>
-												</div>
-											</div>
-											<div class="col-md-4 col-lg-6">
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">대학(원)</label>
-													<div class="col-sm-6 right-tag">
-														<input type="text" class="form-control" disabled>
-													</div>
-												</div>
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">학과(부)</label>
-													<div class="col-sm-6 right-tag">
-														<input type="text" class="form-control" disabled>
-													</div>
-												</div>
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">전공</label>
-													<div class="col-sm-6 right-tag">
-														<input type="text" class="form-control" disabled>
-													</div>
-												</div>
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">학적구분</label>
-													<div class="col-sm-6 right-tag">
-														<input type="text" class="form-control" disabled>
-													</div>
-												</div>
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">이메일</label>
-													<div class="col-sm-6 right-tag">
-														<input type="text" class="form-control" readonly="readonly">
-													</div>
-												</div>
-												<div class="row mb-3">
-													<label class="col-sm-4 col-form-label right-tag">전화번호</label>
-													<div class="col-sm-6 right-tag">
-														<input type="text" class="form-control" readonly="readonly">
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<button type="button" class="btn btn-outline-success float-end"
-											style="margin-left: 5px;">
-											<i class="ri-save-3-line"></i> 저장
-										</button>
-										<button type="button" class="btn btn-outline-primary float-end"
-											style="margin-left: auto;">
-											<i class="ri-edit-2-line"></i> 입력
-										</button>
-
-									</div>
-								</div>
-								<!-- End 개인 정보 Card -->
-
-								<!-- ======= 거주지 정보 Card ======= -->
-								<div class="card">
-									<div class="card-body">
-										<h5 class="card-title">거주지 정보</h5>
-										<div class="col-md-12">
-											<div class="row mb-2">
-												<label class="col-sm-2 col-form-label pd-left-3">우편번호</label>
-												<div class="col-sm-2">
-													<input type="text" class="form-control" id="sample2_postcode"
-														disabled>
-												</div>
-												<button type="button" class="btn btn-primary"
-													onclick="sample2_execDaumPostcode()"
-													style="width: 100px; height: 38px;">주소 검색</button>
-											</div>
-											<div class="row mb-1">
-												<label class="col-sm-2 col-form-label pd-left-3">주소</label>
-												<div class="col-sm-10">
-													<input type="text" class="form-control" id="sample2_address"
-														disabled>
-												</div>
-											</div>
-											<div class="row mb-3">
-												<label class="col-sm-2 col-form-label pd-left-3">상세주소</label>
-												<div class="col-sm-10">
-													<input type="text" class="form-control" id="sample2_detailAddress"
-														readonly="readonly">
-												</div>
-											</div>
-										</div>
-
-										<button type="button" class="btn btn-outline-success float-end"
-											style="margin-left: 5px;">
-											<i class="ri-save-3-line"></i> 저장
-										</button>
-										<button type="button" class="btn btn-outline-primary float-end"
-											style="margin-left: auto;">
-											<i class="ri-edit-2-line"></i> 입력
-										</button>
-										<div id="layer"
-											style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
-											<img src="//t1.daumcdn.net/postcode/resource/images/close.png"
-												id="btnCloseLayer"
-												style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1"
-												onclick="closeDaumPostcode()" alt="닫기 버튼">
-										</div>
-									</div>
-								</div>
-								<!-- End 거주지 정보 Card -->
-
-								<!-- ======= 계좌 정보 Card ======= -->
-								<div class="card">
-									<div class="card-body">
-										<h5 class="card-title">계좌 정보</h5>
-										<div class="row mb-3">
-											<label class="col-sm-1 col-form-label pd-left-3">은행명</label>
-											<div class="col-sm-2">
-												<input type="text" class="form-control" readonly="readonly">
-											</div>
-											<label class="col-sm-1 col-form-label pd-left-3">계좌번호</label>
-											<div class="col-sm-3">
-												<input type="text" class="form-control" readonly="readonly">
-											</div>
-											<label class="col-sm-1 col-form-label pd-left-3">예금주</label>
-											<div class="col-sm-2">
-												<input type="text" class="form-control" readonly="readonly">
-											</div>
-										</div>
-
-										<button type="button" class="btn btn-outline-success float-end"
-											style="margin-left: 5px;">
-											<i class="ri-save-3-line"></i> 저장
-										</button>
-										<button type="button" class="btn btn-outline-primary float-end"
-											style="margin-left: auto;">
-											<i class="ri-edit-2-line"></i> 입력
-										</button>
-
-									</div>
-								</div>
-								<!-- End 계좌 정보 Card -->
-							</div>
-						</div>
-					</section>
-
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-	<!-- 상세정보 모달 -->
-	<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="detailModalLabel">상세 정보</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<!-- 상세 정보를 여기에 추가 -->
-					<!-- ======= Page Title ======= -->
-
-					<section class="section">
-						<div class="row">
-							<div class="col-lg-12">
-								<!-- ======= 개인정보 Card ======= -->
-								<div class="card">
-									<div class="card-body">
-										<h5 class="card-title">개인정보(한글은 폰트 적용X)</h5>
-										<div class="row mb-1">
-											<!-- row 1 -->
-											<div class="col-md-2 col-lg-2">
-												<img src="/assets/img/3.jpeg" alt="Profile" class="rounded-4"
-													style="margin-left: 25%;" width="80%" height="225px">
-											</div>
-											<div class="col-md-4 col-lg-4">
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">입학년도</label>
-													<div class="col-sm-5 right-tag">
-														<input type="text" class="form-control" disabled>
-													</div>
-												</div>
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">학번</label>
-													<div class="col-sm-5 right-tag">
-														<input type="text" class="form-control" disabled>
-													</div>
-												</div>
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">이름</label>
-													<div class="col-sm-5 right-tag">
-														<input type="text" class="form-control" disabled>
-													</div>
-												</div>
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">생년월일</label>
-													<div class="col-sm-5 right-tag">
-														<input type="text" class="form-control" disabled>
-													</div>
-												</div>
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">학년</label>
-													<div class="col-sm-5 right-tag">
-														<input type="text" class="form-control" disabled>
-													</div>
-												</div>
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">학기</label>
-													<div class="col-sm-5 right-tag">
-														<input type="text" class="form-control" disabled>
-													</div>
-												</div>
-											</div>
-											<div class="col-md-4 col-lg-6">
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">대학(원)</label>
-													<div class="col-sm-6 right-tag">
-														<input type="text" class="form-control" disabled>
-													</div>
-												</div>
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">학과(부)</label>
-													<div class="col-sm-6 right-tag">
-														<input type="text" class="form-control" disabled>
-													</div>
-												</div>
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">전공</label>
-													<div class="col-sm-6 right-tag">
-														<input type="text" class="form-control" disabled>
-													</div>
-												</div>
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">학적구분</label>
-													<div class="col-sm-6 right-tag">
-														<input type="text" class="form-control" disabled>
-													</div>
-												</div>
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">이메일</label>
-													<div class="col-sm-6 right-tag">
-														<input type="text" class="form-control" readonly="readonly">
-													</div>
-												</div>
-												<div class="row mb-3">
-													<label class="col-sm-4 col-form-label right-tag">전화번호</label>
-													<div class="col-sm-6 right-tag">
-														<input type="text" class="form-control" readonly="readonly">
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<button type="button" class="btn btn-outline-success float-end"
-											style="margin-left: 5px;">
-											<i class="ri-save-3-line"></i> 저장
-										</button>
-										<button type="button" class="btn btn-outline-primary float-end"
-											style="margin-left: auto;">
-											<i class="ri-edit-2-line"></i> 입력
-										</button>
-
-									</div>
-								</div>
-								<!-- End 개인 정보 Card -->
-
-								<!-- ======= 거주지 정보 Card ======= -->
-								<div class="card">
-									<div class="card-body">
-										<h5 class="card-title">거주지 정보</h5>
-										<div class="col-md-12">
-											<div class="row mb-2">
-												<label class="col-sm-2 col-form-label pd-left-3">우편번호</label>
-												<div class="col-sm-2">
-													<input type="text" class="form-control" id="sample2_postcode"
-														disabled>
-												</div>
-												<button type="button" class="btn btn-primary"
-													onclick="sample2_execDaumPostcode()"
-													style="width: 100px; height: 38px;">주소 검색</button>
-											</div>
-											<div class="row mb-1">
-												<label class="col-sm-2 col-form-label pd-left-3">주소</label>
-												<div class="col-sm-10">
-													<input type="text" class="form-control" id="sample2_address"
-														disabled>
-												</div>
-											</div>
-											<div class="row mb-3">
-												<label class="col-sm-2 col-form-label pd-left-3">상세주소</label>
-												<div class="col-sm-10">
-													<input type="text" class="form-control" id="sample2_detailAddress"
-														readonly="readonly">
-												</div>
-											</div>
-										</div>
-
-										<button type="button" class="btn btn-outline-success float-end"
-											style="margin-left: 5px;">
-											<i class="ri-save-3-line"></i> 저장
-										</button>
-										<button type="button" class="btn btn-outline-primary float-end"
-											style="margin-left: auto;">
-											<i class="ri-edit-2-line"></i> 입력
-										</button>
-										<div id="layer"
-											style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
-											<img src="//t1.daumcdn.net/postcode/resource/images/close.png"
-												id="btnCloseLayer"
-												style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1"
-												onclick="closeDaumPostcode()" alt="닫기 버튼">
-										</div>
-									</div>
-								</div>
-								<!-- End 거주지 정보 Card -->
-
-								<!-- ======= 계좌 정보 Card ======= -->
-								<div class="card">
-									<div class="card-body">
-										<h5 class="card-title">계좌 정보</h5>
-										<div class="row mb-3">
-											<label class="col-sm-1 col-form-label pd-left-3">은행명</label>
-											<div class="col-sm-2">
-												<input type="text" class="form-control" readonly="readonly">
-											</div>
-											<label class="col-sm-1 col-form-label pd-left-3">계좌번호</label>
-											<div class="col-sm-3">
-												<input type="text" class="form-control" readonly="readonly">
-											</div>
-											<label class="col-sm-1 col-form-label pd-left-3">예금주</label>
-											<div class="col-sm-2">
-												<input type="text" class="form-control" readonly="readonly">
-											</div>
-										</div>
-
-										<button type="button" class="btn btn-outline-success float-end"
-											style="margin-left: 5px;">
-											<i class="ri-save-3-line"></i> 저장
-										</button>
-										<button type="button" class="btn btn-outline-primary float-end"
-											style="margin-left: auto;">
-											<i class="ri-edit-2-line"></i> 입력
-										</button>
-
-									</div>
-								</div>
-								<!-- End 계좌 정보 Card -->
-							</div>
-						</div>
-					</section>
-
-					<!-- End Page Title -->
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
+	<!-- 학생별 상세정보 모달 시작 -->
+	<div th:replace="~{/admin/stlistmod_userdetailmodal :: student_userdetailmodal}"></div>
+	<!-- 학생별 상세정보 모달 끝 -->
 
 	<!--footer시작 -->
 	<div th:replace="~{/admin/footer :: admin_footer}"></div>
 	<!--footer끝 -->
 
-	<!--검색기능 js--> 
-	<script>
-		function searchStudents() {
-		    // 검색 조건과 검색어 값을 가져옴
-		    const searchType = document.getElementById("searchType").value;
-		    const searchValue = document.getElementById("searchValue").value;
-
-		    // 검색 조건 또는 검색어가 비어 있는지 확인
-		    if (!searchType || !searchValue) {
-		        alert("검색 조건과 검색어를 입력하세요.");
-		        return;
-		    }
-
-		    // Ajax 요청을 보내서 서버로 검색 요청
-		    fetch(`/students/search?searchType=${encodeURIComponent(searchType)}&searchValue=${encodeURIComponent(searchValue)}`)
-		        .then(response => response.json())
-		        .then(data => {
-		            // 서버에서 받은 데이터를 테이블에 표시
-		            const tableBody = document.getElementById("studentTableBody");
-		            tableBody.innerHTML = "";  // 기존 데이터를 지움
-
-		            data.forEach(student => {
-		                const row = document.createElement("tr");
-
-		                row.innerHTML = `
-		                    <td>${student.stdnt_flnm}</td>
-		                    <td>${student.ogdp_univ}</td>
-		                    <td>${student.ogdp_scsbjt}</td>
-		                    <td>${student.stdnt_no}</td>
-		                    <td>${student.stdnt_stts_se}</td>
-		                `;
-		                tableBody.appendChild(row);
-		            });
-		        })
-		        .catch(error => {
-		            console.error("Error fetching students:", error);
-		        });
-		}
-	</script>
-	
+	<!-- script part -->
 	<script src="/admin/js/bootstrap.bundle.min.js"></script>
 	<script src="/admin/js/global.js"></script>
+
+
+
+	<script>
+    function student_detail_modal(button) {
+        var stdnt_no = button;
+        
+        fetch('/stlistmod?stdnt_no='+stdnt_no)
+        .then(response=>{
+        	console.log(response);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+        
+    }
+    
+    
+    
+	</script>
+	
 
 </body>
 
