@@ -79,6 +79,13 @@ function showCalendar(year, month) {
     });
     calendarBody.appendChild(dayRow);
 
+	var cnslrTimeData = new Array();
+	// 예약 가능한 교시가 없을 때 날짜 비활성화 처리를 위한 배열 생성
+	cnslrDateTimeList.forEach(function(data) {
+		var date_dump = data['rsvt_dt'];
+		cnslrTimeData.push(date_dump);
+	});
+
     let date = 1;
     for (let i = 0; i < 6; i++) {
         let row = document.createElement("tr");
@@ -95,7 +102,9 @@ function showCalendar(year, month) {
             } else {
                 cell.innerHTML = date;
                 
-                cell.setAttribute("datedata", setDateInTDTag(year, month, date));
+                var current_date = setDateInTDTag(year, month, date);
+                
+                cell.setAttribute("datedata", current_date);
                 
                 // 오늘 이전의 날짜를 비활성화(disable) 처리
                 if (
@@ -112,8 +121,10 @@ function showCalendar(year, month) {
                 }
                 
                 // 예약 가능한 교시가 없을 때 날짜 비활성화 처리
-                //if (cnslrDateTimeList)
-
+                if (cnslrTimeData.filter(element => current_date === element).length == 5) {
+					cell.classList.add("disabled");
+				}
+                
                 date++;
             }
             row.appendChild(cell);
@@ -168,8 +179,8 @@ function updateCnslrName(empNo) {
 	cnslrDateTimeList = [];
 	exreservData['cnslr'].forEach(function(data) {
 		if (empNo == data['emp_no']) {
-			var dt_dump = data['rsvt_dt'].replaceAll("-", "");
-			var dt_data = {'rsvt_dt' : dt_dump, 'hr_se' : data['hr_se']};
+			//var dt_dump = data['rsvt_dt'].replaceAll("-", "");
+			var dt_data = {'rsvt_dt' : data['rsvt_dt'], 'hr_se' : data['hr_se']};
 			cnslrDateTimeList.push(dt_data);
 		}
 	});

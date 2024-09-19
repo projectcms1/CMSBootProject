@@ -33,6 +33,9 @@ public class StudentController {
 	@Resource(name = "stdnt_service")
 	private StudentService stdSrvc;
 	
+	@Resource(name = "insp_service")
+	private SlfPsycInspService inspSrvc;
+	
 	@GetMapping("/std_info")
 	public String std_info(Model m) throws Exception {
 		try {
@@ -105,6 +108,7 @@ public class StudentController {
 			m.addAttribute("counselingList", this.stdSrvc.getAllListCounseling(this.STD_NUMBER));
 			this.viewName = "student/std_counsel_reservelist";
 		} catch (Exception e) {
+			e.printStackTrace();
 			this.viewName = "page_blank";
 		}
 		return this.viewName;
@@ -141,7 +145,6 @@ public class StudentController {
 				this.pw.print("<script> alert('오류가 발생하여 예약이 실패하였습니다.'); history.go(-1);</script>");
 			}
 		} catch (Exception e) {
-			System.out.println(e);
 			this.pw.print("<script>location.href = '/blank';</script>");
 		} finally {
 			this.pw.close();
@@ -154,7 +157,14 @@ public class StudentController {
 	}
 	
 	@GetMapping("/std_counsel_selftestlist")
-	public String std_counsel_selftestlist() {
-		return "student/std_counsel_selftestlist";
+	public String std_counsel_selftestlist(Model m) {
+		try {
+			m.addAttribute("inspList", this.inspSrvc.getAllListInsp());
+			this.viewName = "student/std_counsel_selftestlist";
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.viewName = "page_blank";
+		}
+		return this.viewName;
 	}
 }

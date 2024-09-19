@@ -67,29 +67,13 @@
                   	<h5 class="card-title">자가심리검사 리스트</h5>
 		          	<!-- List group with custom content -->
 		            <ol class="list-group list-group-numbered">
-		                <li class="list-group-item d-flex justify-content-between align-items-start">
+		                <li class="list-group-item d-flex justify-content-between align-items-start" th:each="inspData : ${ inspList }">
 		                  	<div class="ms-2 me-auto">
-		                    	<div class="fw-bold">검사1</div>
-		                    	검사1 간단한 설명
+		                    	<div class="fw-bold">[[${ inspData.getPsyc_insp_flnm() }]]</div>
+		                    	[[${ inspData.getInsp_expln() }]]
 		                  	</div>
-		                  	<button class="btn btn-primary rounded-pill" style="margin-left: 5px; align-self: center;">검사하기</button>
-		                  	<button class="btn btn-success rounded-pill" style="margin-left: 5px; align-self: center;">결과보기</button>
-		                </li>
-		                <li class="list-group-item d-flex justify-content-between align-items-start">
-		                  	<div class="ms-2 me-auto">
-		                    	<div class="fw-bold">검사2</div>
-		                    	검사2 간단한 설명
-		                  	</div>
-		                  	<button class="btn btn-primary rounded-pill" style="margin-left: 5px; align-self: center;">검사하기</button>
-		                  	<button class="btn btn-success rounded-pill" style="margin-left: 5px; align-self: center;">결과보기</button>
-		                </li>
-		                <li class="list-group-item d-flex justify-content-between align-items-start">
-		                  	<div class="ms-2 me-auto">
-		                    	<div class="fw-bold">검사3</div>
-		                    	검사3 간단한 설명
-		                  	</div>
-		                  	<button class="btn btn-primary rounded-pill" style="margin-left: 5px; align-self: center;">검사하기</button>
-		                  	<button class="btn btn-success rounded-pill" style="margin-left: 5px; align-self: center;">결과보기</button>
+		                  	<button class="btn btn-primary rounded-pill" style="margin-left: 5px; align-self: center; min-width: 90px;">검사하기</button>
+		                  	<button class="btn btn-success rounded-pill" style="margin-left: 5px; align-self: center; min-width: 90px;">결과보기</button>
 		                </li>
 		           	</ol>
 		           	<!-- End 자가심리검사목록 Card -->

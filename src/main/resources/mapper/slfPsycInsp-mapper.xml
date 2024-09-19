@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cms.ca.student.SlfPsycInspRepository">
+
+	<select id="getAllListInsp" resultType="com.cms.ca.slfPsycInsp_dto">
+		select * from SLF_PSYC_INSP_INFO where USE_YN = 'Y' order by INSP_NO desc
+	</select>
+
+</mapper>
