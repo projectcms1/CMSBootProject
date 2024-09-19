@@ -118,32 +118,32 @@
 				                    		<th data-format="YYYY/DD/MM" data-sortable="true" data-type="date" style="width: 20%;">
 				                    			<button class="datatable-sorter">상담일자</button>
 				                    		</th>
-											<th data-sortable="true" style="width: 20%;">
-												<button class="datatable-sorter">학년</button>
-				                    		</th>
-				                    		<th data-sortable="true" style="width: 20%;">
-				                    			<button class="datatable-sorter">학기</button>
-				                    		</th>
 				                    		<th data-sortable="true" style="width: 20%;">
 				                    			<button class="datatable-sorter">상담자</button>
 				                    		</th>
 				                    		<th data-sortable="true" style="width: 20%;">
 				                    			<button class="datatable-sorter">상담방식</button>
 				                    		</th>
+				                    		<th data-sortable="true" style="width: 20%;">
+				                    			<button class="datatable-sorter">상담종류</button>
+				                    		</th>
+											<th data-sortable="true" style="width: 20%;">
+												<button class="datatable-sorter">회차 수</button>
+				                    		</th>
 				                    	</tr>
 				                    </thead>
 				                    <tbody>
-					                  	<tr th:if="${napproveList.size() == 0 }" align="center"><td colspan="5">대기 중인 상담이 존재하지 않습니다.</td></tr>
-					                  	<tr th:each="counselData : ${ napproveList }">
-					                    	<td>[[${ counselData.getRsvt_dt() }]]</td>
-						                    <td>[[${ counselData.getStd_grade() }]]학년</td>
-						                    <td>[[${ counselData.getUniv_prd() }]]학기</td>
-						                    <td>[[${ counselData.getEmp_flnm() }]]</td>
-						                    <td>
-					                    		[[${ counselData.getDscsn_mthd() }]]상담
-				                    			<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
-				                    		</td>
-					                  	</tr>
+					                  <tr th:if="${napproveList.size() == 0 }" align="center"><td colspan="5">대기 중인 상담이 존재하지 않습니다.</td></tr>
+					                  <tr th:each="counselData : ${ napproveList }">
+					                    <td>[[${ counselData.getRsvt_dt() }]]</td>
+					                    <td>[[${ counselData.getEmp_flnm() }]]</td>
+					                    <td>[[${ counselData.getDscsn_mthd() }]]상담</td>
+					                    <td>[[${ counselData.getDscsn_knd() }]]상담</td>
+					                    <td>
+					                    	[[${ counselData.getRoundCount() + 1 }]]
+											<button type="button" th:onclick="cancelReservation([[${ counselData.getAply_sn() }]])" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
+					                    </td>
+					                  </tr>
 					                </tbody>
 				                </table>
 				            </div>
@@ -227,32 +227,32 @@
 				                    		<th data-format="YYYY/DD/MM" data-sortable="true" data-type="date" style="width: 20%;">
 				                    			<button class="datatable-sorter">상담일자</button>
 				                    		</th>
-											<th data-sortable="true" style="width: 20%;">
-												<button class="datatable-sorter">학년</button>
-				                    		</th>
-				                    		<th data-sortable="true" style="width: 20%;">
-				                    			<button class="datatable-sorter">학기</button>
-				                    		</th>
 				                    		<th data-sortable="true" style="width: 20%;">
 				                    			<button class="datatable-sorter">상담자</button>
 				                    		</th>
 				                    		<th data-sortable="true" style="width: 20%;">
 				                    			<button class="datatable-sorter">상담방식</button>
 				                    		</th>
+				                    		<th data-sortable="true" style="width: 20%;">
+				                    			<button class="datatable-sorter">상담종류</button>
+				                    		</th>
+											<th data-sortable="true" style="width: 20%;">
+												<button class="datatable-sorter">회차 수</button>
+				                    		</th>
 				                    	</tr>
 				                    </thead>
 				                    <tbody>
-						               	<tr th:if="${approveList.size() == 0 }" align="center"><td colspan="5">확정된 상담이 존재하지 않습니다.</td></tr>
-					                  	<tr th:each="counselData : ${ approveList }">
-						                    <td>[[${ counselData.getRsvt_dt() }]]</td>
-						                    <td>[[${ counselData.getStd_grade() }]]학년</td>
-						                    <td>[[${ counselData.getUniv_prd() }]]학기</td>
-						                    <td>[[${ counselData.getEmp_flnm() }]]</td>
-						                    <td>
-					                    		[[${ counselData.getDscsn_mthd() }]]상담
-						                    	<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
-						                    </td>
-						                </tr>
+						              <tr th:if="${approveList.size() == 0 }" align="center"><td colspan="5">확정된 상담이 존재하지 않습니다.</td></tr>
+					                  <tr th:each="counselData : ${ approveList }">
+					                    <td>[[${ counselData.getRsvt_dt() }]]</td>
+					                    <td>[[${ counselData.getEmp_flnm() }]]</td>
+					                    <td>[[${ counselData.getDscsn_mthd() }]]상담</td>
+					                    <td>[[${ counselData.getDscsn_knd() }]]상담</td>
+					                    <td>
+					                    	[[${ counselData.getRoundCount() + 1 }]]
+											<button type="button" th:onclick="cancelReservation([[${ counselData.getAply_sn() }]])" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
+					                    </td>
+					                  </tr>
 						            </tbody>
 				                </table>
 				            </div>
@@ -336,29 +336,31 @@
 				                    		<th data-format="YYYY/DD/MM" data-sortable="true" data-type="date" style="width: 20%;">
 				                    			<button class="datatable-sorter">상담일자</button>
 				                    		</th>
-											<th data-sortable="true" style="width: 20%;">
-												<button class="datatable-sorter">학년</button>
-				                    		</th>
-				                    		<th data-sortable="true" style="width: 20%;">
-				                    			<button class="datatable-sorter">학기</button>
-				                    		</th>
 				                    		<th data-sortable="true" style="width: 20%;">
 				                    			<button class="datatable-sorter">상담자</button>
 				                    		</th>
 				                    		<th data-sortable="true" style="width: 20%;">
 				                    			<button class="datatable-sorter">상담방식</button>
 				                    		</th>
+				                    		<th data-sortable="true" style="width: 20%;">
+				                    			<button class="datatable-sorter">상담종류</button>
+				                    		</th>
+											<th data-sortable="true" style="width: 20%;">
+												<button class="datatable-sorter">회차 수</button>
+				                    		</th>
 				                    	</tr>
 				                    </thead>
 				                    <tbody>
-						                <tr th:if="${ counselingList.size() == 0 }" align="center"><td colspan="5">지난 상담이 존재하지 않습니다.</td></tr>
-					                  	<tr th:each="counselData : ${ counselingList }">
-						                    <td>[[${ counselData.getRsvt_dt() }]]</td>
-						                    <td>[[${ counselData.getStd_grade() }]]학년</td>
-						                    <td>[[${ counselData.getUniv_prd() }]]학기</td>
-						                    <td>[[${ counselData.getEmp_flnm() }]]</td>
-						                    <td>[[${ counselData.getDscsn_mthd() }]]상담</td>
-						                </tr>
+						              <tr th:if="${counselingList.size() == 0 }" align="center"><td colspan="5">지난 상담이 존재하지 않습니다.</td></tr>
+					                  <tr th:each="counselData : ${ counselingList }">
+					                    <td>[[${ counselData.getRsvt_dt() }]]</td>
+					                    <td>[[${ counselData.getEmp_flnm() }]]</td>
+					                    <td>[[${ counselData.getDscsn_mthd() }]]상담</td>
+					                    <td>[[${ counselData.getDscsn_knd() }]]상담</td>
+					                    <td>
+					                    	[[${ counselData.getRoundCount() + 1 }]]
+										</td>
+					                  </tr>
 					                </tbody>
 				                </table>
 				            </div>
@@ -395,7 +397,9 @@
             		</div>
           		</div>
 				<!-- End 지난상담 Card -->
-	          
+				<form id="frmCancel">
+					<input type="hidden" name="cancel_aply_sn" id="cancel_aply_idx" value="">
+				</form>
 	        </div>
 	      </div>
 	    </section>           
@@ -416,6 +420,7 @@
 
   <!-- Template Main JS File -->
   <script src="/assets/js/main.js"></script>
+  <script src="/js/student/counsel_reservlist.js?v=1"></script>
 </body>
 <script>
 window.onload=function(){

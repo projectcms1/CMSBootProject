@@ -11,11 +11,7 @@ public class view_counsel_dto {
 	private String stdnt_flnm, stdnt_stts_se;
 	private String emp_flnm, acnt_stts, mng_authrt;
 	
-	private Integer univ_prd, std_grade;
+	private Integer roundCount;
 	
 	private String dscsn_cn;
-	
-	public void setGrade() {
-		this.std_grade = (int) Math.ceil(this.univ_prd / 2f);
-	}
 }

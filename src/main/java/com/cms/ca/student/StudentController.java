@@ -114,6 +114,27 @@ public class StudentController {
 		return this.viewName;
 	}
 	
+	@PostMapping("/cancel_counsel_reservation")
+	public void cancel_counsel_reservation(@RequestParam(value = "", required = false) String cancel_aply_sn, ServletResponse res) {
+		res.setContentType("text/html; charset=UTF-8");
+		try {
+			this.pw = res.getWriter();
+			
+			int result = this.stdSrvc.updateCounselCancel(cancel_aply_sn);
+			if (result > 0) {
+				this.pw.print("<script> alert('성공적으로 예약이 취소되었습니다.');"
+						+ "location.href = './std_counsel_reservelist';</script>");
+			}
+			else {
+				this.pw.print("<script> alert('오류가 발생하여 취소가 실패하였습니다.'); history.go(-1);</script>");
+			}
+		} catch (Exception e) {
+			this.pw.print("<script>location.href = '/blank';</script>");
+		} finally {
+			this.pw.close();
+		}
+	}
+	
 	@GetMapping("/std_counsel_reserve")
 	public String std_counsel_reserve(Model m) {
 		try {

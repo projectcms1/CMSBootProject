@@ -27,7 +27,11 @@ public interface StudentRepository {
 	
 	List<view_counsel_dto> getListCounsel(Map<String, String> keymap);
 	
+	int getCountRound(int aply_sn);
+	
 	int addCounselReservation(counsel_dto dto);
 	
 	int setStudentInfo(Map<String, String> keymap);
+	
+	int setCounselReservCancel(String aply_sn);
 }

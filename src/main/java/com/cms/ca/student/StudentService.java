@@ -13,6 +13,8 @@ public interface StudentService {
 	
 	int updateStudentInfo(student_dto dto);
 	
+	int updateCounselCancel(String cancel_aply_sn);
+	
 	int addCounselReservation(counsel_dto dto, String professor_number, String counseler_number);
 	
 	String getProfessorNumber(String stdnt_no);

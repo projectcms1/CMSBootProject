@@ -25,10 +25,10 @@
 	<select id="getListCounsel" resultType="com.cms.ca.view_counsel_dto" parameterType="Map">
 		select * from VIEW_DSCSN_APLY where STDNT_NO = #{stdnt_no}
 		<if test='part=="0"'>
-			and STTS_CD = '완료' and ${search_part} like concat('%', #{search_word}, '%')
+			and BFR_APLY_SN IS NULL and STTS_CD = '완료' and ${search_part} like concat('%', #{search_word}, '%')
 		</if>
 		<if test='part=="1"'>
-			and STTS_CD = '완료'
+			and BFR_APLY_SN IS NULL and STTS_CD = '완료'
 		</if>
 		<if test='part=="2"'>
 			and RSVT_DT >= now() and STTS_CD = '미승인'
@@ -37,12 +37,16 @@
 			and RSVT_DT >= now() and STTS_CD = '승인'
 		</if>
 		<if test='part=="4"'>
-			and (STTS_CD = '취소' or STTS_CD = '완료')
+			and BFR_APLY_SN IS NULL and (STTS_CD = '취소' or STTS_CD = '완료')
 		</if>
 		order by APLY_SN desc
 		<if test='part=="0" or part=="1"'>
 			limit ${pageno}, ${datano}
 		</if>
+	</select>
+
+	<select id="getCountRound" resultType="int" parameterType="int">
+		select count(BFR_APLY_SN) from VIEW_DSCSN_APLY where BFR_APLY_SN = #{aply_sn}
 	</select>
 
 	<insert id="addCounselReservation" parameterType="com.cms.ca.counsel_dto">
@@ -62,6 +66,10 @@
 			DLNG_BANK_NM = #{dlng_bank_nm}, DLNG_ACTNO = #{dlng_actno} 
 		</if>
 		where STDNT_NO = #{stdnt_no}
+	</update>
+
+	<update id="setCounselReservCancel" parameterType="String">
+		update DSCSN_APLY set STTS_CD = '취소' where APLY_SN = #{aply_sn}
 	</update>
 
 </mapper>
