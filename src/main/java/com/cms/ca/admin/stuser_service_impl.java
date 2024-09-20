@@ -20,6 +20,9 @@ public class stuser_service_impl implements stuser_service{
 	@Override
 	public List<student_dto> student_list() {
 		List<student_dto> studentlist_data = this.stuser_repo.student_list();
+		for (student_dto stdto : studentlist_data) {
+			stdto.setGrade();
+		}
 		return studentlist_data;
 	}
 
@@ -31,6 +34,14 @@ public class stuser_service_impl implements stuser_service{
 		List<student_dto> studentlist_one_data = this.stuser_repo.student_search_list(mp);
 		return studentlist_one_data;
 	}
+
+	@Override
+	public int student_detail_update(student_dto stdto) {
+		int stuser_update_result = this.stuser_repo.student_detail_update(stdto);
+		return stuser_update_result;
+	}
+	
+	
 	
 }
 

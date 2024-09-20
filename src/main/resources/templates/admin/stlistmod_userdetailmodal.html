@@ -8,6 +8,7 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal"
 					aria-label="Close"></button>
 			</div>
+			<form id="stuser_detail_frm" method="post" action="./stuser_detail_update">
 			<div class="modal-body" id="studentdetailcontent">
 				<!-- 상세 정보를 여기에 추가 -->
 				<section class="section">
@@ -27,25 +28,25 @@
 											<div class="row mb-1">
 												<label class="col-sm-4 col-form-label right-tag">입학년도</label>
 												<div class="col-sm-5 right-tag">
-													<input type="text" class="form-control" id="entrance_year">
+													<input type="text" class="form-control" id="ENTRANCE_YEAR" disabled>
 												</div>
 											</div>
 											<div class="row mb-1">
 												<label class="col-sm-4 col-form-label right-tag">학번</label>
 												<div class="col-sm-5 right-tag">
-													<input type="text" class="form-control" id="STDNT_NO">
+													<input type="text" class="form-control" id="STDNT_NO" name="stdnt_no" readonly>
 												</div>
 											</div>
 											<div class="row mb-1">
 												<label class="col-sm-4 col-form-label right-tag">이름</label>
 												<div class="col-sm-5 right-tag">
-													<input type="text" class="form-control" id="STDNT_FLNM">
+													<input type="text" class="form-control" id="STDNT_FLNM" disabled>
 												</div>
 											</div>
 											<div class="row mb-1">
 												<label class="col-sm-4 col-form-label right-tag">생년월일</label>
 												<div class="col-sm-5 right-tag">
-													<input type="text" class="form-control" id="BRDT" >
+													<input type="text" class="form-control" id="BRDT" disabled>
 												</div>
 											</div>
 											<div class="row mb-1">
@@ -57,7 +58,7 @@
 											<div class="row mb-1">
 												<label class="col-sm-4 col-form-label right-tag">학기</label>
 												<div class="col-sm-5 right-tag">
-													<input type="text" class="form-control" id="UNIV_PRD">
+													<input type="text" class="form-control" id="UNIV_PRD" name="univ_prd">
 												</div>
 											</div>
 										</div>
@@ -65,37 +66,37 @@
 											<div class="row mb-1">
 												<label class="col-sm-4 col-form-label right-tag">대학(원)</label>
 												<div class="col-sm-6 right-tag">
-													<input type="text" class="form-control" id="OGDP_UNIV">
+													<input type="text" class="form-control" id="OGDP_UNIV" name="ogdp_univ">
 												</div>
 											</div>
 											<div class="row mb-1">
 												<label class="col-sm-4 col-form-label right-tag">학과(부)</label>
 												<div class="col-sm-6 right-tag">
-													<input type="text" class="form-control" id="OGDP_SCSBJT">
+													<input type="text" class="form-control" id="OGDP_SCSBJT" name="ogdp_scsbjt">
 												</div>
 											</div>
 											<div class="row mb-1">
 												<label class="col-sm-4 col-form-label right-tag">전공</label>
 												<div class="col-sm-6 right-tag">
-													<input type="text" class="form-control" id="MJR">
+													<input type="text" class="form-control" id="MJR" name="mjr">
 												</div>
 											</div>
 											<div class="row mb-1">
 												<label class="col-sm-4 col-form-label right-tag">학적구분</label>
 												<div class="col-sm-6 right-tag">
-													<input type="text" class="form-control" id="STDNT_STTS_SE">
+													<input type="text" class="form-control" id="STDNT_STTS_SE" name="stdnt_stts_se">
 												</div>
 											</div>
 											<div class="row mb-1">
 												<label class="col-sm-4 col-form-label right-tag">이메일</label>
 												<div class="col-sm-6 right-tag">
-													<input type="text" class="form-control" id="USER_EML_ADDR">
+													<input type="text" class="form-control" id="USER_EML_ADDR" name="user_eml_addr">
 												</div>
 											</div>
 											<div class="row mb-3">
 												<label class="col-sm-4 col-form-label right-tag">전화번호</label>
 												<div class="col-sm-6 right-tag">
-													<input type="text" class="form-control" id="USER_TELNO">
+													<input type="text" class="form-control" id="USER_TELNO" name="user_telno">
 												</div>
 											</div>
 										</div>
@@ -112,8 +113,8 @@
 										<div class="row mb-2" style="margin-left: 5%;">
 											<label class="col-sm-1 col-form-label pd-left-3">우편번호</label>
 											<div class="col-sm-2">
-												<input type="text" class="form-control" id="USER_ZIP"
-													required>
+												<input type="text" class="form-control" id="USER_ZIP" name="user_zip"
+													required readonly>
 											</div>
 											<button type="button" class="btn btn-primary"
 												id="emp_addr_search_btn" style="width: 150px; height: 38px;"
@@ -122,14 +123,14 @@
 										<div class="row mb-2" style="margin-left: 5%;">
 											<label class="col-sm-1 col-form-label pd-left-3">주소</label>
 											<div class="col-sm-8">
-												<input type="text" class="form-control" id="USER_ADDR"
-													required>
+												<input type="text" class="form-control" id="USER_ADDR" name="user_addr"
+													required readonly>
 											</div>
 										</div>
 										<div class="row mb-3" style="margin-left: 5%;">
 											<label class="col-sm-1 col-form-label pd-left-3">상세주소</label>
 											<div class="col-sm-8">
-												<input type="text" class="form-control" id="USER_DADDR"
+												<input type="text" class="form-control" id="USER_DADDR" name="user_daddr"
 													required>
 											</div>
 										</div>
@@ -153,37 +154,32 @@
 									<div class="row mb-3">
 										<label class="col-sm-1 col-form-label pd-left-3">은행명</label>
 										<div class="col-sm-2">
-											<input type="text" class="form-control" id="DLNG_BANK_NM">
+											<input type="text" class="form-control" id="DLNG_BANK_NM" name="dlng_bank_nm">
 										</div>
 										<label class="col-sm-1 col-form-label pd-left-3">계좌번호</label>
 										<div class="col-sm-3">
-											<input type="text" class="form-control" id="DLNG_ACTNO">
+											<input type="text" class="form-control" id="DLNG_ACTNO" name="dlng_actno">
 										</div>
 										<label class="col-sm-1 col-form-label pd-left-3">예금주</label>
 										<div class="col-sm-2">
-											<input type="text" class="form-control" id="DPSTR_NM">
+											<input type="text" class="form-control" id="DPSTR_NM" name="dpstr_nm">
 										</div>
 									</div>
-
-
 								</div>
 							</div>
 							<!-- End 계좌 정보 Card -->
-									<button type="button" class="btn btn-outline-success float-end"
-										style="margin-left: 5px;">
-										<i class="ri-save-3-line"></i> 저장
-									</button>
-									<button type="button" class="btn btn-outline-primary float-end"
-										style="margin-left: auto;">
-										<i class="ri-edit-2-line"></i> 입력
-									</button>
 						</div>
 					</div>
 				</section>
-
 				<!-- End Page Title -->
 			</div>
+			</form>
+			
 			<div class="modal-footer">
+				<button type="button" class="btn btn-outline-primary float-end" onclick="update_stuserdata()"
+					style="margin-left: auto;">
+					<i class="ri-edit-2-line"></i> 수정
+				</button>
 				<button type="button" class="btn btn-secondary"
 					data-bs-dismiss="modal">닫기</button>
 			</div>

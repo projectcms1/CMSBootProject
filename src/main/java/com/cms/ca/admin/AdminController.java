@@ -1,11 +1,14 @@
 package com.cms.ca.admin;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -28,7 +31,7 @@ public class AdminController {
 	@Autowired
 	private counsel_service counsel_service;
 	
-	
+	PrintWriter = null;
 
 	@GetMapping("/adminlogin")
 	public String admin_login() {
@@ -47,8 +50,23 @@ public class AdminController {
 			m.addAttribute("search_word", search_word);
 			m.addAttribute("student_list", this.stuser_service.student_search_list(search_part, search_word));
 		}
+		
 
 		return "admin/stlistmod";
+	}
+	
+	
+	@PostMapping("/stuser_detail_update")
+	public void stuser_detail_update(@ModelAttribute student_dto stdto) {
+		int result = this.stuser_service.student_detail_update(stdto);
+		try {
+			if(result > 0 ) {
+				
+			}
+			
+		}catch (Exception e) {
+			
+		}
 	}
 	
 	

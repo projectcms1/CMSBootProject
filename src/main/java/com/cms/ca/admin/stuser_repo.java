@@ -11,5 +11,8 @@ import com.cms.ca.student_dto;
 public interface stuser_repo {
 	
 	List<student_dto> student_list();
+	
 	List<student_dto> student_search_list(Map<String, String> search_stuser_data);
+	
+	int student_detail_update(student_dto stdto);
 }
