@@ -30,25 +30,29 @@
 											<div class="row mb-1">
 												<label class="col-sm-4 col-form-label right-tag">입학년도</label>
 												<div class="col-sm-5 right-tag">
-													<input type="text" name="entranceyear" id="entranceyear" class="form-control">
+													<input type="text" name="entranceyear" id="entranceyear"
+														class="form-control">
 												</div>
 											</div>
 											<div class="row mb-1">
 												<label class="col-sm-4 col-form-label right-tag">학번</label>
 												<div class="col-sm-5 right-tag">
-													<input type="text" name="STDNT_NO" id="STDNT_NO" class="form-control">
+													<input type="text" name="STDNT_NO" id="STDNT_NO"
+														class="form-control">
 												</div>
 											</div>
 											<div class="row mb-1">
 												<label class="col-sm-4 col-form-label right-tag">이름</label>
 												<div class="col-sm-5 right-tag">
-													<input type="text" name="STDNT_FLNM" id="STDNT_FLNM" class="form-control">
+													<input type="text" name="STDNT_FLNM" id="STDNT_FLNM"
+														class="form-control">
 												</div>
 											</div>
 											<div class="row mb-1">
 												<label class="col-sm-4 col-form-label right-tag">생년월일</label>
 												<div class="col-sm-5 right-tag">
-													<input type="text" name="BRDT" id="BRDT" class="form-control">
+													<input type="text" name="BRDT" id="BRDT"
+														class="form-control">
 												</div>
 											</div>
 											<div class="row mb-1">
@@ -86,7 +90,15 @@
 											<div class="row mb-1">
 												<label class="col-sm-4 col-form-label right-tag">학적구분</label>
 												<div class="col-sm-6 right-tag">
-													<input type="text" class="form-control">
+													<select class="form-select"
+														id="categorySelect" style="width: 235px; height: 38px;"
+														onchange="toggleFields()">
+														<option value="">재학</option>
+														<option value="">휴학</option>
+														<option value="">졸업</option>
+														<option value="">자퇴</option>
+														<option value="">재적</option>
+													</select>
 												</div>
 											</div>
 											<div class="row mb-1">
@@ -112,37 +124,36 @@
 								<div class="card-body">
 									<h5 class="card-title">거주지 정보</h5>
 									<div class="col-md-12">
-										<div class="row mb-2">
-											<label class="col-sm-2 col-form-label pd-left-3">우편번호</label>
+										<input type="hidden">
+										<div class="row mb-2" style="margin-left: 5%;">
+											<label class="col-sm-1 col-form-label pd-left-3">우편번호</label>
 											<div class="col-sm-2">
-												<input type="text" class="form-control"
-													id="sample2_postcode">
+												<input type="text" class="form-control" disabled required>
 											</div>
 											<button type="button" class="btn btn-primary"
-												onclick="sample2_execDaumPostcode()"
-												style="width: 100px; height: 38px;">주소 검색</button>
+												id="emp_addr_search_btn" style="width: 150px; height: 38px;"
+												onclick="execDaumPostcode()" disabled>우편번호 검색</button>
 										</div>
-										<div class="row mb-1">
-											<label class="col-sm-2 col-form-label pd-left-3">주소</label>
-											<div class="col-sm-10">
-												<input type="text" class="form-control" id="sample2_address">
+										<div class="row mb-2" style="margin-left: 5%;">
+											<label class="col-sm-1 col-form-label pd-left-3">주소</label>
+											<div class="col-sm-8">
+												<input type="text" class="form-control" disabled required>
 											</div>
 										</div>
-										<div class="row mb-3">
-											<label class="col-sm-2 col-form-label pd-left-3">상세주소</label>
-											<div class="col-sm-10">
-												<input type="text" class="form-control"
-													id="sample2_detailAddress">
+										<div class="row mb-3" style="margin-left: 5%;">
+											<label class="col-sm-1 col-form-label pd-left-3">상세주소</label>
+											<div class="col-sm-8">
+												<input type="text" class="form-control" disabled required>
 											</div>
 										</div>
-									</div>
-
-									<div id="layer"
-										style="display: none; position: fixed; overflow: hidden; z-index: 1; -webkit-overflow-scrolling: touch;">
-										<img src="//t1.daumcdn.net/postcode/resource/images/close.png"
-											id="btnCloseLayer"
-											style="cursor: pointer; position: absolute; right: -3px; top: -3px; z-index: 1"
-											onclick="closeDaumPostcode()" alt="닫기 버튼">
+										<div id="layer"
+											style="display: none; position: fixed; overflow: hidden; z-index: 1; -webkit-overflow-scrolling: touch;">
+											<img
+												src="//t1.daumcdn.net/postcode/resource/images/close.png"
+												id="btnCloseLayer"
+												style="cursor: pointer; position: absolute; right: -3px; top: -3px; z-index: 1"
+												onclick="closeDaumPostcode()" alt="닫기 버튼">
+										</div>
 									</div>
 								</div>
 							</div>

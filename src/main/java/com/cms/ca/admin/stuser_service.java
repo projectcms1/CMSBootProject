@@ -8,7 +8,7 @@ import com.cms.ca.view_counsel_dto;
 public interface stuser_service {
 	List<student_dto> student_list();
 	
-	List<student_dto> student_one_list(String stdnt_no);
+	List<student_dto> student_search_list(String search_part, String search_word);
 }
 
 

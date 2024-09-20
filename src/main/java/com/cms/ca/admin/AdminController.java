@@ -29,28 +29,23 @@ public class AdminController {
 	private counsel_service counsel_service;
 	
 	
-	
 
 	@GetMapping("/adminlogin")
 	public String admin_login() {
 		return "admin/login";
 	}
 	
-	@GetMapping("/adminfindid")
-	public String find_id() {
-		return "admin/adminfindid";
-	}
 	
 	@GetMapping("/stlistmod")
-	public String stlist_mod(Model m, String stdnt_no) {
-		System.out.println(stdnt_no);
-		List<student_dto> student_list_Data = this.stuser_service.student_list();
-		m.addAttribute("student_list",student_list_Data);
-
-		if(stdnt_no != null) {
-			List<student_dto> student_one_list_Data = this.stuser_service.student_one_list(stdnt_no);
-			m.addAttribute("student_one_list", student_one_list_Data);
-			System.out.println(student_one_list_Data);
+	public String stlist_mod(Model m, @RequestParam(value = "", required = false) String search_part, @RequestParam(value = "", required = false) String search_word) {
+		
+		if (search_part == null || search_word == null || search_part.equals("") || search_word.equals("")) {
+			m.addAttribute("student_list", this.stuser_service.student_list());
+		}
+		else {
+			m.addAttribute("search_part", search_part);
+			m.addAttribute("search_word", search_word);
+			m.addAttribute("student_list", this.stuser_service.student_search_list(search_part, search_word));
 		}
 
 		return "admin/stlistmod";

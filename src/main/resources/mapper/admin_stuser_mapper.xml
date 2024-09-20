@@ -7,9 +7,9 @@
 select * from STDNT_INFO order by STDNT_NO desc
 </select>
 
-<!-- 학생별 상세정보 출력 -->
-<select id="student_one_list" resultType="com.cms.ca.student_dto">
-select * from STDNT_INFO where STDNT_NO = #{stdnt_no}
+<!-- 학생 리스트 검색 기능 -->
+<select id="student_search_list" resultType="com.cms.ca.student_dto" parameterType="map">
+select * from STDNT_INFO where ${search_part} like concat('%', #{search_word}, '%') order by STDNT_NO desc
 </select>
 
 <!-- 학생 사용자 추가 -->

@@ -1,6 +1,7 @@
 package com.cms.ca.admin;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,6 +11,5 @@ import com.cms.ca.student_dto;
 public interface stuser_repo {
 	
 	List<student_dto> student_list();
-	List<student_dto> student_one_list(String stdnt_no);
-	
+	List<student_dto> student_search_list(Map<String, String> search_stuser_data);
 }
