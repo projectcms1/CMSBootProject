@@ -10,6 +10,31 @@
         <result column="ACNT_LCK_YN" property="acntLckYn" />
         <result column="REG_DT" property="regDt" />
     </resultMap>
+
+    <!-- StudentResultMap 정의 -->
+    <resultMap id="StudentResultMap" type="com.secu.test.demo.model.Student">
+        <id column="STDNT_NO" property="stdntNo" />
+        <result column="STDNT_FLNM" property="stdntFlnm" />
+        <result column="USER_NO" property="userNo" />
+        <result column="USER_EML_ADDR" property="userEmlAddr" />
+        <result column="USER_TELNO" property="userTelno" />
+        <result column="USER_ZIP" property="userZip" />
+        <result column="USER_ADDR" property="userAddr" />
+        <result column="USER_DADDR" property="userDaddr" />
+        <result column="USER_PHOTO" property="userPhoto" />
+        <result column="BRDT" property="brdt" />
+        <result column="DLNG_BANK_NM" property="dlngBankNm" />
+        <result column="DLNG_ACTNO" property="dlngActno" />
+        <result column="DPSTR_NM" property="dpstrNm" />
+        <result column="UNIV_PRD" property="univPrd" />
+        <result column="OGDP_UNIV" property="ogdpUniv" />
+        <result column="OGDP_SCSBJT" property="ogdpScsbjt" />
+        <result column="MJR" property="mjr" />
+        <result column="STDNT_STTS_SE" property="stdntSttsSe" />
+    </resultMap>
+
+
+
     <!-- 사용자 이름(lgnId)으로 계정 정보 조회 -->
     <select id="findAccountByUsername" parameterType="String" resultMap="AccountResultMap">
         SELECT * FROM LGN_ACNT_INFO WHERE LGN_ID = #{lgnId}
@@ -21,7 +46,7 @@
     </select>
 
     <!-- USER_NO로 학생 정보 조회 -->
-    <select id="findStudentByAccountId" parameterType="int" resultType="com.secu.test.demo.model.Student">
+    <select id="findStudentByAccountId" parameterType="int" resultMap="StudentResultMap">
         SELECT * FROM STDNT_INFO WHERE USER_NO = #{userNo}
     </select>
 

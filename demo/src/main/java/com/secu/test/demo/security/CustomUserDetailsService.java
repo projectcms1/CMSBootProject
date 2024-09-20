@@ -48,6 +48,8 @@ public class CustomUserDetailsService implements UserDetailsService {
             authorities.add(new SimpleGrantedAuthority(role));
         } else {
             Student student = accountService.findStudentByAccountId(account.getUserNo());
+            System.out.println(account.getUserNo());
+            System.out.println(student);
             if (student != null) {
                 authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
             }

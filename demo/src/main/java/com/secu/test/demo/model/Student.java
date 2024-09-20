@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 @Data
 public class Student {
-    private int stdntNo; // 학생 번호
+    private String stdntNo; // 학생 번호
     private String stdntFlnm; // 학생 성명
     private int userNo; // 계정 번호 (Foreign key)
     private String userEmlAddr; // 이메일 주소
