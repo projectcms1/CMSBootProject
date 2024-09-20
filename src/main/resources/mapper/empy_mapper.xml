@@ -24,4 +24,25 @@
 		where emp_no=#{emp_no}
 	</update>
 	
+	<select id="getStdntNameFromStdNo" resultType="String" parameterType="String">
+		select stdnt_flnm from STDNT_INFO where stdnt_no = #{stdnt_no}
+	</select>
+	
+	<insert id="addCounsel" parameterType="com.cms.ca.counsel_dto">
+		insert into DSCSN_APLY 
+		(aply_sn, bfr_aply_sn, hr_se, stdnt_no, emp_no, stts_cd, 
+		plc, rsvt_dt, aply_dt, dscsn_mthd, dscsn_knd)
+		values 
+		('0', null, #{hr_se}, #{stdnt_no}, #{emp_no}, #{stts_cd}, 
+		#{plc}, #{rsvt_dt}, now(), #{dscsn_mthd}, #{dscsn_knd})
+	</insert>
+	
+	<select id="getAllCounsel" resultType="com.cms.ca.counsel_dto">
+		select * from DSCSN_APLY where emp_no=#{emp_no} and bfr_aply_sn=null
+		order by aply_sn desc
+	</select>
+	
+	<select id="getAllCounselCount" resultType="int">
+		select count(*) as cnt from DSCSN_APLY where emp_no=#{emp_no} and bfr_aply_sn=null
+	</select>
 </mapper>

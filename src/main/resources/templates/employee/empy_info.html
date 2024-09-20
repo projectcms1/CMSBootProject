@@ -188,7 +188,6 @@
 						<h5 class="card-title">거주지 정보</h5>
 						<div class="col-md-12">
 							<form id="addr_info" th:object="${empy_info}" action="/employee/empy_info" method="post" >
-								<input type="hidden" th:field="*{emp_no}" th:value="${ empy_info.getEmp_no() }">
 								<div class="row mb-2" style="margin-left: 5%;">
 									<label class="col-sm-1 col-form-label pd-left-3">우편번호</label>
 									<div class="col-sm-2">

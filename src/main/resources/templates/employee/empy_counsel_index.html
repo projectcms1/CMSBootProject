@@ -124,36 +124,17 @@
 				                    	</tr>
 				                    </thead>
 				                    <tbody>
-					                  	<tr>
-					                    	<td>2021/02/11</td>
-					                    	<td>김하나</td>
-					                    	<td>20201423</td>
-					                    	<td>학업상담</td>
-					                    	<td>
-					                    		채팅상담
-												<button type="button" class="btn btn-outline-info btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable" style="float: right; margin-left: 5px;">상세보기</button>
-					                    	</td>
-					                  	</tr>
-					                  	<tr>
-					                    	<td>2021/02/14</td>
-					                    	<td>이지혜</td>
-					                    	<td>20181423</td>
-					                    	<td>진로상담</td>
-					                    	<td>
-					                    		대면상담
-												<button type="button" class="btn btn-outline-info btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable" style="float: right; margin-left: 5px;">상세보기</button>
-					                    	</td>
-					                  	</tr>
-					                  	<tr>
-					                    	<td>2021/07/24</td>
-					                    	<td>김하나</td>
-					                    	<td>20201423</td>
-					                    	<td>진로상담</td>
-					                    	<td>
-					                    		대면상담
-												<button type="button" class="btn btn-outline-info btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable" style="float: right; margin-left: 5px;">상세보기</button>
-					                    	</td>
-					                  	</tr>
+					                  	<tr th:each="counsel : ${counsel_list}">
+							                <td th:text="${counsel.getRsvt_dt}"/>
+							                <td th:text="${counsel.studentname}"/>
+							                <td th:text="${counsel.getStdnt_no}"/>
+							                <td th:text="${counsel.getDscsn_knd}"/>
+							                <td th:text="${counsel.getDscsn_mthd}">
+							                    <button type="button" class="btn btn-outline-info btn-sm rounded-pill" 
+												data-bs-toggle="modal" data-bs-target="#modalDialogScrollable" 
+												style="float: right; margin-left: 5px;">상세보기</button>
+							                </td>
+							            </tr>
 					                  	<tr>
 					                    	<td>2017/04/21</td>
 					                    	<td>허준</td>
@@ -161,7 +142,9 @@
 					                    	<td>진로상담</td>
 					                    	<td>
 					                    		화상상담
-												<button type="button" class="btn btn-outline-info btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable" style="float: right; margin-left: 5px;">상세보기</button>
+												<button type="button" class="btn btn-outline-info btn-sm rounded-pill" 
+												data-bs-toggle="modal" data-bs-target="#modalDialogScrollable" 
+												style="float: right; margin-left: 5px;">상세보기</button>
 					                    	</td>
 					                  	</tr>
 					                </tbody>
