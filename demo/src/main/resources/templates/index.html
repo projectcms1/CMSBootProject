@@ -8,7 +8,7 @@
 <h2>Welcome to the Index Page</h2>
 
 <!-- 현재 인증된 사용자 정보 표시 -->
-<p>Welcome, <span th:text="${#authentication.name}">[User]</span>!</p>
+<p>안녕하세요, [[${#authentication?.name}]]님!</p>
 
 <!-- ROLE_SUPER_ADMIN 권한이 있는 경우 -->
 <div th:if="${#authorization.expression('hasRole(''SUPER_ADMIN'')')}">
