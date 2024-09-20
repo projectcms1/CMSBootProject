@@ -6,7 +6,7 @@ function closeDaumPostcode() {
     element_layer.style.display = 'none';
 }
 
-function sample2_execDaumPostcode() {
+document.querySelector("#searchAddrBtn").addEventListener("click", function() {
     new daum.Postcode({
         oncomplete: function(data) {
             // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -59,7 +59,7 @@ function sample2_execDaumPostcode() {
 
     // iframe을 넣은 element의 위치를 화면의 가운데로 이동시킨다.
     initLayerPosition();
-}
+});
 
 // 브라우저의 크기 변경에 따라 레이어를 가운데로 이동시키고자 하실때에는
 // resize이벤트나, orientationchange이벤트를 이용하여 값이 변경될때마다 아래 함수를 실행 시켜 주시거나,
@@ -76,4 +76,59 @@ function initLayerPosition(){
     // 실행되는 순간의 화면 너비와 높이 값을 가져와서 중앙에 뜰 수 있도록 위치를 계산한다.
     element_layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width)/2 - borderWidth) + 'px';
     element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
+}
+
+function input_disable(selectedBtn) {
+	personal_frm.user_eml_addr.disabled = true;
+	personal_frm.user_telno.disabled = true;
+	
+	address_frm.user_zip.disabled = true;
+	address_frm.user_addr.disabled = true;
+	address_frm.user_daddr.disabled = true;
+	document.getElementById("searchAddrBtn").disabled = true;
+	
+	acount_frm.dlng_bank_nm.disabled = true;
+	acount_frm.dlng_actno.disabled = true;
+	
+	if (selectedBtn == "1") {
+		personal_frm.user_eml_addr.disabled = false;
+		personal_frm.user_telno.disabled = false;
+		personal_frm.user_telno.value = personal_frm.user_telno.value.replaceAll("-", "");
+	}
+	else if (selectedBtn == "2") {
+		address_frm.user_zip.readOnly = true;
+		address_frm.user_addr.readOnly = true;
+		address_frm.user_zip.disabled = false;
+		address_frm.user_addr.disabled = false;
+		address_frm.user_daddr.disabled = false;
+		document.getElementById("searchAddrBtn").disabled = false;
+	}
+	else if (selectedBtn == "3") {
+		acount_frm.dlng_bank_nm.disabled = false;
+		acount_frm.dlng_actno.disabled = false;
+	}
+	else {
+		alert("잘못된 접근입니다.");
+	}
+}
+
+function input_submit(selectedBtn) {
+	if (selectedBtn == "1" && !personal_frm.user_eml_addr.disabled) {
+		personal_frm.method = "POST";
+		personal_frm.action = "./update_std_info";
+		personal_frm.submit();
+	}
+	else if (selectedBtn == "2" && !address_frm.user_zip.disabled) {
+		address_frm.method = "POST";
+		address_frm.action = "./update_std_info";
+		address_frm.submit();
+	}
+	else if (selectedBtn == "3" && !acount_frm.dlng_bank_nm.disabled) {
+		acount_frm.method = "POST";
+		acount_frm.action = "./update_std_info";
+		acount_frm.submit();
+	}
+	else {
+		alert("입력을 먼저 눌러주세요.");
+	}
 }

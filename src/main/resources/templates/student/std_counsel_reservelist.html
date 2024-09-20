@@ -81,34 +81,9 @@
 				     	<div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
 				     		
 				     		<div class="datatable-top">
-				     			<!-- per-page Dropdown -->
-		    					<div class="datatable-dropdown">
-		            				<label>
-		                				<select class="datatable-selector" name="per-page">
-		                					<option value="5" selected>5개씩 보기</option>
-		                					<option value="10">10개씩 보기</option>
-		                					<option value="-1">전체 보기</option>
-		                				</select>
-		            				</label>
-		        				</div>
-		        				<!-- End per-page Dropdown -->
-		        				
-		        				<!-- Search Bar -->
-			    				<div class="search-bar ">
-						      		<form class="search-form d-flex align-items-center" method="POST" action="#">
-					                  	<select id="inputState" class="form-select" style="width: 180px;">
-					                    	<option selected>전체</option>
-					                    	<option>상담일자</option>
-					                    	<option>학년</option>
-					                    	<option>학기</option>
-					                    	<option>상담자</option>
-					                    	<option>상담종류</option>
-					                  	</select>
-				                  		<input type="text" class="form-control" placeholder="Search" style="margin-left: 5px;">
-						        		<button type="submit" title="Search" class="btn" style="border-color: g"><i class="bi bi-search"></i></button>
-						      		</form>
-						    	</div>
-						    	<!-- End Search Bar -->
+				     			<div class="datatable-info">
+		    						총 [[${ napproveList.size() }]] 개
+		    					</div>
 							</div>
 							
 							<div class="datatable-container">
@@ -119,10 +94,7 @@
 				                    			<button class="datatable-sorter">상담일자</button>
 				                    		</th>
 											<th data-sortable="true" style="width: 20%;">
-												<button class="datatable-sorter">학년</button>
-				                    		</th>
-				                    		<th data-sortable="true" style="width: 20%;">
-				                    			<button class="datatable-sorter">학기</button>
+												<button class="datatable-sorter">상담시간</button>
 				                    		</th>
 				                    		<th data-sortable="true" style="width: 20%;">
 				                    			<button class="datatable-sorter">상담자</button>
@@ -130,79 +102,27 @@
 				                    		<th data-sortable="true" style="width: 20%;">
 				                    			<button class="datatable-sorter">상담방식</button>
 				                    		</th>
+				                    		<th data-sortable="true" style="width: 20%;">
+				                    			<button class="datatable-sorter">상담종류</button>
+				                    		</th>
 				                    	</tr>
 				                    </thead>
 				                    <tbody>
-					                  	<tr>
-					                    	<td>2012/08/14</td>
-						                    <td>3학년</td>
-						                    <td>6학기</td>
-						                    <td>허준</td>
-						                    <td>
-						                    	채팅상담
-				                    			<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
-				                    		</td>
-					                  	</tr>
-					                  	<tr>
-					                    	<td>2012/08/14</td>
-						                    <td>3학년</td>
-						                    <td>6학기</td>
-						                    <td>허준</td>
-						                    <td>
-						                    	화상상담
-				                    			<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
-					                    	</td>
-					                  	</tr>
-					                  	<tr>
-					                    	<td>2012/08/14</td>
-						                    <td>3학년</td>
-						                    <td>6학기</td>
-						                    <td>허준</td>
-						                    <td>
-						                    	대면상담
-				                    			<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
-					                    	</td>
-					                  	</tr>
-					                  	<tr>
-					                    	<td>2012/08/14</td>
-						                    <td>3학년</td>
-						                    <td>6학기</td>
-						                    <td>허준</td>
-						                    <td>
-						                    	채팅상담
-				                    			<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
-					                    	</td>
-					                  	</tr>
+					                  <tr th:if="${napproveList.size() == 0 }" align="center"><td colspan="5">대기 중인 상담이 존재하지 않습니다.</td></tr>
+					                  <tr th:each="counselData : ${ napproveList }">
+					                    <td>[[${ counselData.getRsvt_dt() }]]</td>
+					                    <td>[[${ counselData.getHr_se() }]]교시</td>
+					                    <td>[[${ counselData.getEmp_flnm() }]]</td>
+					                    <td>[[${ counselData.getDscsn_mthd() }]]상담</td>
+					                    <td>
+					                    	[[${ counselData.getDscsn_knd() }]]상담
+											<button type="button" th:onclick="cancelReservation([[${ counselData.getAply_sn() }]])" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
+					                    </td>
+					                  </tr>
 					                </tbody>
 				                </table>
 				            </div>
 				            
-							<div class="datatable-bottom">
-		    					<div class="datatable-info">
-		    						총 n 개 중 i ~ j 개
-		    					</div>
-		    					
-		    					<!-- 페이징 Div-->
-		    					<nav aria-label="Page navigation example">
-				                	<ul class="pagination">
-				                  		<li class="page-item">
-				                    		<a class="page-link" href="#" aria-label="Previous">
-				                      			<span aria-hidden="true">&laquo;</span>
-				                    		</a>
-				                  		</li>
-				                  		<li class="page-item"><a class="page-link" href="#">1</a></li>
-				                  		<li class="page-item"><a class="page-link" href="#">2</a></li>
-				                  		<li class="page-item"><a class="page-link" href="#">3</a></li>
-				                  		<li class="page-item">
-				                    		<a class="page-link" href="#" aria-label="Next">
-				                      			<span aria-hidden="true">&raquo;</span>
-				                    		</a>
-				                  		</li>
-				                	</ul>
-				              	</nav>
-				              	<!-- End 페이징 Div-->
-							
-							</div>
 						</div>
 		             	<!-- End 대기중상담 Table-->
 		
@@ -219,34 +139,9 @@
 				     	<div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
 				     		
 				     		<div class="datatable-top">
-				     			<!-- per-page Dropdown -->
-		    					<div class="datatable-dropdown">
-		            				<label>
-		                				<select class="datatable-selector" name="per-page">
-		                					<option value="5" selected>5개씩 보기</option>
-		                					<option value="10">10개씩 보기</option>
-		                					<option value="-1">전체 보기</option>
-		                				</select>
-		            				</label>
-		        				</div>
-		        				<!-- End per-page Dropdown -->
-		        				
-		        				<!-- Search Bar -->
-			    				<div class="search-bar ">
-						      		<form class="search-form d-flex align-items-center" method="POST" action="#">
-					                  	<select id="inputState" class="form-select" style="width: 180px;">
-					                    	<option selected>전체</option>
-					                    	<option>상담일자</option>
-					                    	<option>학년</option>
-					                    	<option>학기</option>
-					                    	<option>상담자</option>
-					                    	<option>상담종류</option>
-					                  	</select>
-				                  		<input type="text" class="form-control" placeholder="Search" style="margin-left: 5px;">
-						        		<button type="submit" title="Search" class="btn" style="border-color: g"><i class="bi bi-search"></i></button>
-						      		</form>
-						    	</div>
-						    	<!-- End Search Bar -->
+				     			<div class="datatable-info">
+		    						총 [[${ approveList.size() }]] 개
+		    					</div>
 							</div>
 							
 							<div class="datatable-container">
@@ -257,10 +152,7 @@
 				                    			<button class="datatable-sorter">상담일자</button>
 				                    		</th>
 											<th data-sortable="true" style="width: 20%;">
-												<button class="datatable-sorter">학년</button>
-				                    		</th>
-				                    		<th data-sortable="true" style="width: 20%;">
-				                    			<button class="datatable-sorter">학기</button>
+												<button class="datatable-sorter">상담시간</button>
 				                    		</th>
 				                    		<th data-sortable="true" style="width: 20%;">
 				                    			<button class="datatable-sorter">상담자</button>
@@ -268,59 +160,27 @@
 				                    		<th data-sortable="true" style="width: 20%;">
 				                    			<button class="datatable-sorter">상담방식</button>
 				                    		</th>
+				                    		<th data-sortable="true" style="width: 20%;">
+				                    			<button class="datatable-sorter">상담종류</button>
+				                    		</th>
 				                    	</tr>
 				                    </thead>
 				                    <tbody>
-						               	<tr>
-						                    <td>2021/04/21</td>
-						                    <td>2학년</td>
-						                    <td>3학기</td>
-						                    <td>김하나</td>
-						                    <td>
-						                    	대면상담
-						                    	<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
-						                    </td>
-						                </tr>
-						                <tr>
-						                    <td>2012/08/14</td>
-						                    <td>3학년</td>
-						                    <td>6학기</td>
-						                    <td>허준</td>
-						                    <td>
-						                    	대면상담
-						                    	<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
-						                    </td>
-						                </tr>
+						              <tr th:if="${approveList.size() == 0 }" align="center"><td colspan="5">확정된 상담이 존재하지 않습니다.</td></tr>
+					                  <tr th:each="counselData : ${ approveList }">
+					                    <td>[[${ counselData.getRsvt_dt() }]]</td>
+					                    <td>[[${ counselData.getHr_se() }]]교시</td>
+					                    <td>[[${ counselData.getEmp_flnm() }]]</td>
+					                    <td>[[${ counselData.getDscsn_mthd() }]]상담</td>
+					                    <td>
+					                    	[[${ counselData.getDscsn_knd() }]]상담
+											<button type="button" th:onclick="cancelReservation([[${ counselData.getAply_sn() }]])" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
+					                    </td>
+					                  </tr>
 						            </tbody>
 				                </table>
 				            </div>
 				            
-							<div class="datatable-bottom">
-		    					<div class="datatable-info">
-		    						총 n 개 중 i ~ j 개
-		    					</div>
-		    					
-		    					<!-- 페이징 Div-->
-		    					<nav aria-label="Page navigation example">
-				                	<ul class="pagination">
-				                  		<li class="page-item">
-				                    		<a class="page-link" href="#" aria-label="Previous">
-				                      			<span aria-hidden="true">&laquo;</span>
-				                    		</a>
-				                  		</li>
-				                  		<li class="page-item"><a class="page-link" href="#">1</a></li>
-				                  		<li class="page-item"><a class="page-link" href="#">2</a></li>
-				                  		<li class="page-item"><a class="page-link" href="#">3</a></li>
-				                  		<li class="page-item">
-				                    		<a class="page-link" href="#" aria-label="Next">
-				                      			<span aria-hidden="true">&raquo;</span>
-				                    		</a>
-				                  		</li>
-				                	</ul>
-				              	</nav>
-				              	<!-- End 페이징 Div-->
-							
-							</div>
 						</div>
 		             	<!-- End 확정상담 Table-->
 		
@@ -374,42 +234,36 @@
 				                    		<th data-format="YYYY/DD/MM" data-sortable="true" data-type="date" style="width: 20%;">
 				                    			<button class="datatable-sorter">상담일자</button>
 				                    		</th>
-											<th data-sortable="true" style="width: 20%;">
-												<button class="datatable-sorter">학년</button>
-				                    		</th>
-				                    		<th data-sortable="true" style="width: 20%;">
-				                    			<button class="datatable-sorter">학기</button>
-				                    		</th>
 				                    		<th data-sortable="true" style="width: 20%;">
 				                    			<button class="datatable-sorter">상담자</button>
 				                    		</th>
 				                    		<th data-sortable="true" style="width: 20%;">
 				                    			<button class="datatable-sorter">상담방식</button>
 				                    		</th>
+				                    		<th data-sortable="true" style="width: 20%;">
+				                    			<button class="datatable-sorter">상담종류</button>
+				                    		</th>
+											<th data-sortable="true" style="width: 20%;">
+												<button class="datatable-sorter">비고</button>
+				                    		</th>
 				                    	</tr>
 				                    </thead>
 				                    <tbody>
-						                <tr>
-						                    <td>2021/04/21</td>
-						                    <td>2학년</td>
-						                    <td>3학기</td>
-						                    <td>김하나</td>
-						                    <td>대면상담</td>
-						                </tr>
-						                <tr>
-						                    <td>2012/08/14</td>
-						                    <td>3학년</td>
-						                    <td>6학기</td>
-						                    <td>허준</td>
-						                    <td>대면상담</td>
-						                </tr>
+						              <tr th:if="${counselingList.size() == 0 }" align="center"><td colspan="5">지난 상담이 존재하지 않습니다.</td></tr>
+					                  <tr th:each="counselData : ${ counselingList }">
+					                    <td>[[${ counselData.getRsvt_dt() }]]</td>
+					                    <td>[[${ counselData.getEmp_flnm() }]]</td>
+					                    <td>[[${ counselData.getDscsn_mthd() }]]상담</td>
+					                    <td>[[${ counselData.getDscsn_knd() }]]상담</td>
+					                    <td>[[${ counselData.getStts_cd() }]]</td>
+					                  </tr>
 					                </tbody>
 				                </table>
 				            </div>
 				            
 							<div class="datatable-bottom">
 		    					<div class="datatable-info">
-		    						총 n 개 중 i ~ j 개
+		    						총 [[${ counselingList.size() }]] 개
 		    					</div>
 		    					
 		    					<!-- 페이징 Div-->
@@ -439,7 +293,9 @@
             		</div>
           		</div>
 				<!-- End 지난상담 Card -->
-	          
+				<form id="frmCancel">
+					<input type="hidden" name="cancel_aply_sn" id="cancel_aply_idx" value="">
+				</form>
 	        </div>
 	      </div>
 	    </section>           
@@ -460,6 +316,7 @@
 
   <!-- Template Main JS File -->
   <script src="/assets/js/main.js"></script>
+  <script src="/js/student/counsel_reservlist.js?v=1"></script>
 </body>
 <script>
 window.onload=function(){

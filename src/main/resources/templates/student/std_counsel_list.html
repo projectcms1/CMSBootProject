@@ -80,29 +80,21 @@
 				     		<div class="datatable-top">
 				     			<!-- per-page Dropdown -->
 		    					<div class="datatable-dropdown">
-		            				<label>
-		                				<select class="datatable-selector" name="per-page">
-		                					<option value="5" selected>5개씩 보기</option>
-		                					<option value="10">10개씩 보기</option>
-		                					<option value="-1">전체 보기</option>
-		                				</select>
-		            				</label>
+		    						<span>* 상담일자는 숫자로만 검색해주세요.</span>
 		        				</div>
 		        				<!-- End per-page Dropdown -->
 		        				
 		        				<!-- Search Bar -->
 			    				<div class="search-bar ">
-						      		<form class="search-form d-flex align-items-center" method="POST" action="#">
-					                  	<select id="inputState" class="form-select" style="width: 180px;">
-					                    	<option selected>전체</option>
-					                    	<option>상담일자</option>
-					                    	<option>학년</option>
-					                    	<option>학기</option>
-					                    	<option>상담자</option>
-					                    	<option>상담종류</option>
+						      		<form id="frmSearch" class="search-form d-flex align-items-center" th:onsubmit="return list_search()">
+					                  	<select name="search_part" id="inputState" class="form-select" style="width: 180px;">
+					                    	<option value="RSVT_DT" th:selected="${ search_part == 'RSVT_DT' }">상담일자</option>
+					                    	<option value="EMP_FLNM" th:selected="${ search_part == 'EMP_FLNM' }">상담자</option>
+					                    	<option value="DSCSN_MTHD" th:selected="${ search_part == 'DSCSN_MTHD' }">상담방식</option>
+					                    	<option value="DSCSN_KND" th:selected="${ search_part == 'DSCSN_KND' }">상담종류</option>
 					                  	</select>
-				                  		<input type="text" class="form-control" placeholder="Search" style="margin-left: 5px;">
-						        		<button type="submit" title="Search" class="btn" style="border-color: g"><i class="bi bi-search"></i></button>
+				                  		<input type="text" name="search_word" th:value="${ search_word }" class="form-control" placeholder="Search" style="margin-left: 5px;">
+						        		<button type="submit" title="찾기" class="btn" style="border-color: g"><i class="bi bi-search"></i></button>
 						      		</form>
 						    	</div>
 						    	<!-- End Search Bar -->
@@ -115,38 +107,29 @@
 				                    		<th data-format="YYYY/DD/MM" data-sortable="true" data-type="date" style="width: 20%;">
 				                    			<button class="datatable-sorter">상담일자</button>
 				                    		</th>
-											<th data-sortable="true" style="width: 20%;">
-												<button class="datatable-sorter">학년</button>
-				                    		</th>
-				                    		<th data-sortable="true" style="width: 20%;">
-				                    			<button class="datatable-sorter">학기</button>
-				                    		</th>
 				                    		<th data-sortable="true" style="width: 20%;">
 				                    			<button class="datatable-sorter">상담자</button>
 				                    		</th>
 				                    		<th data-sortable="true" style="width: 20%;">
+				                    			<button class="datatable-sorter">상담방식</button>
+				                    		</th>
+				                    		<th data-sortable="true" style="width: 20%;">
 				                    			<button class="datatable-sorter">상담종류</button>
+				                    		</th>
+											<th data-sortable="true" style="width: 20%;">
+												<button class="datatable-sorter">회차 수</button>
 				                    		</th>
 				                    	</tr>
 				                    </thead>
 				                    <tbody>
-					                  <tr>
-					                    <td>2021/02/11</td>
-					                    <td>1학년</td>
-					                    <td>2학기</td>
-					                    <td>교수A</td>
+				                      <tr th:if="${counselList.size() == 0 }" align="center"><td colspan="5">상담 이력이 존재하지 않습니다.</td></tr>
+					                  <tr th:each="counselData : ${ counselList }">
+					                    <td>[[${ counselData.getRsvt_dt() }]]</td>
+					                    <td>[[${ counselData.getEmp_flnm() }]]</td>
+					                    <td>[[${ counselData.getDscsn_mthd() }]]상담</td>
+					                    <td>[[${ counselData.getDscsn_knd() }]]상담</td>
 					                    <td>
-					                    	학업상담
-											<button type="button" class="btn btn-outline-info btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable" style="float: right; margin-left: 5px;">상세보기</button>
-					                    </td>
-					                  </tr>
-					                  <tr>
-					                    <td>2023/06/24</td>
-					                    <td>3학년</td>
-					                    <td>6학기</td>
-					                    <td>상담사B</td>
-					                    <td>
-					                    	진로상담
+					                    	[[${ counselData.getRoundCount() + 1 }]]
 											<button type="button" class="btn btn-outline-info btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable" style="float: right; margin-left: 5px;">상세보기</button>
 					                    </td>
 					                  </tr>
@@ -168,9 +151,9 @@
 				                      			<span aria-hidden="true">&laquo;</span>
 				                    		</a>
 				                  		</li>
-				                  		<li class="page-item"><a class="page-link" href="#">1</a></li>
-				                  		<li class="page-item"><a class="page-link" href="#">2</a></li>
-				                  		<li class="page-item"><a class="page-link" href="#">3</a></li>
+				                  		<li class="page-item" th:each="num : ${ #numbers.sequence(1, pageCount) }">
+				                  			<a class="page-link" onclick="move_page(this.value)" href="javascript:void(0);">[[${ num }]]</a>
+				                  		</li>
 				                  		<li class="page-item">
 				                    		<a class="page-link" href="#" aria-label="Next">
 				                      			<span aria-hidden="true">&raquo;</span>
@@ -179,7 +162,6 @@
 				                	</ul>
 				              	</nav>
 				              	<!-- End 페이징 Div-->
-							
 							</div>
 						</div>
 		             	<!-- End 상담이력 Table-->
@@ -208,6 +190,7 @@
 
   <!-- Template Main JS File -->
   <script src="/assets/js/main.js"></script>
+  <script src="/js/student/counsel_list.js?v=1"></script>
 </body>
 <script>
 window.onload=function(){

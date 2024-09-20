@@ -108,7 +108,7 @@
               			<p class="card-text text-muted">
               				상담사와 지도교수 중 선택하여 상담예약을 신청하실 수 있습니다.<br>
               				상담사에게 상담 신청시 바로 승인 처리되며, 지도 교수 상담 신청시에는 교수님의 확인 이후 승인/미승인 처리됩니다.<br>  
-              				상담 종류에는 ~~~~~~~가 있으며, 상담 방식으로는 ~~~~~가 있습니다.<br>
+              				상담 종류에는 학업, 진로,심리가 있으며, 상담 방식으로는 대면, 화상, 전화, 채팅이 있습니다.<br>
               				자가심리검사 탭에서 간단한 심리검사를 진행할 수 있으니 참고해주세요.
               			</p>
             		</div>
@@ -132,25 +132,23 @@
 		              
 		              <!-- 상담신청 탭 콘텐츠 -->
 	                  <div class="tab-content pt-2" id="borderedTabJustifiedContent">
-
 		                <!-- 상담사 탭 -->
 	                    <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel" aria-labelledby="home-tab">
-	                    <form id="frmCounseler">
 	                      <div class="row">
 		                      <div class="col-md-4" style="display: flex; flex-wrap: wrap; margin: auto; margin-top: 30px;">
 			                    <div style="margin-left: 35px;">
-			                      <select class="form-select" name="counseler_number" onchange="updateCnslrName()">
+			                      <select class="form-select" id="counseler_number" onchange="updateCnslrName(this.value)">
 			                        <option value="">전체</option>
-			                        <option  th:each="empData : ${counseler_list}" th:value="${ empData.getEmp_no() }">[[${ empData.getEmp_flnm() }]]</option>
+			                        <option th:each="empData : ${counseler_list}" th:value="${ empData.getEmp_no() }">[[${ empData.getEmp_flnm() }]]</option>
 			                      </select>
 								  <p>* 상담사를 선택하시면 해당 상담사의 일정만 표시됩니다.</p>
 			                    </div>
 		
 			                    <div class="reser-calendar">
 			                      <div class="calendar-header">
-			                        <button id="prevMonth">&lt;</button>
+			                        <button type="button" id="prevMonth">&lt;</button>
 			                        <h2 id="monthAndYear"></h2>
-			                        <button id="nextMonth">&gt;</button>
+			                        <button type="button" id="nextMonth">&gt;</button>
 			                      </div>
 			                      <table id="calendarTable">
 			                        <thead id="calendarHeader">
@@ -166,14 +164,15 @@
 		                      <div class="col-md-4 counsel-optn-box" style="margin: auto;">
 		                      	<p>희망 날짜 선택 후, 아래 내용을 선택해주세요.</p>
 		                        <hr>
+		                        <form id="frmCounseler">
 		                        <ul>
 		                          <li><i class="bx bx-check"></i>상담사</li>
 		                          <li><div id="selectedCnslrName">전체</div></li>
 		                          <li><i class="bx bx-check"></i>예약 날짜</li>
-		                          <li><div id=""></div></li>
+		                          <li><div id="selectedCnslDate"></div></li>
 		                          <li><i class="bx bx-check"></i>시간 구분</li>
 		                          <li>
-		                            <select class="form-select">
+		                            <select class="form-select" name="hr_se" id="cnslrSelectTime">
 		                              <option value="">시간 선택</option>
 		                              <option value="1">1교시(09:00~10:15)</option>
 		                              <option value="2">2교시(10:30~11:45)</option>
@@ -184,7 +183,7 @@
 		                          </li>
 		                          <li><i class="bx bx-check"></i>상담 종류</li>
 		                          <li>
-		                            <select class="form-select">
+		                            <select class="form-select" name="dscsn_knd">
 		                              <option value="">종류 선택</option>
 		                              <option value="학업">학업</option>
 		                              <option value="진로">진로</option>
@@ -193,7 +192,7 @@
 		                          </li>
 		                          <li><i class="bx bx-check"></i>상담 방식</li>
 		                          <li>
-		                            <select class="form-select">
+		                            <select class="form-select" name="dscsn_mthd">
 		                              <option value="">방식 선택</option>
 		                              <option value="대면">대면</option>
 		                              <option value="화상">화상</option>
@@ -202,12 +201,14 @@
 		                            </select>
 		                          </li>
 		                          <li>
+		                          	<input type="hidden" name="rsvt_dt">
+		                          	<input type="hidden" name="counseler_number">
 		                          	<button type="button" onclick="reservate_counsel('cslr')" class="btn btn-primary btn-lg">신청하기</button>
 		                          </li>
 		                        </ul>
+		                        </form>
 		                      </div>
 	                      </div>
-	                    </form>
 	                    </div>
 	                    <!-- End 상담사 탭 -->
 
@@ -218,17 +219,12 @@
 		                        <ul>
 		                          <li><i class="bx bx-check"></i>예약 날짜</li>
 		                          <li>
-		                          	<input type="date" name="rsvt_dt" id="" class="form-control">
+		                          	<input type="date" name="rsvt_dt" id="prfsSelectDate" class="form-control" onchange="setTimeSelecter2(this.value)">
 		                          </li>
 		                          <li><i class="bx bx-check"></i>시간 구분</li>
 		                          <li>
-		                            <select class="form-select" name="hr_se">
-		                              <option value="">시간 선택</option>
-		                              <option value="1">1교시(09:00~10:15)</option>
-		                              <option value="2">2교시(10:30~11:45)</option>
-		                              <option value="3">3교시(13:00~14:15)</option>
-		                              <option value="4">4교시(14:30~15:45)</option>
-		                              <option value="5">5교시(16:00~17:15)</option>
+		                            <select class="form-select" name="hr_se" id="prfsSelectTime">
+		                              <option value="">날짜를 먼저 선택해주세요.</option>
 		                            </select>
 		                          </li>
 		                          <li><i class="bx bx-check"></i>상담 종류</li>
@@ -288,8 +284,7 @@
   <!-- Template Main JS File -->
   <script src="/assets/js/main.js"></script>
   
-  <script src="/js/student/calendar.js"></script>
-  <script src="/js/student/std_counsel_reserve.js?v=3"></script>
+  <script src="/js/student/calendar.js?v=12"></script>
 </body>
 <script>
 window.onload=function(){

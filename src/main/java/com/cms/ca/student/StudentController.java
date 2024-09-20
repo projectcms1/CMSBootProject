@@ -9,15 +9,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cms.ca.counsel_dto;
 import com.cms.ca.student_dto;
+import com.cms.ca.view_counsel_dto;
 
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletResponse;
 
 @Controller
+@RequestMapping("/student")
 public class StudentController {
 
 	// ==== 로그인 구현 이전, 세션의 임시 학번 데이터 ======
@@ -30,7 +33,10 @@ public class StudentController {
 	@Resource(name = "stdnt_service")
 	private StudentService stdSrvc;
 	
-	@GetMapping("/student/std_info")
+	@Resource(name = "insp_service")
+	private SlfPsycInspService inspSrvc;
+	
+	@GetMapping("/std_info")
 	public String std_info(Model m) throws Exception {
 		try {
 			student_dto onedata = this.stdSrvc.getOneStudent(this.STD_NUMBER);
@@ -51,75 +57,16 @@ public class StudentController {
 		return this.viewName;
 	}
 	
-	@GetMapping("/student/std_counsel_list")
-	public String std_counsel_loglist() {
-		try {
-			this.viewName = "student/std_counsel_list";
-		} catch (Exception e) {
-			this.viewName = "page_blank";
-		}
-		return this.viewName;
-	}
-	
-	@GetMapping("/student/std_counsel_reservelist")
-	public String std_counsel_reservelist() {
-		return "student/std_counsel_reservelist";
-	}
-	
-	@GetMapping("/student/std_counsel_reserve")
-	public String std_counsel_reserve(Model m) {
-		try {
-			m.addAttribute("counseler_list", this.stdSrvc.getAllCounseler());
-			m.addAttribute("professor_number", this.stdSrvc.getProfessorNumber(this.STD_NUMBER));
-			this.viewName = "student/std_counsel_reserve";
-		} catch (Exception e) {
-			this.viewName = "page_blank";
-		}
-		return this.viewName;
-	}
-	
-	// 지도 교수 시간표 SELECT - AJAX
-	@GetMapping("/student/api/professor_time")
-	public String professor_time() {
-		String callback = "";
-		try {
-			//System.out.println("ajax-api 작동");
-			this.stdSrvc.getPrfsTimeTable(this.STD_NUMBER);
-			callback = "ok";
-		} catch (Exception e) {
-			callback = "error";
-		}
-		return callback;
-	}
-	
-	// 상담 신청
-	@PostMapping("/student/insert_counsel_reservation")
-	public void insert_counsel_reservation(@ModelAttribute counsel_dto cdto, ServletResponse res,
-			@RequestParam(value = "", required = false) String professor_number,
-			@RequestParam(value = "", required = false) String counseler_number) {
+	@PostMapping("/update_std_info")
+	public void update_std_info(@ModelAttribute student_dto sdto, ServletResponse res) {
 		res.setContentType("text/html; charset=UTF-8");
-		System.out.println(cdto);
-		System.out.println(professor_number);
 		try {
-			boolean ck = false;
 			this.pw = res.getWriter();
-			cdto.setStdnt_no(this.STD_NUMBER);
-			if (professor_number != null && counseler_number == null) {
-				cdto.setEmp_no(professor_number);
-				cdto = new PickCounselInfo().updateCnslInfo_Professor(cdto);
-				ck = true;
-			}
-			else if (counseler_number != null && professor_number == null) {
-				cdto.setEmp_no(counseler_number);
-				cdto = new PickCounselInfo().updateCnslInfo_Counseler(cdto);
-				ck = true;
-			}
-			
-			int result = (ck) ? this.stdSrvc.addCounselReservation(cdto) : 0;
-			
+			sdto.setStdnt_no(this.STD_NUMBER);
+			int result = this.stdSrvc.updateStudentInfo(sdto);
 			if (result > 0) {
-				this.pw.print("<script> alert('성공적으로 예약이 완료되었습니다.');"
-						+ "location.href = './std_counsel_reservelist';</script>");
+				this.pw.print("<script> alert('성공적으로 정보가 변경되었습니다.');"
+						+ "location.href = './std_info';</script>");
 			}
 			else {
 				this.pw.print("<script> alert('오류가 발생하여 예약이 실패하였습니다.'); history.go(-1);</script>");
@@ -132,13 +79,120 @@ public class StudentController {
 		}
 	}
 	
-	@GetMapping("/student/std_counsel_chatting")
+	@GetMapping("/std_counsel_list")
+	public String std_counsel_loglist(Model m,
+			@RequestParam(value = "", required = false) String search_part,
+			@RequestParam(value = "", required = false) String search_word,
+			@RequestParam(value = "", required = false) Integer page) {
+		try {
+			int datacount = 20;
+			page = (page == null) ? 1 : page;
+			if (search_part == null || search_word == null || search_part.equals("") || search_word.equals("")) {
+				int listCount = this.stdSrvc.getCountData(this.STD_NUMBER);
+				
+				m.addAttribute("dataCount", listCount);
+				m.addAttribute("pageCount", Math.ceil((double) listCount / datacount));
+				m.addAttribute("counselList", this.stdSrvc.getAllListCounsel(this.STD_NUMBER, ((page - 1) * datacount), datacount));
+			}
+			else {
+				m.addAttribute("search_part", search_part);
+				m.addAttribute("search_word", search_word);
+				m.addAttribute("counselList", this.stdSrvc.getAllListCounselSearch(this.STD_NUMBER, ((page - 1) * datacount), datacount, search_part, search_word));
+			}
+			this.viewName = "student/std_counsel_list";
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.viewName = "page_blank";
+		}
+		return this.viewName;
+	}
+	
+	@GetMapping("/std_counsel_reservelist")
+	public String std_counsel_reservelist(Model m) {
+		try {
+			m.addAttribute("napproveList", this.stdSrvc.getAllListNonApproveCounsel(this.STD_NUMBER));
+			m.addAttribute("approveList", this.stdSrvc.getAllListApproveCounsel(this.STD_NUMBER));
+			m.addAttribute("counselingList", this.stdSrvc.getAllListCounseling(this.STD_NUMBER));
+			this.viewName = "student/std_counsel_reservelist";
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.viewName = "page_blank";
+		}
+		return this.viewName;
+	}
+	
+	@PostMapping("/cancel_counsel_reservation")
+	public void cancel_counsel_reservation(@RequestParam(value = "", required = false) String cancel_aply_sn, ServletResponse res) {
+		res.setContentType("text/html; charset=UTF-8");
+		try {
+			this.pw = res.getWriter();
+			
+			int result = this.stdSrvc.updateCounselCancel(cancel_aply_sn);
+			if (result > 0) {
+				this.pw.print("<script> alert('성공적으로 예약이 취소되었습니다.');"
+						+ "location.href = './std_counsel_reservelist';</script>");
+			}
+			else {
+				this.pw.print("<script> alert('오류가 발생하여 취소가 실패하였습니다.'); history.go(-1);</script>");
+			}
+		} catch (Exception e) {
+			this.pw.print("<script>location.href = '/blank';</script>");
+		} finally {
+			this.pw.close();
+		}
+	}
+	
+	@GetMapping("/std_counsel_reserve")
+	public String std_counsel_reserve(Model m) {
+		try {
+			m.addAttribute("counseler_list", this.stdSrvc.getAllCounseler());
+			m.addAttribute("professor_number", this.stdSrvc.getProfessorNumber(this.STD_NUMBER));
+			this.viewName = "student/std_counsel_reserve";
+		} catch (Exception e) {
+			this.viewName = "page_blank";
+		}
+		return this.viewName;
+	}
+	
+	// 상담 신청
+	@PostMapping("/insert_counsel_reservation")
+	public void insert_counsel_reservation(@ModelAttribute counsel_dto cdto, ServletResponse res,
+			@RequestParam(value = "", required = false) String professor_number,
+			@RequestParam(value = "", required = false) String counseler_number) {
+		res.setContentType("text/html; charset=UTF-8");
+		try {
+			cdto.setStdnt_no(this.STD_NUMBER);
+			this.pw = res.getWriter();
+			
+			int result = this.stdSrvc.addCounselReservation(cdto, professor_number, counseler_number);
+			if (result > 0) {
+				this.pw.print("<script> alert('성공적으로 예약이 완료되었습니다.');"
+						+ "location.href = './std_counsel_reservelist';</script>");
+			}
+			else {
+				this.pw.print("<script> alert('오류가 발생하여 예약이 실패하였습니다.'); history.go(-1);</script>");
+			}
+		} catch (Exception e) {
+			this.pw.print("<script>location.href = '/blank';</script>");
+		} finally {
+			this.pw.close();
+		}
+	}
+	
+	@GetMapping("/std_counsel_chatting")
 	public String std_counsel_chatting() {
 		return "student/std_counsel_chatting";
 	}
 	
-	@GetMapping("/student/std_counsel_selftestlist")
-	public String std_counsel_selftestlist() {
-		return "student/std_counsel_selftestlist";
+	@GetMapping("/std_counsel_selftestlist")
+	public String std_counsel_selftestlist(Model m) {
+		try {
+			m.addAttribute("inspList", this.inspSrvc.getAllListInsp());
+			this.viewName = "student/std_counsel_selftestlist";
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.viewName = "page_blank";
+		}
+		return this.viewName;
 	}
 }
