@@ -37,12 +37,14 @@
 		#{plc}, #{rsvt_dt}, now(), #{dscsn_mthd}, #{dscsn_knd})
 	</insert>
 	
-	<select id="getAllCounsel" resultType="com.cms.ca.counsel_dto">
-		select * from DSCSN_APLY where emp_no=#{emp_no} and bfr_aply_sn=null
-		order by aply_sn desc
+	<select id="getAllCounsel" parameterType="HashMap" resultType="com.cms.ca.view_counsel_dto">
+		select * from VIEW_DSCSN_APLY 
+		where emp_no=#{emp_no} and bfr_aply_sn is null and stts_cd="완료"
+		order by aply_sn desc 
+		limit #{offset}, #{size}
 	</select>
 	
 	<select id="getAllCounselCount" resultType="int">
-		select count(*) as cnt from DSCSN_APLY where emp_no=#{emp_no} and bfr_aply_sn=null
+		select count(*) as cnt from VIEW_DSCSN_APLY where emp_no=#{emp_no} and bfr_aply_sn is null and stts_cd="완료"
 	</select>
 </mapper>

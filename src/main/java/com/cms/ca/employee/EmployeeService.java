@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.cms.ca.counsel_dto;
 import com.cms.ca.employee_dto;
+import com.cms.ca.view_counsel_dto;
 
 public interface EmployeeService {
 
@@ -11,6 +12,6 @@ public interface EmployeeService {
 	int updateEmployeeInfo(employee_dto emp_dto);
 	String getStdntNameFromStdNo(String stdnt_no);
 	int addCounsel(counsel_dto csl_dto, String emp_no);
-	List<counsel_dto> getAllCounsel(String emp_no);
+	List<view_counsel_dto> getAllCounsel(String emp_no, search_dto search_dto);
 	int getAllCounselCount(String emp_no);
 }

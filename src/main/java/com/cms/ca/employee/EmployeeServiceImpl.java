@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.cms.ca.counsel_dto;
 import com.cms.ca.employee_dto;
+import com.cms.ca.view_counsel_dto;
 
 import jakarta.annotation.Resource;
 
@@ -29,12 +30,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 		if(emp_dto.getEmp_eml_addr()!=null && emp_dto.getEmp_telno()!=null) {	//교직원 개인 정보 수정
 			updateck=this.empyRepo.updatePersonalEmployeeInfo(emp_dto);
+			System.out.println("111");
 		}
 		else if(emp_dto.getEmp_zip()!=null && emp_dto.getEmp_addr()!=null && emp_dto.getEmp_daddr()!=null) {	//교직원 거주지 정보 수정
+			System.out.println(emp_dto.getEmp_zip());
+			System.out.println(emp_dto.getEmp_addr());
+			System.out.println(emp_dto.getEmp_daddr());
+			System.out.println(emp_dto.getEmp_no());
 			updateck=this.empyRepo.updateAddrEmployeeInfo(emp_dto);
+			System.out.println("222");
 		}
 		else if(emp_dto.getDlng_bank_nm()!=null&& emp_dto.getDlng_actno()!=null) {	//교직원 계좌 정보 수정
 			updateck=this.empyRepo.updateBankEmployeeInfo(emp_dto);
+			System.out.println("333");
 		}
 		return updateck;
 	}
@@ -69,15 +77,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public List<counsel_dto> getAllCounsel(String emp_no) {	//해당 교번의 
-		List<counsel_dto> counsel_list=this.empyRepo.getAllCounsel(emp_no);
+	public List<view_counsel_dto> getAllCounsel(String emp_no, search_dto search_dto) {	//해당 교번의 상담 불러오기
+		List<view_counsel_dto> counsel_list=this.empyRepo.getAllCounsel(emp_no, search_dto.getOffset(), search_dto.getSize());
 		return counsel_list;
 	}
 
 	@Override
 	public int getAllCounselCount(String emp_no) {
-		// TODO Auto-generated method stub
-		return 0;
+		int counsel_list_count=this.empyRepo.getAllCounselCount(emp_no);
+		return counsel_list_count;
 	}
 
 	

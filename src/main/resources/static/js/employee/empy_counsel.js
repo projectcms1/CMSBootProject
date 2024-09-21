@@ -61,3 +61,78 @@ function stdnt_no_check(std_no){
 	    });
 	}  	
 }
+
+function pagechange(){
+	if(window.location.href.indexOf("?")==-1){
+		url=window.location.href;
+	}
+	else{
+		url=window.location.href.substring(0, window.location.href.indexOf("?"));
+		var query=window.location.search.split("&");	//쿼리스트링 각각으로 나누기
+		var i=0, count=0;
+		while(i<query.length){
+			if(count==0){
+				if(query[i].includes("size")){
+					url+="?size="+size;
+				}
+				else{
+					url+="?"+query[i];
+				}
+			}
+			else{
+				if(query[i].includes("size")){
+					url+="&size="+size;
+				}
+				else{
+					url+="&"+query[i];
+				}			
+			}
+			count++;
+			i++;
+		}
+	}
+	console.log(window.location.href.indexOf("?"));
+	console.log(url);
+	location.href=url;
+} 
+
+function perpagesizechange(){
+	var perpage = document.getElementById("per-page");
+	var size = perpage.options[perpage.selectedIndex].value;
+	if(window.location.href.indexOf("?")==-1){
+		url=window.location.href;
+		url+="?size="+size;
+	}
+	else{
+		url=window.location.href.substring(0, window.location.href.indexOf("?"));
+		var query=window.location.search.split("&");	//쿼리스트링 각각으로 나누기
+		var i=0, count=0;
+		while(i<query.length){
+			if(count==0){
+				if(query[i].includes("size")){
+					url+="?size="+size;
+				}
+				else if(query[i].includes("page")){
+					count--;
+				}
+				else{
+					url+="?"+query[i];
+				}
+			}
+			else{
+				if(query[i].includes("size")){
+					url+="&size="+size;
+				}
+				else if(query[i].includes("page")){
+					count--;
+				}
+				else{
+					url+="&"+query[i];
+				}			
+			}
+			count++;
+			i++;
+		}
+	}
+	location.href=url;
+}  	
