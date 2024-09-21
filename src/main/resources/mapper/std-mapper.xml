@@ -18,8 +18,14 @@
 		select * from VIEW_DSCSN_APLY where MNG_AUTHRT = 'C' and (STTS_CD = '미승인' OR STTS_CD = '승인') order by APLY_SN desc
 	</select>
 
-	<select id="getPrfsTimes" resultType="com.cms.ca.counsel_dto" parameterType="String">
+	<select id="getPrfsrTimes" resultType="com.cms.ca.counsel_dto" parameterType="String">
 		select * from DSCSN_APLY where EMP_NO = #{emp_no} and (STTS_CD = '미승인' OR STTS_CD = '승인') order by APLY_SN desc
+	</select>
+
+	<select id="getFreeCounseler" resultType="String">
+		select MAX(T1.EMP_NO) from EMP_INFO T1 where 1=1 and MNG_AUTHRT = 'C'
+		and EMP_NO NOT IN (select S1.EMP_NO from DSCSN_APLY S1 where RSVT_DT = '20240918' and HR_SE = '2')
+	
 	</select>
 
 	<select id="getListCounsel" resultType="com.cms.ca.view_counsel_dto" parameterType="Map">
@@ -43,6 +49,10 @@
 		<if test='part=="0" or part=="1"'>
 			limit ${pageno}, ${datano}
 		</if>
+	</select>
+
+	<select id="getListCounselInfo" resultType="com.cms.ca.view_counsel_dto" parameterType="String">
+		select * from VIEW_DSCSN_APLY where APLY_SN = #{aply_sn} or BFR_APLY_SN = #{aply_sn} order by APLY_SN asc
 	</select>
 
 	<select id="getCountData" resultType="int" parameterType="String">

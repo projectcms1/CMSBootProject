@@ -1,0 +1,68 @@
+<!-- ======= Counsel Detail Modal ======= -->
+<div class="modal fade" id="modalSelfTesting" tabindex="-1" th:fragment="std_selftest_modal" style="height: 1000px;">
+	<div class="modal-dialog modal-dialog-scrollable modal-xl">
+		
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">상담정보 상세보기</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			
+			<div class="modal-body">
+			  	<div class="card-body">
+					<!-- 문항 헤더 -->
+					<div class="header_slf">
+						<span class="question-number" id="question-number">01</span>
+						<span class="total-questions">| 총 3 문항</span>
+					</div>
+
+					<!-- 질문 영역 -->
+					<div id="question-container">
+						<p>지난 일주일간 나는?</p>
+						<h2 id="question-text">평소에는 아무렇지도 않던 일들이 괴롭고 귀찮게 느껴졌다.</h2>
+					</div>
+
+					<!-- 응답 폼 -->
+					<form id="survey-form">
+						<div class="options">
+							<label class="option">
+								<input type="radio" name="response" value="극히 드물었다">
+								<span>극히 드물었다<br><small>(1주일에 1일 이하)</small></span>
+							</label>
+							<label class="option">
+								<input type="radio" name="response" value="가끔 있었다">
+								<span>가끔 있었다<br><small>(1주일에 1~2일간)</small></span>
+							</label>
+							<label class="option">
+								<input type="radio" name="response" value="종종 있었다">
+								<span>종종 있었다<br><small>(1주일에 3~4일간)</small></span>
+							</label>
+							<label class="option">
+								<input type="radio" name="response" value="대부분 그랬다">
+								<span>대부분 그랬다<br><small>(1주일에 5일 이상)</small></span>
+							</label>
+						</div>
+
+						<!-- 이전 및 다음 버튼 -->
+						<div class="slftest-navigation-buttons">
+							<button type="button" class="nav-btn prev-btn" id="prev-btn">이전</button>
+							<button type="button" class="nav-btn next-btn" id="next-btn">다음</button>
+						</div>
+					</form>
+
+					<!-- 주의사항 -->
+					<div class="note">
+						<p>* 자가검진의 결과는 의학적 진단을 대신하는 것이 아니므로 참고자료로만 활용하시기 바랍니다.</p>
+						<p>* 본 검사는 예시입니다.</p>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Counsel Detail Modal-->
