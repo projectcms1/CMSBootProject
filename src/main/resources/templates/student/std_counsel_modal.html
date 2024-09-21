@@ -1,5 +1,5 @@
 <!-- ======= Counsel Detail Modal ======= -->
-<div class="modal fade" id="modalDialogScrollable" tabindex="-1" th:fragment="std_counsel_modal" style="height: 1000px;">
+<div class="modal fade" id="modalCounselDetailInfo" tabindex="-1" th:fragment="std_counsel_modal" style="height: 1000px;">
 	<div class="modal-dialog modal-dialog-scrollable modal-xl">
 		
 		<div class="modal-content">
@@ -15,116 +15,20 @@
 						<h5 class="card-title">상담정보</h5>
 						
 						<div class="row mb-3" align="center" >
-							<label for="inputText" class="col-sm-2 col-form-label">학생이름</label>
+							<label for="inputText" class="col-sm-2 col-form-label">상담자이름</label>
 						  	<div class="col-sm-3">
-						      	<input type="text" class="form-control" value="이름" disabled>
+						      	<input type="text" class="form-control" id="counseler_name" disabled>
 						    </div>
-						    <label for="inputEmail" class="col-sm-2 col-form-label">학생학번</label>
+						    <label for="inputEmail" class="col-sm-2 col-form-label">상담자구분</label>
 						    <div class="col-sm-3">
-						    	<input type="email" class="form-control" value="학번" disabled>
+						    	<input type="email" class="form-control" id="counseler_se" disabled>
 						    </div>
 						</div>
 		
 		              	<div class="accordion" id="counsel_accordion">
-			
-							<!-- 회차 Accordion -->
-		                	<div class="accordion-item">
-		                  		<h2 class="accordion-header" id="1st_heading">
-		                    		<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#1st_collapse" aria-expanded="true" aria-controls="1st_collapse">
-		                      		1회차
-		                    		</button>
-		                  		</h2>
-		                  		<div id="1st_collapse" class="accordion-collapse collapse show" aria-labelledby="1st_heading" data-bs-parent="#counsel_accordion">
-		                    		<div class="accordion-body">
-								    	<div class="row mb-3" align="center" >
-							               	<label for="inputDate" class="col-sm-2 col-form-label">상담일자</label>
-							              	<div class="col-sm-3">
-							                	<input type="date" class="form-control" disabled>
-							               	</div>
-							               	<label for="inputTime" class="col-sm-2 col-form-label">상담시간</label>
-							               	<div class="col-sm-3">
-							                	<input type="time" class="form-control" disabled>
-							               	</div>
-							           	</div>
-							            <div class="row mb-3" align="center" >
-							               	<label class="col-sm-2 col-form-label">상담종류</label>
-							              	<div class="col-sm-3">
-						                  		<input type="text" class="form-control" value="학업상담" disabled>
-							               	</div>
-							               	<label class="col-sm-2 col-form-label">상담방식</label>
-							               	<div class="col-sm-3">
-						                  		<input type="text" class="form-control" value="채팅상담" disabled>
-							              	</div>
-							          	</div>
-							            <div class="row mb-3" align="center" >
-							               	<label class="col-sm-2 col-form-label">상담장소</label>
-							              	 <div class="col-sm-3">
-						                  		<input type="text" class="form-control" value="-" disabled>
-							               	</div>
-							               	<label class="col-sm-2 col-form-label"></label>
-							               	<div class="col-sm-3"></div>
-							            </div>
-									
-										<div class="row mb-3" align="center">
-                  							<label for="inputPassword" class="col-sm-2 col-form-label">상담결과</label>
-                  							<div class="col-sm-10">
-                    							<textarea class="form-control" style="height: 200px;" placeholder="상담 결과는 작성자만 볼 수 있습니다." disabled></textarea>
-                  							</div>
-										</div>
-									</div>
-		                  		</div>
-		                	</div>
-							<!-- End 회차 Accordion -->
 							
-							<!-- 회차 Accordion -->
-		                	<div class="accordion-item">
-		                  		<h2 class="accordion-header" id="2st_heading">
-		                    		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#2st_collapse" aria-expanded="false" aria-controls="2st_collapse">
-		                      		2회차
-		                    		</button>
-		                  		</h2>
-		                  		<div id="2st_collapse" class="accordion-collapse collapse" aria-labelledby="2st_heading" data-bs-parent="#counsel_accordion">
-		                    		<div class="accordion-body">
-								    	<div class="row mb-3" align="center" >
-							               	<label for="inputDate" class="col-sm-2 col-form-label">상담일자</label>
-							              	<div class="col-sm-3">
-							                	<input type="date" class="form-control" disabled>
-							               	</div>
-							               	<label for="inputTime" class="col-sm-2 col-form-label">상담시간</label>
-							               	<div class="col-sm-3">
-							                	<input type="time" class="form-control" disabled>
-							               	</div>
-							           	</div>
-							            <div class="row mb-3" align="center" >
-							               	<label class="col-sm-2 col-form-label">상담종류</label>
-							              	<div class="col-sm-3">
-						                  		<input type="text" class="form-control" value="학업상담" disabled>
-							               	</div>
-							               	<label class="col-sm-2 col-form-label">상담방식</label>
-							               	<div class="col-sm-3">
-						                  		<input type="text" class="form-control" value="화상상담" disabled>
-							              	</div>
-							          	</div>
-							            <div class="row mb-3" align="center" >
-							               	<label class="col-sm-2 col-form-label">상담장소</label>
-							              	 <div class="col-sm-3">
-						                  		<input type="text" class="form-control" value="-" disabled>
-							               	</div>
-							               	<label class="col-sm-2 col-form-label"></label>
-							               	<div class="col-sm-3"></div>
-							            </div>
-									
-										<div class="row mb-3" align="center">
-                  							<label for="inputPassword" class="col-sm-2 col-form-label">상담결과</label>
-                  							<div class="col-sm-10">
-                    							<textarea class="form-control" style="height: 200px;" placeholder="상담 결과는 작성자만 볼 수 있습니다." disabled></textarea>
-                  							</div>
-										</div>
-									</div>
-		                  		</div>
-		                	</div>
-							<!-- End 회차 Accordion -->
-						
+							<!-- 회차 Accordion : JavaScript -->
+							
 						</div>
 					</div>
 				

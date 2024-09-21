@@ -1,9 +1,7 @@
 package com.cms.ca.student;
 
 import java.io.PrintWriter;
-import java.util.List;
 
-import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cms.ca.counsel_dto;
 import com.cms.ca.student_dto;
-import com.cms.ca.view_counsel_dto;
 
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletResponse;
@@ -173,7 +170,7 @@ public class StudentController {
 				this.pw.print("<script> alert('오류가 발생하여 예약이 실패하였습니다.'); history.go(-1);</script>");
 			}
 		} catch (Exception e) {
-			this.pw.print("<script>location.href = '/blank';</script>");
+			this.pw.print("<script> alert('해당 시간에 예약 가능한 상담사가 없습니다.'); history.go(-1);</script>");
 		} finally {
 			this.pw.close();
 		}

@@ -130,8 +130,8 @@
 					                    <td>[[${ counselData.getDscsn_knd() }]]상담</td>
 					                    <td>
 					                    	[[${ counselData.getRoundCount() + 1 }]]
-											<button type="button" class="btn btn-outline-info btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable" style="float: right; margin-left: 5px;">상세보기</button>
-					                    </td>
+											<button type="button" th:onclick="openDetailModal([[${ counselData.getAply_sn() }]])" class="btn btn-outline-info btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#modalCounselDetailInfo" style="float: right; margin-left: 5px;">상세보기</button>
+					                    </td><!-- data-bs-target="#modalDialogScrollable" -->
 					                  </tr>
 					                </tbody>
 					                
@@ -177,6 +177,8 @@
   <!-- End #main -->
 
   <div th:replace="~{/student/std_footer :: std_footer}"></div>	<!-- 학생 footer -->
+  
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -190,7 +192,7 @@
 
   <!-- Template Main JS File -->
   <script src="/assets/js/main.js"></script>
-  <script src="/js/student/counsel_list.js?v=1"></script>
+  <script src="/js/student/counsel_list.js?v=5"></script>
 </body>
 <script>
 window.onload=function(){

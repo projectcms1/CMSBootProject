@@ -28,6 +28,7 @@
 
   <!-- Template Main CSS File -->
   <link href="/assets/css/style.css" rel="stylesheet">
+  <link href="/assets/css/selftest.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: NiceAdmin
@@ -65,6 +66,9 @@
             <div class="card">
                 <div class="card-body">
                   	<h5 class="card-title">자가심리검사 리스트</h5>
+                  	
+                  	<div th:replace="~{/student/std_selftest_modal :: std_selftest_modal}"></div>	<!-- SelfTest Modal -->
+                  	
 		          	<!-- List group with custom content -->
 		            <ol class="list-group list-group-numbered">
 		                <li class="list-group-item d-flex justify-content-between align-items-start" th:each="inspData : ${ inspList }">
@@ -72,7 +76,7 @@
 		                    	<div class="fw-bold">[[${ inspData.getPsyc_insp_flnm() }]]</div>
 		                    	[[${ inspData.getInsp_expln() }]]
 		                  	</div>
-		                  	<button class="btn btn-primary rounded-pill" style="margin-left: 5px; align-self: center; min-width: 90px;">검사하기</button>
+		                  	<button class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#modalSelfTesting" style="margin-left: 5px; align-self: center; min-width: 90px;">검사하기</button>
 		                  	<button class="btn btn-success rounded-pill" style="margin-left: 5px; align-self: center; min-width: 90px;">결과보기</button>
 		                </li>
 		           	</ol>
@@ -102,6 +106,7 @@
 
   <!-- Template Main JS File -->
   <script src="/assets/js/main.js"></script>
+  <script src="/js/student/selftest.js"></script>
 
 </body>
 

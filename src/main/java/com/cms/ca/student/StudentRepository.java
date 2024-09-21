@@ -23,9 +23,13 @@ public interface StudentRepository {
 	
 	List<view_counsel_dto> getAllCnslrTimes();
 	
-	List<counsel_dto> getPrfsTimes(String emp_no);
+	List<counsel_dto> getPrfsrTimes(String emp_no);
+	
+	String getFreeCounseler();
 	
 	List<view_counsel_dto> getListCounsel(Map<String, String> keymap);
+	
+	List<view_counsel_dto> getListCounselInfo(String aply_sn);
 	
 	int getCountData(String stdnt_no);
 	

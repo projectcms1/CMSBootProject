@@ -77,7 +77,7 @@ public class StudentServiceImpl implements StudentService {
 			dto.setPlc((dto.getDscsn_mthd().equals("대면")) ? "교수 연구실" : null);
 		}
 		else if (counseler_number != null && professor_number == null) {
-			dto.setEmp_no(counseler_number);
+			dto.setEmp_no((counseler_number.equals("all")) ? this.stdRepo.getFreeCounseler() : counseler_number);
 			dto.setStts_cd("승인");
 			dto.setPlc((dto.getDscsn_mthd().equals("대면")) ? "상담 센터" : null);
 		}
@@ -105,8 +105,8 @@ public class StudentServiceImpl implements StudentService {
 			ja_c.put(jo_dump);
 		}
 		jo.put("cnslr", ja_c);
+		List<counsel_dto> ptt_list = this.stdRepo.getPrfsrTimes(empNo);
 		JSONArray ja_p = new JSONArray();
-		List<counsel_dto> ptt_list = this.stdRepo.getPrfsTimes(empNo);
 		for (counsel_dto cdto : ptt_list) {
 			JSONObject jo_dump = new JSONObject();
 			jo_dump.put("aply_sn", cdto.getAply_sn());
@@ -153,6 +153,11 @@ public class StudentServiceImpl implements StudentService {
 			vcdto.setRoundCount(this.stdRepo.getCountRound(vcdto.getAply_sn()));
 		}
 		return result;
+	}
+
+	@Override
+	public List<view_counsel_dto> getListModalData(String aply_sn) {
+		return this.stdRepo.getListCounselInfo(aply_sn);
 	}
 
 	@Override
