@@ -31,7 +31,6 @@ public class AdminController {
 	@Autowired
 	private counsel_service counsel_service;
 	
-	PrintWriter = null;
 
 	@GetMapping("/adminlogin")
 	public String admin_login() {
