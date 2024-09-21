@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cms.ca.login_dto;
 import com.cms.ca.student_dto;
 
 
@@ -39,6 +40,12 @@ public class stuser_service_impl implements stuser_service{
 	public int student_detail_update(student_dto stdto) {
 		int stuser_update_result = this.stuser_repo.student_detail_update(stdto);
 		return stuser_update_result;
+	}
+
+	@Override
+	public int add_stuser_detail(student_dto stdto, String entrance_year) {
+		int stuser_insert_detail= this.stuser_repo.add_stuser_detail(stdto);
+		return stuser_insert_detail;
 	}
 	
 	

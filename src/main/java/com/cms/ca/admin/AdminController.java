@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cms.ca.counsel_dto;
 import com.cms.ca.employee_dto;
+import com.cms.ca.login_dto;
 import com.cms.ca.student_dto;
 
 import jakarta.servlet.ServletResponse;
@@ -39,7 +40,7 @@ public class AdminController {
 		return "admin/login";
 	}
 	
-	
+	//학생 사용자 리스트 출력 및 검색
 	@GetMapping("/stlistmod")
 	public String stlist_mod(Model m, @RequestParam(value = "", required = false) String search_part, @RequestParam(value = "", required = false) String search_word) {
 		
@@ -56,7 +57,7 @@ public class AdminController {
 		return "admin/stlistmod";
 	}
 	
-	
+	//학생 사용자 세부정보 수정
 	@PostMapping("/stuser_detail_update")
 	public void stuser_detail_update(@ModelAttribute student_dto stdto, ServletResponse sr) {
 		sr.setContentType("text/html; charset=utf-8");
@@ -80,7 +81,40 @@ public class AdminController {
 		finally {
 			this.pw.close();
 		}
-		
+	}
+	
+	
+	//학생 사용자 추가
+	@PostMapping("/stuser_add")
+	public void stuser_add(@ModelAttribute student_dto stdto, @RequestParam(value = "", required = false) String entrance_year , ServletResponse sr) {
+		sr.setContentType("text/html; charset=utf-8");
+		try {
+			this.pw = sr.getWriter();
+			int detail_result = this.stuser_service.add_stuser_detail(stdto, entrance_year);
+			
+			if(detail_result > 0) {
+				this.pw.print("<script>"
+						+ "alert('학생 계정이 추가되었습니다.');"
+						+ "location.href='./stlistmod';"
+						+ "</script>");
+			}
+			else{
+				this.pw.print("<script>"
+						+ "alert('오류로 인해 학생 계정이 추가되지 않았습니다. 확인해주세요!');"
+						+ "history.go(-1);"
+						+ "</script>");
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			this.pw.print("<script>"
+					+ "alert('오류로 인해 학생 계정이 추가되지 않았습니다. 확인해주세요!');"
+					+ "history.go(-1);"
+					+ "</script>");
+		}
+		finally {
+			this.pw.close();
+		}
 	}
 	
 	

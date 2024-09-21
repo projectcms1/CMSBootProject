@@ -62,12 +62,22 @@
 													<input type="text" class="form-control" id="UNIV_PRD" name="univ_prd">
 												</div>
 											</div>
+											<div class="row mb-1">
+												<label class="col-sm-4 col-form-label right-tag">계정상태</label>
+												<div class="col-sm-5 right-tag">
+													<select class="form-control" id="ACNT_LCK_YN" name="acnt_lck_yn">
+														<option value="Y">Y</option>
+														<option value="N">N</option>
+													</select>
+												</div>
+											</div>
 										</div>
 										<div class="col-md-4 col-lg-6">
 											<div class="row mb-1">
 												<label class="col-sm-4 col-form-label right-tag">대학(원)</label>
 												<div class="col-sm-6 right-tag">
 													<select class="form-control" id="OGDP_UNIV" name="ogdp_univ" onchange="makeSelector(this.value)">
+														<option value="">대학 선택</option>
 														<option value="공과대학">공과대학</option>
 														<option value="사회과학대학">사회과학대학</option>
 														<option value="인문대학">인문대학</option>
@@ -105,10 +115,16 @@
 													<input type="text" class="form-control" id="USER_EML_ADDR" name="user_eml_addr">
 												</div>
 											</div>
-											<div class="row mb-3">
+											<div class="row mb-1">
 												<label class="col-sm-4 col-form-label right-tag">전화번호</label>
 												<div class="col-sm-6 right-tag">
 													<input type="text" class="form-control" id="USER_TELNO" name="user_telno">
+												</div>
+											</div>
+											<div class="row mb-1">
+												<label class="col-sm-4 col-form-label right-tag">등록일시</label>
+												<div class="col-sm-6 right-tag">
+													<input type="text" class="form-control" id="REG_DT" name="reg_dt">
 												</div>
 											</div>
 										</div>

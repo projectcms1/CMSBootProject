@@ -23,15 +23,17 @@ MJR = #{mjr}, STDNT_STTS_SE = #{stdnt_stts_se}
 </update>
 
 
-<!-- 학생 사용자 추가 -->
-<insert id="add_student_user" parameterType="com.cms.ca.student_dto">
+<!-- 학생 사용자 추가 시작 -->
+<insert id="add_stuser_login" parameterType="com.cms.ca.login_dto" >
 insert into LGN_ACNT_INFO (USER_NO, LGN_ID, PSWD,LAST_LGN_DT, ACNT_LCK_YN, REG_DT)
-values ('0', #{lgn_id}, #{pswd}, #{last_lgn_dt}, #{acnt_lck_yn}, now())
-<if test='result=="1"'>
+values ('0', #{lgn_id}, #{pswd}, now(), 'N', now())
+</insert>
+
+<insert id="add_stuser_detail" parameterType="com.cms.ca.student_dto">
 insert into STDNT_INFO
 (stdnt_no, stdnt_flnm, user_no, user_eml_addr, user_telno, user_zip, user_addr, user_daddr, user_photo, brdt, dlng_bank_nm, dlng_actno, dpstr_nm, univ_prd, ogdp_univ, ogdp_scsbjt, mjr, stdnt_stts_se)
 values ('0', #{stdnt_no}, #{stdnt_flnm}, #{user_no}, #{user_eml_addr}, #{user_telno}, #{user_zip}, #{user_addr}, #{user_daddr}, #{user_photo}, #{brdt}, #{dlng_bank_nm}, #{dlng_actno}, #{dpstr_nm}, #{univ_prd}
 #{ogdp_univ}, #{ogdp_scsbjt}, #{mjr}, #{stdnt_stts_se})
-</if>
 </insert>
+<!-- 학생 사용자 추가 끝 -->
 </mapper>
