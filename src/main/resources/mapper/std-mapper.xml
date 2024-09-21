@@ -23,8 +23,8 @@
 	</select>
 
 	<select id="getFreeCounseler" resultType="String">
-		select MAX(T1.EMP_NO) from EMP_INFO T1 where 1=1 and MNG_AUTHRT = 'C'
-		and EMP_NO NOT IN (select S1.EMP_NO from DSCSN_APLY S1 where RSVT_DT = '20240918' and HR_SE = '2')
+		select MAX(EMP_NO) from EMP_INFO where 1=1 and MNG_AUTHRT = 'C'
+		and EMP_NO NOT IN (select EMP_NO from DSCSN_APLY where RSVT_DT = '20240918' and HR_SE = '2')
 	
 	</select>
 

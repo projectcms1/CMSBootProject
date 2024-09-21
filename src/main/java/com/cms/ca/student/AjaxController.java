@@ -21,6 +21,9 @@ public class AjaxController {
 	@Resource(name = "stdnt_service")
 	private StudentService stdSrvc;
 	
+	@Resource(name = "insp_service")
+	private SlfPsycInspService inspSrvc;
+	
 	// 상담사+지도교수 시간표 SELECT - AJAX
 	@GetMapping("/student/api/professor_time")
 	public String professor_time() {
@@ -46,4 +49,16 @@ public class AjaxController {
 		return callback;
 	}
 	
+	// 자가진단 심리검사 검사하기 버튼
+	@PostMapping("/student/selftest_detail_info/{insp_no}")
+	public String selftest_detail_info(@PathVariable(name = "insp_no") String insp_no) {
+		String callback = "";
+		try {
+			callback = this.inspSrvc.getAllDataOfOneInsp(insp_no);
+		} catch (Exception e) {
+			System.out.println(e);
+			callback = "error";
+		}
+		return callback;
+	}
 }

@@ -2,8 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cms.ca.student.SlfPsycInspRepository">
 
-	<select id="getAllListInsp" resultType="com.cms.ca.slfPsycInsp_dto">
+	<select id="getAllListInsp" resultType="com.cms.ca.selfTestInfo_dto">
 		select * from SLF_PSYC_INSP_INFO where USE_YN = 'Y' order by INSP_NO desc
+	</select>
+
+	<select id="getAllListQitem" resultType="com.cms.ca.selfTestQitem_dto" parameterType="String">
+		select * from SLF_PSYC_INSP_QITEM_INFO where INSP_NO = #{insp_no} and USE_YN = 'Y' order by QITEM_NO asc
+	</select>
+
+	<select id="getAllListAnswer" resultType="com.cms.ca.selfTestAnswer_dto" parameterType="String">
+		select * from SLF_PSYC_INSP_ANS_INFO where QITEM_NO IN (select QITEM_NO from SLF_PSYC_INSP_QITEM_INFO where INSP_NO = #{insp_no}) order by ANS_NO asc
+	</select>
+
+	<select id="getAllListResult" resultType="com.cms.ca.selfTestResult_dto" parameterType="String">
+		select * from INSP_RSLT_EXPLN where INSP_NO = #{insp_no}
 	</select>
 
 </mapper>

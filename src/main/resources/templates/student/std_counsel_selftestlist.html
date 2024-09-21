@@ -76,7 +76,7 @@
 		                    	<div class="fw-bold">[[${ inspData.getPsyc_insp_flnm() }]]</div>
 		                    	[[${ inspData.getInsp_expln() }]]
 		                  	</div>
-		                  	<button class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#modalSelfTesting" style="margin-left: 5px; align-self: center; min-width: 90px;">검사하기</button>
+		                  	<button class="btn btn-primary rounded-pill" th:onclick="openTestingModal([[${ inspData.getInsp_no() }]])" data-bs-toggle="modal" data-bs-target="#modalSelfTesting" style="margin-left: 5px; align-self: center; min-width: 90px;">검사하기</button>
 		                  	<button class="btn btn-success rounded-pill" style="margin-left: 5px; align-self: center; min-width: 90px;">결과보기</button>
 		                </li>
 		           	</ol>

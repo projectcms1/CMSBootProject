@@ -5,10 +5,49 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.cms.ca.selfTestAnswer_dto;
+import com.cms.ca.selfTestQitem_dto;
+import com.cms.ca.selfTestResult_dto;
 import com.cms.ca.view_counsel_dto;
 
 public class JSONDataMaker {
 
+	public String makeSelfTestData(List<selfTestQitem_dto> qitemList, List<selfTestAnswer_dto> answerList, List<selfTestResult_dto> resultList) {
+		JSONObject mainDataJSON = new JSONObject();
+		
+		JSONArray ja_qitem = new JSONArray();
+		for (selfTestQitem_dto qdto : qitemList) {
+			JSONObject jo_dump = new JSONObject();
+			jo_dump.put("qitem_no", qdto.getQitem_no());
+			jo_dump.put("qitem_flnm", qdto.getQitem_flnm());
+			JSONArray ja_answer = new JSONArray();
+			for (selfTestAnswer_dto adto : answerList) {
+				if (adto.getQitem_no().equals(qdto.getQitem_no())) {
+					JSONObject answer_dump = new JSONObject();
+					answer_dump.put("ans_no", adto.getAns_no());
+					answer_dump.put("ans_flnm", adto.getAns_flnm());
+					answer_dump.put("scr", adto.getScr());
+					ja_answer.put(answer_dump);
+				}
+			}
+			jo_dump.put("qitem_answer", ja_answer);
+			ja_qitem.put(jo_dump);
+		}
+		mainDataJSON.put("QitemData", ja_qitem);
+		
+		JSONArray ja_result = new JSONArray();
+		for (selfTestResult_dto rdto : resultList) {
+			JSONObject jo_dump = new JSONObject();
+			jo_dump.put("rslt_expln_no", rdto.getRslt_expln_no());
+			jo_dump.put("expln_cn", rdto.getExpln_cn());
+			jo_dump.put("se_scr", rdto.getSe_scr());
+			ja_result.put(jo_dump);
+		}
+		mainDataJSON.put("ResultData", ja_result);
+		
+		return mainDataJSON.toString();
+	}
+	
 	public String makeCounselDetail(List<view_counsel_dto> data) {
 		JSONArray ja = new JSONArray(); // 리스트
 		for (view_counsel_dto vcdto : data) {
