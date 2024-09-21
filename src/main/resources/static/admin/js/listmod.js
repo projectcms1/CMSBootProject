@@ -1,3 +1,17 @@
+//학생 사용자 상세보기 정보 중 대학교 내 대학분류, 학과, 전공 데이터
+const USER_UNIV = ['공과대학', '사회과학대학', '인문대학', '자연과학대학'];
+const USER_SCSBJT = ['기계공학과', '정치학과', '철학과', '생물학과'];
+const USER_MJR = ['기계공학', '정치학', '철학', '생물학'];
+
+function makeSelector(selectedUniv) {
+	USER_UNIV.forEach(function(data, index) {
+		if (selectedUniv == data) {
+			document.getElementById("OGDP_SCSBJT").value = USER_SCSBJT[index];
+			document.getElementById("MJR").value = USER_MJR[index];
+		}
+	});
+}
+
 //교직원 사용자 (prolistmod.html) 검색기능 분류 스크립트 
 function toggleFields() {
 	var categorySelect = document.getElementById("categorySelect").value;
@@ -120,13 +134,13 @@ function list_search() {
         element_layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width)/2 - borderWidth) + 'px';
         element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
  }
+//===============다음 주소 끝=============
 
 
-//학생 사용자 상세정보 수정
+//학생 사용자 상세정보 수정 기능
 function update_stuserdata(){
 	stuser_detail_frm.submit();
 }
-
 
 
 //학생사용자 상세보기 모달에 값 넣기

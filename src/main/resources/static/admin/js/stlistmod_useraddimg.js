@@ -8,7 +8,7 @@ function setstuser_img(event) {
 	reader.onload = function(event) {
 		console.log("이미지 로드 완료."); // 로그 확인
 
-		var container = document.querySelector("div#stuser_img_container");
+		var container = document.querySelector("div#USER_PHOTO");
 		container.innerHTML = ""; // div 내부 비움
 
 		var img = document.createElement("img");

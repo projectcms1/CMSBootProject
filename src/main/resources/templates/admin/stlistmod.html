@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko">
 
+<!-- 240921자 앞으로 추가해야하는 기능
+1. cdn 이미지 파일 첨부 + 비밀번호 암호화
+2. 사용자 추가시 로그인 계정정보 뷰파트 추가하기(최종로그인일시 - 보이게는 하지만 바꿀수는 없음), 계정잠금여부, 등록일시 (비번 저장시 암호화하기) -->
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,7 +29,6 @@
 
 <!-- 사용사 추가 모달 중 이미지 로드시 미리보기 기능 -->
 <script src="/admin/js/stlistmod_useraddimg.js"></script>
-<!-- 다음 주소 검색 API -->
 <body>
 
 	<!--header시작-->
@@ -59,6 +62,7 @@
 					</div>
 				</div>
 
+				<!-- 검색기능 -->
 				<div class="prod_1i mt-3 row">
 					<div class="col-lg-6 col-md-8 col-sm-12">
 						<div class="prod_1il d-flex align-items-center w-100">
@@ -205,14 +209,11 @@
 	</div>
 
 	<!-- 학생사용자 추가 모달 시작 -->
-	<div
-		th:insert="~{/admin/stlistmod_addusermodal :: student_addusermodal}"></div>
+	<div th:insert="~{/admin/stlistmod_addusermodal :: student_addusermodal}"></div>
 	<!-- 학생사용자 추가 모달 끝 -->
 
-
 	<!-- 학생별 상세정보 모달 시작 -->
-	<div
-		th:insert="~{/admin/stlistmod_userdetailmodal :: student_userdetailmodal}"></div>
+	<div th:insert="~{/admin/stlistmod_userdetailmodal :: student_userdetailmodal}"></div>
 	<!-- 학생별 상세정보 모달 끝 -->
 
 	<!--footer시작 -->
@@ -228,5 +229,6 @@
 
 </body>
 
+<!-- 부트스트랩 다른 버전하고 충돌나서 네비 dropdown 작동안되서 막아둠 -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
 </html>

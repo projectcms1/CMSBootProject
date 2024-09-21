@@ -19,10 +19,11 @@
 								<div class="card-body">
 									<h5 class="card-title">개인정보</h5>
 									<div class="row mb-1">
-										<!-- row 1 -->
 										<div class="col-md-2 col-lg-2">
-											<img src="/assets/img/3.jpeg" alt="Profile" class="rounded-4"
-												style="margin-left: 25%;" width="80%" height="225px">
+											<!-- 학생 사용자 이미지-->
+											<div id="USER_PHOTO" name="USER_PHOTO"></div>
+											<br> <input type="file" accept="image/*"
+												onchange="setstuser_img(event);">
 										</div>
 										<div class="col-md-4 col-lg-4">
 											<div class="row mb-1">
@@ -52,7 +53,7 @@
 											<div class="row mb-1">
 												<label class="col-sm-4 col-form-label right-tag">학년</label>
 												<div class="col-sm-5 right-tag">
-													<input type="text" class="form-control" id="STD_GRADE">
+													<input type="text" class="form-control" id="STD_GRADE" disabled>
 												</div>
 											</div>
 											<div class="row mb-1">
@@ -66,25 +67,36 @@
 											<div class="row mb-1">
 												<label class="col-sm-4 col-form-label right-tag">대학(원)</label>
 												<div class="col-sm-6 right-tag">
-													<input type="text" class="form-control" id="OGDP_UNIV" name="ogdp_univ">
+													<select class="form-control" id="OGDP_UNIV" name="ogdp_univ" onchange="makeSelector(this.value)">
+														<option value="공과대학">공과대학</option>
+														<option value="사회과학대학">사회과학대학</option>
+														<option value="인문대학">인문대학</option>
+														<option value="자연과학대학">자연과학대학</option>
+													</select>
 												</div>
 											</div>
 											<div class="row mb-1">
 												<label class="col-sm-4 col-form-label right-tag">학과(부)</label>
 												<div class="col-sm-6 right-tag">
-													<input type="text" class="form-control" id="OGDP_SCSBJT" name="ogdp_scsbjt">
+													<input type="text" class="form-control" id="OGDP_SCSBJT" name="ogdp_scsbjt" readonly>
 												</div>
 											</div>
 											<div class="row mb-1">
 												<label class="col-sm-4 col-form-label right-tag">전공</label>
 												<div class="col-sm-6 right-tag">
-													<input type="text" class="form-control" id="MJR" name="mjr">
+													<input type="text" class="form-control" id="MJR" name="mjr" readonly>
 												</div>
 											</div>
 											<div class="row mb-1">
 												<label class="col-sm-4 col-form-label right-tag">학적구분</label>
 												<div class="col-sm-6 right-tag">
-													<input type="text" class="form-control" id="STDNT_STTS_SE" name="stdnt_stts_se">
+													<select class="form-control" id="STDNT_STTS_SE" name="stdnt_stts_se">
+														<option value="재학">재학</option>
+														<option value="휴학">휴학</option>
+														<option value="졸업">졸업</option>
+														<option value="자퇴">자퇴</option>
+														<option value="재적">재적</option>
+													</select>
 												</div>
 											</div>
 											<div class="row mb-1">

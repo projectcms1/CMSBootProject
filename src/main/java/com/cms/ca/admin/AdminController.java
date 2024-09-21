@@ -9,12 +9,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cms.ca.counsel_dto;
 import com.cms.ca.employee_dto;
 import com.cms.ca.student_dto;
+
+import jakarta.servlet.ServletResponse;
 
 @Controller
 public class AdminController {
@@ -31,7 +32,8 @@ public class AdminController {
 	@Autowired
 	private counsel_service counsel_service;
 	
-
+	PrintWriter pw = null;
+	
 	@GetMapping("/adminlogin")
 	public String admin_login() {
 		return "admin/login";
@@ -56,16 +58,29 @@ public class AdminController {
 	
 	
 	@PostMapping("/stuser_detail_update")
-	public void stuser_detail_update(@ModelAttribute student_dto stdto) {
-		int result = this.stuser_service.student_detail_update(stdto);
+	public void stuser_detail_update(@ModelAttribute student_dto stdto, ServletResponse sr) {
+		sr.setContentType("text/html; charset=utf-8");
 		try {
+			this.pw = sr.getWriter();
+			int result = this.stuser_service.student_detail_update(stdto);
 			if(result > 0 ) {
-				
+				this.pw.print("<script>"
+						+ "alert('학생정보가 수정되었습니다.');"
+						+ "location.href='./stlistmod';"
+						+ "</script>");
 			}
 			
 		}catch (Exception e) {
-			
+			e.printStackTrace();
+			this.pw.print("<script>"
+					+ "alert('오류로 인해 학생정보가 수정되지 않았습니다. 확인해주세요!');"
+					+ "history.go(-1);"
+					+ "</script>");
 		}
+		finally {
+			this.pw.close();
+		}
+		
 	}
 	
 	

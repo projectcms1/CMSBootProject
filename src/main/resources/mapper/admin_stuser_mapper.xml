@@ -15,20 +15,23 @@ select * from STDNT_INFO where ${search_part} like concat('%', #{search_word}, '
 <!-- 학생 사용자 상세정보 수정 -->
 <update id="student_detail_update" parameterType="com.cms.ca.student_dto">
 update STDNT_INFO set 
-USER_EML_ADDR = #{USER_EML_ADDR}, USER_TELNO = #{USER_TELNO}, 
-USER_ZIP = #{USER_ZIP}, USER_TELNO = #{USER_TELNO},
-USER_TELNO = #{USER_TELNO}, USER_ADDR = #{USER_ADDR},
-USER_DADDR = #{USER_DADDR}, USER_PHOTO = #{USER_PHOTO},
-BRDT = #{BRDT}, DLNG_BANK_NM = #{DLNG_BANK_NM},
-UNIV_PRD = #{UNIV_PRD}, OGDP_UNIV = #{OGDP_UNIV},
-OGDP_SCSBJT = #{OGDP_SCSBJT}, MJR = #{MJR}, STDNT_STTS_SE = #{STDNT_STTS_SE}
+USER_EML_ADDR = #{user_eml_addr}, USER_TELNO = #{user_telno}, USER_ZIP = #{user_zip}, USER_ADDR = #{user_addr},
+USER_DADDR = #{user_daddr}, USER_PHOTO = #{user_photo}, DLNG_BANK_NM = #{dlng_bank_nm}, DLNG_ACTNO = #{dlng_actno},
+DPSTR_NM = #{dpstr_nm}, UNIV_PRD = #{univ_prd}, OGDP_UNIV = #{ogdp_univ}, OGDP_SCSBJT = #{ogdp_scsbjt},
+MJR = #{mjr}, STDNT_STTS_SE = #{stdnt_stts_se}
   where STDNT_NO = #{stdnt_no}
 </update>
 
 
 <!-- 학생 사용자 추가 -->
-<insert id="add_student" parameterType="com.cms.ca.student_dto">
-insert into STDNT_INFO (stdnt_no, stdnt_flnm, user_no, user_eml_addr, user_telno, user_zip, user_addr, user_daddr, user_photo, brdt, dlng_bank_nm, dlng_actno, dpstr_nm, univ_prd, ogdp_univ, ogdp_scsbjt, mjr, stdnt_stts_se)
-values ('0', #{stdnt_no}, #{emp_no}, #{stts_cd}, #{plc}, #{hr_se}, #{rsvt_dt}, now(), #{dscsn_mthd}, #{dscsn_knd})
+<insert id="add_student_user" parameterType="com.cms.ca.student_dto">
+insert into LGN_ACNT_INFO (USER_NO, LGN_ID, PSWD,LAST_LGN_DT, ACNT_LCK_YN, REG_DT)
+values ('0', #{lgn_id}, #{pswd}, #{last_lgn_dt}, #{acnt_lck_yn}, now())
+<if test='result=="1"'>
+insert into STDNT_INFO
+(stdnt_no, stdnt_flnm, user_no, user_eml_addr, user_telno, user_zip, user_addr, user_daddr, user_photo, brdt, dlng_bank_nm, dlng_actno, dpstr_nm, univ_prd, ogdp_univ, ogdp_scsbjt, mjr, stdnt_stts_se)
+values ('0', #{stdnt_no}, #{stdnt_flnm}, #{user_no}, #{user_eml_addr}, #{user_telno}, #{user_zip}, #{user_addr}, #{user_daddr}, #{user_photo}, #{brdt}, #{dlng_bank_nm}, #{dlng_actno}, #{dpstr_nm}, #{univ_prd}
+#{ogdp_univ}, #{ogdp_scsbjt}, #{mjr}, #{stdnt_stts_se})
+</if>
 </insert>
 </mapper>
