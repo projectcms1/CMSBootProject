@@ -17,7 +17,12 @@ public interface stuser_repo {
 	
 	int student_detail_update(student_dto stdto);
 	
+	int student_detail_login_update(student_dto stdto);
+	
 	int add_stuser_login(login_dto lgdto);
 	
 	int add_stuser_detail(student_dto stdto);
+	
+	
+	
 }

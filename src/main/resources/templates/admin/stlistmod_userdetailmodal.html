@@ -20,9 +20,11 @@
 									<h5 class="card-title">개인정보</h5>
 									<div class="row mb-1">
 										<div class="col-md-2 col-lg-2">
+										<br>
 											<!-- 학생 사용자 이미지-->
-											<div id="USER_PHOTO" name="USER_PHOTO"></div>
-											<br> <input type="file" accept="image/*"
+											<div id="USER_PHOTO" name="USER_PHOTO" class="mb-2"
+											style="height: 200px; background-color: #f8f9fa; display: flex; align-items: center; justify-content: center;"></div>
+											<br> <input type="file" accept="image/*" class="form-control"
 												onchange="setstuser_img(event);">
 										</div>
 										<div class="col-md-4 col-lg-4">
@@ -77,7 +79,7 @@
 												<label class="col-sm-4 col-form-label right-tag">대학(원)</label>
 												<div class="col-sm-6 right-tag">
 													<select class="form-control" id="OGDP_UNIV" name="ogdp_univ" onchange="makeSelector(this.value)">
-														<option value="">대학 선택</option>
+														<option value="대학선택">대학선택</option>
 														<option value="공과대학">공과대학</option>
 														<option value="사회과학대학">사회과학대학</option>
 														<option value="인문대학">인문대학</option>
@@ -124,7 +126,7 @@
 											<div class="row mb-1">
 												<label class="col-sm-4 col-form-label right-tag">등록일시</label>
 												<div class="col-sm-6 right-tag">
-													<input type="text" class="form-control" id="REG_DT" name="reg_dt">
+													<input type="text" class="form-control" id="REG_DT" disabled >
 												</div>
 											</div>
 										</div>
@@ -162,7 +164,7 @@
 													required>
 											</div>
 										</div>
-										<div id="layer_add"
+										<div id="stlistmod_detail_layer_add"
 											style="display: none; position: fixed; overflow: hidden; z-index: 1051; -webkit-overflow-scrolling: touch;">
 											<img
 												src="//t1.daumcdn.net/postcode/resource/images/close.png"

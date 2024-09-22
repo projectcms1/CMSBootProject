@@ -3,8 +3,14 @@
 <mapper namespace="com.cms.ca.admin.stuser_repo">
 
 <!--학생리스트 출력-->
-<select id="student_list" resultType="com.cms.ca.student_dto" >
+<!--<select id="student_list" resultType="com.cms.ca.student_dto" >
 select * from STDNT_INFO order by STDNT_NO desc
+</select>-->
+
+<select id="student_list" resultType="com.cms.ca.student_dto" >
+select a.*, b.ACNT_LCK_YN, b.REG_DT
+from STDNT_INFO as a INNER JOIN LGN_ACNT_INFO as b
+where a.USER_NO = b.USER_NO
 </select>
 
 <!-- 학생 리스트 검색 기능 -->
@@ -12,7 +18,7 @@ select * from STDNT_INFO order by STDNT_NO desc
 select * from STDNT_INFO where ${search_part} like concat('%', #{search_word}, '%') order by STDNT_NO desc
 </select>
 
-<!-- 학생 사용자 상세정보 수정 -->
+<!-- 학생 사용자 상세정보 수정 시작-->
 <update id="student_detail_update" parameterType="com.cms.ca.student_dto">
 update STDNT_INFO set 
 USER_EML_ADDR = #{user_eml_addr}, USER_TELNO = #{user_telno}, USER_ZIP = #{user_zip}, USER_ADDR = #{user_addr},
@@ -21,6 +27,11 @@ DPSTR_NM = #{dpstr_nm}, UNIV_PRD = #{univ_prd}, OGDP_UNIV = #{ogdp_univ}, OGDP_S
 MJR = #{mjr}, STDNT_STTS_SE = #{stdnt_stts_se}
   where STDNT_NO = #{stdnt_no}
 </update>
+
+<update id="student_detail_login_update" parameterType="com.cms.ca.student_dto">
+update LGN_ACNT_INFO set ACNT_LCK_YN = #{acnt_lck_yn} where LGN_ID = #{stdnt_no}
+</update>
+<!-- 학생 사용자 상세정보 수정 끝-->
 
 
 <!-- 학생 사용자 추가 시작 -->
@@ -35,5 +46,7 @@ insert into STDNT_INFO
 values ('0', #{stdnt_no}, #{stdnt_flnm}, #{user_no}, #{user_eml_addr}, #{user_telno}, #{user_zip}, #{user_addr}, #{user_daddr}, #{user_photo}, #{brdt}, #{dlng_bank_nm}, #{dlng_actno}, #{dpstr_nm}, #{univ_prd}
 #{ogdp_univ}, #{ogdp_scsbjt}, #{mjr}, #{stdnt_stts_se})
 </insert>
+
+<!-- 지도교수 추가하는 것은 추후에 고민하기,,,, -->
 <!-- 학생 사용자 추가 끝 -->
 </mapper>

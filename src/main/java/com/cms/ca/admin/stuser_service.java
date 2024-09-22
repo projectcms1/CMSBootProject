@@ -12,9 +12,10 @@ public interface stuser_service {
 	
 	int student_detail_update(student_dto stdto);
 	
-	//int add_stuser_login(login_dto lgdto);
+	int student_detail_login_update(student_dto stdto);
 	
 	int add_stuser_detail(student_dto stdto, String entrance_year);
+	
 }
 
 

@@ -1,7 +1,7 @@
 //학생 사용자 상세보기 정보 중 대학교 내 대학분류, 학과, 전공 데이터
-const USER_UNIV = ['공과대학', '사회과학대학', '인문대학', '자연과학대학'];
-const USER_SCSBJT = ['기계공학과', '정치학과', '철학과', '생물학과'];
-const USER_MJR = ['기계공학', '정치학', '철학', '생물학'];
+const USER_UNIV = ['대학선택','공과대학', '사회과학대학', '인문대학', '자연과학대학'];
+const USER_SCSBJT = ['-','기계공학과', '정치학과', '철학과', '생물학과'];
+const USER_MJR = ['-','기계공학', '정치학', '철학', '생물학'];
 
 function makeSelector(selectedUniv) {
 	USER_UNIV.forEach(function(data, index) {
@@ -12,9 +12,7 @@ function makeSelector(selectedUniv) {
 	});
 }
 
-//학생 사용자 상세정보 추가시 입학년도 계산 기능
-const today = new Date();
-document.getElementById("entrance_year").value = today.getFullYear();
+
 
 
 //학생 사용자 검색
@@ -33,7 +31,7 @@ function list_search() {
 
 
 //다음 주소 찾기
- var element_layer = document.getElementById('layer_add');
+ var element_layer = document.getElementById('stlistmod_detail_layer_add');
  function closeDaumPostcode() {
         // iframe을 넣은 element를 안보이게 한다.
         element_layer.style.display = 'none';
@@ -124,6 +122,8 @@ document.addEventListener('DOMContentLoaded', function () {
         var st_mjr = button.getAttribute('data-mjr');
         var st_stse = button.getAttribute('data-stdnt_stts_se');
         var st_grd = button.getAttribute('data-std_grade');
+        var st_acnt_yn = button.getAttribute('data-acnt_lck_yn');
+        var st_regdt = button.getAttribute('data-reg_dt');
         
 
         // 모달 내의 입력 필드 요소 선택(html의 id)
@@ -146,6 +146,8 @@ document.addEventListener('DOMContentLoaded', function () {
         var STDNT_STTS_SE = stuserdetailModal.querySelector('#STDNT_STTS_SE');
         var STD_GRADE = stuserdetailModal.querySelector('#STD_GRADE');
         var ENTRANCE_YEAR = stuserdetailModal.querySelector('#ENTRANCE_YEAR');
+        var ACNT_LCK_YN = stuserdetailModal.querySelector('#ACNT_LCK_YN');
+        var REG_DT = stuserdetailModal.querySelector('#REG_DT');
         
 
         // 입력 필드에 데이터 설정
@@ -206,6 +208,12 @@ document.addEventListener('DOMContentLoaded', function () {
         if (ENTRANCE_YEAR) {
         	ENTRANCE_YEAR.value = st_no.substring(0,4);
         }
+        if (ACNT_LCK_YN) {
+        	ACNT_LCK_YN.value = st_acnt_yn;
+        }
+        if (REG_DT) {
+        	REG_DT.value = st_regdt;
+        }
         
     });
 });
@@ -221,13 +229,6 @@ function update_stuserdata(){
 function add_stuser(){
 	stuser_add_frm.submit();
 }
-
-
-
-
-
-
-
 
 
 //교직원 사용자 (prolistmod.html) 검색기능 분류 스크립트 

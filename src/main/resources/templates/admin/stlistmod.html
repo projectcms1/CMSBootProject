@@ -18,15 +18,11 @@
 <link href="/admin/css/font-awesome.min.css" rel="stylesheet">
 <link href="/admin/css/style.css" rel="stylesheet">
 <link href="/admin/css/nav.css" rel="stylesheet">
-<link href="/admin/css/shCoreEclipse.css" type="text/css"
-	rel="stylesheet" />
-<link href="/admin/css/shThemeEclipse.css" type="text/css"
-	rel="Stylesheet" />
+<link href="/admin/css/shCoreEclipse.css" type="text/css" rel="stylesheet" />
+<link href="/admin/css/shThemeEclipse.css" type="text/css" rel="Stylesheet" />
 <link href="/admin/css/global.css" rel="stylesheet">
 <link href="/admin/css/baseui.css" rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
 <link href="/admin/css/listmod.css" rel="stylesheet">
 </head>
 
@@ -95,8 +91,7 @@
 
 					<!-- 사용자 추가 버튼 -->
 					<div class="d-flex justify-content-end">
-						<a class="buttton_1" data-bs-toggle="modal"
-							data-bs-target="#addstuserModal"
+						<a class="buttton_1" href="/stlistmod_adduser"
 							style="height: 38px; display: flex; align-items: center; justify-content: center;">
 							사용자 추가 <i class="fa fa-plus-circle ms-2"></i>
 						</a>
@@ -176,7 +171,9 @@
 										th:data-ogdp_scsbjt="${student_data.getOgdp_scsbjt()}"
 										th:data-mjr="${student_data.getMjr()}"
 										th:data-stdnt_stts_se="${student_data.getStdnt_stts_se()}"
-										th:data-std_grade="${student_data.getStd_grade()}">
+										th:data-std_grade="${student_data.getStd_grade()}"
+										th:data-acnt_lck_yn="${student_data.getAcnt_lck_yn()}"
+										th:data-reg_dt="${student_data.getReg_dt()}">
 										<i class="fa fa-cog"> 상세보기</i>
 									</button>
 								</td>
@@ -210,10 +207,6 @@
 		</main>
 	</div>
 	</div>
-
-	<!-- 학생사용자 추가 모달 시작 -->
-	<div th:insert="~{/admin/stlistmod_addusermodal :: student_addusermodal}"></div>
-	<!-- 학생사용자 추가 모달 끝 -->
 
 	<!-- 학생별 상세정보 모달 시작 -->
 	<div th:insert="~{/admin/stlistmod_userdetailmodal :: student_userdetailmodal}"></div>

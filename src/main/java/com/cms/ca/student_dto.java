@@ -11,6 +11,9 @@ public class student_dto {
 	
 	private Integer std_grade;
 	
+	//로그인 table join
+	private String acnt_lck_yn, reg_dt;
+	
 	public void setGrade() {
 		this.std_grade = (int) Math.ceil(this.univ_prd / 2f);
 	}

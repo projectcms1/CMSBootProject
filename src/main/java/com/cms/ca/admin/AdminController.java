@@ -35,10 +35,6 @@ public class AdminController {
 	
 	PrintWriter pw = null;
 	
-	@GetMapping("/adminlogin")
-	public String admin_login() {
-		return "admin/login";
-	}
 	
 	//학생 사용자 리스트 출력 및 검색
 	@GetMapping("/stlistmod")
@@ -64,10 +60,17 @@ public class AdminController {
 		try {
 			this.pw = sr.getWriter();
 			int result = this.stuser_service.student_detail_update(stdto);
-			if(result > 0 ) {
+			int login_result = this.stuser_service.student_detail_login_update(stdto);
+			if(result > 0 && login_result > 0 ) {
 				this.pw.print("<script>"
 						+ "alert('학생정보가 수정되었습니다.');"
 						+ "location.href='./stlistmod';"
+						+ "</script>");
+			}
+			else {
+				this.pw.print("<script>"
+						+ "alert('오류로 인해 학생정보가 수정되지 않았습니다.');"
+						+ "history.go(-1);"
 						+ "</script>");
 			}
 			
@@ -81,6 +84,12 @@ public class AdminController {
 		finally {
 			this.pw.close();
 		}
+	}
+	
+	
+	@GetMapping("/stlistmod_adduser")
+	public String stlistmod_adduser() {
+		return "admin/stlistmod_adduser";
 	}
 	
 	
@@ -167,7 +176,6 @@ public class AdminController {
 	public String error() {
 		return "error";
 	}
-	
 	
 	
 	

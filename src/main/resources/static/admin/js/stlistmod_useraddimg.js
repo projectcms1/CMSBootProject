@@ -14,7 +14,7 @@ function setstuser_img(event) {
 		var img = document.createElement("img");
 		img.setAttribute("src", event.target.result);
 		img.setAttribute("width", "80%"); // 원하는 크기로 조절
-		img.setAttribute("height", "225px");
+		img.setAttribute("height", "200px");
 		img.classList.add("rounded-4"); // CSS 클래스 추가
 
 		container.appendChild(img);
