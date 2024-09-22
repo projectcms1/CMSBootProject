@@ -19,14 +19,14 @@
 }
 
 /* 질문 텍스트 스타일 */
-.question-text p {
-    margin: 10px 0;
-    font-size: 14px;
-    color: #666;
+.question-text {
+	text-align: center;
+	align-content: center;
+    min-height: 120px;
 }
 
 .question-text h2 {
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     margin-top: 5px;
     margin-bottom: 20px;
@@ -54,14 +54,14 @@
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 30px;
-    padding: 15px 10px;
+    padding: 12px 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 14px;
+    font-size: 18px;
 }
 
 .option small {
-    font-size: 12px;
+    font-size: 14px;
     color: #666;
 }
 

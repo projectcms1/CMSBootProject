@@ -9,6 +9,8 @@ import com.cms.ca.selfTestAnswer_dto;
 import com.cms.ca.selfTestInfo_dto;
 import com.cms.ca.selfTestQitem_dto;
 import com.cms.ca.selfTestResult_dto;
+import com.cms.ca.selfTestUserResult_dto;
+import com.cms.ca.selfTestUserStats_dto;
 
 @Mapper
 @Repository("insp_repo")
@@ -21,4 +23,10 @@ public interface SlfPsycInspRepository {
 	List<selfTestAnswer_dto> getAllListAnswer(String insp_no);
 	
 	List<selfTestResult_dto> getAllListResult(String insp_no);
+	
+	Integer getInspRsltNo(selfTestUserResult_dto dto);
+	
+	int addDataInResultTable(selfTestUserResult_dto dto);
+	
+	int addDataInStatsTable(selfTestUserStats_dto dto);
 }

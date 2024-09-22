@@ -1,6 +1,7 @@
 package com.cms.ca.student;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,8 @@ import com.cms.ca.selfTestAnswer_dto;
 import com.cms.ca.selfTestInfo_dto;
 import com.cms.ca.selfTestQitem_dto;
 import com.cms.ca.selfTestResult_dto;
+import com.cms.ca.selfTestUserResult_dto;
+import com.cms.ca.selfTestUserStats_dto;
 
 import jakarta.annotation.Resource;
 
@@ -30,5 +33,41 @@ public class SlfPsycInspServiceImpl implements SlfPsycInspService {
 		List<selfTestAnswer_dto> answerList = this.inspRepo.getAllListAnswer(insp_no);
 		List<selfTestResult_dto> resultList = this.inspRepo.getAllListResult(insp_no);
 		return new JSONDataMaker().makeSelfTestData(qitemList, answerList, resultList);
+	}
+
+	@Override
+	public String saveUserTestResult(String stdnt_no, String insp_no, Map<String, Map<String, String>> userData) {
+		String result = "";
+		selfTestUserResult_dto rdto = new selfTestUserResult_dto();
+		rdto.setStdnt_no(stdnt_no);
+		rdto.setInsp_no(insp_no);
+		Integer sum = 0;
+		for (String mkey : userData.keySet()) {
+			sum += Integer.parseInt(userData.get(mkey).get("score"));
+		}
+		rdto.setInsp_scr_sum(sum);
+		int rrslt = this.inspRepo.addDataInResultTable(rdto);
+		if (rrslt > 0) {
+			selfTestUserStats_dto sdto = new selfTestUserStats_dto();
+			sdto.setInsp_rslt_no(this.inspRepo.getInspRsltNo(rdto));
+			sdto.setStdnt_no(stdnt_no);
+			sdto.setInsp_no(insp_no);
+			int srslt = 0;
+			for (String mkey : userData.keySet()) {
+				sdto.setQitem_no(Integer.parseInt(mkey));
+				sdto.setAns_no(userData.get(mkey).get("value"));
+				srslt += this.inspRepo.addDataInStatsTable(sdto);
+			}
+			if (srslt == userData.size()) {
+				result = "ok";
+			}
+			else {
+				result = "error";
+			}
+		}
+		else {
+			result = "error";
+		}
+		return result;
 	}
 }

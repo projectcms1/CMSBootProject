@@ -15,7 +15,21 @@
 	</select>
 
 	<select id="getAllListResult" resultType="com.cms.ca.selfTestResult_dto" parameterType="String">
-		select * from INSP_RSLT_EXPLN where INSP_NO = #{insp_no}
+		select * from INSP_RSLT_EXPLN where INSP_NO = #{insp_no} order by SE_SCR asc
 	</select>
+
+	<select id="getInspRsltNo" resultType="Integer" parameterType="com.cms.ca.selfTestUserResult_dto">
+		select INSP_RSLT_NO from SLF_PSYC_INSP_RSLT where STDNT_NO = #{stdnt_no} and INSP_NO = #{insp_no} and INSP_SCR_SUM = #{insp_scr_sum} order by INSP_RSLT_NO desc
+	</select>
+
+	<insert id="addDataInResultTable" parameterType="com.cms.ca.selfTestUserResult_dto">
+		insert into SLF_PSYC_INSP_RSLT (INSP_RSLT_NO, STDNT_NO, INSP_NO, INSP_SCR_SUM, INSP_DT)
+		values ('0', #{stdnt_no}, #{insp_no}, #{insp_scr_sum}, now())
+	</insert>
+
+	<insert id="addDataInStatsTable" parameterType="com.cms.ca.selfTestUserStats_dto">
+		insert into SLF_PSYC_INSP_RSLT_STATS (STDNT_NO, INSP_NO, INSP_RSLT_NO, QITEM_NO, ANS_NO)
+		values (#{stdnt_no}, #{insp_no}, #{insp_rslt_no}, #{qitem_no}, #{ans_no})
+	</insert>
 
 </mapper>

@@ -9,30 +9,33 @@
 			</div>
 			
 			<div class="modal-body">
-			  	<div class="card-body">
+			  	<div class="card-body" id="testingModalCardBody">
 					<!-- 문항 헤더 -->
 					<div class="header_slf">
-						<span class="question-number" id="question-number">01</span>
+						<span class="question-number" id="question-number"></span>
 						<span class="total-questions" id="total-questions"></span>
 					</div>
 
 					<!-- 질문 영역 -->
-					<div id="question-container">
+					<div class="question-text" id="question-container">
 						<h2 id="question-text"></h2>
 					</div>
 
 					<!-- 응답 폼 -->
-					<form id="survey-form"></form>
-					
-					<!-- 이전 및 다음 버튼 -->
-					<div class="slftest-navigation-buttons">
-						<button type="button" class="nav-btn prev-btn" id="prev-btn">이전</button>
-						<button type="button" class="nav-btn next-btn" id="next-btn">다음</button>
-					</div>
+					<form id="survey-form">
+						<div class="options" id="survey-options"></div>
+
+						<!-- 이전 및 다음 버튼 -->
+						<div class="slftest-navigation-buttons">
+							<button type="button" class="nav-btn prev-btn" id="prev-btn">이전</button>
+							<button type="button" class="nav-btn next-btn" id="next-btn">다음</button>
+						</div>
+					</form>
 
 					<!-- 주의사항 -->
 					<div class="note">
 						<p>* 자가검진의 결과는 의학적 진단을 대신하는 것이 아니므로 참고자료로만 활용하시기 바랍니다.</p>
+						<p>* 본 검사는 예시입니다.</p>
 					</div>
 				</div>
 
