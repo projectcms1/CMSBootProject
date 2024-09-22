@@ -18,6 +18,17 @@
 		select * from INSP_RSLT_EXPLN where INSP_NO = #{insp_no} order by SE_SCR asc
 	</select>
 
+	<select id="getUserResultData" resultType="com.cms.ca.selfTestUserResult_dto" parameterType="com.cms.ca.selfTestUserResult_dto">
+		select * from SLF_PSYC_INSP_RSLT where STDNT_NO = #{stdnt_no} and INSP_NO = #{insp_no} order by INSP_RSLT_NO desc limit 0, 1
+	</select>
+
+	<select id="getUserAnswerData" resultType="com.cms.ca.selfTestUserStats_dto" parameterType="com.cms.ca.selfTestUserResult_dto">
+		select a.QITEM_NO, b.QITEM_FLNM, a.ANS_NO, c.ANS_FLNM, c.SCR
+		from SLF_PSYC_INSP_RSLT_STATS as a INNER JOIN SLF_PSYC_INSP_QITEM_INFO as b INNER JOIN SLF_PSYC_INSP_ANS_INFO as c
+		where a.QITEM_NO = b.QITEM_NO and a.ANS_NO = c.ANS_NO and INSP_RSLT_NO =
+		(select MAX(INSP_RSLT_NO) from SLF_PSYC_INSP_RSLT where STDNT_NO = #{stdnt_no} and INSP_NO = #{insp_no})
+	</select>
+
 	<select id="getInspRsltNo" resultType="Integer" parameterType="com.cms.ca.selfTestUserResult_dto">
 		select INSP_RSLT_NO from SLF_PSYC_INSP_RSLT where STDNT_NO = #{stdnt_no} and INSP_NO = #{insp_no} and INSP_SCR_SUM = #{insp_scr_sum} order by INSP_RSLT_NO desc
 	</select>

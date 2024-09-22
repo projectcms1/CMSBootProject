@@ -8,10 +8,18 @@ import org.json.JSONObject;
 import com.cms.ca.selfTestAnswer_dto;
 import com.cms.ca.selfTestQitem_dto;
 import com.cms.ca.selfTestResult_dto;
+import com.cms.ca.selfTestUserStats_dto;
 import com.cms.ca.view_counsel_dto;
 
 public class JSONDataMaker {
 
+	public String makeUserResultData(List<selfTestUserStats_dto> statsList, String datetime, Integer myScore, String expln_text) {
+		JSONObject mainDataJSON = new JSONObject();
+		
+		
+		return null;
+	}
+	
 	public String makeSelfTestData(List<selfTestQitem_dto> qitemList, List<selfTestAnswer_dto> answerList, List<selfTestResult_dto> resultList) {
 		JSONObject mainDataJSON = new JSONObject();
 		

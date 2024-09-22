@@ -74,7 +74,6 @@ public class AjaxController {
 		try {
 			callback = this.inspSrvc.saveUserTestResult(this.STD_NUMBER, insp_no, bodyData);
 		} catch (Exception e) {
-			e.printStackTrace();
 			callback = "error";
 		}
 		return callback;
@@ -83,6 +82,13 @@ public class AjaxController {
 	// 자가진단 심리검사 결과 데이터 조회
 	@GetMapping("/selftest_result/{insp_no}")
 	public String selftest_result_select(@PathVariable(name = "insp_no") String insp_no) {
-		return "ok";
+		String callback = "";
+		try {
+			callback = this.inspSrvc.getUserSelfTestData(this.STD_NUMBER, insp_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+			callback = "error";
+		}
+		return callback;
 	}
 }

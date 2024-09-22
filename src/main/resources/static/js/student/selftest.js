@@ -150,22 +150,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 	}
 
-	function printResultInBody(responseData, resultData) {
-		var resTotalScore = 0;
-		for (const key in responses) {
-			resTotalScore += Number(responseData[key]['score']);
-		}
-		resultData.forEach((data, node) => {
-			if (resTotalScore >= data['se_scr']) {
-				// 26 <- -> 13
-				// 26 <- -> 23
-				// 26 <- -> 33
-				console.log(node);
-			}
-		});
-		console.log(resTotalScore);
-	}
-
     modalOpenButtons.forEach(button => {
 		button.addEventListener('click', () => {
 			openTestingModal(button.value);

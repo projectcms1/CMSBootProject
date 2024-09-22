@@ -70,4 +70,21 @@ public class SlfPsycInspServiceImpl implements SlfPsycInspService {
 		}
 		return result;
 	}
+
+	@Override
+	public String getUserSelfTestData(String stdnt_no, String insp_no) {
+		selfTestUserResult_dto rdto = new selfTestUserResult_dto();
+		rdto.setStdnt_no(stdnt_no);
+		rdto.setInsp_no(insp_no);
+		rdto = this.inspRepo.getUserResultData(rdto);
+		List<selfTestResult_dto> resultList = this.inspRepo.getAllListResult(insp_no);
+		String expln_text = "";
+		for (selfTestResult_dto dto_dump : resultList) {
+			if (rdto.getInsp_scr_sum() >= dto_dump.getSe_scr()) {
+				expln_text = dto_dump.getExpln_cn();
+			}
+		}
+		List<selfTestUserStats_dto> statsList = this.inspRepo.getUserAnswerData(rdto);
+		return new JSONDataMaker().makeUserResultData(statsList, rdto.getInsp_dt(), rdto.getInsp_scr_sum(), expln_text);
+	}
 }

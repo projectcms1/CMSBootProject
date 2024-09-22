@@ -24,6 +24,10 @@ public interface SlfPsycInspRepository {
 	
 	List<selfTestResult_dto> getAllListResult(String insp_no);
 	
+	selfTestUserResult_dto getUserResultData(selfTestUserResult_dto dto);
+	
+	List<selfTestUserStats_dto> getUserAnswerData(selfTestUserResult_dto dto);
+	
 	Integer getInspRsltNo(selfTestUserResult_dto dto);
 	
 	int addDataInResultTable(selfTestUserResult_dto dto);

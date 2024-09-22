@@ -12,4 +12,6 @@ public interface SlfPsycInspService {
 	String getAllDataOfOneInsp(String insp_no);
 	
 	String saveUserTestResult(String stdnt_no, String insp_no, Map<String, Map<String, String>> userData);
+	
+	String getUserSelfTestData(String stdnt_no, String insp_no);
 }
