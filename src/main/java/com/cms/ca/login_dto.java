@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class login_dto {
 
-	private Integer USER_NO;
-	private String LGN_ID, PSWD, LAST_LGN_DT, ACNT_LCK_YN, REG_DT;
+	private Integer user_no;
+	private String lgn_id, pswd, last_lgn_dt, acnt_lck_yn, reg_dt;
 }

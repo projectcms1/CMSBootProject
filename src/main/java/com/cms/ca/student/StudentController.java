@@ -170,6 +170,7 @@ public class StudentController {
 				this.pw.print("<script> alert('오류가 발생하여 예약이 실패하였습니다.'); history.go(-1);</script>");
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			this.pw.print("<script> alert('해당 시간에 예약 가능한 상담사가 없습니다.'); history.go(-1);</script>");
 		} finally {
 			this.pw.close();

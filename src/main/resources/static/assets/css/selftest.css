@@ -19,14 +19,14 @@
 }
 
 /* 질문 텍스트 스타일 */
-.question-text p {
-    margin: 10px 0;
-    font-size: 14px;
-    color: #666;
+.question-text {
+	text-align: center;
+	align-content: center;
+    min-height: 120px;
 }
 
 .question-text h2 {
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     margin-top: 5px;
     margin-bottom: 20px;
@@ -54,14 +54,14 @@
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 30px;
-    padding: 15px 10px;
+    padding: 12px 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 14px;
+    font-size: 18px;
 }
 
 .option small {
-    font-size: 12px;
+    font-size: 14px;
     color: #666;
 }
 
@@ -116,4 +116,67 @@
     line-height: 1.5;
     border-top: 1px solid #ddd;
     padding-top: 10px;
+}
+
+/* 검사 결과 모달 */
+
+/* 검사명 스타일 */
+.test-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* 질문 및 답변 스타일 */
+.question-answer .list-group-item {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* 질문 텍스트 (첫 번째 줄) */
+.question-answer .list-group-item .question {
+    font-weight: bold;
+    margin-bottom: 5px; /* 질문과 답변 사이 여백 */
+    word-wrap: break-word;    /* 텍스트 줄바꿈 처리 */
+    white-space: normal;      /* 긴 텍스트 줄바꿈 */
+}
+
+/* 답변 및 점수 (두 번째 줄) */
+.question-answer .list-group-item .answer-score {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 답변 텍스트 스타일 */
+.question-answer .list-group-item .answer {
+    flex-grow: 1;
+    word-wrap: break-word;    /* 긴 답변일 때 줄바꿈 */
+}
+
+/* 점수 배지 스타일 */
+.question-answer .list-group-item .score {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #f8f9fa; /* 배경색 */
+    border-radius: 0.5rem;
+    margin-left: 15px;
+    flex-shrink: 0;
+    align-self: flex-end; /* 점수를 오른쪽에 위치 */
+}
+
+/* 결과 설명 스타일 */
+.explanation-text {
+    margin-top: 20px;
+}
+
+.explanation-text h6 {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.explanation-text h4 {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #dc3545; /* text-danger */
 }

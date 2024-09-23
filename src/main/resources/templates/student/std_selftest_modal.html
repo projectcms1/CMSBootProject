@@ -4,44 +4,26 @@
 		
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">상담정보 상세보기</h5>
+				<h5 class="modal-title">자가진단 심리검사</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			
 			<div class="modal-body">
-			  	<div class="card-body">
+			  	<div class="card-body" id="testingModalCardBody">
 					<!-- 문항 헤더 -->
 					<div class="header_slf">
-						<span class="question-number" id="question-number">01</span>
-						<span class="total-questions">| 총 3 문항</span>
+						<span class="question-number" id="question-number"></span>
+						<span class="total-questions" id="total-questions"></span>
 					</div>
 
 					<!-- 질문 영역 -->
-					<div id="question-container">
-						<p>지난 일주일간 나는?</p>
-						<h2 id="question-text">평소에는 아무렇지도 않던 일들이 괴롭고 귀찮게 느껴졌다.</h2>
+					<div class="question-text" id="question-container">
+						<h2 id="question-text"></h2>
 					</div>
 
 					<!-- 응답 폼 -->
 					<form id="survey-form">
-						<div class="options">
-							<label class="option">
-								<input type="radio" name="response" value="극히 드물었다">
-								<span>극히 드물었다<br><small>(1주일에 1일 이하)</small></span>
-							</label>
-							<label class="option">
-								<input type="radio" name="response" value="가끔 있었다">
-								<span>가끔 있었다<br><small>(1주일에 1~2일간)</small></span>
-							</label>
-							<label class="option">
-								<input type="radio" name="response" value="종종 있었다">
-								<span>종종 있었다<br><small>(1주일에 3~4일간)</small></span>
-							</label>
-							<label class="option">
-								<input type="radio" name="response" value="대부분 그랬다">
-								<span>대부분 그랬다<br><small>(1주일에 5일 이상)</small></span>
-							</label>
-						</div>
+						<div class="options" id="survey-options"></div>
 
 						<!-- 이전 및 다음 버튼 -->
 						<div class="slftest-navigation-buttons">

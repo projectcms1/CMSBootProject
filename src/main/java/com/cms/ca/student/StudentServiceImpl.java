@@ -71,6 +71,8 @@ public class StudentServiceImpl implements StudentService {
 	@Override // 상담 예약
 	public int addCounselReservation(counsel_dto dto, String professor_number, String counseler_number) {
 		dto.setRsvt_dt(dto.getRsvt_dt().replaceAll("-", ""));
+		System.out.println("professor_number : " + professor_number + "EOF");
+		System.out.println("counseler_number : " + counseler_number + "EOF");
 		if (professor_number != null && counseler_number == null) {
 			dto.setEmp_no(professor_number);
 			dto.setStts_cd("미승인");
