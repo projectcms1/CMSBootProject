@@ -2,40 +2,41 @@
 <html lang="ko">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>상담관리</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+<title>상담관리</title>
+<meta content="" name="description">
+<meta content="" name="keywords">
 
-  <!-- Favicons -->
-  <link href="/assets/img/favicon.png" rel="icon">
-  <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+<!-- Favicons -->
+<link href="/assets/img/favicon.png" rel="icon">
+<link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.gstatic.com" rel="preconnect">
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+	rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="/assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+<!-- Vendor CSS Files -->
+<link href="/assets/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+	rel="stylesheet">
+<link href="/assets/vendor/boxicons/css/boxicons.min.css"
+	rel="stylesheet">
+<link href="/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+<link href="/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+<link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+<link href="/assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
-  <!-- Template Main CSS File -->
-  <link href="/assets/css/style.css" rel="stylesheet">
-  <link href="/assets/css/empy.css" rel="stylesheet">
-  <style>
-    .btn-counsel {
-      width: 100px;
-      height: 38px;
-    }
-  </style>
-  <!-- =======================================================
+<!-- Template Main CSS File -->
+<link href="/assets/css/style.css" rel="stylesheet">
+<link href="/assets/css/empy.css" rel="stylesheet">
+<link href="/assets/css/list_paging.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<!-- =======================================================
   * Template Name: NiceAdmin
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
   * Updated: Apr 20 2024 with Bootstrap v5.3.3
@@ -45,160 +46,178 @@
 </head>
 
 <body>
-	<div th:replace="~{/student/std_header :: std_header}"></div>	<!-- Std Header -->
-	<div th:replace="~{/student/std_sidebar :: std_sidebar}"></div>	<!-- Std Sidebar -->
+	<div th:replace="~{/student/std_header :: std_header}"></div>
+	<!-- Std Header -->
+	<div th:replace="~{/student/std_sidebar :: std_sidebar}"></div>
+	<!-- Std Sidebar -->
 
-	  <main id="main" class="main">
-    
-    	<!-- ======= Page Title ======= -->
-    	<div class="pagetitle">
-    	  	<h1>상담관리</h1>
-      		<nav>
-        	  	<ol class="breadcrumb">
-          			<li class="breadcrumb-item"><a href="/">Home</a></li>
-	          		<li class="breadcrumb-item">상담관리</li>
-          			<li class="breadcrumb-item active">상담이력조회</li>
-        	  	</ol>
-      		</nav>
-    	</div> 
-    	<!-- End Page Title -->
-		
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
-        
-        	<!-- 상담 이력 검색 Card-->
-          		<div class="card">
-            		<div class="card-body">
-              			<h5 class="card-title">상담이력검색</h5>
-		              	
-		              	<div th:replace="~{/student/std_counsel_modal :: std_counsel_modal}"></div>	<!-- Std Counsel Modal -->
-		              	
-		              	<!-- 상담이력 Table-->
-				     	<div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
-				     		
-				     		<div class="datatable-top">
-				     			<!-- per-page Dropdown -->
-		    					<div class="datatable-dropdown">
-		    						<span>* 상담일자는 숫자로만 검색해주세요.</span>
-		        				</div>
-		        				<!-- End per-page Dropdown -->
-		        				
-		        				<!-- Search Bar -->
-			    				<div class="search-bar ">
-						      		<form id="frmSearch" class="search-form d-flex align-items-center" th:onsubmit="return list_search()">
-					                  	<select name="search_part" id="inputState" class="form-select" style="width: 180px;">
-					                    	<option value="RSVT_DT" th:selected="${ search_part == 'RSVT_DT' }">상담일자</option>
-					                    	<option value="EMP_FLNM" th:selected="${ search_part == 'EMP_FLNM' }">상담자</option>
-					                    	<option value="DSCSN_MTHD" th:selected="${ search_part == 'DSCSN_MTHD' }">상담방식</option>
-					                    	<option value="DSCSN_KND" th:selected="${ search_part == 'DSCSN_KND' }">상담종류</option>
-					                  	</select>
-				                  		<input type="text" name="search_word" th:value="${ search_word }" class="form-control" placeholder="Search" style="margin-left: 5px;">
-						        		<button type="submit" title="찾기" class="btn" style="border-color: g"><i class="bi bi-search"></i></button>
-						      		</form>
-						    	</div>
-						    	<!-- End Search Bar -->
+	<main id="main" class="main">
+
+		<!-- ======= Page Title ======= -->
+		<div class="pagetitle">
+			<h1>상담관리</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="/">Home</a></li>
+					<li class="breadcrumb-item">상담관리</li>
+					<li class="breadcrumb-item active">상담이력조회</li>
+				</ol>
+			</nav>
+		</div>
+		<!-- End Page Title -->
+
+		<section class="section">
+			<div class="row">
+				<div class="col-lg-12">
+
+					<!-- 상담 이력 검색 Card-->
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">상담이력검색</h5>
+
+							<div
+								th:replace="~{/student/std_counsel_modal :: std_counsel_modal}"></div>
+							<!-- Std Counsel Modal -->
+
+							<!-- 상담이력 Table-->
+							<div
+								class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
+
+								<div class="datatable-top">
+									<!-- per-page Dropdown -->
+									<div class="datatable-dropdown">
+										총 ${//insert 데이터 총} 개
+										
+									</div>
+									<!-- End per-page Dropdown -->
+
+									<!-- Search Bar -->
+									<div class="search-bar ">
+											<div class="search-form d-flex align-items-right">*상담일자는 숫자로만 검색 가능합니다.</div><br>
+										<form id="frmSearch"
+											class="search-form d-flex align-items-center"
+											th:onsubmit="return list_search()">
+											<select name="search_part" id="inputState"
+												class="form-select" style="width: 180px;">
+												<option value="RSVT_DT"
+													th:selected="${ search_part == 'RSVT_DT' }">상담일자</option>
+												<option value="EMP_FLNM"
+													th:selected="${ search_part == 'EMP_FLNM' }">상담자</option>
+												<option value="DSCSN_MTHD"
+													th:selected="${ search_part == 'DSCSN_MTHD' }">상담방식</option>
+												<option value="DSCSN_KND"
+													th:selected="${ search_part == 'DSCSN_KND' }">상담종류</option>
+											</select> <input type="text" name="search_word"
+												th:value="${ search_word }" class="form-control"
+												placeholder="Search" style="margin-left: 5px;">
+											<button type="submit" title="찾기" class="btn"
+												style="border-color: g">
+												<i class="bi bi-search"></i>
+											</button>
+										</form>
+									</div>
+									<!-- End Search Bar -->
+								</div>
+
+								<div class="datatable-container">
+									<table id="demo-table" class="table datatable datatable-table">
+										<thead>
+											<tr>
+												<th data-format="YYYY/DD/MM" data-sortable="true"
+													data-type="date" style="width: 20%;">
+													<button class="datatable-sorter">상담일자</button>
+												</th>
+												<th data-sortable="true" style="width: 20%;">
+													<button class="datatable-sorter">상담자</button>
+												</th>
+												<th data-sortable="true" style="width: 20%;">
+													<button class="datatable-sorter">상담방식</button>
+												</th>
+												<th data-sortable="true" style="width: 20%;">
+													<button class="datatable-sorter">상담종류</button>
+												</th>
+												<th data-sortable="true" style="width: 20%;">
+													<button class="datatable-sorter">회차 수</button>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:if="${counselList.size() == 0 }" align="center">
+												<td colspan="5">상담 이력이 존재하지 않습니다.</td>
+											</tr>
+											<tr th:each="counselData : ${ counselList }">
+												<td>[[${ counselData.getRsvt_dt() }]]</td>
+												<td>[[${ counselData.getEmp_flnm() }]]</td>
+												<td>[[${ counselData.getDscsn_mthd() }]]상담</td>
+												<td>[[${ counselData.getDscsn_knd() }]]상담</td>
+												<td>[[${ counselData.getRoundCount() + 1 }]]
+													<button type="button"
+														th:onclick="openDetailModal([[${ counselData.getAply_sn() }]])"
+														class="btn btn-outline-info btn-sm rounded-pill"
+														data-bs-toggle="modal"
+														data-bs-target="#modalCounselDetailInfo"
+														style="float: right; margin-left: 5px;">상세보기</button>
+												</td>
+												<!-- data-bs-target="#modalDialogScrollable" -->
+											</tr>
+										</tbody>
+
+									</table>
+								</div>
+
+								<div class="datatable-bottom">
+									
+
+									<!-- 페이징처리 -->
+									<div class="prod_1i1r pages">
+										<ul id="std_counsel_list_paging">
+											<li><a id="first-page"><i class="fa fa-angle-double-left"></i></a></li>
+											<li><a id="prev-page"><i class="fa fa-chevron-left"></i></a></li>
+											<li><a id="next-page"><i class="fa fa-chevron-right"></i></a></li>
+											<li><a id="last-page"><i class="fa fa-angle-double-right"></i></a></li>
+										</ul>
+									</div>
+								</div>
 							</div>
-							
-							<div class="datatable-container">
-								<table id="demo-table" class="table datatable datatable-table">
-									<thead>
-										<tr>
-				                    		<th data-format="YYYY/DD/MM" data-sortable="true" data-type="date" style="width: 20%;">
-				                    			<button class="datatable-sorter">상담일자</button>
-				                    		</th>
-				                    		<th data-sortable="true" style="width: 20%;">
-				                    			<button class="datatable-sorter">상담자</button>
-				                    		</th>
-				                    		<th data-sortable="true" style="width: 20%;">
-				                    			<button class="datatable-sorter">상담방식</button>
-				                    		</th>
-				                    		<th data-sortable="true" style="width: 20%;">
-				                    			<button class="datatable-sorter">상담종류</button>
-				                    		</th>
-											<th data-sortable="true" style="width: 20%;">
-												<button class="datatable-sorter">회차 수</button>
-				                    		</th>
-				                    	</tr>
-				                    </thead>
-				                    <tbody>
-				                      <tr th:if="${counselList.size() == 0 }" align="center"><td colspan="5">상담 이력이 존재하지 않습니다.</td></tr>
-					                  <tr th:each="counselData : ${ counselList }">
-					                    <td>[[${ counselData.getRsvt_dt() }]]</td>
-					                    <td>[[${ counselData.getEmp_flnm() }]]</td>
-					                    <td>[[${ counselData.getDscsn_mthd() }]]상담</td>
-					                    <td>[[${ counselData.getDscsn_knd() }]]상담</td>
-					                    <td>
-					                    	[[${ counselData.getRoundCount() + 1 }]]
-											<button type="button" th:onclick="openDetailModal([[${ counselData.getAply_sn() }]])" class="btn btn-outline-info btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#modalCounselDetailInfo" style="float: right; margin-left: 5px;">상세보기</button>
-					                    </td><!-- data-bs-target="#modalDialogScrollable" -->
-					                  </tr>
-					                </tbody>
-					                
-				                </table>
-				            </div>
-				            
-							<div class="datatable-bottom">
-		    					<div class="datatable-info">
-		    						총 n 개 중 i ~ j 개
-		    					</div>
-		    					
-		    					<!-- 페이징 Div-->
-		    					<nav aria-label="Page navigation example">
-				                	<ul class="pagination">
-				                  		<li class="page-item">
-				                    		<a class="page-link" href="#" aria-label="Previous">
-				                      			<span aria-hidden="true">&laquo;</span>
-				                    		</a>
-				                  		</li>
-				                  		<li class="page-item" th:each="num : ${ #numbers.sequence(1, pageCount) }">
-				                  			<a class="page-link" onclick="move_page(this.value)" href="javascript:void(0);">[[${ num }]]</a>
-				                  		</li>
-				                  		<li class="page-item">
-				                    		<a class="page-link" href="#" aria-label="Next">
-				                      			<span aria-hidden="true">&raquo;</span>
-				                    		</a>
-				                  		</li>
-				                	</ul>
-				              	</nav>
-				              	<!-- End 페이징 Div-->
-							</div>
+							<!-- End 상담이력 Table-->
+
 						</div>
-		             	<!-- End 상담이력 Table-->
-		
-            		</div>
-          		</div>
-          		<!-- End 상담 이력 검색 Card-->	
+					</div>
+					<!-- End 상담 이력 검색 Card-->
 
-        </div>
-      </div>
-    </section>                 
-  </main>
-  <!-- End #main -->
+				</div>
+			</div>
+		</section>
+	</main>
+	<!-- End #main -->
 
-  <div th:replace="~{/student/std_footer :: std_footer}"></div>	<!-- 학생 footer -->
-  
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+	<div th:replace="~{/student/std_footer :: std_footer}"></div>
+	<!-- 학생 footer -->
 
-  <!-- Vendor JS Files -->
-  <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="/assets/vendor/chart.js/chart.umd.js"></script>
-  <script src="/assets/vendor/echarts/echarts.min.js"></script>
-  <script src="/assets/vendor/quill/quill.js"></script>
-  <script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
-  <script src="/assets/vendor/php-email-form/validate.js"></script>
+	<a href="#"
+		class="back-to-top d-flex align-items-center justify-content-center"><i
+		class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Template Main JS File -->
-  <script src="/assets/js/main.js"></script>
-  <script src="/js/student/counsel_list.js?v=5"></script>
+	<!-- Vendor JS Files -->
+	<script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
+	<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="/assets/vendor/chart.js/chart.umd.js"></script>
+	<script src="/assets/vendor/echarts/echarts.min.js"></script>
+	<script src="/assets/vendor/quill/quill.js"></script>
+	<script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
+	<script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+	<script src="/assets/vendor/php-email-form/validate.js"></script>
+
+	<!-- Template Main JS File -->
+	<script src="/assets/js/main.js"></script>
+	<script src="/js/student/counsel_list.js?v=5"></script>
+	<script src="/js/student/list_paging.js?v=1"></script>
 </body>
 <script>
-window.onload=function(){
-	document.getElementById('counsel-nav').className = 'nav-link';
-	document.getElementById('counsel-nav1').className += ' show';
-    document.getElementById('counsel-nav-1').className += ' active';	
-}
+	window.onload = function() {
+		document.getElementById('counsel-nav').className = 'nav-link';
+		document.getElementById('counsel-nav1').className += ' show';
+		document.getElementById('counsel-nav-1').className += ' active';
+	}
 </script>
 </html>
