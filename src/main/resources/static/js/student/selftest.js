@@ -19,6 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
 
+	const resultQuestionTag = document.getElementById("result-question-list");
+
 	function openTestingModal(testNumber) {
 		// Modal Open 시 데이터 초기화
 		currentQuestionIndex = 0;
@@ -49,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 	
 	function openResultModal(testNumber) {
+		results = [];
 		fetch('./selftest_result/' + testNumber, {
 			method : "GET",
 			headers : { "content-type" : "application/x-www-form-urlencoded" }
@@ -60,9 +63,12 @@ document.addEventListener("DOMContentLoaded", () => {
 				location.reload();
 			}
 			else {
-				document.getElementById("test-title").innerText = currentInspName;
-				document.getElementById("test-title").innerText = currentInspName;
-				results = data;
+				document.getElementById("test-title").textContent = currentInspName;
+				document.getElementById("test-date").textContent = data['insp_dt'];
+				document.getElementById("test-expln").innerHTML = data['expln_cn'];
+				document.getElementById("user-testScore").textContent = data['myScore'];
+				results = data['ResponData'];
+				printResultModal();
 			}
 		}).catch(function() {
 			alert("오류 발생!");
@@ -146,6 +152,22 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     });
+
+	function printResultModal() {
+		resultQuestionTag.innerHTML = "";
+		var htmlcode = "";
+		results.forEach((data, node) => {
+			htmlcode += `
+					<li class="list-group-item">
+						<div class="question">질문 ${node+1}. ${data.qitem_flnm}</div>
+						<div class="answer-score">
+							<div class="answer">${data.ans_flnm}</div>
+							<div class="score">${data.scr}점</div>
+						</div>
+					</li>`
+		});
+		resultQuestionTag.innerHTML = htmlcode;
+	}
 
 	function insertTestResult(userData) {
 		fetch('./selftest_result/' + selectedTestNo, {

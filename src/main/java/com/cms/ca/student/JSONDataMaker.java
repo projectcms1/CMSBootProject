@@ -35,7 +35,7 @@ public class JSONDataMaker {
 		return mainDataJSON.toString();
 	}
 	
-	public String makeSelfTestData(List<selfTestQitem_dto> qitemList, List<selfTestAnswer_dto> answerList, List<selfTestResult_dto> resultList) {
+	public String makeSelfTestData(List<selfTestQitem_dto> qitemList, List<selfTestAnswer_dto> answerList) {
 		JSONObject mainDataJSON = new JSONObject();
 		
 		JSONArray ja_qitem = new JSONArray();
@@ -57,16 +57,6 @@ public class JSONDataMaker {
 			ja_qitem.put(jo_dump);
 		}
 		mainDataJSON.put("QitemData", ja_qitem);
-		
-		JSONArray ja_result = new JSONArray();
-		for (selfTestResult_dto rdto : resultList) {
-			JSONObject jo_dump = new JSONObject();
-			jo_dump.put("rslt_expln_no", rdto.getRslt_expln_no());
-			jo_dump.put("expln_cn", rdto.getExpln_cn());
-			jo_dump.put("se_scr", rdto.getSe_scr());
-			ja_result.put(jo_dump);
-		}
-		mainDataJSON.put("ResultData", ja_result);
 		
 		return mainDataJSON.toString();
 	}

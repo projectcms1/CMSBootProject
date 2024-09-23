@@ -31,8 +31,7 @@ public class SlfPsycInspServiceImpl implements SlfPsycInspService {
 	public String getAllDataOfOneInsp(String insp_no) {
 		List<selfTestQitem_dto> qitemList = this.inspRepo.getAllListQitem(insp_no);
 		List<selfTestAnswer_dto> answerList = this.inspRepo.getAllListAnswer(insp_no);
-		List<selfTestResult_dto> resultList = this.inspRepo.getAllListResult(insp_no);
-		return new JSONDataMaker().makeSelfTestData(qitemList, answerList, resultList);
+		return new JSONDataMaker().makeSelfTestData(qitemList, answerList);
 	}
 
 	@Override
@@ -74,8 +73,8 @@ public class SlfPsycInspServiceImpl implements SlfPsycInspService {
 	@Override
 	public String getUserSelfTestData(String stdnt_no, String insp_no) {
 		selfTestUserResult_dto rdto = new selfTestUserResult_dto();
-		rdto.setStdnt_no(stdnt_no);System.out.println(rdto.getStdnt_no());
-		rdto.setInsp_no(insp_no);System.out.println(rdto.getInsp_no());
+		rdto.setStdnt_no(stdnt_no);
+		rdto.setInsp_no(insp_no);
 		selfTestUserResult_dto ndto = this.inspRepo.getUserResultData(rdto);
 		List<selfTestResult_dto> resultList = this.inspRepo.getAllListResult(insp_no);
 		String expln_text = "";
@@ -84,7 +83,7 @@ public class SlfPsycInspServiceImpl implements SlfPsycInspService {
 				expln_text = dto_dump.getExpln_cn();
 			}
 		}
-		List<selfTestUserStats_dto> statsList = this.inspRepo.getUserAnswerData(rdto);
-		return new JSONDataMaker().makeUserResultData(statsList, ndto.getInsp_dt(), rdto.getInsp_scr_sum(), expln_text);
+		List<selfTestUserStats_dto> statsList = this.inspRepo.getUserAnswerData(ndto);
+		return new JSONDataMaker().makeUserResultData(statsList, ndto.getInsp_dt(), ndto.getInsp_scr_sum(), expln_text);
 	}
 }
