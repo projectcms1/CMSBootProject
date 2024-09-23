@@ -16,6 +16,7 @@ public interface stuser_service {
 	
 	int add_stuser_detail(student_dto stdto, String entrance_year);
 	
+	
 }
 
 

@@ -1,5 +1,7 @@
 package com.cms.ca.admin;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 public class add_stuserdata_maker {
@@ -20,7 +22,6 @@ public class add_stuserdata_maker {
 
 		// 학번 생성
 		String stdnt_no = entrance_year + randomStr;
-		System.out.println(stdnt_no);
 
 		return stdnt_no;
 	}
@@ -32,6 +33,15 @@ public class add_stuserdata_maker {
 		String bt = brdt.substring(4,8);
 		String pswd = tel+bt;
 		return pswd;
+	}
+	
+	
+	//지도교수 등록일시 만들기
+	public String addstuser_promatchtime_maker() {
+		Date dt = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+
+		return sdf.format(dt);
 	}
 
 }

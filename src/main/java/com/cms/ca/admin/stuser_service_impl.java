@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cms.ca.login_dto;
+import com.cms.ca.std_emp_dto;
 import com.cms.ca.student_dto;
 
 
@@ -54,6 +55,10 @@ public class stuser_service_impl implements stuser_service{
 		add_stuserdata_maker stuser_logindata_maker = new add_stuserdata_maker();
 		login_dto lgdto = new login_dto();
 
+		
+		//학생 생년월일 - 빼고 db에 넣기
+		stdto.setBrdt(stdto.getBrdt().replaceAll("-", ""));
+		
 		//학생 사용자 초기 비밀번호 만들기
 		lgdto.setPswd(stuser_logindata_maker.addstuser_pass_maker(stdto.getUser_telno(), stdto.getBrdt()));
 		
@@ -61,9 +66,28 @@ public class stuser_service_impl implements stuser_service{
 		String new_stdnt_no = stuser_logindata_maker.addstuser_stdntno_maker(entrance_year);
 		lgdto.setLgn_id(new_stdnt_no);
 		
-		
 		int stuser_insert_login= this.stuser_repo.add_stuser_login(lgdto);
-		return stuser_insert_login;
+		int stuser_insert_matchp = 0;
+		if(stuser_insert_login > 0) {
+			stdto.setStdnt_no(new_stdnt_no);
+			stdto.setUser_no(this.stuser_repo.match_st_userno(lgdto));
+			
+			int stuser_insert_detail = this.stuser_repo.add_stuser_detail(stdto);
+			if(stuser_insert_detail > 0) {
+				std_emp_dto sedto = new std_emp_dto();
+				
+				//전공에 따른 지도교수 넣기
+				sedto.setMjr(stdto.getMjr());
+				sedto.setStdnt_no(new_stdnt_no);
+				
+				//등록일시 넣기
+				sedto.setMatchtime(stuser_logindata_maker.addstuser_promatchtime_maker());
+				stuser_insert_matchp = this.stuser_repo.match_leadpro(sedto);
+				
+			}
+		}
+		
+		return stuser_insert_matchp;
 	}
 
 	

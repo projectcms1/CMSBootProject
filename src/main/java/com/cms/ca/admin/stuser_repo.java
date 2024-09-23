@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.cms.ca.login_dto;
+import com.cms.ca.std_emp_dto;
 import com.cms.ca.student_dto;
 
 @Mapper
@@ -23,6 +24,9 @@ public interface stuser_repo {
 	
 	int add_stuser_detail(student_dto stdto);
 	
+	Integer match_st_userno(login_dto lgdto);
+	
+	int match_leadpro(std_emp_dto sedto);
 	
 	
 }

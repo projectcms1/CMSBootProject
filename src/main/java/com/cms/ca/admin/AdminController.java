@@ -42,6 +42,7 @@ public class AdminController {
 		
 		if (search_part == null || search_word == null || search_part.equals("") || search_word.equals("")) {
 			m.addAttribute("student_list", this.stuser_service.student_list());
+			//===============여기서 lgn_info 데이터 가져와서 넣어줘야함 - 버그처리 : 검색시 이 데이터 안날라옴!!!!!!=======================
 		}
 		else {
 			m.addAttribute("search_part", search_part);

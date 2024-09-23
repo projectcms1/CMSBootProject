@@ -40,13 +40,24 @@ insert into LGN_ACNT_INFO (USER_NO, LGN_ID, PSWD,LAST_LGN_DT, ACNT_LCK_YN, REG_D
 values ('0', #{lgn_id}, #{pswd}, now(), 'N', now())
 </insert>
 
+<select id="match_st_userno" parameterType="com.cms.ca.login_dto" resultType="Integer">
+select USER_NO from LGN_ACNT_INFO where LGN_ID=#{lgn_id}
+</select>
+
 <insert id="add_stuser_detail" parameterType="com.cms.ca.student_dto">
 insert into STDNT_INFO
 (stdnt_no, stdnt_flnm, user_no, user_eml_addr, user_telno, user_zip, user_addr, user_daddr, user_photo, brdt, dlng_bank_nm, dlng_actno, dpstr_nm, univ_prd, ogdp_univ, ogdp_scsbjt, mjr, stdnt_stts_se)
-values ('0', #{stdnt_no}, #{stdnt_flnm}, #{user_no}, #{user_eml_addr}, #{user_telno}, #{user_zip}, #{user_addr}, #{user_daddr}, #{user_photo}, #{brdt}, #{dlng_bank_nm}, #{dlng_actno}, #{dpstr_nm}, #{univ_prd}
-#{ogdp_univ}, #{ogdp_scsbjt}, #{mjr}, #{stdnt_stts_se})
+values (#{stdnt_no}, #{stdnt_flnm}, #{user_no}, #{user_eml_addr}, #{user_telno},
+#{user_zip}, #{user_addr}, #{user_daddr}, #{user_photo}, #{brdt},
+#{dlng_bank_nm}, #{dlng_actno}, #{dpstr_nm}, '1', 
+#{ogdp_univ}, #{ogdp_scsbjt}, #{mjr}, '재학')
 </insert>
 
-<!-- 지도교수 추가하는 것은 추후에 고민하기,,,, -->
+<insert id="match_leadpro" parameterType="com.cms.ca.std_emp_dto">
+insert into STDNT_ACAVSR_INFO (stdnt_no, emp_no, tkcg_yn, bgng_ymd, end_ymd)
+values (#{stdnt_no}, (select MAX(EMP_NO) from EMP_INFO where MJR = #{mjr} and MNG_AUTHRT = 'P'), 'Y', #{matchtime}, '')
+</insert>
+
 <!-- 학생 사용자 추가 끝 -->
+
 </mapper>
