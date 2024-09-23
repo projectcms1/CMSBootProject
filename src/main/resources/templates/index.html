@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>중앙정보대학교</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+	
+	<!-- test -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/test.css}">
+    
+  <!-- Favicons -->
+  <link href="/assets/img/favicon.png" rel="icon">
+  <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Updated: Apr 20 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+	<!-- 로그인 전-->	
+	  <div th:if="${!#authorization.expression('hasRole(''USER'')')}">
+	  <header id="header" class="header fixed-top d-flex align-items-center">
+	
+	    <div class="d-flex align-items-center justify-content-between">
+	      <a href="index" class="logo d-flex align-items-center">
+	        <img src="/assets/img/logo.png" alt="" style="width: 30px;">
+	        <span class="d-none d-lg-block">중앙정보대학교</span>
+	      </a>      
+	    </div>
+	  </header><!-- End Header -->
+	</div>
+	<!-- 로그인 전 헤더 -->	
+
+	<!-- 학생로그인 시 헤더&사이드바 -->
+	<div th:if="${#authorization.expression('hasRole(''USER'')')}">			
+			<div th:replace="~{/student/std_header :: std_header}"></div>	<!-- Std Header -->
+			<div th:replace="~{/student/std_sidebar :: std_sidebar}"></div>	<!-- Std Sidebar -->
+	</div>
+	
+
+	<!-- ======= Header END ======= -->
+  <!-- ======= main ======= -->
+  <main style="width: calc(100% - 300px); margin-left: 300px;">
+		<div class="container">
+        <!-- Left Section: Login -->
+        <div class="left-section">
+        
+	        <!-- 일반 사용자 권한이 없을 시 -->
+	        <div th:if="${!#authorization.expression('hasRole(''USER'') or hasRole(''PROFESSOR'') or hasRole(''SUPER_ADMIN'')')}">
+	            <a class="login-button" href="/login">로그인</a>
+	            <button class="login-button secondary">수강신청 전용 로그인</button>
+            </div>
+            
+            <!-- 학생 로그인 성공 -->
+			<div th:if="${#authorization.expression('hasRole(''USER'')')}">
+			    <h3>Student Section</h3>
+			    <p>학생 로그인</p>
+			</div>
+			
+            <!-- Information Links 
+            <ul class="info-links">
+                <li><a href="extra_indexok.do">비교과프로그램</a></li>
+                <li><a href="#">1:1 채팅상담</a></li>
+                <li><a href="#">인터넷증명발급</a></li>
+                <li><a href="#">시간표조회</a></li>
+            </ul>-->
+            <div class="navigation-container">
+        <div class="navigation-row">        
+            <a href="extra_indexok.do" class="navigation-item">
+                <i class="bx bx-category"></i>
+                <div class="nav-text">
+                    <h3>비교과 프로그램</h3>
+                    <p>바로가기 &gt;</p>
+                </div>
+            </a>
+            <a href="#" class="navigation-item">    
+                <i class="bx bxs-chat"></i>
+                <div class="nav-text">
+                    <h3>1:1 채팅상담</h3>
+                    <p>바로가기 &gt;</p>
+                </div>
+            </a>
+        </div>
+        <div class="navigation-row">
+            <a href="#" class="navigation-item">
+                <i class="bx bx-laptop"></i>
+                <div class="nav-text">
+                    <h3>인터넷증명발급</h3>
+                    <p>바로가기 &gt;</p>
+                </div>
+            </a>
+            <a href="#" class="navigation-item">
+                <i class="bi bi-calendar-range"></i>
+                <div class="nav-text">
+                    <h3>시간표조회</h3>
+                    <p>바로가기 &gt;</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    </div>
+	
+        <!-- Right Section: Notices [공지사항 part]-->
+        <div class="right-section">
+            <!-- Notice Header and Categories -->
+            <div class="notices">
+                <div class="notice-header">
+                    <h2>공지사항</h2>
+                    <div class="category-tabs">
+                        <button class="category active" data-category="academic">학사</button>
+                        <button class="category" data-category="scholarship">교직원</button>
+                        <button class="category" data-category="volunteer">비교과</button>
+                    </div>
+                </div>
+                <!-- Notices Lists -->
+                <ul class="notice-list" id="academic">
+                    <li><a href="#">2024-2학기 온라인 강좌 증원 추가 안내</a> <span class="date">2024-09-02</span></li>
+                    <li><a href="#">2024-2학기 소그룹채플 안내: 개강일, 소그룹 조배정 현황</a> <span class="date">2024-08-30</span></li>
+                    <li><a href="#">2024년 2학기 장학금 신청 안내</a> <span class="date">2024-08-30</span></li>
+                    <li><a href="#">취업박람회 참가자 모집 공고</a> <span class="date">2024-08-30</span></li>
+                    <li><a href="#">코로나19 대응 방침 업데이트</a> <span class="date">2024-08-30</span></li>
+                    <li><a href="#">2024-2학기 소그룹채플 안내: 개강일, 소그룹 조배정 현황</a> <span class="date">2024-08-30</span></li>
+                    <li><a href="#">산학협력 프로그램 참여 안내</a> <span class="date">2024-08-30</span></li>
+                    <li><a href="#">국제교류 프로그램 참가자 모집 공고</a> <span class="date">2024-08-30</span></li>
+                </ul>
+                
+                <ul class="notice-list hidden" id="scholarship">
+                    <li><a href="#">2024-장학금 신청 안내</a> <span class="date">2024-08-25</span></li>
+                </ul>
+
+                <ul class="notice-list hidden" id="volunteer">
+                    <li><a href="#">봉사활동 참가 신청 안내</a> <span class="date">2024-08-20</span></li>
+                </ul>
+
+                <ul class="notice-list hidden" id="international">
+                    <li><a href="#">2024-2학기 국제교류 프로그램 안내</a> <span class="date">2024-08-18</span></li>
+                </ul>
+
+                <ul class="notice-list hidden" id="events">
+                    <li><a href="#">비교과 행사 안내</a> <span class="date">2024-08-10</span></li>
+                </ul>
+            </div>
+        </div>
+     </div>
+      
+</main>
+
+  <!-- ======= Footer ======= -->
+  <footer class="footer">
+    <!-- Contact Information -->
+            <div class="contact-info">
+                <p>아이디/비밀번호 문의: 02-820-0067~8</p>
+                <p>개인정보처리방침</p>
+                <address>
+                    06978 서울시 동작구 상도로 369 숭실대학교 TEL. 02-820-0114<br>
+                    Copyright Soongsil University All Rights Reserved.
+                </address>
+                <p>문의사항은 메일로 보내주세요: <a href="mailto:sos@soongsil.dooray.com">sos@soongsil.dooray.com</a></p>
+            </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <!-- Template Main JS File -->
+  <script src="/assets/js/main.js"></script>
+  <script src="/js/scripts.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+@charset "UTF-8";
+/* Students Modal*/
+.row > button {
+	width: 100px;
+}
+div:has(> input[type='date']) {
+	display: inline-block;
+	margin-top: 10px;
+}
+
+.col-lg-2 {
+	margin-top: 10px;
+	margin-left: 10px;
+	width:15%;
+}
+
+.col-lg-4 {
+	margin-left: 5px;
+	padding: 0px;
+}
