@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cms.ca.counsel_dto;
 import com.cms.ca.employee_dto;
+import com.cms.ca.search_dto;
 import com.cms.ca.view_counsel_dto;
 
 import jakarta.annotation.Resource;
@@ -64,12 +65,7 @@ public class EmployeeController {
 			int updateck=0;
 			res.setContentType("text/html;charset=utf-8");
 			this.pw=res.getWriter();
-			
-			System.out.println(updatedData.getEmp_zip());
-			System.out.println(updatedData.getEmp_addr());
-			System.out.println(updatedData.getEmp_daddr());
 			updateck=this.empyService.updateEmployeeInfo(updatedData);	//데이터 수정 체크
-			System.out.println(updateck);
 			if(updateck>0) {	//데이터 업데이트 success
 				m.addAttribute("empy_info", this.oneData);
 				this.pw.print("<script>"
@@ -94,13 +90,23 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/employee/empy_counsel_index")
-	public String employeeCounselIndexPage(Model m, @ModelAttribute("params") search_dto params) {	//교번에 해당하는 완료 상담 정보와 개수 로드
+	public String employeeCounselIndexPage(Model m, @ModelAttribute("params") search_dto params, ServletResponse res) {	//교번에 해당하는 완료 상담 정보와 개수 로드
 		try {
 			List<view_counsel_dto> counsel_list = this.empyService.getAllCounsel(emp_no, params);
 			int counsel_list_count = this.empyService.getAllCounselCount(emp_no);	
+			int maxpage=(int)Math.ceil((double)counsel_list_count/params.getSize());
+			if(maxpage<params.getPage()) {
+				res.setContentType("text/html;charset=utf-8");
+				this.pw=res.getWriter();
+				this.pw.print("<script>"
+					+ "alert('잘못된 페이지 접근입니다.');"
+					+ "history.go(-1);"
+					+ "</script>");
+				this.pw.close();
+			}
 			m.addAttribute("counsel_list", counsel_list);
 			m.addAttribute("counsel_list_count", counsel_list_count);
-			m.addAttribute("maxpage", (int)Math.ceil(counsel_list_count/params.getSize()));
+			m.addAttribute("maxpage", maxpage);
 		} 
 		catch (Exception e) {
 			e.printStackTrace();

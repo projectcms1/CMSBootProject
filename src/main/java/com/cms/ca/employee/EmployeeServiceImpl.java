@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.cms.ca.counsel_dto;
 import com.cms.ca.employee_dto;
+import com.cms.ca.search_dto;
 import com.cms.ca.view_counsel_dto;
 
 import jakarta.annotation.Resource;

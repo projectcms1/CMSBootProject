@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.cms.ca.counsel_dto;
 import com.cms.ca.employee_dto;
+import com.cms.ca.search_dto;
 import com.cms.ca.view_counsel_dto;
 
 public interface EmployeeService {

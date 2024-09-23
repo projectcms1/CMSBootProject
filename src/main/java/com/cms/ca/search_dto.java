@@ -1,4 +1,4 @@
-package com.cms.ca.employee;
+package com.cms.ca;
 
 import lombok.Data;
 
