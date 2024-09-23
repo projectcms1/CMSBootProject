@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cms.ca.counsel_dto;
 import com.cms.ca.employee_dto;
-import com.cms.ca.search_dto;
 import com.cms.ca.student_dto;
 
 import jakarta.servlet.ServletResponse;
@@ -38,26 +37,7 @@ public class AdminController {
 	
 	//학생 사용자 리스트 출력 및 검색
 	@GetMapping("/stlistmod")
-	public String stlist_mod(Model m, @RequestParam(value = "", required = false) String search_part, @RequestParam(value = "", required = false) String search_word,
-			@ModelAttribute("params") search_dto params, ServletResponse res) {
-		
-		/*
-		int stlist_count = this.stuser_service.getall_stuser_count();	
-		int stlist_maxpage=(int)Math.ceil((double)stlist_count/params.getSize());
-		if(stlist_maxpage<params.getPage()) {
-			res.setContentType("text/html;charset=utf-8");
-			this.pw=res.getWriter();
-			this.pw.print("<script>"
-				+ "alert('잘못된 페이지 접근입니다.');"
-				+ "history.go(-1);"
-				+ "</script>");
-			this.pw.close();
-		}
-		m.addAttribute("counsel_list", counsel_list);
-		m.addAttribute("counsel_list_count", counsel_list_count);
-		m.addAttribute("maxpage", maxpage);
-		*/
-		
+	public String stlist_mod(Model m, @RequestParam(value = "", required = false) String search_part, @RequestParam(value = "", required = false) String search_word) {
 		
 		//검색파트 및 리스트출력
 		if (search_part == null || search_word == null || search_part.equals("") || search_word.equals("")) {

@@ -92,15 +92,6 @@ public class stuser_service_impl implements stuser_service{
 		
 		return stuser_insert_matchp;
 	}
-
-	@Override
-	public int getall_stuser_count() {
-		int stuser_ctn = this.stuser_repo.getall_stuser_count();
-		return stuser_ctn;
-	}
-
-	
-	
 	
 }
 
