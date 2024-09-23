@@ -19,16 +19,16 @@ function personal_save(){
 	
 	var email=emp_eml_addr.value;
 	var tel=emp_telno.value;
-	
-	if(!regex_email.test(email)){
-		alert("이메일을 형식에 맞게 입력해주세요.");
-	}
-	if(tel.length!=11){
-		alert("전화번호 11자리 숫자를 모두 입력해주세요.");
-	}
-	else{
-		alert("개인정보가 정상적으로 변경되셨습니다.");
-		personal_info.submit();
+	if(emp_eml_addr.disabled==false && emp_telno.disabled==false){
+		if(!regex_email.test(email)){
+			alert("이메일을 형식에 맞게 입력해주세요.");
+		}
+		else if(tel.length!=11){
+			alert("전화번호 11자리 숫자를 모두 입력해주세요.");
+		}
+		else{
+			personal_info.submit();
+		}		
 	}
 }
 
@@ -49,8 +49,9 @@ function addr_input(){
 }
 
 function addr_save(){
-	alert("거주지 정보가 정상적으로 변경되셨습니다.");
-	addr_info.submit();
+	if(emp_zip.disabled==false && emp_addr.disabled==false && emp_daddr.disabled==false && emp_addr_search_btn.disabled==false){
+		addr_info.submit();
+	}
 }
 
 function bank_input(){
@@ -68,8 +69,9 @@ function bank_input(){
 }
 
 function bank_save(){
-	alert("계좌 정보가 정상적으로 변경되셨습니다.");
-	bank_info.submit();
+	if(dlng_bank_nm.disabled==false &&	dlng_actno.disabled==false){	
+		bank_info.submit();
+	}
 }
 
 

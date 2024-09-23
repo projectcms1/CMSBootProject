@@ -28,6 +28,8 @@
 
 <!-- Template Main CSS File -->
 <link href="/assets/css/style.css" rel="stylesheet">
+
+<!-- Employee Counsel Add File -->
 <link href="/assets/css/empy.css" rel="stylesheet">
 
 <!-- =======================================================
@@ -61,56 +63,60 @@
 	    <section class="section">
 	    	<div class="row">
 	        	<div class="col-lg-12">
-	        	
-	        	<div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
-            	   	상담시간 수정해야함.
-                	<button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
-              	</div>
               	
 					<!-- 상담 추가 Card -->
-					<div class="card">
+					<div class="card"> 
 				  		<div class="card-body">
 							<h5 class="card-title">상담추가</h5>
 					  		
-              				<form>
+              				<form id="counsel_add" th:object="${csl_dto}" action="/employee/empy_counsel_addok" method="post" onsubmit="return counsel_add();">
+              					<input type="hidden" name="std_name_ck" value="">
 			                	<div class="row mb-3" align="center" style="margin-left: 5%;">
-			                  		<label for="inputText" class="col-sm-1 col-form-label">학생이름</label>
-			                  		<div class="col-sm-4">
-			                    		<input type="text" class="form-control">
-			                  		</div>
 			                  		<label for="inputEmail" class="col-sm-1 col-form-label">학생학번</label>
 			                  		<div class="col-sm-4">
-			                    		<input type="email" class="form-control">
+			                    		<input type="text" class="form-control" placeholder="학번 8자리를 입력해주세요" th:field="*{stdnt_no}"
+			                    		onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="8" onblur="stdnt_no_check(this.value)">
+			                  		</div>
+			                  		<label for="inputText" class="col-sm-1 col-form-label">학생이름</label>
+			                  		<div class="col-sm-4">
+			                    		<input type="text" class="form-control" placeholder="학번 입력시 자동입력됩니다" name="stdnt_flnm" readOnly>
 			                  		</div>
 			                	</div>
 			                	<div class="row mb-3" align="center" style="margin-left: 5%;">
 			                  		<label for="inputDate" class="col-sm-1 col-form-label">상담일자</label>
 			                  		<div class="col-sm-4">
-			                    		<input type="date" class="form-control">
+			                    		<input type="date" class="form-control" th:field="*{rsvt_dt}">
 			                  		</div>
 			                  		<label for="inputTime" class="col-sm-1 col-form-label">상담시간</label>
 			                  		<div class="col-sm-4">
-			                    		<input type="time" class="form-control">
+			                    		<select class="form-select" th:field="*{hr_se}" >
+						                    <option value="" selected="selected">상담시간을 선택해주세요</option>
+						                    <option value="1">1교시(09:00~10:15)</option>
+						                    <option value="2">2교시(10:30~11:45)</option>
+						                    <option value="3">3교시(13:00~14:15)</option>
+						                    <option value="4">4교시(14:30~15:45)</option>
+						                    <option value="5">5교시(16:00~17:15)</option>
+						                </select>
 			                  		</div>
 			                	</div>
 			                	<div class="row mb-3" align="center" style="margin-left: 5%;">
 			                  		<label class="col-sm-1 col-form-label">상담종류</label>
 			                 	 	<div class="col-sm-4">
-			                    		<select class="form-select" aria-label="Default select example">
-			                      			<option selected>상담 종류를 선택해주세요</option>
-			                      			<option value="1">학업</option>
-			                      			<option value="2">진로</option>
-			                      			<option value="3">심리</option>
+			                    		<select class="form-select" th:field="*{dscsn_knd}">
+			                      			<option value="" selected>상담종류를 선택해주세요</option>
+			                      			<option value="학업">학업</option>
+			                      			<option value="진로">진로</option>
+			                      			<option value="심리">심리</option>
 			                    		</select>
 			                  		</div>
 			                  		<label class="col-sm-1 col-form-label">상담방식</label>
 			                  		<div class="col-sm-4">
-			                    		<select class="form-select" aria-label="Default select example">
-			                      			<option selected>상담 방식을 선택해주세요</option>
-			                      			<option value="1">대면</option>
-			                      			<option value="2">채팅</option>
-			                      			<option value="3">화상</option>
-			                      			<option value="3">전화</option>
+			                    		<select class="form-select" th:field="*{dscsn_mthd}">
+			                      			<option value="" selected>상담방식을 선택해주세요</option>
+			                      			<option value="대면">대면</option>
+			                      			<option value="채팅">채팅</option>
+			                      			<option value="화상">화상</option>
+			                      			<option value="전화">전화</option>
 			                    		</select>
 			                  		</div>
 			                	</div>
@@ -154,6 +160,15 @@
 		document.getElementById('counsel-nav1').className += ' show';
     	document.getElementById('counsel-nav-3').className += ' active';	
 	}
+	
+	//달력 선택 날짜 당일부터 2달 후까지로 설정
+	let today=new Date();
+	let endday=new Date();
+	endday.setMonth(endday.getMonth()+2);
+	endday.setDate(endday.getDate()-1);
+	document.getElementById("rsvt_dt").setAttribute("min", today.toISOString().substring(0,10));
+	document.getElementById("rsvt_dt").setAttribute("max", endday.toISOString().substring(0,10));
 </script>
+<script src="/js/employee/empy_counsel.js"></script>
 
 </html>

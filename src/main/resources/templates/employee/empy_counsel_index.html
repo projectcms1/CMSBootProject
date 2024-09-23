@@ -64,7 +64,7 @@
         		<!-- 상담이력 검색 Card-->
           		<div class="card">
             		<div class="card-body">
-              			<h5 class="card-title">상담이력검색</h5>
+              			<h5 class="card-title">상담이력조회</h5>
 		              	
 	    				<div th:replace="~{/employee/empy_counsel_modal :: empy_counsel_modal}"></div>	<!-- Empy Counsel Modal -->
 	    				
@@ -75,10 +75,10 @@
 				     			<!-- per-page Dropdown -->
 		    					<div class="datatable-dropdown">
 		            				<label>
-		                				<select class="datatable-selector" name="per-page">
-		                					<option value="5" selected>5개씩 보기</option>
-		                					<option value="10">10개씩 보기</option>
-		                					<option value="-1">전체 보기</option>
+		                				<select class="datatable-selector" id="per-page" onchange="perpagesizechange()">
+		                					<option value="5" th:selected="${params.size}=='5'">5개씩 보기</option>
+		                					<option value="10" th:selected="${params.size}=='10'">10개씩 보기</option>
+		                					<option value="20" th:selected="${params.size}=='20'">20개씩 보기</option>
 		                				</select>
 		            				</label>
 		        				</div>
@@ -88,12 +88,12 @@
 			    				<div class="search-bar ">
 						      		<form class="search-form d-flex align-items-center" method="POST" action="#">
 					                  	<select id="inputState" class="form-select" style="width: 180px;">
-					                    	<option selected>전체</option>
-					                    	<option>상담일자</option>
-					                    	<option>학생이름</option>
-					                    	<option>학생학번</option>
-					                    	<option>상담종류</option>
-					                    	<option>상담방식</option>
+					                    	<option value="">전체</option>
+					                    	<option value="${counsel.getRsvt_dt}">상담일자</option>
+					                    	<option value="${counsel.getStdnt_flnm}">학생이름</option>
+					                    	<option value="${counsel.getStdnt_no}">학생학번</option>
+					                    	<option value="${counsel.getDscsn_knd}">상담종류</option>
+					                    	<option value="${counsel.getAply_sn}">상담방식</option>
 					                  	</select>
 				                  		<input type="text" class="form-control" placeholder="Search" style="margin-left: 5px;">
 						        		<button type="submit" title="Search" class="btn" style="border-color: g"><i class="bi bi-search"></i></button>
@@ -124,68 +124,79 @@
 				                    	</tr>
 				                    </thead>
 				                    <tbody>
-					                  	<tr>
-					                    	<td>2021/02/11</td>
-					                    	<td>김하나</td>
-					                    	<td>20201423</td>
-					                    	<td>학업상담</td>
-					                    	<td>
-					                    		채팅상담
-												<button type="button" class="btn btn-outline-info btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable" style="float: right; margin-left: 5px;">상세보기</button>
-					                    	</td>
-					                  	</tr>
-					                  	<tr>
-					                    	<td>2021/02/14</td>
-					                    	<td>이지혜</td>
-					                    	<td>20181423</td>
-					                    	<td>진로상담</td>
-					                    	<td>
-					                    		대면상담
-												<button type="button" class="btn btn-outline-info btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable" style="float: right; margin-left: 5px;">상세보기</button>
-					                    	</td>
-					                  	</tr>
-					                  	<tr>
-					                    	<td>2021/07/24</td>
-					                    	<td>김하나</td>
-					                    	<td>20201423</td>
-					                    	<td>진로상담</td>
-					                    	<td>
-					                    		대면상담
-												<button type="button" class="btn btn-outline-info btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable" style="float: right; margin-left: 5px;">상세보기</button>
-					                    	</td>
-					                  	</tr>
-					                  	<tr>
-					                    	<td>2017/04/21</td>
-					                    	<td>허준</td>
-					                    	<td>20051231</td>
-					                    	<td>진로상담</td>
-					                    	<td>
-					                    		화상상담
-												<button type="button" class="btn btn-outline-info btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable" style="float: right; margin-left: 5px;">상세보기</button>
-					                    	</td>
-					                  	</tr>
+										<tr th:if="${counsel_list_count}== 0">
+										    <td colspan="6"  class="first last" style="text-align: center;">조회 결과가 없습니다.</td> 
+										</tr>
+					                  	<tr th:each="counsel : ${counsel_list}">
+							                <td th:text="${counsel.getRsvt_dt.substring(0,4)+'/'+counsel.getRsvt_dt.substring(4,6)+'/'+counsel.getRsvt_dt.substring(6,8)}"/>
+							                <td th:text="${counsel.getStdnt_flnm}"/>
+							                <td th:text="${counsel.getStdnt_no}"/>
+							                <td th:text="${counsel.getDscsn_knd}"/>
+							                <td>[[${counsel.getDscsn_mthd}]]
+							                    <button type="button" class="btn btn-outline-info btn-sm rounded-pill" 
+												data-bs-toggle="modal" data-bs-target="#modalDialogScrollable" 
+												style="float: right; margin-left: 5px;" 
+												th:value="${counsel.getAply_sn}">상세보기</button>
+							                </td>
+							            </tr>
 					                </tbody>
 				                </table>
 				            </div>
 				            
 							<div class="datatable-bottom">
-		    					<div class="datatable-info">
-		    						총 n 개 중 i ~ j 개
+		    					<div class="datatable-info" th:if="${counsel_list_count}<${params.getPage()}*${params.getSize()} and ${maxpage}>=${params.getPage()}"> <!-- 마지막 페이지일때 -->
+		    						<input type="hidden" id="counsel_count" th:value="${counsel_list_count}">
+		    						<div>총 [[${counsel_list_count}]]개 중 [[(${params.getPage}-1)*${params.size}]]~[[${counsel_list_count}]]번째</div>
+		    					</div>
+		    					<div class="datatable-info" th:if="${counsel_list_count}>=${params.getPage}*${params.size} and ${maxpage}>=${params.getPage()}"> <!-- 마지막 페이지가 아닐 때 -->
+		    						<input type="hidden" id="counsel_count" th:value="${counsel_list_count}">
+		    						<div>총 [[${counsel_list_count}]]개 중 [[(${params.getPage}-1)*${params.size}+1]]~[[${params.getPage}*${params.size}]]번째</div>
 		    					</div>
 		    					
 		    					<!-- 페이징 Div-->
-		    					<nav aria-label="Page navigation example">
-				                	<ul class="pagination">
-				                  		<li class="page-item">
-				                    		<a class="page-link" href="#" aria-label="Previous">
+		    					<nav class="datatable-pagination" aria-label="Page navigation example">
+		    						<input type="hidden" id="maxpage" th:value="${maxpage}">
+		    						<input type="hidden" id="page" th:value="${params.getPage}">
+				                	<ul class="datatable-pagination-list">
+				                  		<li class="datatable-pagination-list-item">
+				                    		<a class="datatable-pagination-list-item-link" aria-label="Previous" onclick="firstNlastPage('first')">
 				                      			<span aria-hidden="true">&laquo;</span>
 				                    		</a>
 				                  		</li>
-				                  		<li class="page-item"><a class="page-link" href="#">1</a></li>
-				                  		<li class="page-item"><a class="page-link" href="#">2</a></li>
-				                  		<li class="page-item"><a class="page-link" href="#">3</a></li>
-				                  		<li class="page-item">
-				                    		<a class="page-link" href="#" aria-label="Next">
+				                  		<th:block th:if="${maxpage}<=4"> <!-- 최대 페이지가 4이하일때는 모든 페이지 출력 -->
+					                  		<li class="datatable-pagination-list-item" th:each="num:${#numbers.sequence(1, maxpage)}">
+					                  			<a class="datatable-pagination-list-item-link selectedPage">[[${num}]]</a>
+					                  		</li>
+										</th:block>
+				                  		<th:block th:if="${params.getPage}<=2 and ${maxpage}>4"> <!-- 최대 페이지가 4초과, 현재 페이지가 2이하일때 -->
+					                  		<li class="datatable-pagination-list-item" th:each="num:${#numbers.sequence(1,3)}">
+					                  			<a class="datatable-pagination-list-item-link selectedPage">[[${num}]]</a>
+					                  		</li>
+					                  		<li class="datatable-pagination-list-item">
+				                  				<a class="datatable-pagination-list-item-link" style="background-color: white !important; cursor: default !important;">...</a>
+				                  			</li>
+										</th:block>
+										<th:block th:if="${params.getPage}<= (${maxpage}-2) and ${params.getPage}>2 and ${maxpage}>4"> <!-- 최대 페이지가 4초과, 현재 페이지가 중간 부분일때 -->
+											<li class="datatable-pagination-list-item">
+				                  				<a class="datatable-pagination-list-item-link" style="background-color: white !important; cursor: default !important;">...</a>
+				                  			</li>
+					                  		<li class="datatable-pagination-list-item" th:each="num:${#numbers.sequence(params.getPage-1,params.getPage+1)}">
+					                  			<a class="datatable-pagination-list-item-link selectedPage">[[${num}]]</a>
+					                  		</li>
+					                  		<li class="datatable-pagination-list-item">
+				                  				<a class="datatable-pagination-list-item-link" style="background-color: white !important; cursor: default !important;">...</a>
+				                  			</li>
+										</th:block>
+				                  		<th:block th:if="${params.getPage}>${maxpage-2} and ${maxpage}>4"> <!-- 최대 페이지가 4초과, 현재 페이지가 마지막페이지(와 그직전)일때 -->
+											<li class="datatable-pagination-list-item">
+				                  				<a class="datatable-pagination-list-item-link" style="background-color: white !important; cursor: default !important;">...</a>
+				                  			</li>
+					                  		<li class="datatable-pagination-list-item" th:each="num:${#numbers.sequence(maxpage-2,maxpage)}">
+					                  			<a class="datatable-pagination-list-item-link selectedPage">[[${num}]]</a>
+					                  		</li>
+										</th:block>	
+				                  		<li class="datatable-pagination-list-item">
+				                    		<a class="datatable-pagination-list-item-link"aria-label="Next" onclick="firstNlastPage('last')">
 				                      			<span aria-hidden="true">&raquo;</span>
 				                    		</a>
 				                  		</li>
@@ -232,5 +243,6 @@
     	document.getElementById('counsel-nav-1').className += ' active';	
 	}
 </script>
+<script src="/js/employee/empy_counsel.js"></script>
 
 </html>
