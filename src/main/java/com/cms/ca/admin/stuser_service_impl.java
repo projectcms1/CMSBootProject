@@ -34,6 +34,9 @@ public class stuser_service_impl implements stuser_service{
 		mp.put("search_part", search_part);
 		mp.put("search_word", search_word);
 		List<student_dto> studentlist_one_data = this.stuser_repo.student_search_list(mp);
+		for (student_dto stdto : studentlist_one_data) {
+			stdto.setGrade();
+		}
 		return studentlist_one_data;
 	}
 
@@ -88,6 +91,12 @@ public class stuser_service_impl implements stuser_service{
 		}
 		
 		return stuser_insert_matchp;
+	}
+
+	@Override
+	public int getall_stuser_count() {
+		int stuser_ctn = this.stuser_repo.getall_stuser_count();
+		return stuser_ctn;
 	}
 
 	

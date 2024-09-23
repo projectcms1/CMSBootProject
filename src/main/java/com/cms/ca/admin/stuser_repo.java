@@ -28,5 +28,6 @@ public interface stuser_repo {
 	
 	int match_leadpro(std_emp_dto sedto);
 	
+	int getall_stuser_count();
 	
 }
