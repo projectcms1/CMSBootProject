@@ -21,9 +21,15 @@ function openDetailModal(cidx) {
 	}).then(function(response) {
 		return response.json();
 	}).then(function(data) {
-		makeModal(data);
-	}).catch(function(error) {
-		console.log(error)
+		if (data[0] == "error") {
+			alert("오류가 발생하였습니다.");
+		}
+		else {
+			makeModal(data);
+		}
+	}).catch(function() {
+		alert("오류 발생!");
+		location.href = '/blank';
 	});
 }
 

@@ -74,7 +74,7 @@
 		            <ol class="list-group list-group-numbered">
 		                <li class="list-group-item d-flex justify-content-between align-items-start" th:each="inspData : ${ inspList }">
 		                  	<div class="ms-2 me-auto">
-		                    	<div class="fw-bold">[[${ inspData.getPsyc_insp_flnm() }]]</div>
+		                    	<div class="fw-bold test-name">[[${ inspData.getPsyc_insp_flnm() }]]</div>
 		                    	[[${ inspData.getInsp_expln() }]]
 		                  	</div>
 		                  	<button class="btn btn-primary rounded-pill modal-button" th:value="${ inspData.getInsp_no() }" data-bs-toggle="modal" data-bs-target="#modalSelfTesting" style="margin-left: 5px; align-self: center; min-width: 90px;">검사하기</button>

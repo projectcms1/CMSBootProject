@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let selectedTestNo = ""; // 선택 검사 번호
     let results = [];
     const responses = {};
+    
+    const inspNameClass = document.getElementsByClassName("test-name");
+    let currentInspName = "";
 
     const questionNumberElement = document.getElementById('question-number');
     const questionTotalNumberElement = document.getElementById('total-questions');
@@ -28,15 +31,20 @@ document.addEventListener("DOMContentLoaded", () => {
 		
 		fetch('./selftest_detail_info/' + selectedTestNo, {
 			method : "POST",
-			headers : { "content-type" : "application/json" }
+			headers : { "content-type" : "application/x-www-form-urlencoded" }
 		}).then(function(response) {
 			return response.json();
 		}).then(function(data) {
-			questions = data.QitemData;
-			results = data.ResultData;
-			updateQuestion();
-		}).catch(function(error) {
-			console.log(error)
+			if (data.QitemData == "error") {
+				alert("오류가 발생하였습니다.");
+			}
+			else {
+				questions = data.QitemData;
+				updateQuestion();
+			}
+		}).catch(function() {
+			alert("오류 발생!");
+		location.href = '/blank';
 		});
 	}
 	
@@ -45,11 +53,20 @@ document.addEventListener("DOMContentLoaded", () => {
 			method : "GET",
 			headers : { "content-type" : "application/x-www-form-urlencoded" }
 		}).then(function(response) {
-			return response.text();
+			return response.json();
 		}).then(function(data) {
-			document.getElementById("result-body").innerText = data;
-		}).catch(function(error) {
-			console.log(error)
+			if (data.insp_dt == "error") {
+				alert("해당 심리검사를 진행한 기록이 없습니다.");
+				location.reload();
+			}
+			else {
+				document.getElementById("test-title").innerText = currentInspName;
+				document.getElementById("test-title").innerText = currentInspName;
+				results = data;
+			}
+		}).catch(function() {
+			alert("오류 발생!");
+			location.href = '/blank';
 		});
 	}
 
@@ -145,18 +162,21 @@ document.addEventListener("DOMContentLoaded", () => {
 			else {
 				alert("오류가 발생하여 저장되지 않았습니다.");
 			}
-		}).catch(function(error) {
-			console.log(error)
+		}).catch(function() {
+			alert("오류 발생!");
+			location.href = '/blank';
 		});
 	}
 
-    modalOpenButtons.forEach(button => {
+    modalOpenButtons.forEach((button, node) => {
 		button.addEventListener('click', () => {
+			currentInspName = inspNameClass[node].innerText;
 			openTestingModal(button.value);
 		})
 	})
-    resultOpenButtons.forEach(button => {
+    resultOpenButtons.forEach((button, node) => {
 		button.addEventListener('click', () => {
+			currentInspName = inspNameClass[node].innerText;
 			openResultModal(button.value);
 		})
 	})

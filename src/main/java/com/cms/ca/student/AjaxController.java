@@ -3,6 +3,8 @@ package com.cms.ca.student;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,6 +31,9 @@ public class AjaxController {
 	@Resource(name = "insp_service")
 	private SlfPsycInspService inspSrvc;
 	
+	JSONObject errorObj = null;
+	JSONArray errorArr = null;
+	
 	// 상담사+지도교수 시간표 SELECT - AJAX
 	@GetMapping("/api/professor_time")
 	public String professor_time() {
@@ -36,7 +41,9 @@ public class AjaxController {
 		try {
 			callback = this.stdSrvc.getAllEmpTimeTable(this.STD_NUMBER);
 		} catch (Exception e) {
-			callback = "error";
+			this.errorObj = new JSONObject();
+			this.errorObj.put("cnslr", "error");
+			callback = this.errorObj.toString();
 		}
 		return callback;
 	}
@@ -49,7 +56,9 @@ public class AjaxController {
 			List<view_counsel_dto> result = this.stdSrvc.getListModalData(aply_sn);
 			callback = new JSONDataMaker().makeCounselDetail(result);
 		} catch (Exception e) {
-			callback = "error";
+			this.errorArr = new JSONArray();
+			this.errorArr.put("error");
+			callback = this.errorArr.toString();
 		}
 		return callback;
 	}
@@ -61,7 +70,9 @@ public class AjaxController {
 		try {
 			callback = this.inspSrvc.getAllDataOfOneInsp(insp_no);
 		} catch (Exception e) {
-			callback = "error";
+			this.errorObj = new JSONObject();
+			this.errorObj.put("QitemData", "error");
+			callback = this.errorObj.toString();
 		}
 		return callback;
 	}
@@ -87,7 +98,9 @@ public class AjaxController {
 			callback = this.inspSrvc.getUserSelfTestData(this.STD_NUMBER, insp_no);
 		} catch (Exception e) {
 			e.printStackTrace();
-			callback = "error";
+			this.errorObj = new JSONObject();
+			this.errorObj.put("insp_dt", "error");
+			callback = this.errorObj.toString();
 		}
 		return callback;
 	}

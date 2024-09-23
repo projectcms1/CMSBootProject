@@ -31,7 +31,15 @@ const TimeTableList = ["<option value=''>시간 선택</option>", "<option value
 	}).then(function(result_data) {
 		return result_data.json();
 	}).then(function(result_res) {
-		exreservData = result_res;
+		if (result_res['cnslr'] == "error") {
+			alert("오류가 발생하였습니다.");
+		}
+		else {
+			exreservData = result_res;
+		}
+	}).catch(function() {
+		alert("오류 발생!");
+		location.href = '/blank';
 	});
 }());
 
