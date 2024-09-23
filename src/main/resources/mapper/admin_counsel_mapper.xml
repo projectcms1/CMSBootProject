@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cms.ca.admin.counsel_repo">
-<select id="counsel_list" resultType="com.cms.ca.view_counsel_dto" parameterType="Map" >
-select * from VIEW_DSCSN_APLY
+
+	<select id="counsel_list" resultType="com.cms.ca.view_counsel_dto" parameterType="Map" >
+	select APLY_SN, STDNT_NO, STDNT_FLNM, EMP_NO, EMP_FLNM, RSVT_DT, HR_SE from VIEW_DSCSN_APLY where BFR_APLY_SN IS NULL
 		<if test='part=="0"'>
 			and now() > RSVT_DT and (STTS_CD = '취소' or STTS_CD = '완료') and ${search_part} like concat('%', #{search_word}, '%')
 		</if>
-		<if test='part=="1"'>
+		<if test='part=="1"'> 
 			and now() > RSVT_DT and (STTS_CD = '취소' or STTS_CD = '완료')
 		</if>
 		<if test='part=="2"'>
@@ -19,8 +20,14 @@ select * from VIEW_DSCSN_APLY
 			and RSVT_DT >= now() and (STTS_CD = '취소' or STTS_CD = '완료')
 		</if>
 		order by APLY_SN desc
-		<if test='part=="0" or part=="1"'>
-			limit ${pageno}, ${datano}
-		</if>
-</select>
+	</select>
+	
+	<select id="getCountRound" resultType="int" parameterType="int">
+		select count(BFR_APLY_SN) from VIEW_DSCSN_APLY where BFR_APLY_SN = #{aply_sn}
+	</select>
+
+	<select id="counsel_detail" resultType="com.cms.ca.view_counsel_dto" parameterType="String">
+	
+	</select>
+
 </mapper>

@@ -40,7 +40,7 @@
 				<div class="card-body">
 
 					<!-- Form 시작 -->
-					<form id="stuser_add_frm" method="post" action="./stuser_add">
+					<form id="stuser_add_frm" method="post" action="./stuser_add" enctype="multipart/form-data">
 						<!-- 개인정보 섹션 -->
 						<div class="mb-4">
 							<h5 class="mb-3">개인정보</h5>
@@ -52,7 +52,7 @@
 										<!-- 이미지 미리보기 영역 -->
 										<span>이미지 미리보기</span>
 									</div>
-									<input type="file" accept="image/*"
+									<input type="file" accept="image/*" name="uphoto_file"
 										onchange="setstuser_img(event);" class="form-control">
 								</div>
 

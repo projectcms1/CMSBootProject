@@ -14,15 +14,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cms.ca.counsel_dto;
+import com.cms.ca.CDNFileUploader;
 import com.cms.ca.employee_dto;
 import com.cms.ca.student_dto;
+import com.cms.ca.view_counsel_dto;
 
 import jakarta.servlet.ServletResponse;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.annotation.MultipartConfig;
 
 @Controller
 public class AdminController {
@@ -88,7 +90,7 @@ public class AdminController {
 	@PostMapping("/cdn_uploadok.do")
 	public @ResponseBody String cdn_server(@RequestParam(defaultValue = "", required = false) String url,
 			@RequestParam("mfile") MultipartFile mfile) { // multipartfile 이름은 jsp에서 날라온 name과 같아야됨
-	
+		
 		String signs = "";
 		
 		FTPClient ftp = new FTPClient();
@@ -125,6 +127,7 @@ public class AdminController {
 						signs = file_url; // 업로드된 이미지의 URL 반환
 						
 					} catch (Exception e) {
+						
 						System.out.println(e);
 						System.out.println("Database 연결 실패 오류 !!");
 						signs = "fail: Database 오류 발생";
@@ -162,13 +165,20 @@ public class AdminController {
 
 	// 학생 사용자 추가
 	@PostMapping("/stuser_add")
-	public void stuser_add(@ModelAttribute student_dto stdto,
+	public void stuser_add(@ModelAttribute student_dto stdto, @RequestPart(name = "uphoto_file", required = false) MultipartFile uphoto_file,
 			@RequestParam(value = "", required = false) String entrance_year, ServletResponse sr) {
 		sr.setContentType("text/html; charset=utf-8");
 		try {
 			this.pw = sr.getWriter();
-			int detail_result = this.stuser_service.add_stuser_detail(stdto, entrance_year);
-
+			int detail_result = 0;
+			
+			if (uphoto_file == null || uphoto_file.getOriginalFilename().isEmpty()) {
+				detail_result = this.stuser_service.add_stuser_detail(stdto, entrance_year);
+			}
+			else {
+				//String aa = new CDNFileUploader(uphoto_file);
+			}
+			
 			if (detail_result > 0) {
 				this.pw.print("<script>" + "alert('학생 계정이 추가되었습니다.');" + "location.href='./stlistmod';" + "</script>");
 			} else {
@@ -205,7 +215,7 @@ public class AdminController {
 	@GetMapping("/allcounselmod")
 	public String allcounselmod(Model m) {
 
-		List<counsel_dto> counsel_list_data = this.counsel_service.counsel_list();
+		List<view_counsel_dto> counsel_list_data = this.counsel_service.counsel_list();
 		m.addAttribute("counsel_list", counsel_list_data);
 
 		return "admin/allcounselmod";

@@ -7,7 +7,7 @@
 <select id="student_list" resultType="com.cms.ca.student_dto" >
 select a.*, b.ACNT_LCK_YN, b.REG_DT
 from STDNT_INFO as a INNER JOIN LGN_ACNT_INFO as b
-where a.USER_NO = b.USER_NO
+where a.USER_NO = b.USER_NO order by STDNT_NO desc
 </select>
 
 <!-- 학생 리스트 검색 기능 -->
