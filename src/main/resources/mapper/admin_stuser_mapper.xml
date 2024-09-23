@@ -16,7 +16,6 @@ select a.*, b.ACNT_LCK_YN, b.REG_DT
 from STDNT_INFO as a INNER JOIN LGN_ACNT_INFO as b where a.USER_NO = b.USER_NO and ${search_part} like concat('%', #{search_word}, '%') order by STDNT_NO desc
 </select>
 
-
 <!-- 학생 사용자 상세정보 수정 시작-->
 <update id="student_detail_update" parameterType="com.cms.ca.student_dto">
 update STDNT_INFO set 

@@ -14,7 +14,6 @@ function makeSelector(selectedUniv) {
 
 
 
-
 //학생 사용자 검색
 function list_search() {
     console.log("test");
@@ -369,7 +368,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 	
 	
-	
+
 
 //학생 사용자 상세정보 수정 기능
 function update_stuserdata(){
