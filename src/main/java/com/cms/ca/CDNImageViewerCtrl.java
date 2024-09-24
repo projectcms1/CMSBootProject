@@ -24,7 +24,7 @@ public class CDNImageViewerCtrl {
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping("/img_file/{filenm}")
-	public @ResponseBody byte[] getImageFile(@PathVariable String filenm, ServletResponse res) {
+	public @ResponseBody byte[] getImageFile(@PathVariable String filenm, ServletResponse res) throws Exception {
 		byte imgByte [] = null;
 		HttpURLConnection httpcon = null;
 		InputStream is = null;

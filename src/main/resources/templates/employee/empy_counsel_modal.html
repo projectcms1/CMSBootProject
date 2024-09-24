@@ -1,0 +1,42 @@
+<!-- ======= Counsel Detail Modal ======= -->
+<div class="modal fade" id="counselDetailModal" tabindex="-1" th:fragment="empy_counsel_modal" style="height: 1000px;">
+	<div class="modal-dialog modal-dialog-scrollable modal-xl">
+		
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">상담정보</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			
+			<div class="modal-body">
+	
+				<div class="card">
+				  	<div class="card-body">
+						<h5 class="card-title">상담정보</h5>
+						
+						<div class="row mb-3" align="center" >
+							<label for="inputText" class="col-sm-2 col-form-label">학생이름</label>
+						  	<div class="col-sm-3">
+						      	<input type="text" class="form-control" name="stdnt_flnm" disabled>
+						    </div>
+						    <label for="inputEmail" class="col-sm-2 col-form-label">학생학번</label>
+						    <div class="col-sm-3">
+						    	<input type="email" class="form-control" name="stdnt_no" disabled>
+						    </div>
+						</div>
+		
+		              	<div class="accordion" id="counsel_accordion">
+							
+						</div>
+					</div>
+				
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Counsel Detail Modal-->

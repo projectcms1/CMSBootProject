@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <title>중앙정보대학교 유세인트(u-SAINT)</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <nav class="nav">
+            <ul>
+                <li><a href="#academic">학사</a></li>
+                <li><a href="#scholarship">장학</a></li>
+                <li><a href="#volunteer">봉사</a></li>
+                <li><a href="#international">국제교류</a></li>
+                <li><a href="#events">비교과·행사</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <!-- Left Section: Login -->
+        <div class="left-section">
+            <div class="logo">
+            	<img src="/assets/img/logo.png" alt="중앙정보대학교">
+            </div>
+            <button class="login-button">로그인</button>
+            <button class="login-button secondary">수강신청 전용 로그인</button>
+
+            <!-- Information Links -->
+            <ul class="info-links">
+                <li><a href="extra_indexok.do">비교과프로그램</a></li>
+                <li><a href="#">1:1 채팅상담</a></li>
+                <li><a href="#">인터넷증명발급</a></li>
+                <li><a href="#">시간표조회</a></li>
+            </ul>
+
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <p>아이디/비밀번호 문의: 02-820-0067~8</p>
+                <p>개인정보처리방침</p>
+                <address>
+                    06978 서울시 동작구 상도로 369 숭실대학교 TEL. 02-820-0114<br>
+                    Copyright Soongsil University All Rights Reserved.
+                </address>
+                <p>문의사항은 메일로 보내주세요: <a href="mailto:sos@soongsil.dooray.com">sos@soongsil.dooray.com</a></p>
+            </div>
+        </div>
+
+        <!-- Right Section: Notices -->
+        <div class="right-section">
+            <!-- Notice Header and Categories -->
+            <div class="notices">
+                <div class="notice-header">
+                    <h2>공지사항</h2>
+                    <div class="category-tabs">
+                        <button class="category active" data-category="academic">학사</button>
+                        <button class="category" data-category="scholarship">장학</button>
+                        <button class="category" data-category="volunteer">봉사</button>
+                        <button class="category" data-category="international">국제교류</button>
+                        <button class="category" data-category="events">비교과·행사</button>
+                    </div>
+                </div>
+
+                <!-- Notices Lists -->
+                <ul class="notice-list" id="academic">
+                    <li><a href="#">2024-2학기 온라인 강좌 증원 추가 안내</a> <span class="date">2024-09-02</span></li>
+                    <li><a href="#">2024-2학기 소그룹채플 안내: 개강일, 소그룹 조배정 현황</a> <span class="date">2024-08-30</span></li>
+                </ul>
+                
+                <ul class="notice-list hidden" id="scholarship">
+                    <li><a href="#">2024-장학금 신청 안내</a> <span class="date">2024-08-25</span></li>
+                </ul>
+
+                <ul class="notice-list hidden" id="volunteer">
+                    <li><a href="#">봉사활동 참가 신청 안내</a> <span class="date">2024-08-20</span></li>
+                </ul>
+
+                <ul class="notice-list hidden" id="international">
+                    <li><a href="#">2024-2학기 국제교류 프로그램 안내</a> <span class="date">2024-08-18</span></li>
+                </ul>
+
+                <ul class="notice-list hidden" id="events">
+                    <li><a href="#">비교과 행사 안내</a> <span class="date">2024-08-10</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="/js/scripts.js"></script>
+</body>
+</html>

@@ -17,4 +17,8 @@ public class student_dto {
 	public void setGrade() {
 		this.std_grade = (int) Math.ceil(this.univ_prd / 2f);
 	}
+	
+	public void setDashInTelNumber() {
+		this.user_telno = this.user_telno.substring(0, 3) + "-" + this.user_telno.substring(3, 7) + "-" + this.user_telno.substring(7);
+	}
 }

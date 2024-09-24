@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>상담관리</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="/assets/img/favicon.png" rel="icon">
+  <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/assets/css/style.css" rel="stylesheet">  
+  <link href="/assets/css/empy.css" rel="stylesheet">
+  <link href="/assets/css/list_paging.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+  <style>
+    .btn-cancel {
+      width: 80px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+  
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Updated: Apr 20 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+	<div th:replace="~{/student/std_header :: std_header}"></div>	<!-- Std Header -->
+	<div th:replace="~{/student/std_sidebar :: std_sidebar}"></div>	<!-- Std Sidebar -->
+
+	<main id="main" class="main">
+	   
+	    <!-- ======= Page Title ======= -->
+	    <div class="pagetitle">
+	      	<h1>상담관리</h1>
+	      	<nav>
+	        	<ol class="breadcrumb">
+	          		<li class="breadcrumb-item"><a href="/">Home</a></li>
+	          		<li class="breadcrumb-item">상담관리</li>
+	          		<li class="breadcrumb-item active">상담예약조회</li>
+	        	</ol>
+	      	</nav>
+	    </div> 
+	    <!-- End Page Title -->
+			
+	    <section class="section">
+	      <div class="row">
+	        <div class="col-lg-12">
+	        
+	          <!-- ======= 대기중 상담 Card ======= -->
+          		<div class="card">
+            		<div class="card-body">
+              			<h5 class="card-title">대기중 상담</h5>
+		              	
+		              	<!-- 대기중 상담 Table-->
+				     	<div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
+				     		
+				     		<div class="datatable-top">
+				     			<div class="datatable-info">
+		    						총 [[${ napproveList.size() }]] 개
+		    					</div>
+							</div>
+							
+							<div class="datatable-container">
+								<table id="demo-table" class="table datatable datatable-table">
+									<thead>
+										<tr>
+				                    		<th data-format="YYYY/DD/MM" data-sortable="true" data-type="date" style="width: 20%;">
+				                    			<button class="datatable-sorter">상담일자</button>
+				                    		</th>
+											<th data-sortable="true" style="width: 20%;">
+												<button class="datatable-sorter">상담시간</button>
+				                    		</th>
+				                    		<th data-sortable="true" style="width: 20%;">
+				                    			<button class="datatable-sorter">상담자</button>
+				                    		</th>
+				                    		<th data-sortable="true" style="width: 20%;">
+				                    			<button class="datatable-sorter">상담방식</button>
+				                    		</th>
+				                    		<th data-sortable="true" style="width: 20%;">
+				                    			<button class="datatable-sorter">상담종류</button>
+				                    		</th>
+				                    	</tr>
+				                    </thead>
+				                    <tbody>
+					                  <tr th:if="${napproveList.size() == 0 }" align="center"><td colspan="5">대기 중인 상담이 존재하지 않습니다.</td></tr>
+					                  <tr th:each="counselData : ${ napproveList }">
+					                    <td>[[${ counselData.getRsvt_dt() }]]</td>
+					                    <td>[[${ counselData.getHr_se() }]]교시</td>
+					                    <td>[[${ counselData.getEmp_flnm() }]]</td>
+					                    <td>[[${ counselData.getDscsn_mthd() }]]상담</td>
+					                    <td>
+					                    	[[${ counselData.getDscsn_knd() }]]상담
+											<button type="button" th:onclick="cancelReservation([[${ counselData.getAply_sn() }]])" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
+					                    </td>
+					                  </tr>
+					                </tbody>
+				                </table>
+				            </div>
+				            
+						</div>
+		             	<!-- End 대기중상담 Table-->
+		
+            		</div>
+          		</div>
+				<!-- End 대기중 상담 Card -->
+	          
+	          <!-- ======= 확정 상담 Card ======= -->
+          		<div class="card">
+            		<div class="card-body">
+              			<h5 class="card-title">확정 상담</h5>
+		              	
+		              	<!-- 확정상담 Table-->
+				     	<div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
+				     		
+				     		<div class="datatable-top">
+				     			<div class="datatable-info">
+		    						총 [[${ approveList.size() }]] 개
+		    					</div>
+							</div>
+							
+							<div class="datatable-container">
+								<table id="demo-table" class="table datatable datatable-table">
+									<thead>
+										<tr>
+				                    		<th data-format="YYYY/DD/MM" data-sortable="true" data-type="date" style="width: 20%;">
+				                    			<button class="datatable-sorter">상담일자</button>
+				                    		</th>
+											<th data-sortable="true" style="width: 20%;">
+												<button class="datatable-sorter">상담시간</button>
+				                    		</th>
+				                    		<th data-sortable="true" style="width: 20%;">
+				                    			<button class="datatable-sorter">상담자</button>
+				                    		</th>
+				                    		<th data-sortable="true" style="width: 20%;">
+				                    			<button class="datatable-sorter">상담방식</button>
+				                    		</th>
+				                    		<th data-sortable="true" style="width: 20%;">
+				                    			<button class="datatable-sorter">상담종류</button>
+				                    		</th>
+				                    	</tr>
+				                    </thead>
+				                    <tbody>
+						              <tr th:if="${approveList.size() == 0 }" align="center"><td colspan="5">확정된 상담이 존재하지 않습니다.</td></tr>
+					                  <tr th:each="counselData : ${ approveList }">
+					                    <td>[[${ counselData.getRsvt_dt() }]]</td>
+					                    <td>[[${ counselData.getHr_se() }]]교시</td>
+					                    <td>[[${ counselData.getEmp_flnm() }]]</td>
+					                    <td>[[${ counselData.getDscsn_mthd() }]]상담</td>
+					                    <td>
+					                    	[[${ counselData.getDscsn_knd() }]]상담
+											<button type="button" th:onclick="cancelReservation([[${ counselData.getAply_sn() }]])" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
+					                    </td>
+					                  </tr>
+						            </tbody>
+				                </table>
+				            </div>
+				            
+						</div>
+		             	<!-- End 확정상담 Table-->
+		
+            		</div>
+          		</div>
+				<!-- End 확정상담 Card -->
+	          
+				<!-- ======= 지난상담 Card ======= -->
+          		<div class="card">
+            		<div class="card-body">
+              			<h5 class="card-title">지난 상담</h5>
+		              	
+		              	<!-- 지난상담 Table-->
+				     	<div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
+							<div class="datatable-container">
+								<table id="demo-table_rest" class="table datatable datatable-table">
+									<thead>
+										<tr>
+				                    		<th data-format="YYYY/DD/MM" data-sortable="true" data-type="date" style="width: 20%;">
+				                    			<button class="datatable-sorter">상담일자</button>
+				                    		</th>
+				                    		<th data-sortable="true" style="width: 20%;">
+				                    			<button class="datatable-sorter">상담자</button>
+				                    		</th>
+				                    		<th data-sortable="true" style="width: 20%;">
+				                    			<button class="datatable-sorter">상담방식</button>
+				                    		</th>
+				                    		<th data-sortable="true" style="width: 20%;">
+				                    			<button class="datatable-sorter">상담종류</button>
+				                    		</th>
+											<th data-sortable="true" style="width: 20%;">
+												<button class="datatable-sorter">비고</button>
+				                    		</th>
+				                    	</tr>
+				                    </thead>
+				                    <tbody>
+						              <tr th:if="${counselingList.size() == 0 }" align="center"><td colspan="5">지난 상담이 존재하지 않습니다.</td></tr>
+					                  <tr th:each="counselData : ${ counselingList }">
+					                    <td>[[${ counselData.getRsvt_dt() }]]</td>
+					                    <td>[[${ counselData.getEmp_flnm() }]]</td>
+					                    <td>[[${ counselData.getDscsn_mthd() }]]상담</td>
+					                    <td>[[${ counselData.getDscsn_knd() }]]상담</td>
+					                    <td>[[${ counselData.getStts_cd() }]]</td>
+					                  </tr>
+					                </tbody>
+				                </table>
+				            </div>
+				            
+							<div class="datatable-bottom">
+		    					<div class="datatable-info">
+		    						총 [[${ counselingList.size() }]] 개
+		    					</div>
+		    					
+		    					<!-- 페이징 Div-->
+									<div class="prod_1i1r pages">
+										<ul id="std_rescounsel_list_paging">
+											<li><a id="first-rpage"><i class="fa fa-angle-double-left"></i></a></li>
+											<li><a id="prev-rpage"><i class="fa fa-chevron-left"></i></a></li>
+											<li><a id="next-rpage"><i class="fa fa-chevron-right"></i></a></li>
+											<li><a id="last-rpage"><i class="fa fa-angle-double-right"></i></a></li>
+										</ul>
+									</div>
+				              	<!-- End 페이징 Div-->
+							</div>
+						</div>
+		             	<!-- End 지난상담 Table-->
+		
+            		</div>
+          		</div>
+				<!-- End 지난상담 Card -->
+				<form id="frmCancel">
+					<input type="hidden" name="cancel_aply_sn" id="cancel_aply_idx" value="">
+				</form>
+	        </div>
+	      </div>
+	    </section>           
+	</main>
+	<!-- End #main -->
+	
+  <div th:replace="~{/student/std_footer :: std_footer}"></div>	<!-- 학생 footer -->
+
+  <!-- Vendor JS Files -->
+  <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="/assets/vendor/echarts/echarts.min.js"></script>
+  <script src="/assets/vendor/quill/quill.js"></script>
+  <script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/assets/js/main.js"></script>
+  <script src="/js/student/counsel_reservlist.js?v=1"></script>
+  <script src="/js/student/list_paging_r.js"></script>
+  
+</body>
+<script>
+window.onload=function(){
+	document.getElementById('counsel-nav').className = 'nav-link';
+	document.getElementById('counsel-nav1').className += ' show';
+    document.getElementById('counsel-nav-2').className += ' active';	
+}
+</script>
+
+</html>

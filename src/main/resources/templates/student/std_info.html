@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+<title>학적정보</title>
+<meta content="" name="description">
+<meta content="" name="keywords">
+
+<!-- Favicons -->
+<link href="/assets/img/favicon.png" rel="icon">
+<link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+<!-- Google Fonts -->
+<link href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+<!-- Vendor CSS Files -->
+<link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+<link href="/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+<link href="/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+<link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+<link href="/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+<!-- Template Main CSS File -->
+<link href="/assets/css/style.css" rel="stylesheet">
+<link href="/assets/css/empy.css" rel="stylesheet">
+
+<!-- Vendor JS Files -->
+<script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/chart.js/chart.umd.js"></script>
+<script src="/assets/vendor/echarts/echarts.min.js"></script>
+<script src="/assets/vendor/quill/quill.js"></script>
+<script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+<script src="/assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="/assets/js/main.js"></script>
+  
+<!-- =======================================================
+  * Template Name: NiceAdmin
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Updated: Apr 20 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+	<div th:replace="~{/student/std_header :: std_header}"></div>	<!-- Std Header -->
+	<div th:replace="~{/student/std_sidebar :: std_sidebar}"></div>	<!-- Std Sidebar -->
+
+	<main id="main" class="main">
+    
+    	<!-- ======= Page Title ======= -->
+    	<div class="pagetitle">
+      		<h1>학적정보</h1>
+      		<nav>
+        		<ol class="breadcrumb">
+          			<li class="breadcrumb-item"><a href="/">Home</a></li>
+          			<li class="breadcrumb-item">학적정보</li>
+          			<li class="breadcrumb-item active">기본정보</li>
+        		</ol>
+     	 	</nav>
+    	</div> 
+    	<!-- End Page Title -->
+		
+		<section class="section">
+			<div class="row">
+				<div class="col-lg-12">
+			    <!-- ======= 개인정보 Card ======= -->
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">개인정보(한글은 폰트 적용X)</h5>
+							<div class="row mb-1">
+								<!-- row 1 -->
+								<div class="col-md-2 col-lg-2">
+									<img src="/assets/img/3.jpeg" alt="Profile" class="rounded-4" style="margin-left: 25%;" width="80%" height="225px">
+								</div>
+								<div class="col-md-4 col-lg-4">
+									<div class="row mb-1">
+										<label class="col-sm-4 col-form-label right-tag">입학년도</label>
+										<div class="col-sm-5 right-tag">
+											<input type="text" class="form-control" th:value="${ std_data.getStdnt_no().substring(0, 4) }" disabled>
+										</div>
+									</div>
+									<div class="row mb-1">
+										<label class="col-sm-4 col-form-label right-tag">학번</label>
+										<div class="col-sm-5 right-tag">
+											<input type="text" class="form-control" th:value="${ std_data.getStdnt_no() }" disabled>
+										</div>
+									</div>
+									<div class="row mb-1">
+										<label class="col-sm-4 col-form-label right-tag">이름</label>
+										<div class="col-sm-5 right-tag">
+											<input type="text" class="form-control" th:value="${ std_data.getStdnt_flnm() }" disabled>
+										</div>
+									</div>
+									<div class="row mb-1">
+										<label class="col-sm-4 col-form-label right-tag">생년월일</label>
+										<div class="col-sm-5 right-tag">
+											<input type="text" class="form-control" th:value="${ std_data.getBrdt() }" disabled>
+										</div>
+									</div>
+									<div class="row mb-1">
+										<label class="col-sm-4 col-form-label right-tag">학년</label>
+										<div class="col-sm-5 right-tag">
+											<input type="text" class="form-control" th:value="${ std_data.getStd_grade() }" disabled>
+										</div>
+									</div>
+									<div class="row mb-1">
+										<label class="col-sm-4 col-form-label right-tag">학기</label>
+										<div class="col-sm-5 right-tag">
+											<input type="text" class="form-control" th:value="${ std_data.getUniv_prd() }" disabled>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-lg-6">
+									<div class="row mb-1">
+										<label class="col-sm-4 col-form-label right-tag">대학(원)</label>
+										<div class="col-sm-6 right-tag">
+											<input type="text" class="form-control" th:value="${ std_data.getOgdp_univ() }" disabled>
+										</div>
+									</div>
+									<div class="row mb-1">
+										<label class="col-sm-4 col-form-label right-tag">학과(부)</label>
+										<div class="col-sm-6 right-tag">
+											<input type="text" class="form-control" th:value="${ std_data.getOgdp_scsbjt() }" disabled>
+										</div>
+									</div>
+									<div class="row mb-1">
+										<label class="col-sm-4 col-form-label right-tag">전공</label>
+										<div class="col-sm-6 right-tag">
+											<input type="text" class="form-control" th:value="${ std_data.getMjr() }" disabled>
+										</div>
+									</div>
+									<div class="row mb-1">
+										<label class="col-sm-4 col-form-label right-tag">학적구분</label>
+										<div class="col-sm-6 right-tag">
+											<input type="text" class="form-control" th:value="${ std_data.getStdnt_stts_se() }" disabled>
+										</div>
+									</div>
+									<form id="personal_frm">
+									<div class="row mb-1">
+										<label class="col-sm-4 col-form-label right-tag">이메일</label>
+										<div class="col-sm-6 right-tag">
+											<input type="text" name="user_eml_addr" class="form-control" th:value="${ std_data.getUser_eml_addr() }" disabled required>
+										</div>
+									</div>
+									<div class="row mb-3">
+										<label class="col-sm-4 col-form-label right-tag">전화번호</label>
+										<div class="col-sm-6 right-tag">
+											<input type="text" name="user_telno" class="form-control" th:value="${ std_data.getUser_telno() }" disabled required>
+										</div>
+									</div>
+									</form>
+								</div>
+							</div>
+							
+							<button type="button" onclick="input_submit('1')" class="btn btn-outline-success float-end" style="margin-left: 5px;">
+								<i class="ri-save-3-line"></i> 저장
+							</button>
+							<button type="button" onclick="input_disable('1')" class="btn btn-outline-primary float-end" style="margin-left: auto;">
+								<i class="ri-edit-2-line"></i> 입력
+							</button>
+							
+						</div>
+					</div>
+				<!-- End 개인 정보 Card -->
+				
+				<!-- ======= 거주지 정보 Card ======= -->
+					<div class="card">
+						<div class="card-body">	
+							<h5 class="card-title">거주지 정보</h5>
+							<div class="col-md-12">
+							<form id="address_frm">
+								<div class="row mb-2" style="margin-left: 5%;">
+									<label class="col-sm-1 col-form-label pd-left-3">우편번호</label>
+									<div class="col-sm-2">
+										<input type="text" class="form-control" name="user_zip" id="sample2_postcode" th:value="${ std_data.getUser_zip() }" disabled required>
+									</div>
+									<button type="button" class="btn btn-primary" id="searchAddrBtn"
+										style="width: 150px; height: 38px;" disabled>우편번호 검색</button>
+								</div>
+								<div class="row mb-2" style="margin-left: 5%;">
+									<label class="col-sm-1 col-form-label pd-left-3">주소</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" name="user_addr" id="sample2_address" th:value="${ std_data.getUser_addr() }" disabled required>
+									</div>
+								</div>
+								<div class="row mb-3" style="margin-left: 5%;">
+									<label class="col-sm-1 col-form-label pd-left-3">상세주소</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" name="user_daddr" id="sample2_detailAddress" th:value="${ std_data.getUser_daddr() }" disabled required>
+									</div>
+								</div>
+							</form>
+							</div>
+							
+							<button type="button" onclick="input_submit('2')" class="btn btn-outline-success float-end"style="margin-left: 5px;">
+								<i class="ri-save-3-line"></i> 저장
+							</button>
+							<button type="button" onclick="input_disable('2')" class="btn btn-outline-primary float-end" style="margin-left: auto;">
+								<i class="ri-edit-2-line"></i> 입력
+							</button>
+							<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
+								<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer"
+									style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
+							</div>
+						</div>
+					</div>
+				<!-- End 거주지 정보 Card -->
+				
+				<!-- ======= 계좌 정보 Card ======= -->
+					<div class="card">
+						<div class="card-body">	
+							<h5 class="card-title">계좌 정보</h5>
+							<form id="acount_frm">
+							<div class="row mb-3" style="margin-left: 5%;">
+								<label class="col-sm-1 col-form-label pd-left-3">은행명</label>
+								<div class="col-sm-2">
+									<input type="text" name="dlng_bank_nm" class="form-control" th:value="${ std_data.getDlng_bank_nm() }" disabled required>
+								</div>
+								<label class="col-sm-1 col-form-label pd-left-3">계좌번호</label>
+								<div class="col-sm-3">
+									<input type="text" name="dlng_actno" class="form-control" th:value="${ std_data.getDlng_actno() }" disabled required>
+								</div>
+								<label class="col-sm-1 col-form-label pd-left-3">예금주</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" th:value="${ std_data.getDpstr_nm() }" disabled required>
+								</div>
+							</div>
+							</form>
+							
+							<button type="button" onclick="input_submit('3')" class="btn btn-outline-success float-end" style="margin-left: 5px;">
+								<i class="ri-save-3-line"></i> 저장
+							</button>
+							<button type="button" onclick="input_disable('3')" class="btn btn-outline-primary float-end" style="margin-left: auto;">
+								<i class="ri-edit-2-line"></i> 입력
+							</button>
+							
+						</div>
+					</div>
+				<!-- End 계좌 정보 Card -->
+				</div>
+			</div>
+		</section>
+	</main>
+	<!-- End #main -->
+	
+	<div th:replace="~{/student/std_footer :: std_footer}"></div>	<!-- 학생 footer -->
+</body>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/js/student/std_info.js?v=3"></script>
+<script>
+window.onload=function(){
+	document.getElementById('info-nav').className = 'nav-link';
+	document.getElementById('info-nav1').className += ' show';
+    document.getElementById('info-nav-1').className += ' active';	
+}
+</script>
+</html>

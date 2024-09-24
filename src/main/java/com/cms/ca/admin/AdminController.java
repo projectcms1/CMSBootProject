@@ -97,7 +97,6 @@ public class AdminController {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			this.pw.print("<script>" + "alert('오류로 인해 학생정보가 수정되지 않았습니다. 확인해주세요!');" + "history.go(-1);" + "</script>");
 		} finally {
 			this.pw.close();
@@ -141,7 +140,6 @@ public class AdminController {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			this.pw.print("<script>" + "alert('오류로 인해 학생 계정이 추가되지 않았습니다. 확인해주세요!');" + "history.go(-1);" + "</script>");
 		} finally {
 			this.pw.close();
@@ -157,6 +155,11 @@ public class AdminController {
 		return "admin/emlistmod";
 	}
 
+	@GetMapping("/emlistmod_adduser")
+	public String emlistmod_adduser() {
+		return "admin/emlistmod_adduser";
+	}
+	
 	@GetMapping("/adminlistmod")
 	public String adminlist_mod(Model m) {
 
@@ -165,6 +168,13 @@ public class AdminController {
 
 		return "admin/adminlistmod";
 	}
+	
+	@GetMapping("/adminlistmod_adduser")
+	public String adminlistmod_adduser() {
+		return "admin/admin"
+				+ "listmod_adduser";
+	}
+	
 
 	// 상담 내역 리스트 출력
 	@GetMapping("/allcounselmod")
@@ -188,11 +198,6 @@ public class AdminController {
 		return "admin/addcounsel";
 	}
 
-	
-	@GetMapping("/pro_info")
-	public String pro_info() {
-		return "admin/pro_info";
-	}
 
 	@GetMapping("/noticemod")
 	public String portalnotice_mod() {
