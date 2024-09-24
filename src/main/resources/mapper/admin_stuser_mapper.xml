@@ -20,9 +20,9 @@ from STDNT_INFO as a INNER JOIN LGN_ACNT_INFO as b where a.USER_NO = b.USER_NO a
 <update id="student_detail_update" parameterType="com.cms.ca.student_dto">
 update STDNT_INFO set 
 USER_EML_ADDR = #{user_eml_addr}, USER_TELNO = #{user_telno}, USER_ZIP = #{user_zip}, USER_ADDR = #{user_addr},
-USER_DADDR = #{user_daddr}, USER_PHOTO = #{user_photo}, DLNG_BANK_NM = #{dlng_bank_nm}, DLNG_ACTNO = #{dlng_actno},
+USER_DADDR = #{user_daddr}, DLNG_BANK_NM = #{dlng_bank_nm}, DLNG_ACTNO = #{dlng_actno},
 DPSTR_NM = #{dpstr_nm}, UNIV_PRD = #{univ_prd}, OGDP_UNIV = #{ogdp_univ}, OGDP_SCSBJT = #{ogdp_scsbjt},
-MJR = #{mjr}, STDNT_STTS_SE = #{stdnt_stts_se}
+MJR = #{mjr}, STDNT_STTS_SE = #{stdnt_stts_se} <if test="user_photo!=null">, USER_PHOTO = #{user_photo}</if>
   where STDNT_NO = #{stdnt_no}
 </update>
 

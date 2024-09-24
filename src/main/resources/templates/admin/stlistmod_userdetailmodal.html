@@ -8,207 +8,226 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal"
 					aria-label="Close"></button>
 			</div>
-			<form id="stuser_detail_frm" method="post" action="./stuser_detail_update">
-			<div class="modal-body" id="studentdetailcontent">
-				<!-- 상세 정보를 여기에 추가 -->
-				<section class="section">
-					<div class="row">
-						<div class="col-lg-12">
-
-							<!-- ======= 개인정보 Card ======= -->
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">개인정보</h5>
-									<div class="row mb-1">
-										<div class="col-md-2 col-lg-2">
-										<br>
-											<!-- 학생 사용자 이미지-->
-											<div id="USER_PHOTO" name="USER_PHOTO" class="mb-2"
-											style="height: 200px; background-color: #f8f9fa; display: flex; align-items: center; justify-content: center;"></div>
-											<br> <input type="file" accept="image/*" class="form-control"
-												onchange="setstuser_img(event);">
-										</div>
-										<div class="col-md-4 col-lg-4">
-											<div class="row mb-1">
-												<label class="col-sm-4 col-form-label right-tag">입학년도</label>
-												<div class="col-sm-5 right-tag">
-													<input type="text" class="form-control" id="ENTRANCE_YEAR" disabled>
+			<form id="stuser_detail_frm" method="post" action="./stuser_detail_update" enctype="multipart/form-data">
+				<div class="modal-body" id="studentdetailcontent">
+					<!-- 상세 정보를 여기에 추가 -->
+					<section class="section">
+						<div class="row">
+							<div class="col-lg-12">
+								<!-- ======= 개인정보 Card ======= -->
+								<div class="card">
+									<div class="card-body">
+										<h5 class="card-title">개인정보</h5>
+										<div class="row mb-1">
+											<div class="col-md-2 col-lg-2">
+												<br>
+												<!-- 학생 사용자 이미지-->
+												<div id="USER_PHOTO" class="mb-2"
+													style="height: 200px; background-color: #f8f9fa; display: flex; align-items: center; justify-content: center;">
+													
+												</div>
+												<br> <input type="file" accept="image/*" name="uphoto_file"
+													class="form-control" onchange="setstuser_img(event);">
+													<input type="hidden" name="previousFileName" id="prev_file">
+											</div>
+											<div class="col-md-4 col-lg-4">
+												<div class="row mb-1">
+													<label class="col-sm-4 col-form-label right-tag">입학년도</label>
+													<div class="col-sm-5 right-tag">
+														<input type="text" class="form-control" id="ENTRANCE_YEAR"
+															disabled>
+													</div>
+												</div>
+												<div class="row mb-1">
+													<label class="col-sm-4 col-form-label right-tag">학번</label>
+													<div class="col-sm-5 right-tag">
+														<input type="text" class="form-control" id="STDNT_NO"
+															name="stdnt_no" readonly>
+													</div>
+												</div>
+												<div class="row mb-1">
+													<label class="col-sm-4 col-form-label right-tag">이름</label>
+													<div class="col-sm-5 right-tag">
+														<input type="text" class="form-control" id="STDNT_FLNM"
+															disabled>
+													</div>
+												</div>
+												<div class="row mb-1">
+													<label class="col-sm-4 col-form-label right-tag">생년월일</label>
+													<div class="col-sm-5 right-tag">
+														<input type="text" class="form-control" id="BRDT" disabled>
+													</div>
+												</div>
+												<div class="row mb-1">
+													<label class="col-sm-4 col-form-label right-tag">학년</label>
+													<div class="col-sm-5 right-tag">
+														<input type="text" class="form-control" id="STD_GRADE"
+															disabled>
+													</div>
+												</div>
+												<div class="row mb-1">
+													<label class="col-sm-4 col-form-label right-tag">학기</label>
+													<div class="col-sm-5 right-tag">
+														<input type="text" class="form-control" id="UNIV_PRD"
+															name="univ_prd">
+													</div>
+												</div>
+												<div class="row mb-1">
+													<label class="col-sm-4 col-form-label right-tag">계정상태</label>
+													<div class="col-sm-5 right-tag">
+														<select class="form-control" id="ACNT_LCK_YN"
+															name="acnt_lck_yn">
+															<option value="Y">Y</option>
+															<option value="N">N</option>
+														</select>
+													</div>
 												</div>
 											</div>
-											<div class="row mb-1">
-												<label class="col-sm-4 col-form-label right-tag">학번</label>
-												<div class="col-sm-5 right-tag">
-													<input type="text" class="form-control" id="STDNT_NO" name="stdnt_no" readonly>
+											<div class="col-md-4 col-lg-6">
+												<div class="row mb-1">
+													<label class="col-sm-4 col-form-label right-tag">대학(원)</label>
+													<div class="col-sm-6 right-tag">
+														<select class="form-control" id="OGDP_UNIV"
+															name="ogdp_univ" onchange="makeSelector(this.value)">
+															<option value="대학선택">대학선택</option>
+															<option value="공과대학">공과대학</option>
+															<option value="사회과학대학">사회과학대학</option>
+															<option value="인문대학">인문대학</option>
+															<option value="자연과학대학">자연과학대학</option>
+														</select>
+													</div>
 												</div>
-											</div>
-											<div class="row mb-1">
-												<label class="col-sm-4 col-form-label right-tag">이름</label>
-												<div class="col-sm-5 right-tag">
-													<input type="text" class="form-control" id="STDNT_FLNM" disabled>
+												<div class="row mb-1">
+													<label class="col-sm-4 col-form-label right-tag">학과(부)</label>
+													<div class="col-sm-6 right-tag">
+														<input type="text" class="form-control" id="OGDP_SCSBJT"
+															name="ogdp_scsbjt" readonly>
+													</div>
 												</div>
-											</div>
-											<div class="row mb-1">
-												<label class="col-sm-4 col-form-label right-tag">생년월일</label>
-												<div class="col-sm-5 right-tag">
-													<input type="text" class="form-control" id="BRDT" disabled>
+												<div class="row mb-1">
+													<label class="col-sm-4 col-form-label right-tag">전공</label>
+													<div class="col-sm-6 right-tag">
+														<input type="text" class="form-control" id="MJR"
+															name="mjr" readonly>
+													</div>
 												</div>
-											</div>
-											<div class="row mb-1">
-												<label class="col-sm-4 col-form-label right-tag">학년</label>
-												<div class="col-sm-5 right-tag">
-													<input type="text" class="form-control" id="STD_GRADE" disabled>
+												<div class="row mb-1">
+													<label class="col-sm-4 col-form-label right-tag">학적구분</label>
+													<div class="col-sm-6 right-tag">
+														<select class="form-control" id="STDNT_STTS_SE"
+															name="stdnt_stts_se">
+															<option value="재학">재학</option>
+															<option value="휴학">휴학</option>
+															<option value="졸업">졸업</option>
+															<option value="자퇴">자퇴</option>
+															<option value="재적">재적</option>
+														</select>
+													</div>
 												</div>
-											</div>
-											<div class="row mb-1">
-												<label class="col-sm-4 col-form-label right-tag">학기</label>
-												<div class="col-sm-5 right-tag">
-													<input type="text" class="form-control" id="UNIV_PRD" name="univ_prd">
+												<div class="row mb-1">
+													<label class="col-sm-4 col-form-label right-tag">이메일</label>
+													<div class="col-sm-6 right-tag">
+														<input type="text" class="form-control" id="USER_EML_ADDR"
+															name="user_eml_addr">
+													</div>
 												</div>
-											</div>
-											<div class="row mb-1">
-												<label class="col-sm-4 col-form-label right-tag">계정상태</label>
-												<div class="col-sm-5 right-tag">
-													<select class="form-control" id="ACNT_LCK_YN" name="acnt_lck_yn">
-														<option value="Y">Y</option>
-														<option value="N">N</option>
-													</select>
+												<div class="row mb-1">
+													<label class="col-sm-4 col-form-label right-tag">전화번호</label>
+													<div class="col-sm-6 right-tag">
+														<input type="text" class="form-control" id="USER_TELNO"
+															name="user_telno">
+													</div>
 												</div>
-											</div>
-										</div>
-										<div class="col-md-4 col-lg-6">
-											<div class="row mb-1">
-												<label class="col-sm-4 col-form-label right-tag">대학(원)</label>
-												<div class="col-sm-6 right-tag">
-													<select class="form-control" id="OGDP_UNIV" name="ogdp_univ" onchange="makeSelector(this.value)">
-														<option value="대학선택">대학선택</option>
-														<option value="공과대학">공과대학</option>
-														<option value="사회과학대학">사회과학대학</option>
-														<option value="인문대학">인문대학</option>
-														<option value="자연과학대학">자연과학대학</option>
-													</select>
-												</div>
-											</div>
-											<div class="row mb-1">
-												<label class="col-sm-4 col-form-label right-tag">학과(부)</label>
-												<div class="col-sm-6 right-tag">
-													<input type="text" class="form-control" id="OGDP_SCSBJT" name="ogdp_scsbjt" readonly>
-												</div>
-											</div>
-											<div class="row mb-1">
-												<label class="col-sm-4 col-form-label right-tag">전공</label>
-												<div class="col-sm-6 right-tag">
-													<input type="text" class="form-control" id="MJR" name="mjr" readonly>
-												</div>
-											</div>
-											<div class="row mb-1">
-												<label class="col-sm-4 col-form-label right-tag">학적구분</label>
-												<div class="col-sm-6 right-tag">
-													<select class="form-control" id="STDNT_STTS_SE" name="stdnt_stts_se">
-														<option value="재학">재학</option>
-														<option value="휴학">휴학</option>
-														<option value="졸업">졸업</option>
-														<option value="자퇴">자퇴</option>
-														<option value="재적">재적</option>
-													</select>
-												</div>
-											</div>
-											<div class="row mb-1">
-												<label class="col-sm-4 col-form-label right-tag">이메일</label>
-												<div class="col-sm-6 right-tag">
-													<input type="text" class="form-control" id="USER_EML_ADDR" name="user_eml_addr">
-												</div>
-											</div>
-											<div class="row mb-1">
-												<label class="col-sm-4 col-form-label right-tag">전화번호</label>
-												<div class="col-sm-6 right-tag">
-													<input type="text" class="form-control" id="USER_TELNO" name="user_telno">
-												</div>
-											</div>
-											<div class="row mb-1">
-												<label class="col-sm-4 col-form-label right-tag">등록일시</label>
-												<div class="col-sm-6 right-tag">
-													<input type="text" class="form-control" id="REG_DT" disabled >
+												<div class="row mb-1">
+													<label class="col-sm-4 col-form-label right-tag">등록일시</label>
+													<div class="col-sm-6 right-tag">
+														<input type="text" class="form-control" id="REG_DT"
+															disabled>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<!-- End 개인 정보 Card -->
+								<!-- End 개인 정보 Card -->
 
-							<!-- ======= 거주지 정보 Card ======= -->
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">거주지 정보</h5>
-									<div class="col-md-12">
-										<div class="row mb-2" style="margin-left: 5%;">
-											<label class="col-sm-1 col-form-label pd-left-3">우편번호</label>
+								<!-- ======= 거주지 정보 Card ======= -->
+								<div class="card">
+									<div class="card-body">
+										<h5 class="card-title">거주지 정보</h5>
+										<div class="col-md-12">
+											<div class="row mb-2" style="margin-left: 5%;">
+												<label class="col-sm-1 col-form-label pd-left-3">우편번호</label>
+												<div class="col-sm-2">
+													<input type="text" class="form-control" id="USER_ZIP"
+														name="user_zip" required readonly>
+												</div>
+												<button type="button" class="btn btn-primary"
+													id="emp_addr_search_btn"
+													style="width: 150px; height: 38px;"
+													onclick="execDaumPostcode()">우편번호 검색</button>
+											</div>
+											<div class="row mb-2" style="margin-left: 5%;">
+												<label class="col-sm-1 col-form-label pd-left-3">주소</label>
+												<div class="col-sm-8">
+													<input type="text" class="form-control" id="USER_ADDR"
+														name="user_addr" required readonly>
+												</div>
+											</div>
+											<div class="row mb-3" style="margin-left: 5%;">
+												<label class="col-sm-1 col-form-label pd-left-3">상세주소</label>
+												<div class="col-sm-8">
+													<input type="text" class="form-control" id="USER_DADDR"
+														name="user_daddr" required>
+												</div>
+											</div>
+											<div id="stlistmod_detail_layer_add"
+												style="display: none; position: fixed; overflow: hidden; z-index: 1051; -webkit-overflow-scrolling: touch;">
+												<img
+													src="//t1.daumcdn.net/postcode/resource/images/close.png"
+													id="btnCloseLayer"
+													style="cursor: pointer; position: absolute; right: -3px; top: -3px; z-index: 1"
+													onclick="closeDaumPostcode()" alt="닫기 버튼">
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- End 거주지 정보 Card -->
+
+								<!-- ======= 계좌 정보 Card ======= -->
+								<div class="card">
+									<div class="card-body">
+										<h5 class="card-title">계좌 정보</h5>
+										<div class="row mb-3">
+											<label class="col-sm-1 col-form-label pd-left-3">은행명</label>
 											<div class="col-sm-2">
-												<input type="text" class="form-control" id="USER_ZIP" name="user_zip"
-													required readonly>
+												<input type="text" class="form-control" id="DLNG_BANK_NM"
+													name="dlng_bank_nm">
 											</div>
-											<button type="button" class="btn btn-primary"
-												id="emp_addr_search_btn" style="width: 150px; height: 38px;"
-												onclick="execDaumPostcode()">우편번호 검색</button>
-										</div>
-										<div class="row mb-2" style="margin-left: 5%;">
-											<label class="col-sm-1 col-form-label pd-left-3">주소</label>
-											<div class="col-sm-8">
-												<input type="text" class="form-control" id="USER_ADDR" name="user_addr"
-													required readonly>
+											<label class="col-sm-1 col-form-label pd-left-3">계좌번호</label>
+											<div class="col-sm-3">
+												<input type="text" class="form-control" id="DLNG_ACTNO"
+													name="dlng_actno">
 											</div>
-										</div>
-										<div class="row mb-3" style="margin-left: 5%;">
-											<label class="col-sm-1 col-form-label pd-left-3">상세주소</label>
-											<div class="col-sm-8">
-												<input type="text" class="form-control" id="USER_DADDR" name="user_daddr"
-													required>
+											<label class="col-sm-1 col-form-label pd-left-3">예금주</label>
+											<div class="col-sm-2">
+												<input type="text" class="form-control" id="DPSTR_NM"
+													name="dpstr_nm">
 											</div>
-										</div>
-										<div id="stlistmod_detail_layer_add"
-											style="display: none; position: fixed; overflow: hidden; z-index: 1051; -webkit-overflow-scrolling: touch;">
-											<img
-												src="//t1.daumcdn.net/postcode/resource/images/close.png"
-												id="btnCloseLayer"
-												style="cursor: pointer; position: absolute; right: -3px; top: -3px; z-index: 1"
-												onclick="closeDaumPostcode()" alt="닫기 버튼">
 										</div>
 									</div>
 								</div>
+								<!-- End 계좌 정보 Card -->
 							</div>
-							<!-- End 거주지 정보 Card -->
-
-							<!-- ======= 계좌 정보 Card ======= -->
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">계좌 정보</h5>
-									<div class="row mb-3">
-										<label class="col-sm-1 col-form-label pd-left-3">은행명</label>
-										<div class="col-sm-2">
-											<input type="text" class="form-control" id="DLNG_BANK_NM" name="dlng_bank_nm">
-										</div>
-										<label class="col-sm-1 col-form-label pd-left-3">계좌번호</label>
-										<div class="col-sm-3">
-											<input type="text" class="form-control" id="DLNG_ACTNO" name="dlng_actno">
-										</div>
-										<label class="col-sm-1 col-form-label pd-left-3">예금주</label>
-										<div class="col-sm-2">
-											<input type="text" class="form-control" id="DPSTR_NM" name="dpstr_nm">
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- End 계좌 정보 Card -->
 						</div>
-					</div>
-				</section>
-				<!-- End Page Title -->
-			</div>
+					</section>
+					<!-- End Page Title -->
+				</div>
 			</form>
-			
+
 			<div class="modal-footer">
-				<button type="button" class="btn btn-outline-primary float-end" onclick="update_stuserdata()"
-					style="margin-left: auto;">
+				<button type="button" class="btn btn-outline-primary float-end"
+					onclick="update_stuserdata()" style="margin-left: auto;">
 					<i class="ri-edit-2-line"></i> 수정
 				</button>
 				<button type="button" class="btn btn-secondary"

@@ -92,6 +92,9 @@ function list_search() {
  }
 //===============다음 주소 끝=============
 
+
+
+
 //학생사용자 상세보기 모달에 값 넣기
 document.addEventListener('DOMContentLoaded', function () {
     // 모달 요소 가져오기
@@ -172,7 +175,13 @@ document.addEventListener('DOMContentLoaded', function () {
         	USER_DADDR.value = st_daddr;
         }
         if (USER_PHOTO) {
-        	USER_PHOTO.value = st_photo;
+        	if (st_photo != null) {
+        		USER_PHOTO.innerHTML = `<img src="/img_file/${st_photo}" />`;
+        		document.getElementById("prev_file").value = st_photo;
+        	}
+        	else {
+				USER_PHOTO.innerHTML = "";
+			}
         }
         if (BRDT) {
         	BRDT.value = st_brdt;
@@ -216,6 +225,8 @@ document.addEventListener('DOMContentLoaded', function () {
         
     });
 });
+
+
 
 
 //학생 리스트 페이징 처리
