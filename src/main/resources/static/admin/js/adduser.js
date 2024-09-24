@@ -104,14 +104,6 @@ function add_stuser(){
 }
 
 
-
-
-
-
-
-
-
-
 //관리자 사용자 (adminlistmod.html) 검색기능 분류 스크립트
 function toggleFields() {
 	var categorySelect = document.getElementById("categorySelect").value;

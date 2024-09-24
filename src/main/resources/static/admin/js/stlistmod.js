@@ -14,7 +14,6 @@ function makeSelector(selectedUniv) {
 
 
 
-
 //학생 사용자 검색
 function list_search() {
     console.log("test");
@@ -92,6 +91,9 @@ function list_search() {
         element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
  }
 //===============다음 주소 끝=============
+
+
+
 
 //학생사용자 상세보기 모달에 값 넣기
 document.addEventListener('DOMContentLoaded', function () {
@@ -173,7 +175,13 @@ document.addEventListener('DOMContentLoaded', function () {
         	USER_DADDR.value = st_daddr;
         }
         if (USER_PHOTO) {
-        	USER_PHOTO.value = st_photo;
+        	if (st_photo != null) {
+        		USER_PHOTO.innerHTML = `<img src="/img_file/${st_photo}" />`;
+        		document.getElementById("prev_file").value = st_photo;
+        	}
+        	else {
+				USER_PHOTO.innerHTML = "";
+			}
         }
         if (BRDT) {
         	BRDT.value = st_brdt;
@@ -219,6 +227,160 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+
+
+//학생 리스트 페이징 처리
+	document.addEventListener('DOMContentLoaded', function() {
+	    const rowsPerPage = 10; // 한 페이지당 표시할 행의 수
+	    const tableBody = document.getElementById('studentTableBody');
+	    const pagination = document.getElementById('stlist_paging');
+	    const rows = Array.from(tableBody.getElementsByTagName('tr'));
+	    const totalRows = rows.length;
+	    const totalPages = Math.ceil(totalRows / rowsPerPage);
+	    let currentPage = 1;
+	    const maxPageNumbers = 5; // 최대 페이지 번호 표시 개수
+
+	    // 페이지 표시 함수
+	    function showPage(page) {
+	        currentPage = page;
+	        const start = (page - 1) * rowsPerPage;
+	        const end = start + rowsPerPage;
+
+	        rows.forEach((row, index) => {
+	            if (index >= start && index < end) {
+	                row.style.display = '';
+	            } else {
+	                row.style.display = 'none';
+	            }
+	        });
+
+	        updatePagination();
+	    }
+
+	    // 페이지 네비게이션 업데이트 함수
+	    function updatePagination() {
+	        // 페이지 번호 버튼을 동적으로 생성하기 위해 기존 페이지 번호 제거
+	        // <<, <, >, >> 버튼은 유지
+	        const pageNumbers = pagination.querySelectorAll('.page-number');
+	        pageNumbers.forEach(btn => btn.remove());
+
+	        // 페이지 번호 범위 계산
+	        let startPage = 1;
+	        let endPage = totalPages;
+
+	        if (totalPages > maxPageNumbers) {
+	            const half = Math.floor(maxPageNumbers / 2);
+	            if (currentPage <= half + 1) {
+	                startPage = 1;
+	                endPage = maxPageNumbers;
+	            } else if (currentPage + half >= totalPages) {
+	                startPage = totalPages - maxPageNumbers + 1;
+	                endPage = totalPages;
+	            } else {
+	                startPage = currentPage - half;
+	                endPage = currentPage + half;
+	                if (maxPageNumbers % 2 === 0) {
+	                    endPage -= 1;
+	                }
+	            }
+	        }
+
+	        // 페이지 번호 버튼 생성
+	        for (let i = startPage; i <= endPage; i++) {
+	            const li = document.createElement('li');
+	            li.classList.add('page-number');
+
+	            const a = document.createElement('a');
+	            a.href = '#';
+	            a.textContent = i;
+	            a.dataset.page = i;
+
+	            if (i === currentPage) {
+	                li.classList.add('act'); // 활성화된 페이지에 클래스 추가
+	            }
+
+	            a.addEventListener('click', function(e) {
+	                e.preventDefault();
+	                const selectedPage = parseInt(this.dataset.page);
+	                if (selectedPage !== currentPage) {
+	                    showPage(selectedPage);
+	                }
+	            });
+
+	            li.appendChild(a);
+	            // Insert before the > 버튼 (3번째 위치부터)
+	            //pagination.insertBefore(li, pagination.querySelector('#next-page'));
+	        }
+
+	        // << 버튼 활성화/비활성화
+	        const firstBtn = document.getElementById('first-page');
+	        if (currentPage === 1) {
+	            firstBtn.classList.add('disabled');
+	        } else {
+	            firstBtn.classList.remove('disabled');
+	        }
+
+	        // < 버튼 활성화/비활성화
+	        const prevBtn = document.getElementById('prev-page');
+	        if (currentPage === 1) {
+	            prevBtn.classList.add('disabled');
+	        } else {
+	            prevBtn.classList.remove('disabled');
+	        }
+
+	        // > 버튼 활성화/비활성화
+	        const nextBtn = document.getElementById('next-page');
+	        if (currentPage === totalPages) {
+	            nextBtn.classList.add('disabled');
+	        } else {
+	            nextBtn.classList.remove('disabled');
+	        }
+
+	        // >> 버튼 활성화/비활성화
+	        const lastBtn = document.getElementById('last-page');
+	        if (currentPage === totalPages) {
+	            lastBtn.classList.add('disabled');
+	        } else {
+	            lastBtn.classList.remove('disabled');
+	        }
+	    }
+
+	    // 버튼 클릭 이벤트 설정
+	    document.getElementById('first-page').addEventListener('click', function(e) {
+	        e.preventDefault();
+	        if (currentPage !== 1) {
+	            showPage(1);
+	        }
+	    });
+
+	    document.getElementById('prev-page').addEventListener('click', function(e) {
+	        e.preventDefault();
+	        if (currentPage > 1) {
+	            showPage(currentPage - 1);
+	        }
+	    });
+
+	    document.getElementById('next-page').addEventListener('click', function(e) {
+	        e.preventDefault();
+	        if (currentPage < totalPages) {
+	            showPage(currentPage + 1);
+	        }
+	    });
+
+	    document.getElementById('last-page').addEventListener('click', function(e) {
+	        e.preventDefault();
+	        if (currentPage !== totalPages) {
+	            showPage(totalPages);
+	        }
+	    });
+
+	    // 초기 페이지 표시
+	    showPage(1);
+	});
+	
+	
+
+
 //학생 사용자 상세정보 수정 기능
 function update_stuserdata(){
 	stuser_detail_frm.submit();
@@ -231,32 +393,7 @@ function add_stuser(){
 }
 
 
-//교직원 사용자 (prolistmod.html) 검색기능 분류 스크립트 
-function toggleFields() {
-	var categorySelect = document.getElementById("categorySelect").value;
-	var staffTypeSelect = document.getElementById("staffTypeSelect");
-	var searchInput = document.getElementById("searchInput");
-	var statusRadio = document.getElementById("statusRadio");
 
-	// '교직원 분류'가 선택되면 교수/상담사 select 박스를 표시하고 input 텍스트 필드를 숨김
-	if (categorySelect === "staff") {
-		staffTypeSelect.style.display = "inline-block"; // 교수/상담사 select 보이기
-		searchInput.style.display = "none"; // input 필드 숨기기
-		statusRadio.style.display = "none"; // 상태 라디오 버튼 숨기기
-	}
-	// '상태'가 선택되면 input 텍스트 필드를 숨기고 상태 라디오 버튼을 표시
-	else if (categorySelect === "status") {
-		staffTypeSelect.style.display = "none"; // 교수/상담사 select 숨기기
-		searchInput.style.display = "none"; // input 필드 숨기기
-		statusRadio.style.display = "block"; // 상태 라디오 버튼 표시
-	}
-	// 다른 값이 선택되면 input 필드를 보이게 하고 나머지를 숨김
-	else {
-		staffTypeSelect.style.display = "none"; // 교수/상담사 select 숨기기
-		searchInput.style.display = "inline-block"; // input 필드 보이기
-		statusRadio.style.display = "none"; // 상태 라디오 버튼 숨기기
-	}
-}
 
 //관리자 사용자 (adminlistmod.html) 검색기능 분류 스크립트
 function toggleFields() {

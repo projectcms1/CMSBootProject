@@ -162,6 +162,7 @@ public class AdminController {
 		return "admin/adminlistmod";
 	}
 
+	// 상담 내역 리스트 출력
 	@GetMapping("/allcounselmod")
 	public String allcounselmod(Model m) {
 
@@ -171,6 +172,12 @@ public class AdminController {
 		return "admin/allcounselmod";
 	}
 
+	@GetMapping("/addcounsel")
+	public String addcounsel() {
+		return "admin/addcounsel";
+	}
+
+	
 	@GetMapping("/pro_info")
 	public String pro_info() {
 		return "admin/pro_info";

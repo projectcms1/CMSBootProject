@@ -112,3 +112,39 @@ button.btn {
 	max-height: 100%;
 	max-width: 100%;
 }
+
+
+
+/*상담 리스트 페이지 _ 총 페이지 수 css*/
+/* 총 페이지 수 표시 스타일 */
+#totalPagesDisplay {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* 페이징 버튼 사이 간격 조정 */
+.pagination .page-item + .page-item {
+    margin-left: 0.25rem;
+}
+
+/* 활성화된 페이지 버튼 스타일 변경 */
+.pagination .page-item.active .page-link {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+
+/* 비활성화된 페이지 버튼 스타일 변경 */
+.pagination .page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    cursor: not-allowed;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/* 호버 효과 */
+.pagination .page-link:hover:not(.disabled) {
+    background-color: #e9ecef;
+}
