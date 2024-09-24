@@ -97,21 +97,15 @@
 										<form id="frmSearch"
 											class="search-form d-flex align-items-center"
 											th:onsubmit="return list_search()">
-											<select name="search_part" id="inputState"
-												class="form-select" style="width: 180px;">
-												<option value="RSVT_DT"
-													th:selected="${ search_part == 'RSVT_DT' }">상담일자</option>
-												<option value="EMP_FLNM"
-													th:selected="${ search_part == 'EMP_FLNM' }">상담자</option>
-												<option value="DSCSN_MTHD"
-													th:selected="${ search_part == 'DSCSN_MTHD' }">상담방식</option>
-												<option value="DSCSN_KND"
-													th:selected="${ search_part == 'DSCSN_KND' }">상담종류</option>
-											</select> <input type="text" name="search_word"
-												th:value="${ search_word }" class="form-control"
-												placeholder="Search" style="margin-left: 5px;">
-											<button type="submit" title="찾기" class="btn"
-												style="border-color: g">
+											<select name="search_part" id="inputState" class="form-select" style="width: 180px;">
+												<option value="RSVT_DT" th:selected="${ search_part == 'RSVT_DT' }">상담일자</option>
+												<option value="EMP_FLNM" th:selected="${ search_part == 'EMP_FLNM' }">상담자</option>
+												<option value="DSCSN_MTHD" th:selected="${ search_part == 'DSCSN_MTHD' }">상담방식</option>
+												<option value="DSCSN_KND" th:selected="${ search_part == 'DSCSN_KND' }">상담종류</option>
+											</select>
+											 <input type="text" name="search_word" th:value="${ search_word }" class="form-control"
+											 placeholder="Search" style="margin-left: 5px;">
+											<button type="submit" title="찾기" class="btn" style="border-color: g">
 												<i class="bi bi-search"></i>
 											</button>
 										</form>
