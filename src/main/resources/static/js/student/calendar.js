@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+let exreservData = new Object();
+
+>>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 const monthAndYear = document.getElementById("monthAndYear");
 const calendarBody = document.getElementById("calendarBody");
 const prevMonthBtn = document.getElementById("prevMonth");
@@ -9,6 +14,41 @@ const todayDate = today.getDate();
 const todayMonth = today.getMonth();
 const todayYear = today.getFullYear();
 
+<<<<<<< HEAD
+=======
+const prfsSelectDate = document.getElementById("prfsSelectDate");
+const prfsSelectTime = document.getElementById("prfsSelectTime");
+prfsSelectDate.setAttribute("min", today.toISOString().split("T")[0]);
+
+const cnslrSelectTime = document.getElementById("cnslrSelectTime");
+
+var cnslrDateTimeList = [];
+
+const TimeTableList = ["<option value=''>시간 선택</option>", "<option value='1'>1교시(09:00~10:15)</option>",
+		"<option value='2'>2교시(10:30~11:45)</option>", "<option value='3'>3교시(13:00~14:15)</option>",
+		"<option value='4'>4교시(14:30~15:45)</option>", "<option value='5'>5교시(16:00~17:15)</option>"
+];
+
+(function ajax_empTimeTable() {
+	fetch('./api/professor_time', {
+		method : "GET",
+		headers : { "content-type" : "application/json" }
+	}).then(function(result_data) {
+		return result_data.json();
+	}).then(function(result_res) {
+		if (result_res['cnslr'] == "error") {
+			alert("오류가 발생하였습니다.");
+		}
+		else {
+			exreservData = result_res;
+		}
+	}).catch(function() {
+		alert("오류 발생!");
+		location.href = '/blank';
+	});
+}());
+
+>>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 // 한국어 월 이름과 요일 이름 배열
 const monthNames = [
     "1월", "2월", "3월", "4월", "5월", "6월",
@@ -53,12 +93,26 @@ function showCalendar(year, month) {
     });
     calendarBody.appendChild(dayRow);
 
+<<<<<<< HEAD
+=======
+	var cnslrTimeData = new Array();
+	// 예약 가능한 교시가 없을 때 날짜 비활성화 처리를 위한 배열 생성
+	cnslrDateTimeList.forEach(function(data) {
+		var date_dump = data['rsvt_dt'];
+		cnslrTimeData.push(date_dump);
+	});
+
+>>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
     let date = 1;
     for (let i = 0; i < 6; i++) {
         let row = document.createElement("tr");
 
         for (let j = 0; j < 7; j++) {
             let cell = document.createElement("td");
+<<<<<<< HEAD
+=======
+
+>>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
             const currentDate = new Date(year, month, date);
 
             if (i === 0 && j < firstDay) {
@@ -67,7 +121,15 @@ function showCalendar(year, month) {
                 break;
             } else {
                 cell.innerHTML = date;
+<<<<<<< HEAD
 
+=======
+                
+                var current_date = setDateInTDTag(year, month, date);
+                
+                cell.setAttribute("datedata", current_date);
+                
+>>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
                 // 오늘 이전의 날짜를 비활성화(disable) 처리
                 if (
                     (year < todayYear) ||
@@ -81,13 +143,35 @@ function showCalendar(year, month) {
                 if (j === 0 || j === 6 || isPublicHoliday(currentDate)) {
                     cell.classList.add("disabled");
                 }
+<<<<<<< HEAD
 
+=======
+                
+                // 예약 가능한 교시가 없을 때 날짜 비활성화 처리
+                if (cnslrTimeData.filter(element => current_date === element).length == 5) {
+					cell.classList.add("disabled");
+				}
+                
+>>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
                 date++;
             }
             row.appendChild(cell);
         }
         calendarBody.appendChild(row);
     }
+<<<<<<< HEAD
+=======
+    search_tdtag();
+}
+
+function setDateInTDTag(y, m, d) {
+	var result = "";
+	var fm = m + 1;
+	var fmonth = (fm > 9) ? fm : "0" + fm;
+	var fdate = (d > 9) ? d : "0" + d;
+	result = y + "" + fmonth + "" + fdate;
+	return result;
+>>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 }
 
 function initCalendar() {
@@ -103,6 +187,10 @@ prevMonthBtn.addEventListener("click", () => {
         currentYear--;
     }
     showCalendar(currentYear, currentMonth);
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 });
 
 nextMonthBtn.addEventListener("click", () => {
@@ -114,4 +202,123 @@ nextMonthBtn.addEventListener("click", () => {
     showCalendar(currentYear, currentMonth);
 });
 
+<<<<<<< HEAD
 initCalendar();
+=======
+function updateCnslrName(empNo) {
+	var emp_name = document.querySelector('#counseler_number > option:checked').innerText;
+	document.getElementById("selectedCnslrName").innerText = emp_name;
+	frmCounseler.counseler_number.value = empNo;
+	
+	frmCounseler.rsvt_dt.value = "";
+	document.getElementById("selectedCnslDate").innerText = "";
+	
+	cnslrDateTimeList = [];
+	exreservData['cnslr'].forEach(function(data) {
+		if (empNo == data['emp_no']) {
+			//var dt_dump = data['rsvt_dt'].replaceAll("-", "");
+			var dt_data = {'rsvt_dt' : data['rsvt_dt'], 'hr_se' : data['hr_se']};
+			cnslrDateTimeList.push(dt_data);
+		}
+	});
+	initCalendar();
+}
+
+function reservate_counsel(empType) {
+	if (empType == "cslr") {
+		if (frmCounseler.rsvt_dt.value == "") {
+			alert("상담 신청 날짜를 선택해주세요.");
+		}
+		else if (frmCounseler.hr_se.value == "") {
+			alert("상담 신청 시간을 선택해주세요.");
+		}
+		else if (frmCounseler.dscsn_knd.value == "") {
+			alert("신청할 상담의 종류를 선택해주세요.");
+		}
+		else if (frmCounseler.dscsn_mthd.value == "") {
+			alert("신청할 상담의 방식을 선택해주세요.");
+		}
+		else {
+			if (confirm("아래 내용으로 상담을 신청하시겠습니까?")) {
+				frmCounseler.method = "POST";
+				frmCounseler.action = "./insert_counsel_reservation";
+				frmCounseler.submit();
+			}
+		}
+	}
+	else if (empType == "prfs") {
+		if (frmProfessor.rsvt_dt.value == "") {
+			alert("상담 신청 날짜를 선택해주세요.");
+		}
+		else if (frmProfessor.hr_se.value == "") {
+			alert("상담 신청 시간을 선택해주세요.");
+		}
+		else if (frmProfessor.dscsn_knd.value == "") {
+			alert("신청할 상담의 종류를 선택해주세요.");
+		}
+		else if (frmProfessor.dscsn_mthd.value == "") {
+			alert("신청할 상담의 방식을 선택해주세요.");
+		}
+		else {
+			if (confirm("아래 내용으로 상담을 신청하시겠습니까?")) {
+				frmProfessor.method = "POST";
+				frmProfessor.action = "./insert_counsel_reservation";
+				frmProfessor.submit();
+			}
+		}
+	}
+	else {
+		alert("잘못된 접근입니다.");
+	}
+}
+
+initCalendar();
+
+function search_tdtag() {
+	var td_data = document.querySelectorAll("td:not(.disabled)");
+	td_data.forEach((data) => {
+		data.addEventListener('click', function(e) {
+			var datedata = e.currentTarget.getAttribute("datedata");
+			frmCounseler.rsvt_dt.value = datedata;
+			
+			var dateview = datedata.substring(0, 4) + "년 " + datedata.substring(4, 6) + "월 " + datedata.substring(6, 8) + "일";
+			
+			document.getElementById("selectedCnslDate").innerText = dateview;
+			
+			cnslrSelectTime.innerHTML = "";
+			var timeList = [];
+			var html = "";
+			cnslrDateTimeList.forEach(function(data) {
+				if (datedata == data.rsvt_dt) {
+					timeList.push(data.hr_se);
+				}
+			});
+			TimeTableList.forEach(function(data, node) {
+				if (!timeList.includes(node)) {
+					html += data;
+				}
+			});
+			cnslrSelectTime.innerHTML = html;
+		});
+	});
+}
+
+function setTimeSelecter2(selectedDate) {
+	prfsSelectTime.innerHTML = "";
+	var timeList = [];
+	var html = "";
+	var sdate = selectedDate.replaceAll("-", "");
+	var time_data = exreservData['prfs'];
+	time_data.forEach(function(data) {
+		if (sdate == data.rsvt_dt) {
+			timeList.push(data.hr_se);
+		}
+	});
+	TimeTableList.forEach(function(data, node) {
+		if (!timeList.includes(node)) {
+			html += data;
+		}
+	});
+	prfsSelectTime.innerHTML = html;
+}
+>>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7

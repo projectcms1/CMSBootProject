@@ -6,6 +6,7 @@
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}]},{},[1])(1)
 });
+<<<<<<< HEAD
 
 /**
  * Check is item is object
@@ -5670,3 +5671,5 @@ const addColumnFilter = function (dataTable, options = {}) {
 
 export { DataTable, addColumnFilter, convertCSV, convertJSON, createElement, exportCSV, exportJSON, exportSQL, exportTXT, isJson, isObject, makeEditable };
 //# sourceMappingURL=module.js.map
+=======
+>>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7

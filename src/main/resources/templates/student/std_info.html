@@ -81,8 +81,12 @@
 							<div class="row mb-1">
 								<!-- row 1 -->
 								<div class="col-md-2 col-lg-2">
+<<<<<<< HEAD
 									<img src="/assets/img/3.jpeg" alt="Profile" class="rounded-4" style="margin-left: 25%;"
 										width="80%" height="225px">
+=======
+									<img src="/assets/img/3.jpeg" alt="Profile" class="rounded-4" style="margin-left: 25%;" width="80%" height="225px">
+>>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 								</div>
 								<div class="col-md-4 col-lg-4">
 									<div class="row mb-1">
@@ -106,7 +110,11 @@
 									<div class="row mb-1">
 										<label class="col-sm-4 col-form-label right-tag">생년월일</label>
 										<div class="col-sm-5 right-tag">
+<<<<<<< HEAD
 											<input type="text" class="form-control" th:value="${ std_data.getBrdt().substring(2) }" disabled>
+=======
+											<input type="text" class="form-control" th:value="${ std_data.getBrdt() }" disabled>
+>>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 										</div>
 									</div>
 									<div class="row mb-1">
@@ -121,29 +129,41 @@
 											<input type="text" class="form-control" th:value="${ std_data.getUniv_prd() }" disabled>
 										</div>
 									</div>
+<<<<<<< HEAD
 									<div class="row mb-1">
 										<label class="col-sm-4 col-form-label right-tag">학적구분</label>
 										<div class="col-sm-5 right-tag">
 											<input type="text" class="form-control" value="재학" disabled>
 										</div>
 									</div>
+=======
+>>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 								</div>
 								<div class="col-md-4 col-lg-6">
 									<div class="row mb-1">
 										<label class="col-sm-4 col-form-label right-tag">대학(원)</label>
 										<div class="col-sm-6 right-tag">
+<<<<<<< HEAD
 											<input type="text" class="form-control" value="IT대" disabled>
+=======
+											<input type="text" class="form-control" th:value="${ std_data.getOgdp_univ() }" disabled>
+>>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 										</div>
 									</div>
 									<div class="row mb-1">
 										<label class="col-sm-4 col-form-label right-tag">학과(부)</label>
 										<div class="col-sm-6 right-tag">
+<<<<<<< HEAD
 											<input type="text" class="form-control" value="컴퓨터학과" disabled>
+=======
+											<input type="text" class="form-control" th:value="${ std_data.getOgdp_scsbjt() }" disabled>
+>>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 										</div>
 									</div>
 									<div class="row mb-1">
 										<label class="col-sm-4 col-form-label right-tag">전공</label>
 										<div class="col-sm-6 right-tag">
+<<<<<<< HEAD
 											<input type="text" class="form-control" value="정보보안전공" disabled>
 										</div>
 									</div>
@@ -157,11 +177,28 @@
 										<label class="col-sm-4 col-form-label right-tag">이메일</label>
 										<div class="col-sm-6 right-tag">
 											<input type="text" class="form-control" value="capybara@cauniv.com">
+=======
+											<input type="text" class="form-control" th:value="${ std_data.getMjr() }" disabled>
+										</div>
+									</div>
+									<div class="row mb-1">
+										<label class="col-sm-4 col-form-label right-tag">학적구분</label>
+										<div class="col-sm-6 right-tag">
+											<input type="text" class="form-control" th:value="${ std_data.getStdnt_stts_se() }" disabled>
+										</div>
+									</div>
+									<form id="personal_frm">
+									<div class="row mb-1">
+										<label class="col-sm-4 col-form-label right-tag">이메일</label>
+										<div class="col-sm-6 right-tag">
+											<input type="text" name="user_eml_addr" class="form-control" th:value="${ std_data.getUser_eml_addr() }" disabled required>
+>>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 										</div>
 									</div>
 									<div class="row mb-3">
 										<label class="col-sm-4 col-form-label right-tag">전화번호</label>
 										<div class="col-sm-6 right-tag">
+<<<<<<< HEAD
 											<input type="text" class="form-control" value="010-1234-5678">
 										</div>
 									</div>
@@ -172,6 +209,19 @@
 								<i class="ri-save-3-line"></i> 저장
 							</button>
 							<button type="button" class="btn btn-outline-primary float-end" style="margin-left: auto;">
+=======
+											<input type="text" name="user_telno" class="form-control" th:value="${ std_data.getUser_telno() }" disabled required>
+										</div>
+									</div>
+									</form>
+								</div>
+							</div>
+							
+							<button type="button" onclick="input_submit('1')" class="btn btn-outline-success float-end" style="margin-left: 5px;">
+								<i class="ri-save-3-line"></i> 저장
+							</button>
+							<button type="button" onclick="input_disable('1')" class="btn btn-outline-primary float-end" style="margin-left: auto;">
+>>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 								<i class="ri-edit-2-line"></i> 입력
 							</button>
 							
@@ -184,6 +234,7 @@
 						<div class="card-body">	
 							<h5 class="card-title">거주지 정보</h5>
 							<div class="col-md-12">
+<<<<<<< HEAD
 								<div class="row mb-2">
 									<label class="col-sm-2 col-form-label pd-left-3">우편번호</label>
 									<div class="col-sm-2">
@@ -213,6 +264,42 @@
 								<i class="ri-edit-2-line"></i> 입력
 							</button>
 							
+=======
+							<form id="address_frm">
+								<div class="row mb-2" style="margin-left: 5%;">
+									<label class="col-sm-1 col-form-label pd-left-3">우편번호</label>
+									<div class="col-sm-2">
+										<input type="text" class="form-control" name="user_zip" id="sample2_postcode" th:value="${ std_data.getUser_zip() }" disabled required>
+									</div>
+									<button type="button" class="btn btn-primary" id="searchAddrBtn"
+										style="width: 150px; height: 38px;" disabled>우편번호 검색</button>
+								</div>
+								<div class="row mb-2" style="margin-left: 5%;">
+									<label class="col-sm-1 col-form-label pd-left-3">주소</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" name="user_addr" id="sample2_address" th:value="${ std_data.getUser_addr() }" disabled required>
+									</div>
+								</div>
+								<div class="row mb-3" style="margin-left: 5%;">
+									<label class="col-sm-1 col-form-label pd-left-3">상세주소</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" name="user_daddr" id="sample2_detailAddress" th:value="${ std_data.getUser_daddr() }" disabled required>
+									</div>
+								</div>
+							</form>
+							</div>
+							
+							<button type="button" onclick="input_submit('2')" class="btn btn-outline-success float-end"style="margin-left: 5px;">
+								<i class="ri-save-3-line"></i> 저장
+							</button>
+							<button type="button" onclick="input_disable('2')" class="btn btn-outline-primary float-end" style="margin-left: auto;">
+								<i class="ri-edit-2-line"></i> 입력
+							</button>
+							<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
+								<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer"
+									style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
+							</div>
+>>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 						</div>
 					</div>
 				<!-- End 거주지 정보 Card -->
@@ -221,6 +308,7 @@
 					<div class="card">
 						<div class="card-body">	
 							<h5 class="card-title">계좌 정보</h5>
+<<<<<<< HEAD
 							<div class="row mb-3">
 								<label class="col-sm-1 col-form-label pd-left-3">은행명</label>
 								<div class="col-sm-2">
@@ -240,6 +328,29 @@
 								<i class="ri-save-3-line"></i> 저장
 							</button>
 							<button type="button" class="btn btn-outline-primary float-end" style="margin-left: auto;">
+=======
+							<form id="acount_frm">
+							<div class="row mb-3" style="margin-left: 5%;">
+								<label class="col-sm-1 col-form-label pd-left-3">은행명</label>
+								<div class="col-sm-2">
+									<input type="text" name="dlng_bank_nm" class="form-control" th:value="${ std_data.getDlng_bank_nm() }" disabled required>
+								</div>
+								<label class="col-sm-1 col-form-label pd-left-3">계좌번호</label>
+								<div class="col-sm-3">
+									<input type="text" name="dlng_actno" class="form-control" th:value="${ std_data.getDlng_actno() }" disabled required>
+								</div>
+								<label class="col-sm-1 col-form-label pd-left-3">예금주</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" th:value="${ std_data.getDpstr_nm() }" disabled required>
+								</div>
+							</div>
+							</form>
+							
+							<button type="button" onclick="input_submit('3')" class="btn btn-outline-success float-end" style="margin-left: 5px;">
+								<i class="ri-save-3-line"></i> 저장
+							</button>
+							<button type="button" onclick="input_disable('3')" class="btn btn-outline-primary float-end" style="margin-left: auto;">
+>>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 								<i class="ri-edit-2-line"></i> 입력
 							</button>
 							
@@ -254,6 +365,11 @@
 	
 	<div th:replace="~{/student/std_footer :: std_footer}"></div>	<!-- 학생 footer -->
 </body>
+<<<<<<< HEAD
+=======
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/js/student/std_info.js?v=3"></script>
+>>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 <script>
 window.onload=function(){
 	document.getElementById('info-nav').className = 'nav-link';

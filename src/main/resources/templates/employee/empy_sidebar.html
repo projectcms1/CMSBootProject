@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- ======= Sidebar ======= -->
 	<aside id="sidebar" class="sidebar" th:fragment="empy_sidebar">
 		<ul class="sidebar-nav" id="sidebar-nav">
@@ -74,4 +75,82 @@
 			<!-- End 상담관리 Nav -->
 		</ul>
 	</aside>
+=======
+<!-- ======= Sidebar ======= -->
+	<aside id="sidebar" class="sidebar" th:fragment="empy_sidebar">
+		<ul class="sidebar-nav" id="sidebar-nav">
+			<!-- ======= Home Nav ======= -->
+			<li class="nav-item">
+        		<a class="nav-link collapsed" href="/">
+          		<i class="bi bi-grid"></i>
+          		<span>Home</span>
+        		</a>
+      		</li>
+			<!-- End Home Nav -->
+			
+			<!-- ======= 교직원정보 Nav ======= -->
+			<li class="nav-item">
+        		<a id="info-nav" class="nav-link collapsed" data-bs-target="#info-nav1" data-bs-toggle="collapse" href="/employee/empy_info">
+          			<i class="bi bi-person-bounding-box"></i>
+          			<span>교직원정보</span>
+          			<i class="bi bi-chevron-down ms-auto"></i>
+        		</a>
+        		<ul id="info-nav1" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          			<li>
+            			<a href="/employee/empy_info" id="info-nav-1">
+              				<i class="bi bi-circle"></i>
+              				<span>기본정보</span>
+            			</a>
+          			</li>
+          		</ul>
+      		</li>
+      		<!-- End 교직원정보 Nav -->
+      		
+			<!-- ======= 학사관리 Nav ======= -->
+			<li class="nav-item">
+        		<a class="nav-link collapsed" href="/employee/empy_academy_index">
+          		<i class="bi bi-menu-button-wide"></i>
+          		<span>학사관리</span>
+        		</a>
+      		</li>
+			<!-- End 학사관리 Nav -->
+			
+			<!-- ======= 상담관리 Nav ======= -->
+			<li class="nav-item">
+				<a id="counsel-nav" class="nav-link collapsed" data-bs-target="#counsel-nav1" data-bs-toggle="collapse" href="#">
+					<i class="bi bi-chat-left-dots"></i> 
+					<span>상담관리</span> 
+					<i class="bi bi-chevron-down ms-auto"></i>
+				</a>
+				<ul id="counsel-nav1" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+					<li>
+						<a href="/employee/empy_counsel_index"  id="counsel-nav-1"> 
+							<i class="bi bi-circle"></i>
+							<span>상담이력조회</span>
+						</a>
+					</li>
+					<li>
+						<a href="/employee/empy_counsel_reserve" id="counsel-nav-2"> 
+							<i class="bi bi-circle"></i>
+							<span>상담예약관리</span>
+						</a>
+					</li>
+					<li>
+						<a href="/employee/empy_counsel_add" id="counsel-nav-3"> 
+							<i class="bi bi-circle"></i>
+							<span>상담추가</span>
+						</a>
+					</li>
+					<li>
+						<a href="/employee/empy_counsel_chatting" id="counsel-nav-4"> 
+							<i class="bi bi-circle"></i>
+							<span>채팅상담</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<!-- End 상담관리 Nav -->
+		</ul>
+	</aside>
+>>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 	<!-- End Sidebar -->

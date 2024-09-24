@@ -12,13 +12,20 @@ target/
 .settings
 .springBeans
 .sts4-cache
+<<<<<<< HEAD
+=======
+src/main/resources/application.properties
+>>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
+<<<<<<< HEAD
 *.properties
+=======
+>>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 
 ### NetBeans ###
 /nbproject/private/

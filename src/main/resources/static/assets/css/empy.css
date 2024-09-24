@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*개인적인 추가 css*/
 .right-tag {
 	margin-left: auto;
@@ -5,4 +6,88 @@
 
 .pd-left-3{
 	padding-left: 3%;
+=======
+/*개인적인 추가 css*/
+.right-tag {
+	margin-left: auto;
+}
+
+.pd-left-3{
+	padding-left: 3%;
+}
+
+#demo-table > tbody > tr > td{
+	padding-left: 15px;
+}
+
+#demo-table > thead > tr > th > button{
+	cursor: default;
+}
+
+#main{
+	min-height: calc(100vh - 160px)  !important;
+}
+body{
+  margin:0;
+  padding:0;
+}
+.count_motion {
+    position: absolute;
+    border-radius: 100%;
+    border: 10px solid transparent;
+    border-color: #00baff #fff #fff #fff;
+    transform-origin: 50% 50%;
+    background-color: #313e51;
+}
+
+.count_motion.on{
+    -moz-animation: rotate-loading 1.5s linear 0s infinite normal;
+    -moz-transform-origin: 50% 50%;
+    -o-animation: rotate-loading 1.5s linear 0s infinite normal;
+    -o-transform-origin: 50% 50%;
+    -webkit-animation: rotate-loading 1.5s linear 0s infinite normal;
+    -webkit-transform-origin: 50% 50%;
+    
+    animation: rotate-loading 1.5s linear 0s infinite normal;
+}
+
+.count_motion > img{
+	margin: auto;
+}
+
+
+.count_txt {
+    color: #ffffff;
+    font-size: 48px;
+    font-weight: bold;
+    margin-top: 71px;
+    margin-left: 16px;
+    position: absolute;
+    text-align: center;
+    text-transform: uppercase;
+    width: 147px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top:-15px
+}
+
+
+@keyframes rotate-loading {
+    0%  {transform: rotate(0deg);-ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg);}
+    100% {transform: rotate(360deg);-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); -o-transform: rotate(360deg); -moz-transform: rotate(360deg);}
+}
+@-moz-keyframes rotate-loading {
+    0%  {transform: rotate(0deg);-ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg);}
+    100% {transform: rotate(360deg);-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); -o-transform: rotate(360deg); -moz-transform: rotate(360deg);}
+}
+@-webkit-keyframes rotate-loading {
+    0%  {transform: rotate(0deg);-ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg);}
+    100% {transform: rotate(360deg);-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); -o-transform: rotate(360deg); -moz-transform: rotate(360deg);}
+}
+@-o-keyframes rotate-loading {
+    0%  {transform: rotate(0deg);-ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg);}
+    100% {transform: rotate(360deg);-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); -o-transform: rotate(360deg); -moz-transform: rotate(360deg);}
+>>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 }

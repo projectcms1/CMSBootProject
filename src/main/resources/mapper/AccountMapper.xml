@@ -49,7 +49,7 @@
 	    <result column="DLNG_ACTNO" property="dlng_actno" />
 	    <result column="DPSTR_NM" property="dpstr_nm" />
 	    <result column="OGDP_INST_NM" property="ogdp_inst_nm" />
-	    <result column="OGDP_DEPT_NM" property="ogdp_iept_nm" />
+	    <result column="OGDP_DEPT_NM" property="ogdp_dept_nm" />
 	    <result column="JBGD_NM" property="jbgd_nm" />
 	    <result column="MJR" property="mjr" />
 	    <result column="ACNT_STTS" property="acnt_stts" />
