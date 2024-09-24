@@ -1,65 +1,3 @@
-function counsel_add(){	//상담을 추가할 때 모든 정보들이 입력되었는지 체크하는 함수
-	if(document.querySelector("input[name='std_name_ck']").value!="true"){
-		alert("올바른 학번을 입력해주세요.");
-		return false;
-	}
-	else if(document.querySelector("input[name='rsvt_dt']").value==""){
-		document.querySelector("input[name='rsvt_dt']").focus();
-		alert("상담일자를 선택해주세요.");
-	}
-	else if(document.querySelector("select[name='hr_se']").value==""){
-		document.querySelector("select[name='hr_se']").focus();
-		alert("상담시간을 선택해주세요.");
-	}
-	else if(document.querySelector("select[name='dscsn_knd']").value==""){
-		document.querySelector("select[name='dscsn_knd']").focus();
-		alert("상담종류를 선택해주세요.");
-	}
-	else if(document.querySelector("select[name='dscsn_mthd']").value==""){
-		document.querySelector("select[name='dscsn_mthd']").focus();
-		alert("상담방식을 선택해주세요.");
-	}
-	else{
-		if(confirm("입력하신 정보로 상담을 추가하시겠습니까?")){
-			return true;
-		}
-	}
-	return false;
-	
-}
-
-function stdnt_no_check(std_no){	//학번으로 학생 이름을 불러오는 함수
-	if(std_no.length<8){
-		alert("학번 8자리를 모두 입력해주세요");
-		return false;
-	}
-	else{	//학번8자리가 입력되었을 시 DB Post 통신으로 학생 이름을 불러옴
-		let formData = new FormData(); 
-		formData.append('stdnt_no', std_no);
-	
-		fetch('http://localhost:8080/employee/empy_counsel_add_stdnt_no_ok.do', {
-		    method: 'post', 
-		    body: formData,  //전송할 데이터 body에 추가
-		})
-	    .then(res => res.json()) //응답 결과를 json으로 파싱
-	    .then(data => {
-			if(data.stdnt_name==null){
-				document.querySelector("input[name='stdnt_flnm']").value="존재하지 않는 사용자입니다.";
-				document.querySelector("input[name='stdnt_flnm']").style.color="#FF0000";
-				document.querySelector("input[name='std_name_ck']").value="false";
-			}	
-			else{
-				document.querySelector("input[name='stdnt_flnm']").value=data.stdnt_name;
-				document.querySelector("input[name='stdnt_flnm']").style.removeProperty('color');
-				document.querySelector("input[name='std_name_ck']").value="true";
-			}	
-	    })
-	    .catch(err => { // 오류 발생시 오류를 담아서 보여줌
-	        console.log('Fetch Error', err);
-	    });
-	}  	
-}
-
 function perpagesizechange(){	//페이지 당 출력 게시물 수를 바꾸는 함수
 	var perpage = document.getElementById("per-page");
 	var size = perpage.options[perpage.selectedIndex].value;
@@ -169,16 +107,20 @@ for(let i=0;i<selectedPage.length;i++){		//각각의 페이지 버튼에 페이�
 }
 
 function firstNlastPage(firstorlast){	//첫번째 또는 마지막 페이지로 이동하는 함수
+	var maxpage=document.getElementById("maxpage").value;
 	var page=firstorlast;
 	var url;
 
 	if(firstorlast=='first'){
 		page=1;	
 	}
-	else if(firstorlast=='last'){
-		page=document.getElementById("maxpage").value;
+	else if(firstorlast=='last' && maxpage!=0){
+		page=maxpage;
 	}
-	console.log(page);
+	else if(firstorlast=='last' && maxpage==0){
+		page=1;
+	}
+
 	if(window.location.href.indexOf("?")==-1){	// 현재 URL에 파라미터가 없을 시
 		url=window.location.href;
 		url+="?page="+page;
@@ -222,6 +164,92 @@ function firstNlastPage(firstorlast){	//첫번째 또는 마지막 페이지로 
 	location.href=url;
 }  
 
-function searchData(){
+function searchData(){	//검색 시 처리하는 함수
+	var searchform=document.getElementById("searchForm");
+	var searchvalue=searchform.searchValue.value;
+	if(searchvalue==null || searchvalue==""){	//검색어가 없을 때, 모든 상담이 검색되도록 함
+		location.href=window.location.href;
+		return false;
+	}
+	else{	//검색어가 있을 때, 파라미터로 검색 카테고리와 검색어가 설정됨
+		var url=window.location.href.substring(0, window.location.href.indexOf("?"));
+		searchform.action=url;
+		searchform.submit();		
+	}
 	
+}
+
+function madalDataSet(aply_sn){
+	var url=window.location.href;
+	fetch(url+"ok.do?aply_sn="+aply_sn)
+	    .then(res => res.json()) //응답 결과를 json으로 파싱
+	    .then(data => {
+			console.log(data);
+			console.log(data.counsel_detail[0].stdnt_flnm);
+			makeModal(data);
+		})
+	    .catch(err => { // 오류 발생시 오류를 담아서 보여줌
+	        console.log('Fetch Error', err);
+	        location.href='/blank';
+	    });
+}
+
+
+function createAccordionItem(index, item) {
+    return `
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading${index}">
+                <button class="accordion-button ${index === 0 ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${index}" aria-expanded="${index === 0}" aria-controls="collapse${index}">
+                    ${index + 1}회차
+                </button>
+            </h2>
+            <div id="collapse${index}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" aria-labelledby="heading${index}" data-bs-parent="#counsel_accordion">
+                <div class="accordion-body">
+                    <div class="row mb-3" align="center">
+                        <label for="inputDate" class="col-sm-2 col-form-label">상담일자</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" value="${item.rsvt_dt}" disabled>
+                        </div>
+                        <label for="inputTime" class="col-sm-2 col-form-label">상담시간</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" value="${item.hr_se}" disabled>
+                        </div>
+                    </div>
+                    <div class="row mb-3" align="center">
+                        <label class="col-sm-2 col-form-label">상담종류</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" value="${item.dscsn_knd}" disabled>
+                        </div>
+                        <label class="col-sm-2 col-form-label">상담방식</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" value="${item.dscsn_mthd}" disabled>
+                        </div>
+                    </div>
+                    <div class="row mb-3" align="center">
+                        <label class="col-sm-2 col-form-label">상담장소</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" value="${item.plc}" disabled>
+                        </div>
+                    </div>
+                    <div class="row mb-3" align="center">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">상담결과</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" style="height: 200px;" placeholder="상담 결과는 작성자만 볼 수 있습니다." disabled></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function makeModal(detailData) {
+	counsel_accordion.innerHTML = '';
+	
+	document.querySelector("input[name='stdnt_flnm']").value=detailData.counsel_detail[0]['stdnt_flnm'];
+	document.querySelector("input[name='stdnt_no']").value=detailData.counsel_detail[0]['stdnt_no'];
+	
+	detailData.counsel_detail.forEach(function(data, node) {
+		counsel_accordion.innerHTML += createAccordionItem(node, data);
+	});
 }

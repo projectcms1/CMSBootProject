@@ -52,7 +52,7 @@
        	  	<ol class="breadcrumb">
        	  		<li class="breadcrumb-item"><a href="/">Home</a></li>
 	          	<li class="breadcrumb-item">상담관리</li>
-       			<li class="breadcrumb-item active">상담이력조회</li>
+       			<li class="breadcrumb-item active">지난상담관리</li>
        	  	</ol>
     	</nav>
     </div> 
@@ -117,7 +117,7 @@
 				                    			<button class="datatable-sorter">상담종류</button>
 				                    		</th>
 				                    		<th data-sortable="true" style="width: 20%;">
-				                    			<button class="datatable-sorter">상담방식</button>
+				                    			<button class="datatable-sorter">상담상태</button>
 				                    		</th>
 				                    	</tr>
 				                    </thead>
@@ -130,12 +130,7 @@
 							                <td th:text="${counsel.getStdnt_flnm}"/>
 							                <td th:text="${counsel.getStdnt_no}"/>
 							                <td th:text="${counsel.getDscsn_knd}"/>
-							                <td>[[${counsel.getDscsn_mthd}]]
-							                    <button type="button" class="btn btn-outline-info btn-sm rounded-pill" 
-												data-bs-toggle="modal" data-bs-target="#counselDetailModal" 
-												style="float: right; margin-left: 5px;" 
-												th:value="${counsel.getAply_sn}" onclick="madalDataSet(this.value)">상세보기</button>
-							                </td>
+							                <td th:text="${counsel.getDscsn_mthd}"/>
 							            </tr>
 					                </tbody>
 				                </table>
@@ -251,7 +246,7 @@
 	window.onload=function(){
 		document.getElementById('counsel-nav').className = 'nav-link';
 		document.getElementById('counsel-nav1').className += ' show';
-    	document.getElementById('counsel-nav-1').className += ' active';
+    	document.getElementById('counsel-nav-4').className += ' active';
 	}
 </script>
 <script src="/js/employee/empy_counsel.js"></script>

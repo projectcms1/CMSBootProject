@@ -92,10 +92,11 @@ public class EmployeeController {
 	@GetMapping("/employee/empy_counsel_index")
 	public String employeeCounselIndexPage(Model m, @ModelAttribute("params") search_dto params, ServletResponse res) {	//교번에 해당하는 완료 상담 정보와 개수 로드
 		try {
-			List<view_counsel_dto> counsel_list = this.empyService.getAllCounsel(emp_no, params);
-			int counsel_list_count = this.empyService.getAllCounselCount(emp_no);	
+			List<view_counsel_dto> counsel_list = this.empyService.getAllCounsel(emp_no, "완료", params);
+			int counsel_list_count = this.empyService.getAllCounselCount(emp_no, "완료", params);	
 			int maxpage=(int)Math.ceil((double)counsel_list_count/params.getSize());
-			if(maxpage<params.getPage()) {
+			
+			if(maxpage<params.getPage() && maxpage!=0) {
 				res.setContentType("text/html;charset=utf-8");
 				this.pw=res.getWriter();
 				this.pw.print("<script>"
@@ -104,6 +105,7 @@ public class EmployeeController {
 					+ "</script>");
 				this.pw.close();
 			}
+			
 			m.addAttribute("counsel_list", counsel_list);
 			m.addAttribute("counsel_list_count", counsel_list_count);
 			m.addAttribute("maxpage", maxpage);
@@ -114,6 +116,118 @@ public class EmployeeController {
 		return "employee/empy_counsel_index";
 	}
 	
+	@ResponseBody
+	@GetMapping("/employee/empy_counsel_indexok.do")
+    public Map<String, Object> counselDetailModal(final int aply_sn) {
+        Map<String, Object> map= new HashMap<String, Object>();
+		try {
+			List<view_counsel_dto> counsel_detail=this.empyService.getOneCounsel(aply_sn);
+			map.put("counsel_detail", counsel_detail);
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return map;
+    }
+	
+	@GetMapping("/employee/empy_counsel_waiting")
+	public String employeeCounselWaitingPage(Model m, @ModelAttribute("params") search_dto params, ServletResponse res) {	//교번에 해당하는 완료 상담 정보와 개수 로드
+		try {
+			List<view_counsel_dto> counsel_list = this.empyService.getAllCounsel(emp_no, "미승인", params);
+			int counsel_list_count = this.empyService.getAllCounselCount(emp_no, "미승인", params);	
+			int maxpage=(int)Math.ceil((double)counsel_list_count/params.getSize());
+			
+			if(maxpage<params.getPage() && maxpage!=0) {
+				res.setContentType("text/html;charset=utf-8");
+				this.pw=res.getWriter();
+				this.pw.print("<script>"
+					+ "alert('잘못된 페이지 접근입니다.');"
+					+ "history.go(-1);"
+					+ "</script>");
+				this.pw.close();
+			}
+			
+			m.addAttribute("counsel_list", counsel_list);
+			m.addAttribute("counsel_list_count", counsel_list_count);
+			m.addAttribute("maxpage", maxpage);
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "employee/empy_counsel_waiting";
+	}
+	
+	@ResponseBody
+	@GetMapping("/employee/empy_counsel_waiting_updateok.do")
+    public Map<String, Object> counselWaitingUpdate(final int aply_sn) {
+        Map<String, Object> map= new HashMap<String, Object>();
+		try {
+			counsel_dto counsel=new counsel_dto();
+			counsel.setAply_sn(aply_sn);
+			counsel.setStts_cd("승인");
+			int counsel_update_ok=this.empyService.updateCounselStatus(counsel);
+			map.put("counsel_update_ok", counsel_update_ok);
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return map;
+    }
+	
+	@GetMapping("/employee/empy_counsel_confirm")
+	public String employeeCounselConfirmPage(Model m, @ModelAttribute("params") search_dto params, ServletResponse res) {	//교번에 해당하는 완료 상담 정보와 개수 로드
+		try {
+			List<view_counsel_dto> counsel_list = this.empyService.getAllCounsel(emp_no, "승인", params);
+			int counsel_list_count = this.empyService.getAllCounselCount(emp_no, "승인", params);	
+			int maxpage=(int)Math.ceil((double)counsel_list_count/params.getSize());
+			
+			if(maxpage<params.getPage() && maxpage!=0) {
+				res.setContentType("text/html;charset=utf-8");
+				this.pw=res.getWriter();
+				this.pw.print("<script>"
+					+ "alert('잘못된 페이지 접근입니다.');"
+					+ "history.go(-1);"
+					+ "</script>");
+				this.pw.close();
+			}
+			
+			m.addAttribute("counsel_list", counsel_list);
+			m.addAttribute("counsel_list_count", counsel_list_count);
+			m.addAttribute("maxpage", maxpage);
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "employee/empy_counsel_confirm";
+	}
+	
+	@GetMapping("/employee/empy_counsel_past")
+	public String employeeCounselPastPage(Model m, @ModelAttribute("params") search_dto params, ServletResponse res) {	//교번에 해당하는 완료 상담 정보와 개수 로드
+		try {
+			List<view_counsel_dto> counsel_list_cancle = this.empyService.getPastCounsel(emp_no, params);
+			int counsel_list_count = this.empyService.getAllCounselCount(emp_no, "완료", params)+this.empyService.getAllCounselCount(emp_no, "취소", params);	
+			int maxpage=(int)Math.ceil((double)counsel_list_count/params.getSize());
+			
+			if(maxpage<params.getPage() && maxpage!=0) {
+				res.setContentType("text/html;charset=utf-8");
+				this.pw=res.getWriter();
+				this.pw.print("<script>"
+					+ "alert('잘못된 페이지 접근입니다.');"
+					+ "history.go(-1);"
+					+ "</script>");
+				this.pw.close();
+			}
+			
+			m.addAttribute("counsel_list", counsel_list_cancle);
+			m.addAttribute("counsel_list_count", counsel_list_count);
+			m.addAttribute("maxpage", maxpage);
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "employee/empy_counsel_past";
+	}
+
 	@GetMapping("/employee/empy_counsel_reserve")
 	public String employeeCounselReservePage() {
 		return "employee/empy_counsel_reserve";
@@ -150,7 +264,7 @@ public class EmployeeController {
 				this.pw.print("<script>"
 						+ "alert('상담이 정상적으로 신청되었습니다.');"
 						+ "if(confirm('상담 리스트로 이동하시겠습니까?'))"
-						+ "{ location.href='/employee/empy_counsel_reserve'; }"
+						+ "{ location.href='/employee/empy_counsel_confirm'; }"
 						+ "else{ location.href='/employee/empy_counsel_add'; }"
 						+ "</script>");
 			}
