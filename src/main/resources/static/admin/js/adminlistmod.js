@@ -1,37 +1,3 @@
-//교직원 사용자 상세보기 정보 중 대학교 내 대학분류, 학과, 전공 데이터
-const USER_UNIV = ['대학선택', '공과대학', '사회과학대학', '인문대학', '자연과학대학', '심리상담센터'];
-const USER_SCSBJT = ['-', '기계공학과', '정치학과', '철학과', '생물학과', '심리상담센터'];
-const USER_MJR = ['-', '기계공학', '정치학', '철학', '생물학', ''];
-
-function makeSelector(selectedUniv) {
-	console.log("Selected University:", selectedUniv);
-
-	const scsbjtField = document.getElementById("OGDP_SCSBJT");
-	const mjrField = document.getElementById("MJR");
-
-	scsbjtField.value = "";
-	mjrField.readOnly = true;
-	mjrField.value = "";
-
-	USER_UNIV.forEach(function(data, index) {
-		if (selectedUniv === data) {
-			scsbjtField.value = USER_SCSBJT[index];
-			console.log("OGDP_SCSBJT set to:", scsbjtField.value);
-
-			if (selectedUniv === "심리상담센터") {
-				mjrField.readOnly = false;
-				console.log("MJR field is editable");
-			} else {
-				mjrField.readOnly = true;
-				mjrField.value = USER_MJR[index];
-				console.log("MJR field is readonly with value:", mjrField.value);
-			}
-		}
-	});
-}
-
-
-
 //다음 주소 찾기
  var element_layer = document.getElementById('stlistmod_detail_layer_add');
  function closeDaumPostcode() {
@@ -95,6 +61,10 @@ function makeSelector(selectedUniv) {
  }
 //===============다음 주소 끝=============
 
+
+
+
+/*
 //학생사용자 상세보기 모달에 값 넣기
 document.addEventListener('DOMContentLoaded', function () {
     // 모달 요소 가져오기
@@ -220,140 +190,4 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-
-//교직원 리스트 페이징 처리
-document.addEventListener('DOMContentLoaded', function() {
-    const rowsPerPage = 10; // 한 페이지당 표시할 행의 수
-    const tableBody = document.getElementById('employeeTableBody');
-    const pagination = document.getElementById('emlist_paging');
-    const totalPagesDisplay = document.getElementById('totalPagesDisplay');
-
-    if (!tableBody) {
-        console.error('employeeTableBody 요소를 찾을 수 없습니다.');
-        return;
-    }
-
-    // 모든 tr 요소를 선택합니다.
-    const rows = Array.from(tableBody.getElementsByTagName('tr'));
-    const totalRows = rows.length;
-    const totalPages = Math.ceil(totalRows / rowsPerPage);
-    let currentPage = 1;
-
-    // 페이지 표시 함수
-    function showPage(page) {
-        currentPage = page;
-        const start = (page - 1) * rowsPerPage;
-        const end = start + rowsPerPage;
-
-        rows.forEach((row, index) => {
-            if (index >= start && index < end) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
-
-        updatePagination();
-    }
-
-    // 페이지 네비게이션 업데이트 함수
-    function updatePagination() {
-        // 기존 총 페이지 수 표시 제거
-        if (totalPagesDisplay.firstChild) {
-            totalPagesDisplay.removeChild(totalPagesDisplay.firstChild);
-        }
-
-        // 총 페이지 수 표시 추가
-        const span = document.createElement('span');
-        span.textContent = `총 페이지: ${totalPages}`;
-        totalPagesDisplay.appendChild(span);
-
-        // << 버튼 활성화/비활성화
-        const firstBtn = document.getElementById('first-page');
-        if (currentPage === 1) {
-            firstBtn.parentElement.classList.add('disabled');
-        } else {
-            firstBtn.parentElement.classList.remove('disabled');
-        }
-
-        // < 버튼 활성화/비활성화
-        const prevBtn = document.getElementById('prev-page');
-        if (currentPage === 1) {
-            prevBtn.parentElement.classList.add('disabled');
-        } else {
-            prevBtn.parentElement.classList.remove('disabled');
-        }
-
-        // > 버튼 활성화/비활성화
-        const nextBtn = document.getElementById('next-page');
-        if (currentPage === totalPages) {
-            nextBtn.parentElement.classList.add('disabled');
-        } else {
-            nextBtn.parentElement.classList.remove('disabled');
-        }
-
-        // >> 버튼 활성화/비활성화
-        const lastBtn = document.getElementById('last-page');
-        if (currentPage === totalPages) {
-            lastBtn.parentElement.classList.add('disabled');
-        } else {
-            lastBtn.parentElement.classList.remove('disabled');
-        }
-    }
-
-    // 버튼 클릭 이벤트 설정
-    const firstBtn = document.getElementById('first-page');
-    const prevBtn = document.getElementById('prev-page');
-    const nextBtn = document.getElementById('next-page');
-    const lastBtn = document.getElementById('last-page');
-
-    if (firstBtn && prevBtn && nextBtn && lastBtn) {
-        firstBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (currentPage !== 1) {
-                showPage(1);
-            }
-        });
-
-        prevBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (currentPage > 1) {
-                showPage(currentPage - 1);
-            }
-        });
-
-        nextBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (currentPage < totalPages) {
-                showPage(currentPage + 1);
-            }
-        });
-
-        lastBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (currentPage !== totalPages) {
-                showPage(totalPages);
-            }
-        });
-    }
-
-    // 초기 페이지 표시
-    showPage(1);
-});
-
-
-
-
-/*
-//학생 사용자 상세정보 수정 기능
-function update_stuserdata(){
-	stuser_detail_frm.submit();
-}
-
-
-//학생 사용자 추가 기능
-function add_stuser(){
-	stuser_add_frm.submit();
-}
 */
-
