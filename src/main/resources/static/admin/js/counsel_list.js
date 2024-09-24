@@ -1,28 +1,32 @@
+// 상담 내역 상세보기 모달 내부 ID
+const accordionContainer = document.getElementById('counsel_accordion');
+	
+// 상세 내역 데이터 저장
+let detailData = [];
+	
+// 상담 내역 상세보기 AJAX
+function openDetailModal(aply_sn) {
+	fetch('./admin_counsel_detail/' + aply_sn, {
+		method : "POST",
+		headers : { "content-type" : "application/x-www-form-urlencoded" }
+	}).then(function(result_data) {
+		return result_data.text();
+	}).then(function(result_res) {
+		detailData = result_res;
+		makeOpeningModal();
+	}).catch(function(error) {
+		alert("통신 오류 발생!");
+	});
+}
+
+function makeOpeningModal() {
+	
+}
+
 // 상담 리스트 페이징 처리
 document.addEventListener('DOMContentLoaded', function() {
 	
-	// 상담 내역 상세보기 모달 내부 ID
-	//const accordionContainer = document.getElementById('counsel_accordion');
-	
-	// 상세 내역 데이터 저장
-	let detailData = [];
-	
-	// 상담 내역 상세보기 AJAX apthemaksemfrl
-	function openDetailModal(aply_sn) {
-		fetch('./admin_counsel_detail/' + aply_sn, {
-			method : "POST",
-			headers : { "content-type" : "application/x-www-form-urlencoded" }
-		}).then(function(result_data) {
-			return result_data.text();
-		}).then(function(result_res) {
-			detailData = result_res;
-			makeOpeningModal();
-		}).catch(function(error) {
-			alert("통신 오류 발생!");
-		});
-	}
-	
-    const rowsPerPage = 10; // 한 페이지당 표시할 행의 수
+	const rowsPerPage = 10; // 한 페이지당 표시할 행의 수
     const tableBody = document.getElementById('counselTableBody');
     const pagination = document.getElementById('counsel_list_paging');
     const totalPagesDisplay = document.getElementById('totalPagesDisplay');
@@ -139,3 +143,64 @@ document.addEventListener('DOMContentLoaded', function() {
     // 초기 페이지 표시
     showPage(1);
 });
+
+function makeHtmlTag() {
+	html = `<div class="accordion-item">
+<h2 class="accordion-header" id="first_heading">
+<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#first_collapse" aria-expanded="true" aria-controls="first_collapse">
+1회차
+</button>
+</h2>
+<div id="first_collapse" class="accordion-collapse collapse show" aria-labelledby="first_heading" data-bs-parent="#counsel_accordion">
+<div class="accordion-body">
+<!-- 1회차 상담 내용 -->
+<div class="row mb-3 align-items-center">
+<label class="col-sm-2 col-form-label">상담일자</label>
+<div class="col-sm-3">
+<input type="date" class="form-control" disabled>
+</div>
+<label class="col-sm-2 col-form-label">상담시간</label>
+<div class="col-sm-3">
+<input type="time" class="form-control" disabled>
+</div>
+</div>
+
+<div class="row mb-3 align-items-center">
+<label class="col-sm-2 col-form-label">상담종류</label>
+<div class="col-sm-3">
+<select class="form-select" aria-label="상담종류 선택">
+<option value="1">학업</option>
+<option value="2">진로</option>
+ <option value="3">심리</option>
+</select>
+</div>
+<label class="col-sm-2 col-form-label">상담방식</label>
+<div class="col-sm-3">
+<select class="form-select" aria-label="상담방식 선택">
+<option value="1">대면</option>
+<option value="2">채팅</option>
+<option value="3">화상</option>
+<option value="4">전화</option>
+</select>
+</div>
+</div>
+
+<div class="row mb-3 align-items-center">
+<label class="col-sm-2 col-form-label">상담장소</label>
+<div class="col-sm-3">
+<input type="text" class="form-control" value="-" disabled>
+</div>
+<label class="col-sm-2 col-form-label">상담상태</label>
+<div class="col-sm-3">
+<select class="form-select" aria-label="상담상태 선택">
+<option value="1">완료</option>
+<option value="2">취소</option>
+<option value="3">예정</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+</div>`
+return html;
+}
