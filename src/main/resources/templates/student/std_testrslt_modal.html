@@ -12,25 +12,19 @@
 				<div class="card-body">
 				    <!-- 검사명 -->
 				    <h5 class="test-title" id="test-title">검사명: 인터넷 사용</h5>
-				    <span>검사일시 : <span id="">124424242</span></span>
+				    <span>검사일시 : <span id="test-date">124424242</span></span>
 				    
 				    <!-- 질문 및 답변 -->
 				    <div class="question-answer">
-				        <ul class="list-group">
-				            <li class="list-group-item">
-				            	<div class="question">질문 1. 인터넷을 얼마나 자주 사용하십니까?</div>
-					            <div class="answer-score">
-					                <div class="answer">매일 사용합니다</div>
-					                <div class="score">5점</div>
-					            </div>
-					        </li>
+				        <ul class="list-group" id="result-question-list">
+				            <!-- JavaScript innerHTML -->
 				        </ul>
 				    </div>
 				
 				    <!-- 결과 설명 -->
 				    <div class="explanation-text mt-4">
-				        <h6><strong>총점: 27점</strong></h6>
-				        <h4 class="text-danger mt-3">
+				        <h6><strong>총점: <span id="user-testScore"></span>점</strong></h6>
+				        <h4 class="text-danger mt-3" id="test-expln">
 				            섭식 문제 없음<br>현재 식사나 음식 섭취, 체중, 다이어트 등에 관련된 심각한 문제를 보이지 않습니다.
 				        </h4>
 				    </div>

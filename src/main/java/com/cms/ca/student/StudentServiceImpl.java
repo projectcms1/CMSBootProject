@@ -194,7 +194,6 @@ public class StudentServiceImpl implements StudentService {
 		List<view_counsel_dto> result = this.stdRepo.getListCounsel(this.keymap);
 		for (view_counsel_dto vcdto : result) {
 			vcdto.setRsvt_dt(vcdto.getRsvt_dt().substring(0, 4) + "/" + vcdto.getRsvt_dt().substring(4, 6) + "/" + vcdto.getRsvt_dt().substring(6,8));
-			//vcdto.setRoundCount(this.stdRepo.getCountRound(vcdto.getAply_sn()));
 		}
 		return result;
 	}

@@ -29,6 +29,8 @@
   <!-- Template Main CSS File -->
   <link href="/assets/css/style.css" rel="stylesheet">  
   <link href="/assets/css/empy.css" rel="stylesheet">
+  <link href="/assets/css/list_paging.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
   <style>
     .btn-cancel {
@@ -195,40 +197,8 @@
 		              	
 		              	<!-- 지난상담 Table-->
 				     	<div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
-				     		
-				     		<div class="datatable-top">
-				     			<!-- per-page Dropdown -->
-		    					<div class="datatable-dropdown">
-		            				<label>
-		                				<select class="datatable-selector" name="per-page">
-		                					<option value="5" selected>5개씩 보기</option>
-		                					<option value="10">10개씩 보기</option>
-		                					<option value="-1">전체 보기</option>
-		                				</select>
-		            				</label>
-		        				</div>
-		        				<!-- End per-page Dropdown -->
-		        				
-		        				<!-- Search Bar -->
-			    				<div class="search-bar ">
-						      		<form class="search-form d-flex align-items-center" method="POST" action="#">
-					                  	<select id="inputState" class="form-select" style="width: 180px;">
-					                    	<option selected>전체</option>
-					                    	<option>상담일자</option>
-					                    	<option>학년</option>
-					                    	<option>학기</option>
-					                    	<option>상담자</option>
-					                    	<option>상담종류</option>
-					                  	</select>
-				                  		<input type="text" class="form-control" placeholder="Search" style="margin-left: 5px;">
-						        		<button type="submit" title="Search" class="btn" style="border-color: g"><i class="bi bi-search"></i></button>
-						      		</form>
-						    	</div>
-						    	<!-- End Search Bar -->
-							</div>
-							
 							<div class="datatable-container">
-								<table id="demo-table" class="table datatable datatable-table">
+								<table id="demo-table_rest" class="table datatable datatable-table">
 									<thead>
 										<tr>
 				                    		<th data-format="YYYY/DD/MM" data-sortable="true" data-type="date" style="width: 20%;">
@@ -267,25 +237,15 @@
 		    					</div>
 		    					
 		    					<!-- 페이징 Div-->
-		    					<nav aria-label="Page navigation example">
-				                	<ul class="pagination">
-				                  		<li class="page-item">
-				                    		<a class="page-link" href="#" aria-label="Previous">
-				                      			<span aria-hidden="true">&laquo;</span>
-				                    		</a>
-				                  		</li>
-				                  		<li class="page-item"><a class="page-link" href="#">1</a></li>
-				                  		<li class="page-item"><a class="page-link" href="#">2</a></li>
-				                  		<li class="page-item"><a class="page-link" href="#">3</a></li>
-				                  		<li class="page-item">
-				                    		<a class="page-link" href="#" aria-label="Next">
-				                      			<span aria-hidden="true">&raquo;</span>
-				                    		</a>
-				                  		</li>
-				                	</ul>
-				              	</nav>
+									<div class="prod_1i1r pages">
+										<ul id="std_rescounsel_list_paging">
+											<li><a id="first-rpage"><i class="fa fa-angle-double-left"></i></a></li>
+											<li><a id="prev-rpage"><i class="fa fa-chevron-left"></i></a></li>
+											<li><a id="next-rpage"><i class="fa fa-chevron-right"></i></a></li>
+											<li><a id="last-rpage"><i class="fa fa-angle-double-right"></i></a></li>
+										</ul>
+									</div>
 				              	<!-- End 페이징 Div-->
-							
 							</div>
 						</div>
 		             	<!-- End 지난상담 Table-->
@@ -317,6 +277,8 @@
   <!-- Template Main JS File -->
   <script src="/assets/js/main.js"></script>
   <script src="/js/student/counsel_reservlist.js?v=1"></script>
+  <script src="/js/student/list_paging_r.js"></script>
+  
 </body>
 <script>
 window.onload=function(){
