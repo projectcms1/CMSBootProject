@@ -101,6 +101,10 @@
 							</div>
 							
 							<div class="datatable-container">
+					        <form id="counsel_form">
+						        <input type="hidden" name="statue">
+								<input type="hidden" name="aply_sn">
+								
 								<table id="demo-table" class="table datatable datatable-table">
 									<thead>
 										<tr>
@@ -122,21 +126,22 @@
 				                    	</tr>
 				                    </thead>
 				                    <tbody>
-										<tr th:if="${counsel_list_count}== 0">
-										    <td colspan="6"  class="first last" style="text-align: center;">조회 결과가 없습니다.</td> 
-										</tr>
-					                  	<tr th:each="counsel : ${counsel_list}">
-							                <td th:text="${counsel.getRsvt_dt.substring(0,4)+'/'+counsel.getRsvt_dt.substring(4,6)+'/'+counsel.getRsvt_dt.substring(6,8)}"/>
-							                <td th:text="${counsel.getStdnt_flnm}"/>
-							                <td th:text="${counsel.getStdnt_no}"/>
-							                <td th:text="${counsel.getDscsn_knd}"/>
-							                <td>[[${counsel.getDscsn_mthd}]]
-							                	<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">미승인</button>
-					                    		<button type="button" class="btn btn-primary btn-sm rounded-pill" style="float: right; margin-left: 5px;">승인</button>
-							                </td>
-							            </tr>
+											<tr th:if="${counsel_list_count}== 0">
+											    <td colspan="6"  class="first last" style="text-align: center;">조회 결과가 없습니다.</td> 
+											</tr>
+						                  	<tr th:each="counsel : ${counsel_list}">
+								                <td th:text="${counsel.getRsvt_dt.substring(0,4)+'/'+counsel.getRsvt_dt.substring(4,6)+'/'+counsel.getRsvt_dt.substring(6,8)}"/>
+								                <td th:text="${counsel.getStdnt_flnm}"/>
+								                <td th:text="${counsel.getStdnt_no}"/>
+								                <td th:text="${counsel.getDscsn_knd}"/>
+								                <td>[[${counsel.getDscsn_mthd}]]
+								                	<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;" th:onclick="changeCounselStatue('취소', [[${counsel.getAply_sn}]], '미승인')">미승인</button>
+						                    		<button type="button" class="btn btn-primary btn-sm rounded-pill" style="float: right; margin-left: 5px;" th:onclick="changeCounselStatue('승인', [[${counsel.getAply_sn}]], '승인')">승인</button>
+								                </td>
+								            </tr>
 					                </tbody>
 				                </table>
+				            </form>
 				            </div>
 				            
 							<div class="datatable-bottom">
@@ -252,6 +257,8 @@
     	document.getElementById('counsel-nav-2').className += ' active';
 	}
 </script>
+
 <script src="/js/employee/empy_counsel.js"></script>
+<script src="/js/employee/empy_paging.js"></script>
 
 </html>

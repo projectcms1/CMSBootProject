@@ -118,7 +118,7 @@ public class EmployeeController {
 	
 	@ResponseBody
 	@GetMapping("/employee/empy_counsel_indexok.do")
-    public Map<String, Object> counselDetailModal(final int aply_sn) {
+    public Map<String, Object> employeeCounselDetailModal(final int aply_sn) {
         Map<String, Object> map= new HashMap<String, Object>();
 		try {
 			List<view_counsel_dto> counsel_detail=this.empyService.getOneCounsel(aply_sn);
@@ -157,21 +157,43 @@ public class EmployeeController {
 		return "employee/empy_counsel_waiting";
 	}
 	
-	@ResponseBody
-	@GetMapping("/employee/empy_counsel_waiting_updateok.do")
-    public Map<String, Object> counselWaitingUpdate(final int aply_sn) {
-        Map<String, Object> map= new HashMap<String, Object>();
+	@PostMapping("/employee/empy_counsel_waiting")
+    public void employeeCounselWaitingUpdate(final int aply_sn, String statue, ServletResponse res) {
 		try {
-			counsel_dto counsel=new counsel_dto();
-			counsel.setAply_sn(aply_sn);
-			counsel.setStts_cd("승인");
-			int counsel_update_ok=this.empyService.updateCounselStatus(counsel);
-			map.put("counsel_update_ok", counsel_update_ok);
-		} 
-		catch (Exception e) {
+			res.setContentType("text/html;charset=utf-8");
+			this.pw=res.getWriter();
+			
+			int counsel_updateck=this.empyService.updateCounselStatus(statue, aply_sn);
+			if(counsel_updateck>0 && statue.equals("승인")) {	//상태 수정 success - 승인
+				this.pw.print("<script>"
+						+ "alert('상담이 정상적으로 승인 처리되었습니다.');"
+						+ "if(confirm('확정예약관리로 이동하시겠습니까?'))"
+						+ "{ location.href='/employee/empy_counsel_confirm'; }"
+						+ "else{ location.href='/employee/empy_counsel_waiting'; }"
+						+ "</script>");
+			}
+			else if(counsel_updateck>0 && statue.equals("취소")) {	//상태 수정 success - 미승인
+				this.pw.print("<script>"
+						+ "	alert('상담이 정상적으로 미승인 처리되었습니다.');"
+						+ "if(confirm('지난예약관리로 이동하시겠습니까?'))"
+						+ "{ location.href='/employee/empy_counsel_past'; }"
+						+ "else{ location.href='/employee/empy_counsel_waiting'; }"
+						+ "</script>");
+			}
+			else {	// 데이터 업데이트 fail
+				this.pw.print("<script>"
+						+ "alert('데이터베이스 연결 오류가 발생했습니다.\\n다시 시도해주세요.');"
+						+ "history.go(-1);"
+						+ "</script>");
+			}
+		
+		} catch (Exception e) {
+			this.pw.print("<script>location.href='/employee/empy_blankpage';</script>");	//에러 페이지 이동
 			e.printStackTrace();
 		}
-		return map;
+		finally {
+			this.pw.close();
+		}
     }
 	
 	@GetMapping("/employee/empy_counsel_confirm")
@@ -200,6 +222,20 @@ public class EmployeeController {
 		}
 		return "employee/empy_counsel_confirm";
 	}
+	
+	@ResponseBody
+	@GetMapping("/employee/empy_counsel_confirmok.do")
+    public Map<String, Object> employeeCounselConfirmModal(final int aply_sn) {
+        Map<String, Object> map= new HashMap<String, Object>();
+		try {
+			List<view_counsel_dto> counsel_detail=this.empyService.getOneCounsel(aply_sn);
+			map.put("counsel_detail", counsel_detail);
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return map;
+    }
 	
 	@GetMapping("/employee/empy_counsel_past")
 	public String employeeCounselPastPage(Model m, @ModelAttribute("params") search_dto params, ServletResponse res) {	//교번에 해당하는 완료 상담 정보와 개수 로드

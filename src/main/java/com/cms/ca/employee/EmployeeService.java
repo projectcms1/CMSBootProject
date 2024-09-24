@@ -17,6 +17,6 @@ public interface EmployeeService {
 	int getAllCounselCount(String emp_no, String stts_cd, search_dto search_dto);
 	List<view_counsel_dto> getOneCounsel(int aply_sn);
 	List<view_counsel_dto> getPastCounsel(String emp_no, search_dto search_dto);
-	int updateCounselStatus(counsel_dto csl_dto);
+	int updateCounselStatus(String stts_cd, int aply_sn);
 	String getCounselResult(int aply_sn);
 }

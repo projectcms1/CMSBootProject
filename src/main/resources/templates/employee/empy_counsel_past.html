@@ -130,7 +130,7 @@
 							                <td th:text="${counsel.getStdnt_flnm}"/>
 							                <td th:text="${counsel.getStdnt_no}"/>
 							                <td th:text="${counsel.getDscsn_knd}"/>
-							                <td th:text="${counsel.getDscsn_mthd}"/>
+							                <td th:text="${counsel.getStts_cd }"/>
 							            </tr>
 					                </tbody>
 				                </table>
@@ -249,6 +249,8 @@
     	document.getElementById('counsel-nav-4').className += ' active';
 	}
 </script>
+
 <script src="/js/employee/empy_counsel.js"></script>
+<script src="/js/employee/empy_paging.js"></script>
 
 </html>

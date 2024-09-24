@@ -81,9 +81,9 @@
 		order by aply_sn asc 
 	</select>
 	
-	<select id="getCounselResult" parameterType="String" resultType="String">
-		select * from DSCSN_RSLT 
-		where (aply_sn=#{aply_sn} or bfr_aply_sn=#{aply_sn})
+	<select id="getCounselResult" parameterType="int" resultType="String">
+		select dscsn_cn from DSCSN_RSLT 
+		where aply_sn=#{aply_sn}
 		order by aply_sn asc 
 	</select>
 	

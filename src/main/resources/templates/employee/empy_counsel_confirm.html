@@ -101,6 +101,9 @@
 							</div>
 							
 							<div class="datatable-container">
+							<form id="counsel_form">
+						        <input type="hidden" name="statue">
+								<input type="hidden" name="aply_sn">
 								<table id="demo-table" class="table datatable datatable-table">
 									<thead>
 										<tr>
@@ -131,7 +134,7 @@
 							                <td th:text="${counsel.getStdnt_no}"/>
 							                <td th:text="${counsel.getDscsn_knd}"/>
 							                <td>[[${counsel.getDscsn_mthd}]]
-												<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
+												<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;" th:onclick="changeCounselStatue('취소', [[${counsel.getAply_sn}]], '취소')">취소</button>
 							                    <button type="button" class="btn btn-primary btn-sm rounded-pill" 
 												data-bs-toggle="modal" data-bs-target="#counselDetailModal" 
 												style="float: right; margin-left: 5px;" 
@@ -140,6 +143,7 @@
 							            </tr>
 					                </tbody>
 				                </table>
+				            </form>
 				            </div>
 				            
 							<div class="datatable-bottom">
@@ -211,6 +215,7 @@
 				                    		<a class="datatable-pagination-list-item-link"aria-label="Next" onclick="firstNlastPage('last')">
 				                      			<span aria-hidden="true">&raquo;</span>
 				                    		</a>
+				                    		<input type="checkbox" value="상담 연장" name="counsel_extend">
 				                  		</li>
 				                	</ul>
 				              	</nav>
@@ -255,6 +260,9 @@
     	document.getElementById('counsel-nav-3').className += ' active';
 	}
 </script>
+
 <script src="/js/employee/empy_counsel.js"></script>
+<script src="/js/employee/empy_counsel_confirm_modal.js"></script>
+<script src="/js/employee/empy_paging.js"></script>
 
 </html>

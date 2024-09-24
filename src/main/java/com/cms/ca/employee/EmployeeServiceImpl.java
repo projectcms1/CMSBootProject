@@ -33,10 +33,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 			updateck=this.empyRepo.updatePersonalEmployeeInfo(emp_dto);
 		}
 		else if(emp_dto.getEmp_zip()!=null && emp_dto.getEmp_addr()!=null && emp_dto.getEmp_daddr()!=null) {	//교직원 거주지 정보 수정
-			System.out.println(emp_dto.getEmp_zip());
-			System.out.println(emp_dto.getEmp_addr());
-			System.out.println(emp_dto.getEmp_daddr());
-			System.out.println(emp_dto.getEmp_no());
 			updateck=this.empyRepo.updateAddrEmployeeInfo(emp_dto);
 		}
 		else if(emp_dto.getDlng_bank_nm()!=null&& emp_dto.getDlng_actno()!=null) {	//교직원 계좌 정보 수정
@@ -99,8 +95,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 			if(counsel_detail.get(i).getPlc()==null || counsel_detail.get(i).getPlc().equals("")) {
 				counsel_detail.get(i).setPlc("-");
 			}
-			if(counsel_detail.get(i).getDscsn_cn()==null) {
-				counsel_detail.get(i).setDscsn_cn(getCounselResult(aply_sn));				
+			String result=getCounselResult(counsel_detail.get(i).getAply_sn());
+			if(result!=null) {
+				counsel_detail.get(i).setDscsn_cn(result);
 			}
 			i++;
 		}
@@ -120,8 +117,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public int updateCounselStatus(counsel_dto csl_dto) {
-		int update_result=this.empyRepo.updateCounselStatus(csl_dto.getStts_cd(), csl_dto.getAply_sn());
+	public int updateCounselStatus(String stts_cd, int aply_sn) {
+		int update_result=this.empyRepo.updateCounselStatus(stts_cd, aply_sn);
 		return update_result;
 	}
 
