@@ -172,7 +172,13 @@ document.addEventListener('DOMContentLoaded', function () {
         	USER_DADDR.value = st_daddr;
         }
         if (USER_PHOTO) {
-        	USER_PHOTO.value = st_photo;
+        	if (st_photo != null) {
+        		USER_PHOTO.innerHTML = `<img src="/img_file/${st_photo}" />`;
+        		document.getElementById("prev_file").value = st_photo;
+        	}
+        	else {
+				USER_PHOTO.innerHTML = "";
+			}
         }
         if (BRDT) {
         	BRDT.value = st_brdt;
