@@ -1,19 +1,19 @@
 package com.cms.ca;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.UUID;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPClientConfig;
 import org.springframework.web.multipart.MultipartFile;
 
-public class CDNFileUploader {
+public class CDNFileHandler {
 
 	private String result = "";
 	
 	private MultipartFile userFile = null;
 	private String fileOriginName = "";
+	
 	
 	private FTPClient ftp = null;
 	private FTPClientConfig cf = null;
@@ -22,10 +22,7 @@ public class CDNFileUploader {
 	private String pass = "a1234";
 	private int port = 9005;
 	
-	private Date dt = null;
-	private SimpleDateFormat sdf = null;
-	
-	public CDNFileUploader(MultipartFile mfile) {
+	public CDNFileHandler(MultipartFile mfile) {
 		this.userFile = mfile;
 		this.fileOriginName = mfile.getOriginalFilename();
 	}
@@ -39,12 +36,15 @@ public class CDNFileUploader {
 			this.ftp.configure(this.cf);
 			this.ftp.connect(this.host, this.port);
 			
-			
 			if (this.ftp.login(user, pass)) {
 				this.ftp.setFileType(FTP.BINARY_FILE_TYPE);
-				boolean ok = ftp.storeFile("/cacms/" + this.fileOriginName, this.userFile.getInputStream());
+				
+				String pro = this.fileOriginName.substring(this.fileOriginName.lastIndexOf("."));
+				String randomname = UUID.randomUUID().toString() +  pro;
+				
+				boolean ok = ftp.storeFile("/cacms/" + randomname, this.userFile.getInputStream());
 				if (ok) {
-					this.result = "http://172.30.1.7:9009/cacms/" + this.fileOriginName;
+					this.result = "http://172.30.1.7:9009/cacms/" + randomname;
 				}
 				else {
 					this.result = "error";
@@ -61,13 +61,5 @@ public class CDNFileUploader {
 			}
 		}
 		return this.result;
-	}
-	
-	private String makeFileName() {
-		this.dt = new Date();
-		this.sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		String datetime = this.sdf.format(dt);
-		int a = (int) Math.floor(Math.random() * 10000);
-		return datetime + a;
 	}
 }

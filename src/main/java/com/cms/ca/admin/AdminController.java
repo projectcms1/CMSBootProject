@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cms.ca.CDNFileUploader;
+import com.cms.ca.CDNFileHandler;
 import com.cms.ca.employee_dto;
 import com.cms.ca.student_dto;
 import com.cms.ca.view_counsel_dto;
@@ -172,12 +172,10 @@ public class AdminController {
 			this.pw = sr.getWriter();
 			int detail_result = 0;
 			
-			if (uphoto_file == null || uphoto_file.getOriginalFilename().isEmpty()) {
-				detail_result = this.stuser_service.add_stuser_detail(stdto, entrance_year);
+			if (uphoto_file != null && !uphoto_file.getOriginalFilename().isEmpty()) {
+				stdto.setUser_photo(new CDNFileHandler(uphoto_file).uploadFile());
 			}
-			else {
-				//String aa = new CDNFileUploader(uphoto_file);
-			}
+			detail_result = this.stuser_service.add_stuser_detail(stdto, entrance_year);
 			
 			if (detail_result > 0) {
 				this.pw.print("<script>" + "alert('학생 계정이 추가되었습니다.');" + "location.href='./stlistmod';" + "</script>");
