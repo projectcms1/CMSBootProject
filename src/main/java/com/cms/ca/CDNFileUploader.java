@@ -67,7 +67,6 @@ public class CDNFileUploader {
 				this.imgdto = null;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			this.imgdto = null;
 		} finally {
 			if (ftp.isConnected()) {
