@@ -153,6 +153,11 @@ public class AdminController {
 		return "admin/emlistmod";
 	}
 
+	@GetMapping("/emlistmod_adduser")
+	public String emlistmod_adduser() {
+		return "admin/emlistmod_adduser";
+	}
+	
 	@GetMapping("/adminlistmod")
 	public String adminlist_mod(Model m) {
 
@@ -161,6 +166,13 @@ public class AdminController {
 
 		return "admin/adminlistmod";
 	}
+	
+	@GetMapping("/adminlistmod_adduser")
+	public String adminlistmod_adduser() {
+		return "admin/admin"
+				+ "listmod_adduser";
+	}
+	
 
 	// 상담 내역 리스트 출력
 	@GetMapping("/allcounselmod")
@@ -177,11 +189,6 @@ public class AdminController {
 		return "admin/addcounsel";
 	}
 
-	
-	@GetMapping("/pro_info")
-	public String pro_info() {
-		return "admin/pro_info";
-	}
 
 	@GetMapping("/noticemod")
 	public String portalnotice_mod() {

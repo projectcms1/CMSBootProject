@@ -1,0 +1,41 @@
+<!-- ======= Counsel Detail Modal ======= -->
+<div class="modal fade" id="modalSelfTestResult" tabindex="-1" th:fragment="std_testrslt_modal" style="height: 1000px;">
+	<div class="modal-dialog modal-dialog-scrollable modal-xl">
+		
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">심리검사 결과보기</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			
+			<div class="modal-body">
+				<div class="card-body">
+				    <!-- 검사명 -->
+				    <h5 class="test-title" id="test-title">검사명: 인터넷 사용</h5>
+				    <span>검사일시 : <span id="test-date">124424242</span></span>
+				    
+				    <!-- 질문 및 답변 -->
+				    <div class="question-answer">
+				        <ul class="list-group" id="result-question-list">
+				            <!-- JavaScript innerHTML -->
+				        </ul>
+				    </div>
+				
+				    <!-- 결과 설명 -->
+				    <div class="explanation-text mt-4">
+				        <h6><strong>총점: <span id="user-testScore"></span>점</strong></h6>
+				        <h4 class="text-danger mt-3" id="test-expln">
+				            섭식 문제 없음<br>현재 식사나 음식 섭취, 체중, 다이어트 등에 관련된 심각한 문제를 보이지 않습니다.
+				        </h4>
+				    </div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Counsel Detail Modal-->

@@ -1,0 +1,44 @@
+<!-- ======= Counsel Detail Modal ======= -->
+<div class="modal fade" id="modalCounselDetailInfo" tabindex="-1" th:fragment="std_counsel_modal" style="height: 1000px;">
+	<div class="modal-dialog modal-dialog-scrollable modal-xl">
+		
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">상담정보 상세보기</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			
+			<div class="modal-body">
+	
+				<div class="card">
+				  	<div class="card-body">
+						<h5 class="card-title">상담정보</h5>
+						
+						<div class="row mb-3" align="center" >
+							<label for="inputText" class="col-sm-2 col-form-label">상담자이름</label>
+						  	<div class="col-sm-3">
+						      	<input type="text" class="form-control" id="counseler_name" disabled>
+						    </div>
+						    <label for="inputEmail" class="col-sm-2 col-form-label">상담자구분</label>
+						    <div class="col-sm-3">
+						    	<input type="email" class="form-control" id="counseler_se" disabled>
+						    </div>
+						</div>
+		
+		              	<div class="accordion" id="counsel_accordion">
+							
+							<!-- 회차 Accordion : JavaScript -->
+							
+						</div>
+					</div>
+				
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Counsel Detail Modal-->

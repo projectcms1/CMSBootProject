@@ -1,0 +1,130 @@
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center" th:fragment="empy_header">
+
+	<!-- Logo -->
+	<div class="d-flex align-items-center justify-content-between">
+     	<a href="/" class="logo d-flex align-items-center">
+        	<img src="/assets/img/logo.png" alt="">
+        	<span class="d-none d-lg-block">중앙정보처리대학교</span>
+      	</a>
+    </div>
+    <!-- End Logo -->
+    
+    <!-- Left Header Nav -->
+	<nav class="header-nav">
+	   	<ul class="d-flex align-items-center">
+	        <li><a href="/">HOME</a></li>
+			<li>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</li>
+			<li><a href="/employee/empy_info">교직원정보</a></li>
+			<li>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</li>
+			<li><a href="/employee/empy_academy_index">학사관리</a></li>
+			<li>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</li>
+			<li><a href="/employee/empy_counsel_index">상담관리</a></li>
+	    </ul>
+	</nav>
+	<!-- End Left Header Nav -->
+	
+	<!-- Right Header Nav -->
+    <nav class="header-nav ms-auto">
+		<ul class="d-flex align-items-center">
+    	    <li class="nav-item dropdown">
+    	    
+    	    	<!-- Notification Icon -->
+        		<a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+           			<i class="bi bi-bell"></i>
+           			<span class="badge bg-primary badge-number">1</span>
+         		</a>
+         		<!-- End Notification Icon -->
+         		
+         		<!-- Notification Dropdown Items -->
+			    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+            		<li class="dropdown-header">
+              			You have 1 new notifications
+              			<a href="#모든새알림보기">
+              				<span class="badge rounded-pill bg-primary p-2 ms-2">View all</span>
+              			</a>
+            		</li>
+            		<li>
+              			<hr class="dropdown-divider">
+            		</li>
+            		<li class="notification-item">
+              			<i class="bi bi-info-circle text-primary"></i>
+              			<div>
+                			<h4>알림 예시</h4>
+                			<p>집에 가고싶다</p>
+                			<p>26years ago</p>
+              			</div>
+            		</li>
+            		<li>
+              			<hr class="dropdown-divider">
+            		</li>
+            		<li class="dropdown-footer">
+              			<a href="#모든알림보기">Show all notifications</a>
+            		</li>
+          		</ul>
+          		<!-- End Notification Dropdown Items -->
+          		
+        	</li>
+        	<!-- End Notification Nav -->
+        	
+        	<!-- Profile Nav -->
+        	<li class="nav-item dropdown pe-3">
+          		<a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            		<img src="/assets/img/3.jpeg" alt="Profile" class="rounded-circle">
+            		<span class="d-none d-md-block dropdown-toggle ps-2">교직원 카피바라</span>
+          		</a><!-- End Profile Iamge Icon -->
+          		
+          		<!-- Profile Dropdown Items -->
+          		<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            		<li class="dropdown-header">
+              			<h6>교직원명</h6>
+              			<span>소속 및 교번</span>
+           	 		</li>
+            		<li>
+              			<hr class="dropdown-divider">
+            		</li>
+            		<li>
+              			<a class="dropdown-item d-flex align-items-center" href="/employee/empy_info">
+                			<i class="bi bi-person"></i>
+                			<span>My Profile</span>
+              			</a>
+            		</li>
+            		<li>
+              			<hr class="dropdown-divider">
+            		</li>
+            		<li>
+              			<a class="dropdown-item d-flex align-items-center" href="#비교과프로그램">
+                			<i class="bi bi-gear"></i>
+                			<span>비교과 프로그램</span>
+              			</a>
+            		</li>
+            		<li>
+              			<hr class="dropdown-divider">
+            		</li>
+            		<li>
+              			<a class="dropdown-item d-flex align-items-center" href="#채팅상담">
+                			<i class="bi bi-question-circle"></i>
+                			<span>채팅 상담</span>
+              			</a>
+            		</li>
+            		<li>
+              			<hr class="dropdown-divider">
+	  	         	</li>
+            		<li>
+              			<a class="dropdown-item d-flex align-items-center" href="#로그아웃">
+                			<i class="bi bi-box-arrow-right"></i>
+                			<span>로그아웃</span>
+              			</a>
+            		</li>
+          		</ul>
+          		<!-- End Profile Dropdown Items -->
+          		
+        	</li>
+        	<!-- End Profile Nav -->
+        	
+      	</ul>
+    </nav>
+    <!-- End Right Header Nav -->
+    
+</header>
+<!-- End Header -->
