@@ -15,10 +15,8 @@
 <link href="/admin/css/font-awesome.min.css" rel="stylesheet">
 <link href="/admin/css/style.css" rel="stylesheet">
 <link href="/admin/css/nav.css" rel="stylesheet">
-<link href="/admin/css/shCoreEclipse.css" type="text/css"
-	rel="stylesheet" />
-<link href="/admin/css/shThemeEclipse.css" type="text/css"
-	rel="Stylesheet" />
+<link href="/admin/css/shCoreEclipse.css" type="text/css" rel="stylesheet" />
+<link href="/admin/css/shThemeEclipse.css" type="text/css" rel="Stylesheet" />
 <link href="/admin/css/global.css" rel="stylesheet">
 <link href="/admin/css/baseui.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
@@ -189,6 +187,7 @@
 
 
 				<!-- 페이징처리 -->
+				<br><div id="totalPagesDisplay" class="text-muted"></div>
 				<div class="prod_1i1r pages" style="text-align: right;">
 					<ul class="mb-0" id="stlist_paging">
 						<!-- << 버튼 (첫 페이지로 이동) -->
@@ -202,7 +201,6 @@
 						<li><a id="last-page"><i class="fa fa-angle-double-right"></i></a></li>
 					</ul>
 				</div>
-		</div>
 		</main>
 	</div>
 	</div>
@@ -219,82 +217,10 @@
 	<script
 		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<!-- 다음 API 주소 -->
-	<script src="/admin/js/listmod.js"></script>
+	<script src="/admin/js/stlistmod.js?v=2"></script>
 	<script src="/admin/js/bootstrap.bundle.min.js"></script>
 	<script src="/admin/js/global.js"></script>
 	
-	<!-- cdn 이미지 파일 전송 -->
-	<script>
-	function setstuser_img(event) {
-	    const file = event.target.files[0];
-	    if (!file) return;
-
-	    // 파일 유효성 검사 (선택 사항)
-	    const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
-	    if (!validTypes.includes(file.type)) {
-	        alert("허용되지 않은 파일 형식입니다. JPEG, PNG, GIF만 업로드 가능합니다.");
-	        return;
-	    }
-
-	    const maxSize = 5 * 1024 * 1024; // 5MB
-	    if (file.size > maxSize) {
-	        alert("파일 크기가 너무 큽니다. 5MB 이하의 파일을 업로드해주세요.");
-	        return;
-	    }
-
-	    const ajax = new XMLHttpRequest();
-	    const formData = new FormData();
-	    formData.append("mfile", file);
-	    formData.append("url", "172.30.1.7"); // FTP 서버 URL
-
-	    ajax.onreadystatechange = function () { // 'onreadyStatechange' → 'onreadystatechange'
-	        if (ajax.readyState === 4) {
-	           
-	            if (ajax.status === 200) {
-	                const response = this.responseText.trim();
-	                console.log(response);
-	                if (!response.startsWith("fail")) { // 성공 시 URL 반환
-	                    const imageUrl = response;
-	                    const userPhotoDiv = document.getElementById("USER_PHOTO");
-	                    
-	                    // 배경 이미지로 설정할 경우
-	                    userPhotoDiv.style.backgroundImage = `url(${imageUrl})`;
-	                    
-	                    // <img> 태그로 설정할 경우
-	                    let imgTag = userPhotoDiv.querySelector('img');
-	                    if (imgTag) {
-	                        imgTag.src = imageUrl;
-	                    } else {
-	                        imgTag = document.createElement('img');
-	                        imgTag.src = imageUrl;
-	                        imgTag.alt = "User Photo";
-	                        imgTag.style.maxHeight = "100%";
-	                        imgTag.style.maxWidth = "100%";
-	                        userPhotoDiv.innerHTML = ''; // 기존 내용 제거
-	                        userPhotoDiv.appendChild(imgTag);
-	                    }
-
-	                    // 숨겨진 필드에 이미지 URL 설정
-	                    document.getElementById("USER_PHOTO_URL").value = imageUrl;
-
-	                    alert("정상적으로 이미지가 반영 되었습니다.");
-	                    // 파일 입력 초기화
-	                    event.target.value = "";
-	                } else {
-	                    alert("이미지 업로드에 실패하였습니다: " + response);
-	                }
-	            } else {
-	                console.log("통신 오류 발생");
-	                alert("이미지 업로드 중 오류가 발생했습니다.");
-	            }
-	        }
-	    };
-
-	    ajax.open("POST", "./cdn_uploadok.do", true); // 비동기화 (false → true)
-	    ajax.send(formData);
-	}
-	</script>
-
 </body>
 
 

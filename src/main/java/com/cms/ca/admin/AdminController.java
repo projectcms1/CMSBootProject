@@ -219,6 +219,12 @@ public class AdminController {
 		return "admin/allcounselmod";
 	}
 
+	@GetMapping("/addcounsel")
+	public String addcounsel() {
+		return "admin/addcounsel";
+	}
+
+	
 	@GetMapping("/pro_info")
 	public String pro_info() {
 		return "admin/pro_info";

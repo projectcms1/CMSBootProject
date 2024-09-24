@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>학생 사용자 추가</title>
+<!-- Bootstrap core CSS -->
+<link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+<link href="/admin/css/font-awesome.min.css" rel="stylesheet">
+<link href="/admin/css/style.css" rel="stylesheet">
+<link href="/admin/css/nav.css" rel="stylesheet">
+<link href="/admin/css/shCoreEclipse.css" rel="stylesheet" />
+<link href="/admin/css/shThemeEclipse.css" rel="stylesheet" />
+<link href="/admin/css/global.css" rel="stylesheet">
+<link href="/admin/css/baseui.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+<link href="/admin/css/listmod.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<!-- Header 시작 -->
+	<div th:replace="~{/admin/header :: admin_header}"></div>
+	<!-- Header 끝 -->
+
+	<!-- Nav 시작 -->
+	<section id="menu_big" class="sticky-top" th:insert="~{/admin/nav :: admin_nav}"></section>
+	<!-- Nav 끝 -->
+
+	<!-- Main 시작 -->
+	<div class="container-fluid">
+		<main class="col-md-12 ms-sm-auto col-lg-12 px-md-4">
+			<div class="card card-custom">
+				<div class="card-header">
+					<h3 class="mb-0">상담 추가</h3>
+				</div>
+				<div class="card-body">
+
+					<!-- Form 시작 -->
+					<form id="stuser_add_frm" method="post" action="./stuser_add" enctype="multipart/form-data">
+						        <div class="row mb-3 align-items-center">
+                            <label class="col-sm-2 col-form-label">상담자명</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" value="이름" disabled>
+                            </div>
+                            <label class="col-sm-2 col-form-label">학번</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" value="학번" disabled>
+                            </div>
+                        </div>
+
+                        <!-- 내담자 정보 -->
+                        <div class="row mb-3 align-items-center">
+                            <label class="col-sm-2 col-form-label">내담자명</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" value="이름" disabled>
+                            </div>
+                            <label class="col-sm-2 col-form-label">교번</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" value="교번" disabled>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="row mb-3 align-items-center">
+                                            <label class="col-sm-2 col-form-label">상담일자</label>
+                                            <div class="col-sm-3">
+                                                <input type="date" class="form-control" disabled>
+                                            </div>
+                                            <label class="col-sm-2 col-form-label">상담시간</label>
+                                            <div class="col-sm-3">
+                                                <input type="time" class="form-control" disabled>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3 align-items-center">
+                                            <label class="col-sm-2 col-form-label">상담종류</label>
+                                            <div class="col-sm-3">
+                                                <select class="form-select" aria-label="상담종류 선택">
+                                                    <option value="1">학업</option>
+                                                    <option value="2">진로</option>
+                                                    <option value="3">심리</option>
+                                                </select>
+                                            </div>
+                                            <label class="col-sm-2 col-form-label">상담방식</label>
+                                            <div class="col-sm-3">
+                                                <select class="form-select" aria-label="상담방식 선택">
+                                                    <option value="1">대면</option>
+                                                    <option value="2">채팅</option>
+                                                    <option value="3">화상</option>
+                                                    <option value="4">전화</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3 align-items-center">
+                                            <label class="col-sm-2 col-form-label">상담장소</label>
+                                            <div class="col-sm-3">
+                                                <input type="text" class="form-control" value="-" disabled>
+                                            </div>
+                                            <label class="col-sm-2 col-form-label">상담상태</label>
+                                            <div class="col-sm-3">
+                                                <select class="form-select" aria-label="상담상태 선택">
+                                                    <option value="1">완료</option>
+                                                    <option value="2">취소</option>
+                                                    <option value="3">예정</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                        
+                        
+                        
+						
+
+						<!-- 등록 버튼 -->
+						<div class="d-flex justify-content-end">
+							<button type="button" class="btn btn-outline-primary"
+								onclick="add_stuser()">
+								<i class="ri-edit-2-line"></i> 등록
+							</button>
+						</div>
+					</form>
+					<!-- Form 끝 -->
+				</div>
+			</div>
+		</main>
+	</div>
+	<br>
+	<!-- Main 끝 -->
+
+	<!-- Footer 시작 -->
+	<div th:replace="~{/admin/footer :: admin_footer}"></div>
+	<!-- Footer 끝 -->
+
+	<!-- Scripts -->
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="/admin/js/adduser.js"></script>
+	<script src="/admin/js/bootstrap.bundle.min.js"></script>
+	<script src="/admin/js/global.js"></script>
+	<script src="/admin/js/stlistmod_useraddimg.js"></script>
+</body>
+</html>

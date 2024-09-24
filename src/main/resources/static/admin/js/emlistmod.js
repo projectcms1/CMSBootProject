@@ -1,35 +1,3 @@
-//학생 사용자 상세보기 정보 중 대학교 내 대학분류, 학과, 전공 데이터
-const USER_UNIV = ['대학선택','공과대학', '사회과학대학', '인문대학', '자연과학대학'];
-const USER_SCSBJT = ['-','기계공학과', '정치학과', '철학과', '생물학과'];
-const USER_MJR = ['-','기계공학', '정치학', '철학', '생물학'];
-
-function makeSelector(selectedUniv) {
-	USER_UNIV.forEach(function(data, index) {
-		if (selectedUniv == data) {
-			document.getElementById("OGDP_SCSBJT").value = USER_SCSBJT[index];
-			document.getElementById("MJR").value = USER_MJR[index];
-		}
-	});
-}
-
-
-
-
-//학생 사용자 검색
-function list_search() {
-    console.log("test");
-
-    var frmSearch = document.getElementById('frmSearch');
-    var inputState = frmSearch.elements['search_part'];
-    var searchInput = frmSearch.elements['search_word'];
-    
-    frmSearch.method = "GET";
-    frmSearch.action = "./stlistmod?search_part=" + inputState.value + "&search_word=" + searchInput.value;
-    frmSearch.submit();
-    return false;
-}
-
-
 //다음 주소 찾기
  var element_layer = document.getElementById('stlistmod_detail_layer_add');
  function closeDaumPostcode() {
@@ -219,6 +187,130 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+//교직원 리스트 페이징 처리
+document.addEventListener('DOMContentLoaded', function() {
+    const rowsPerPage = 10; // 한 페이지당 표시할 행의 수
+    const tableBody = document.getElementById('employeeTableBody');
+    const pagination = document.getElementById('emlist_paging');
+    const totalPagesDisplay = document.getElementById('totalPagesDisplay');
+
+    if (!tableBody) {
+        console.error('employeeTableBody 요소를 찾을 수 없습니다.');
+        return;
+    }
+
+    // 모든 tr 요소를 선택합니다.
+    const rows = Array.from(tableBody.getElementsByTagName('tr'));
+    const totalRows = rows.length;
+    const totalPages = Math.ceil(totalRows / rowsPerPage);
+    let currentPage = 1;
+
+    // 페이지 표시 함수
+    function showPage(page) {
+        currentPage = page;
+        const start = (page - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+
+        rows.forEach((row, index) => {
+            if (index >= start && index < end) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        updatePagination();
+    }
+
+    // 페이지 네비게이션 업데이트 함수
+    function updatePagination() {
+        // 기존 총 페이지 수 표시 제거
+        if (totalPagesDisplay.firstChild) {
+            totalPagesDisplay.removeChild(totalPagesDisplay.firstChild);
+        }
+
+        // 총 페이지 수 표시 추가
+        const span = document.createElement('span');
+        span.textContent = `총 페이지: ${totalPages}`;
+        totalPagesDisplay.appendChild(span);
+
+        // << 버튼 활성화/비활성화
+        const firstBtn = document.getElementById('first-page');
+        if (currentPage === 1) {
+            firstBtn.parentElement.classList.add('disabled');
+        } else {
+            firstBtn.parentElement.classList.remove('disabled');
+        }
+
+        // < 버튼 활성화/비활성화
+        const prevBtn = document.getElementById('prev-page');
+        if (currentPage === 1) {
+            prevBtn.parentElement.classList.add('disabled');
+        } else {
+            prevBtn.parentElement.classList.remove('disabled');
+        }
+
+        // > 버튼 활성화/비활성화
+        const nextBtn = document.getElementById('next-page');
+        if (currentPage === totalPages) {
+            nextBtn.parentElement.classList.add('disabled');
+        } else {
+            nextBtn.parentElement.classList.remove('disabled');
+        }
+
+        // >> 버튼 활성화/비활성화
+        const lastBtn = document.getElementById('last-page');
+        if (currentPage === totalPages) {
+            lastBtn.parentElement.classList.add('disabled');
+        } else {
+            lastBtn.parentElement.classList.remove('disabled');
+        }
+    }
+
+    // 버튼 클릭 이벤트 설정
+    const firstBtn = document.getElementById('first-page');
+    const prevBtn = document.getElementById('prev-page');
+    const nextBtn = document.getElementById('next-page');
+    const lastBtn = document.getElementById('last-page');
+
+    if (firstBtn && prevBtn && nextBtn && lastBtn) {
+        firstBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (currentPage !== 1) {
+                showPage(1);
+            }
+        });
+
+        prevBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (currentPage > 1) {
+                showPage(currentPage - 1);
+            }
+        });
+
+        nextBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (currentPage < totalPages) {
+                showPage(currentPage + 1);
+            }
+        });
+
+        lastBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (currentPage !== totalPages) {
+                showPage(totalPages);
+            }
+        });
+    }
+
+    // 초기 페이지 표시
+    showPage(1);
+});
+
+
+
+
+/*
 //학생 사용자 상세정보 수정 기능
 function update_stuserdata(){
 	stuser_detail_frm.submit();
@@ -229,9 +321,9 @@ function update_stuserdata(){
 function add_stuser(){
 	stuser_add_frm.submit();
 }
+*/
 
-
-//교직원 사용자 (prolistmod.html) 검색기능 분류 스크립트 
+//교직원 사용자 검색기능 분류 스크립트 
 function toggleFields() {
 	var categorySelect = document.getElementById("categorySelect").value;
 	var staffTypeSelect = document.getElementById("staffTypeSelect");
@@ -253,24 +345,6 @@ function toggleFields() {
 	// 다른 값이 선택되면 input 필드를 보이게 하고 나머지를 숨김
 	else {
 		staffTypeSelect.style.display = "none"; // 교수/상담사 select 숨기기
-		searchInput.style.display = "inline-block"; // input 필드 보이기
-		statusRadio.style.display = "none"; // 상태 라디오 버튼 숨기기
-	}
-}
-
-//관리자 사용자 (adminlistmod.html) 검색기능 분류 스크립트
-function toggleFields() {
-	var categorySelect = document.getElementById("categorySelect").value;
-	var searchInput = document.getElementById("searchInput");
-	var statusRadio = document.getElementById("statusRadio");
-
-	// '상태'가 선택되면 input 텍스트 필드를 숨기고 상태 라디오 버튼을 표시
-	if (categorySelect === "status") {
-		searchInput.style.display = "none"; // input 필드 숨기기
-		statusRadio.style.display = "block"; // 상태 라디오 버튼 표시
-	}
-	// 다른 값이 선택되면 input 필드를 보이게 하고 나머지를 숨김
-	else {
 		searchInput.style.display = "inline-block"; // input 필드 보이기
 		statusRadio.style.display = "none"; // 상태 라디오 버튼 숨기기
 	}
