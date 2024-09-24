@@ -164,6 +164,7 @@ public class AdminController {
 		return "admin/adminlistmod";
 	}
 
+	// 상담 내역 리스트 출력
 	@GetMapping("/allcounselmod")
 	public String allcounselmod(Model m) {
 
