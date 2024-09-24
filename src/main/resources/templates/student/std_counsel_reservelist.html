@@ -199,18 +199,6 @@
 				     	<div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
 				     		
 				     		<div class="datatable-top">
-				     			<!-- per-page Dropdown -->
-		    				<!-- 	<div class="datatable-dropdown">
-		            				<label>
-		                				<select class="datatable-selector" name="per-page">
-		                					<option value="5" selected>5개씩 보기</option>
-		                					<option value="10">10개씩 보기</option>
-		                					<option value="-1">전체 보기</option>
-		                				</select>
-		            				</label>
-		        				</div> -->
-		        				<!-- End per-page Dropdown -->
-		        				
 		        				<!-- Search Bar -->
 			    				<div class="search-bar ">
 						      		<form class="search-form d-flex align-items-center" method="POST" action="#">
@@ -230,7 +218,7 @@
 							</div>
 							
 							<div class="datatable-container">
-								<table id="demo-table" class="table datatable datatable-table">
+								<table id="demo-table_rest" class="table datatable datatable-table">
 									<thead>
 										<tr>
 				                    		<th data-format="YYYY/DD/MM" data-sortable="true" data-type="date" style="width: 20%;">
@@ -269,7 +257,6 @@
 		    					</div>
 		    					
 		    					<!-- 페이징 Div-->
-		    					<div class="datatable-bottom">
 									<div class="prod_1i1r pages">
 										<ul id="std_rescounsel_list_paging">
 											<li><a id="first-rpage"><i class="fa fa-angle-double-left"></i></a></li>
@@ -278,9 +265,7 @@
 											<li><a id="last-rpage"><i class="fa fa-angle-double-right"></i></a></li>
 										</ul>
 									</div>
-								</div>
 				              	<!-- End 페이징 Div-->
-							
 							</div>
 						</div>
 		             	<!-- End 지난상담 Table-->
@@ -312,7 +297,7 @@
   <!-- Template Main JS File -->
   <script src="/assets/js/main.js"></script>
   <script src="/js/student/counsel_reservlist.js?v=1"></script>
-  <script src="/js/student/list_paging_r.js?v=1"></script>
+  <script src="/js/student/list_paging_r.js"></script>
   
 </body>
 <script>

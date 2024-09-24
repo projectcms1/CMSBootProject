@@ -1,68 +1,43 @@
 .btn-counsel {
-	width: 100px;
-	height: 38px;
+    width: 100px;
+    height: 38px;
 }
 
-#std_counsel_list_paging {
-	display: flex;
-	justify-content: flex-end;
-	list-style-type: none;
-	padding: 0;
-	margin: 20px 0;
+#std_counsel_list_paging,
+#std_rescounsel_list_paging {
+    display: flex;
+    justify-content: flex-end;
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
 }
 
-#std_counsel_list_paging li {
-	margin: 0 5px;
+#std_counsel_list_paging li,
+#std_rescounsel_list_paging li {
+    margin: 0 5px;
 }
 
-#std_counsel_list_paging a {
-	text-decoration: none;
-	color: #fff;
-	background-color: #0DCAF0;
-	padding: 10px 15px;
-	border-radius: 5px;
-	transition: background-color 0.3s;
+#std_counsel_list_paging a,
+#std_rescounsel_list_paging a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #0DCAF0;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
-#std_counsel_list_paging a:hover {
-	background-color: #0056b3;
+#std_counsel_list_paging a:hover,
+#std_rescounsel_list_paging a:hover {
+    background-color: #0056b3;
 }
 
-#std_counsel_list_paging .disabled {
-	background-color: #ccc;
-	pointer-events: none;
+#std_counsel_list_paging .disabled,
+#std_rescounsel_list_paging .disabled {
+    background-color: #ccc;
+    pointer-events: none;
 }
 
 .act a {
-	background-color: #0056b3;
-}
-
-#std_rescounsel_list_paging {
-	display: flex;
-	justify-content: flex-end;
-	list-style-type: none;
-	padding: 0;
-	margin: 20px 0;
-}
-
-#std_rescounsel_list_paging li {
-	margin: 0 5px;
-}
-
-#std_rescounsel_list_paging a {
-	text-decoration: none;
-	color: #fff;
-	background-color: #0DCAF0;
-	padding: 10px 15px;
-	border-radius: 5px;
-	transition: background-color 0.3s;
-}
-
-#std_rescounsel_list_paging a:hover {
-	background-color: #0056b3;
-}
-
-#std_rescounsel_list_paging .disabled {
-	background-color: #ccc;
-	pointer-events: none;
+    background-color: #0056b3;
 }
