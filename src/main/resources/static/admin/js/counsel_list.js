@@ -1,25 +1,27 @@
-// 상담 내역 상세보기 모달 내부 ID
-//const accordionContainer = document.getElementById('counsel_accordion');
-
-// 상세 내역 데이터 저장
-let detailData = [];
-
-// 상담 내역 상세보기 AJAX
-function openDetailModal(aply_sn) {
-	fetch('./admin_counsel_detail/' + aply_sn, {
-		method : "POST",
-		headers : { "content-type" : "application/x-www-form-urlencoded" }
-	}).then(function(result_data) {
-		return result_data.text();
-	}).then(function(result_res) {
-		detailData = result_res;
-	}).catch(function(error) {
-		alert("통신 오류 발생!");
-	});
-}
-
 // 상담 리스트 페이징 처리
 document.addEventListener('DOMContentLoaded', function() {
+	
+	// 상담 내역 상세보기 모달 내부 ID
+	//const accordionContainer = document.getElementById('counsel_accordion');
+	
+	// 상세 내역 데이터 저장
+	let detailData = [];
+	
+	// 상담 내역 상세보기 AJAX apthemaksemfrl
+	function openDetailModal(aply_sn) {
+		fetch('./admin_counsel_detail/' + aply_sn, {
+			method : "POST",
+			headers : { "content-type" : "application/x-www-form-urlencoded" }
+		}).then(function(result_data) {
+			return result_data.text();
+		}).then(function(result_res) {
+			detailData = result_res;
+			makeOpeningModal();
+		}).catch(function(error) {
+			alert("통신 오류 발생!");
+		});
+	}
+	
     const rowsPerPage = 10; // 한 페이지당 표시할 행의 수
     const tableBody = document.getElementById('counselTableBody');
     const pagination = document.getElementById('counsel_list_paging');
@@ -133,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
+	
     // 초기 페이지 표시
     showPage(1);
 });
