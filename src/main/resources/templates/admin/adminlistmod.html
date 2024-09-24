@@ -27,10 +27,10 @@
 	<div th:replace="~{/admin/header :: admin_header}"></div>
 	<!--header끝-->
 
+	<!--nav시작 -->
 	<section id="menu_big" class="sticky-top" th:insert="~{/admin/nav :: admin_nav}">
-		<!--nav시작 -->
-		<!--nav끝 -->
 	</section>
+	<!--nav끝 -->
 
 	<div class="container-fluid">
 		<div class="row">
@@ -58,37 +58,13 @@
 					<div class="col-lg-6 col-md-8 col-sm-12">
 						<div class="prod_1il d-flex align-items-center w-100">
 							<div class="d-flex align-items-center">
-								<!-- 관리자 분류 select -->
 								<select class="form-select form-select-sm ms-2 me-2" id="categorySelect"
 									style="width: 150px; height:38px;" onchange="toggleFields()">
-									<option value="">운영자 코드</option>
 									<option value="">이름</option>
-									<option value="status">상태</option> <!-- 상태를 선택하면 라디오 버튼 표시 -->
+									<option value="">교번</option>
+									<option value="">직급</option>
+									<option value="status">상태</option>
 								</select>
-
-								<!-- 라디오 버튼을 포함하는 div (기본적으로 숨김 처리) -->
-								<div id="statusRadio" class="ms-3" style="display: none;">
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="statusOptions" id="all"
-											value="all">
-										<label class="form-check-label" for="all">전체</label>
-									</div>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="statusOptions" id="active"
-											value="active">
-										<label class="form-check-label" for="active">활성화</label>
-									</div>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="statusOptions" id="inactive"
-											value="inactive">
-										<label class="form-check-label" for="inactive">비활성화</label>
-									</div>
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="statusOptions" id="delete"
-											value="delete">
-										<label class="form-check-label" for="inactive">삭제</label>
-									</div>
-								</div>
 							</div>
 
 							<!-- 입력 텍스트 필드 -->
@@ -109,7 +85,7 @@
 
 
 					<div class="d-flex justify-content-end">
-						<a class="buttton_1" href="#"
+						<a class="buttton_1" href="/emlistmod_adduser"
 							style="height:38px; display:flex; align-items:center; justify-content: center;">
 							사용자 추가 <i class="fa fa-plus-circle ms-2"></i>
 						</a>
@@ -120,13 +96,10 @@
 					<table class="table table-responsive table-striped table-borderless m-0 mt-2">
 						<thead>
 							<tr>
-								<th scope="col">
-									<div class="form-check"><input type="checkbox"
-											class="form-check-input dt-checkboxes"><label
-											class="form-check-label">&nbsp;</label></div>
-								</th>
 								<th scope="col">이름</th>
 								<th scope="col">교번</th>
+								<th scope="col">직급</th>
+								<th scope="col"></th><th scope="col"></th>
 								<th scope="col">상태</th>
 								<th scope="col">상세보기</th>
 							</tr>
@@ -135,238 +108,42 @@
 						<tbody>
 							<tr th:each="admin_data : ${admin_list}">
 								<td>
-									<div class="form-check">
-										<input type="checkbox" class="form-check-input dt-checkboxes">
-										<label class="form-check-label">&nbsp;</label>
-									</div>
-								</td>
-
-								<td>
 									<h6 class="font_14 col_3" th:text="${admin_data.getEmp_flnm()}"></h6>
 								</td>
-
 								<td>
 									<h6 class="font_14 col_3" th:text="${admin_data.getEmp_no()}"></h6>
 								</td>
 								<td>
+									<h6 class="font_14 col_3" th:text="${admin_data.getJbgd_nm()}"></h6>
+								</td>
+								<td></td><td></td>
+								<td>
 									<h6 class="bg_3 text-center font_12 p-1 mb-0" th:text="${admin_data.getAcnt_stts()}"></h6>
 								</td>
 								<td>
-									<!-- 모달 트리거 버튼 -->
 									<button type="button" class="btn btn-primary bg_1" data-bs-toggle="modal"
-										data-bs-target="#detailModal">
+										data-bs-target="#adminuserdetailModal">
 										<i class="fa fa-cog"> 상세보기</i></button>
 								</td>
 							</tr>
 						</tbody>
 
-
 					</table>
 				</div>
-		</div>
 		</main>
 	</div>
 </div>
-
-
-	<!-- 모달 -->
-	<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="detailModalLabel">상세 정보</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<!-- 상세 정보를 여기에 추가 -->
-					<!-- ======= Page Title ======= -->
-					<div class="pagetitle">
-						<h1>교직원정보</h1>
-						<nav>
-							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="/empy_info">교직원정보</a></li>
-								<li class="breadcrumb-item active">기본정보</li>
-							</ol>
-						</nav>
-					</div>
-					<!-- End Page Title -->
-					<section class="section">
-						<div class="row">
-							<div class="col-lg-12">
-								<!-- ======= 개인정보 Card ======= -->
-								<div class="card">
-									<div class="card-body">
-										<h5 class="card-title">개인정보(한글은 폰트 적용X)</h5>
-										<div class="row mb-1">
-											<!-- row 1 -->
-											<div class="col-md-2 col-lg-2">
-												<img src="/admin/img/newjeans.jpeg" alt="Profile" class="rounded-4"
-													style="margin-left: 25%" width="80%" height="225px">
-											</div>
-											<div class="col-md-4 col-lg-4">
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">입사년도</label>
-													<div class="col-sm-5 right-tag">
-														<input type="text" class="form-control" value="2017" disabled>
-													</div>
-												</div>
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">교번</label>
-													<div class="col-sm-5 right-tag">
-														<input type="text" class="form-control" value="20171234"
-															disabled>
-													</div>
-												</div>
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">이름</label>
-													<div class="col-sm-5 right-tag">
-														<input type="text" class="form-control" value="교직원a" disabled>
-													</div>
-												</div>
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">생년월일</label>
-													<div class="col-sm-5 right-tag">
-														<input type="text" class="form-control" value="891212" disabled>
-													</div>
-												</div>
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">소속기관(단과대학)</label>
-													<div class="col-sm-5 right-tag">
-														<input type="text" class="form-control" value="대학본부" disabled>
-													</div>
-												</div>
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">소속부서(학과)</label>
-													<div class="col-sm-5 right-tag">
-														<input type="text" class="form-control" value="시설운영팀" disabled>
-													</div>
-												</div>
-											</div>
-											<div class="col-md-4 col-lg-6">
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">관리권한</label>
-													<div class="col-sm-6 right-tag">
-														<input type="text" class="form-control" value="일반관리자" disabled>
-													</div>
-												</div>
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">입사일자</label>
-													<div class="col-sm-6 right-tag">
-														<input type="text" class="form-control" value="20170812"
-															disabled>
-													</div>
-												</div>
-												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">이메일</label>
-													<div class="col-sm-6 right-tag">
-														<input type="text" class="form-control"
-															value="capybara@cauniv.com">
-													</div>
-												</div>
-												<div class="row mb-3">
-													<label class="col-sm-4 col-form-label right-tag">전화번호</label>
-													<div class="col-sm-6 right-tag">
-														<input type="text" class="form-control" value="010-1234-5678">
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<button type="button" class="btn btn-outline-info float-end">
-											<i class="ri-save-3-line"></i> 저장
-										</button>
-										<button type="button" class="btn btn-outline-primary float-end">
-											<i class="ri-edit-2-line"></i> 입력
-										</button>
-
-									</div>
-								</div>
-								<!-- End 개인 정보 Card -->
-
-								<!-- ======= 거주지 정보 Card ======= -->
-								<div class="card">
-									<div class="card-body">
-										<h5 class="card-title">거주지 정보</h5>
-										<div class="col-md-12">
-											<div class="row mb-2">
-												<label class="col-sm-2 col-form-label pd-left-3">우편번호</label>
-												<div class="col-sm-2">
-													<input type="text" class="form-control">
-												</div>
-												<button type="button" class="btn btn-primary"
-													style="width: 100px; height: 38px;">주소 검색</button>
-											</div>
-											<div class="row mb-1">
-												<label class="col-sm-2 col-form-label pd-left-3">주소</label>
-												<div class="col-sm-10">
-													<input type="text" class="form-control">
-												</div>
-											</div>
-											<div class="row mb-3">
-												<label class="col-sm-2 col-form-label pd-left-3">상세주소</label>
-												<div class="col-sm-10">
-													<input type="text" class="form-control">
-												</div>
-											</div>
-										</div>
-
-										<button type="button" class="btn btn-outline-info float-end">
-											<i class="ri-save-3-line"></i> 저장
-										</button>
-										<button type="button" class="btn btn-outline-primary float-end">
-											<i class="ri-edit-2-line"></i> 입력
-										</button>
-
-									</div>
-								</div>
-								<!-- End 거주지 정보 Card -->
-
-								<!-- ======= 계좌 정보 Card ======= -->
-								<div class="card">
-									<div class="card-body">
-										<h5 class="card-title">계좌 정보</h5>
-										<div class="row mb-3">
-											<label class="col-sm-1 col-form-label pd-left-3">은행명</label>
-											<div class="col-sm-2">
-												<input type="text" class="form-control">
-											</div>
-											<label class="col-sm-1 col-form-label pd-left-3">계좌번호</label>
-											<div class="col-sm-3">
-												<input type="text" class="form-control">
-											</div>
-											<label class="col-sm-1 col-form-label pd-left-3">예금주</label>
-											<div class="col-sm-1">
-												<input type="text" class="form-control">
-											</div>
-										</div>
-
-										<button type="button" class="btn btn-outline-info float-end">
-											<i class="ri-save-3-line"></i> 저장
-										</button>
-										<button type="button" class="btn btn-outline-primary float-end">
-											<i class="ri-edit-2-line"></i> 입력
-										</button>
-
-									</div>
-								</div>
-								<!-- End 계좌 정보 Card -->
-							</div>
-						</div>
-					</section>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
+	
+	<!-- 교직원 상세정보 모달 시작 -->
+	<div th:insert="~{/admin/adminlistmod_userdetailmodal :: admin_userdetailmodal}"></div>
+	<!-- 교직원 상세정보 모달 끝 -->
+	
+	
 	<!--footer시작 -->
 	<div th:replace="~{/admin/footer :: admin_footer}"></div>
 	<!--footer끝 -->
 
-	<script src="/admin/js/listmod.js"></script>
+	<script src="/admin/js/adminlistmod.js"></script>
 	<script src="/admin/js/bootstrap.bundle.min.js"></script>
 	<script src="/admin/js/global.js"></script>
 

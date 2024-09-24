@@ -35,7 +35,7 @@
 		<main class="col-md-12 ms-sm-auto col-lg-12 px-md-4">
 			<div class="card card-custom">
 				<div class="card-header">
-					<h3 class="mb-0">교직원 사용자 추가</h3>
+					<h3 class="mb-0">교직원/관리자 사용자 추가</h3>
 				</div>
 				<div class="card-body">
 
@@ -124,13 +124,13 @@
 									<label class="col-form-label">소속기관(단과대학)</label>
 										<select class="form-control" id="OGDP_UNIV" name="ogdp_univ"
 											onchange="makeSelector(this.value)" required>
-											<option value="">대학 선택</option>
+											<option value="대학선택">대학 선택</option>
 											<option value="공과대학">공과대학</option>
 											<option value="사회과학대학">사회과학대학</option>
 											<option value="인문대학">인문대학</option>
 											<option value="자연과학대학">자연과학대학</option>
-											<option value="자연과학대학">심리상담센터</option>
-											<option value="자연과학대학">대학본부</option>
+											<option value="심리상담센터">심리상담센터</option>
+											<option value="대학본부">대학본부</option>
 										</select>
 								</div>
 								<div class="col-md-4">
@@ -232,7 +232,7 @@
 
 	<!-- Scripts -->
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script src="/admin/js/adduser.js"></script>
+	<script src="/admin/js/emadduser.js"></script>
 	<script src="/admin/js/bootstrap.bundle.min.js"></script>
 	<script src="/admin/js/global.js"></script>
 </body>
