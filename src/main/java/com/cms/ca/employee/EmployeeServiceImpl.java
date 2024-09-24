@@ -122,8 +122,33 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return update_result;
 	}
 
-	
-	
+	@Override
+	public int addConnectedCounsel(view_counsel_dto csl_dto, String emp_no) {	//재귀 상담 추가(교직원 분류에 따라 장소 변경 및 날짜 포멧 수정)
+		csl_dto.setEmp_no(emp_no);
+		csl_dto.setStts_cd("승인");
+		if(csl_dto.getDscsn_mthd().equals("대면")) {
+			csl_dto.setPlc("상담 센터");			
+		}
+		else {
+			csl_dto.setPlc(null);	
+		}
+		csl_dto.setRsvt_dt(csl_dto.getRsvt_dt().substring(0, 4)+csl_dto.getRsvt_dt().substring(5,7)+csl_dto.getRsvt_dt().substring(8,10));
+		/*
+		if(사용자관리권한=="P"){	//교수
+			csl_dto.setPlc("교수 연구실");
+		}
+		else if(사용자관리권한=="C"){	//상담사
+			csl_dto.setPlc("상담 센터");
+		}
+		*/
+		int insertResult=this.empyRepo.addConnectedCounsel(csl_dto);
+		return insertResult;
+	}
 
+	@Override
+	public int addCounselResult(String dscsn_cn, int aply_sn) {
+		int addResult=this.empyRepo.addCounselResult(dscsn_cn, aply_sn);
+		return addResult;
+	}
 	
 }

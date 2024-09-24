@@ -26,4 +26,6 @@ public interface EmployeeRepository {
 	List<view_counsel_dto> getPastCounsel(@Param("emp_no") String emp_no, @Param("offset") int offset, @Param("size") int size, @Param("searchType") String searchType, @Param("searchValue") String searchValue);
 	int updateCounselStatus(@Param("stts_cd") String stts_cd, @Param("aply_sn") int aply_sn);
 	String getCounselResult(@Param("aply_sn") int aply_sn);
+	int addConnectedCounsel(view_counsel_dto csl_dto);
+	int addCounselResult(@Param("dscsn_cn") String dscsn_cn, @Param("aply_sn") int aply_sn);
 }
