@@ -27,7 +27,7 @@
 	</select>
 
 	<select id="counsel_detail" resultType="com.cms.ca.view_counsel_dto" parameterType="String">
-	
+		select * from VIEW_DSCSN_APLY where APLY_SN = #{aply_sn} or BFR_APLY_SN = #{aply_sn} order by APLY_SN asc
 	</select>
 
 </mapper>

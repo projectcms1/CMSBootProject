@@ -1,15 +1,18 @@
 // 상담 내역 상세보기 모달 내부 ID
 //const accordionContainer = document.getElementById('counsel_accordion');
 
+// 상세 내역 데이터 저장
+let detailData = [];
+
 // 상담 내역 상세보기 AJAX
 function openDetailModal(aply_sn) {
 	fetch('./admin_counsel_detail/' + aply_sn, {
-		method : "GET",
+		method : "POST",
 		headers : { "content-type" : "application/x-www-form-urlencoded" }
 	}).then(function(result_data) {
 		return result_data.text();
 	}).then(function(result_res) {
-		console.log(result_res);
+		detailData = result_res;
 	}).catch(function(error) {
 		alert("통신 오류 발생!");
 	});

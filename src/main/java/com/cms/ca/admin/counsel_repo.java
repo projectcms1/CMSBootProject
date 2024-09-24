@@ -13,4 +13,6 @@ public interface counsel_repo {
 	List<view_counsel_dto> counsel_list(Map<String, String> keymap);
 	
 	int getCountRound(int aply_sn);
+	
+	List<view_counsel_dto> counsel_detail(String aply_sn);
 }

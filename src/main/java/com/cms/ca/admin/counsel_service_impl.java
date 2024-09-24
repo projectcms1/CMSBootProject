@@ -30,5 +30,10 @@ public class counsel_service_impl implements counsel_service {
 		}
 		return result;
 	}
+
+	@Override
+	public List<view_counsel_dto> counsel_detail(String aply_sn) {
+		return this.counsel_repo.counsel_detail(aply_sn);
+	}
 	
 }
