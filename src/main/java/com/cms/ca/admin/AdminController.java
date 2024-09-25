@@ -169,7 +169,7 @@ public class AdminController {
 	}
 	
 
-	//교직원 사용자 상세보기 데이터 로드
+	//교직원/관리자 사용자 추가
 	@PostMapping("/emuser_add")
 	public void emuser_add(@ModelAttribute employee_dto emdto, @RequestPart(name = "uphoto_file", required = false) MultipartFile uphoto_file,
 			@RequestParam(value = "", required = false) String entrance_year, ServletResponse sr) {
@@ -209,6 +209,7 @@ public class AdminController {
 		}
 
 	
+	//교직원 사용자 상세정보 로드
 	@ResponseBody
 	@PostMapping("/admin_employee_detail/{emp_no}")
 	public employee_dto admin_employee_detail(@PathVariable(name = "emp_no") String emp_no) {
@@ -225,6 +226,7 @@ public class AdminController {
 		System.out.println(uphoto_file);
 	}
 	
+	//교직원/관리자 추가 페이지 열기
 	@GetMapping("/emlistmod_adduser")
 	public String emlistmod_adduser() {
 		return "admin/emlistmod_adduser";
@@ -255,6 +257,53 @@ public class AdminController {
 	public employee_dto admin_detail(@PathVariable(name = "emp_no") String emp_no) {
 		return this.aduser_service.amdin_data(emp_no);
 	}
+	
+	
+	
+	// 학생 사용자 세부정보 수정
+		@PostMapping("/adminuser_detail_update")
+		public void adminuser_detail_update(@ModelAttribute employee_dto emdto, @RequestPart(name = "uphoto_file", required = false) MultipartFile uphoto_file,
+				ServletResponse sr, String previousFileName) {
+			sr.setContentType("text/html; charset=utf-8");
+			
+			try {
+				this.pw = sr.getWriter();
+				
+				if (uphoto_file != null && !uphoto_file.getOriginalFilename().isEmpty()) {
+					CDNFileUploader fileUploader = new CDNFileUploader(uphoto_file);
+					
+					boolean delck = fileUploader.deleteFile(previousFileName);
+					if (delck) {
+						this.img_service.deleteImageFile(previousFileName);
+					}
+					imgfile_dto imgdto = fileUploader.uploadFile();
+					int dbck = this.img_service.addImageFile(imgdto);
+					if (dbck > 0) {
+						emdto.setEmp_photo(imgdto.getImg_file_nm());
+					}
+					else {
+						// insert 실패했을 때 FTP 파일 삭제 처리
+						// -> 실패 시 Exception 발동으로 삭제하지 못할 수도 있음
+						fileUploader.deleteFile(imgdto.getImg_file_nm());
+					}
+				}
+				int result = this.aduser_service.admin_detail_update(emdto);
+				if (result > 0) {
+					this.pw.print("<script>" + "alert('관리자 정보가 수정되었습니다.');" + "location.href='./adminlistmod';" + "</script>");
+				} else {
+					this.pw.print("<script>" + "alert('오류로 인해 관리자 정보가 수정되지 않았습니다.');" + "history.go(-1);" + "</script>");
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				this.pw.print("<script>" + "alert('오류로 인해 관리자 정보가 수정되지 않았습니다. 확인해주세요!');" + "history.go(-1);" + "</script>");
+			} finally {
+				this.pw.close();
+			}
+		}
+	
+	
+	
 	
 	
 	@GetMapping("/adminlistmod_adduser")

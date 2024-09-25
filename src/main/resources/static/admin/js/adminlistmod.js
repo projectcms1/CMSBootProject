@@ -143,3 +143,11 @@ function makeOpeningModal(detailData) {
 }
 
 
+//관리자 사용자 상세정보 수정 기능
+function update_adminuserdata(){
+	if (confirm("정말로 정보를 수정하시겠습니까?")) {
+		adminuser_detail_frm.submit();
+	}
+}
+
+
