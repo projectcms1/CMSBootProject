@@ -33,7 +33,12 @@ public class counsel_service_impl implements counsel_service {
 
 	@Override
 	public List<view_counsel_dto> counsel_detail(String aply_sn) {
-		return this.counsel_repo.counsel_detail(aply_sn);
+		List<view_counsel_dto> result = this.counsel_repo.counsel_detail(aply_sn);
+		for (view_counsel_dto dto : result) {
+			dto.setPlc((dto.getPlc() == null) ? "-" : dto.getPlc());
+			dto.setRsvt_dt(dto.getRsvt_dt().substring(0, 4) + "년 " + dto.getRsvt_dt().substring(4, 6) + "월 " + dto.getRsvt_dt().substring(6, 8) + "일");
+		}
+		return result;
 	}
 	
 }
