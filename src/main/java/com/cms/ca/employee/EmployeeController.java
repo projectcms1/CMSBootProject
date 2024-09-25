@@ -122,7 +122,7 @@ public class EmployeeController {
     public Map<String, Object> employeeCounselDetailModal(final int aply_sn) {
         Map<String, Object> map= new HashMap<String, Object>();
 		try {
-			List<view_counsel_dto> counsel_detail=this.empyService.getOneCounsel(aply_sn);
+			List<view_counsel_dto> counsel_detail=this.empyService.getOneCounsel(aply_sn, "완료");
 			map.put("counsel_detail", counsel_detail);
 		} 
 		catch (Exception e) {
@@ -260,13 +260,13 @@ public class EmployeeController {
     public Map<String, Object> employeeCounselConfirmModal(final int aply_sn) {
         Map<String, Object> map= new HashMap<String, Object>();
 		try {
-			List<view_counsel_dto> counsel_detail=this.empyService.getOneCounsel(aply_sn);
+			List<view_counsel_dto> counsel_detail=this.empyService.getConnectedCounsel(aply_sn);
 			map.put("counsel_detail", counsel_detail);
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		return map;
+		return map;	
     }
 	
 	@PostMapping("/employee/empy_counsel_confirm_add")	//확정상담관리 페이지, 상담 완료 및 회기 상담 추가

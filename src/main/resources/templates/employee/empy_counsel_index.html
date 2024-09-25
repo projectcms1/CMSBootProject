@@ -134,7 +134,7 @@
 							                    <button type="button" class="btn btn-outline-info btn-sm rounded-pill" 
 												data-bs-toggle="modal" data-bs-target="#counselDetailModal" 
 												style="float: right; margin-left: 5px;" 
-												th:value="${counsel.getAply_sn}" onclick="madalDataSet(this.value)">상세보기</button>
+												th:value="${counsel.getAply_sn}" th:onclick="madalDataSet([[${counsel.getAply_sn}]])">상세보기</button>
 							                </td>
 							            </tr>
 					                </tbody>

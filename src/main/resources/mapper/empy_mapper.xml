@@ -39,7 +39,14 @@
 	
 	<select id="getAllCounsel" parameterType="HashMap" resultType="com.cms.ca.view_counsel_dto">
 		select * from VIEW_DSCSN_APLY 
-		where emp_no=#{emp_no} and bfr_aply_sn is null and stts_cd=#{stts_cd}
+        <choose>
+	        <when test="stts_cd.equals('완료')">
+	          	where emp_no=#{emp_no} and bfr_aply_sn is null and stts_cd=#{stts_cd}
+	        </when>
+	        <when test="!stts_cd.equals('완료')">
+	           	where emp_no=#{emp_no} and stts_cd=#{stts_cd}
+	        </when>
+        </choose>
 		<include refid="search" />
 		order by aply_sn desc 
 		limit #{offset}, #{size}
@@ -47,7 +54,14 @@
 	
 	<select id="getAllCounselCount" parameterType="HashMap" resultType="int">
 		select count(*) as cnt from VIEW_DSCSN_APLY 
-		where emp_no=#{emp_no} and bfr_aply_sn is null and stts_cd=#{stts_cd}
+		<choose>
+	        <when test="stts_cd.equals('완료')">
+	          	where emp_no=#{emp_no} and bfr_aply_sn is null and stts_cd=#{stts_cd}
+	        </when>
+	        <when test="!stts_cd.equals('완료')">
+	           	where emp_no=#{emp_no} and stts_cd=#{stts_cd}
+	        </when>
+        </choose>
 		<include refid="search" />
 	</select>
 	
@@ -77,7 +91,20 @@
 	
 	<select id="getOneCounsel" parameterType="HashMap" resultType="com.cms.ca.view_counsel_dto">
 		select * from VIEW_DSCSN_APLY 
-		where (aply_sn=#{aply_sn} or bfr_aply_sn=#{aply_sn})
+		<choose>
+	        <when test="stts_cd.equals('완료')">
+	          	where ((aply_sn=#{aply_sn} or bfr_aply_sn=#{aply_sn}) and stts_cd="완료") 
+	        </when>
+	        <when test="stts_cd.equals('')">
+	           	where (aply_sn=#{aply_sn} )
+	        </when>
+        </choose>
+		order by aply_sn asc 
+	</select>
+	
+	<select id="getConnectedCounsel" parameterType="HashMap" resultType="com.cms.ca.view_counsel_dto">
+		select * from VIEW_DSCSN_APLY 
+		where (aply_sn=#{aply_sn} or aply_sn=#{bfr_aply_sn} or bfr_aply_sn=#{bfr_aply_sn}) 
 		order by aply_sn asc 
 	</select>
 	

@@ -88,8 +88,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public List<view_counsel_dto> getOneCounsel(int aply_sn) {
-		List<view_counsel_dto> counsel_detail=this.empyRepo.getOneCounsel(aply_sn);
+	public List<view_counsel_dto> getOneCounsel(int aply_sn, String stts_cd) {
+		List<view_counsel_dto> counsel_detail=this.empyRepo.getOneCounsel(aply_sn, stts_cd);
 		int i=0;
 		while(i<counsel_detail.size()) {
 			if(counsel_detail.get(i).getPlc()==null || counsel_detail.get(i).getPlc().equals("")) {
@@ -149,6 +149,30 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public int addCounselResult(String dscsn_cn, int aply_sn) {
 		int addResult=this.empyRepo.addCounselResult(dscsn_cn, aply_sn);
 		return addResult;
+	}
+	
+	@Override
+	public List<view_counsel_dto> getConnectedCounsel(int aply_sn) {
+		List<view_counsel_dto> counsel_list=this.empyRepo.getOneCounsel(aply_sn, "");
+		List<view_counsel_dto> counsel_detail=null;
+		if(counsel_list.get(0).getBfr_aply_sn()!=null) {
+			counsel_detail=this.empyRepo.getConnectedCounsel(aply_sn, counsel_list.get(0).getBfr_aply_sn());			
+		}
+		else {
+			counsel_detail=counsel_list;
+		}
+		int i=0;
+		while(i<counsel_detail.size()) {
+			if(counsel_detail.get(i).getPlc()==null || counsel_detail.get(i).getPlc().equals("")) {
+				counsel_detail.get(i).setPlc("-");
+			}
+			String result=getCounselResult(counsel_detail.get(i).getAply_sn());
+			if(result!=null) {
+				counsel_detail.get(i).setDscsn_cn(result);
+			}
+			i++;
+		}
+		return counsel_detail;
 	}
 	
 }
