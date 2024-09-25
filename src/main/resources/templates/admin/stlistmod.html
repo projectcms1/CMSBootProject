@@ -64,6 +64,7 @@
 							<form id="frmSearch"
 								class="search-form d-flex align-items-center"
 								th:onsubmit="return list_search()">
+							<div class="d-flex align-items-center">
 								<select class="form-select form-select-sm ms-2 me-2"
 									name="search_part" id="inputState"
 									style="width: 150px; height: 38px;">
@@ -75,7 +76,10 @@
 										th:selected="${ search_part == 'OGDP_SCSBJT' }">학과</option>
 									<option value="STDNT_NO"
 										th:selected="${ search_part == 'STDNT_NO' }">학번</option>
-								</select> <input class="form-control ms-2" id="searchInput" type="text"
+								</select>
+								</div>
+								
+								<input class="form-control ms-2" id="searchInput" type="text"
 									name="search_word" th:value="${ search_word }"
 									style="flex-grow: 1; width: 100%; min-width: 200px; height: 38px;">
 
