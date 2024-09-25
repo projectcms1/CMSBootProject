@@ -36,5 +36,15 @@
 	<select id="counsel_detail" resultType="com.cms.ca.view_counsel_dto" parameterType="String">
 		select * from VIEW_DSCSN_APLY where APLY_SN = #{aply_sn} or BFR_APLY_SN = #{aply_sn} order by APLY_SN desc
 	</select>
+	
+	<!-- 상담추가 -->
+	<insert id="counsel_add" parameterType="com.cms.ca.counsel_dto">
+		insert into DSCSN_APLY 
+		(aply_sn, bfr_aply_sn, hr_se, stdnt_no, emp_no, stts_cd, 
+		plc, rsvt_dt, aply_dt, dscsn_mthd, dscsn_knd)
+		values
+		('0', null, #{hr_se}, #{stdnt_no}, #{emp_no}, #{stts_cd}, 
+		#{plc}, #{rsvt_dt}, now(), #{dscsn_mthd}, #{dscsn_knd})
+	</insert>
 
 </mapper>

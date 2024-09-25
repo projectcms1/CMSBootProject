@@ -37,39 +37,32 @@
 				<div class="card-body">
 
 					<!-- Form 시작 -->
-					<form id="stuser_add_frm" method="post" action="./stuser_add" enctype="multipart/form-data">
+					<form id="counsel_add_frm" method="post" action="./counsel_add">
 						        <div class="row mb-3 align-items-center">
-                            <label class="col-sm-2 col-form-label">상담자명</label>
+                            <label class="col-sm-2 col-form-label">교번(상담사)</label>
                             <div class="col-sm-3">
-                                <input type="text" class="form-control" value="이름" disabled>
+                                <input type="text" class="form-control">
                             </div>
-                            <label class="col-sm-2 col-form-label">학번</label>
+                            <label class="col-sm-2 col-form-label">학번(내담자)</label>
                             <div class="col-sm-3">
-                                <input type="text" class="form-control" value="학번" disabled>
-                            </div>
-                        </div>
-
-                        <!-- 내담자 정보 -->
-                        <div class="row mb-3 align-items-center">
-                            <label class="col-sm-2 col-form-label">내담자명</label>
-                            <div class="col-sm-3">
-                                <input type="text" class="form-control" value="이름" disabled>
-                            </div>
-                            <label class="col-sm-2 col-form-label">교번</label>
-                            <div class="col-sm-3">
-                                <input type="text" class="form-control" value="교번" disabled>
+                                <input type="text" class="form-control">
                             </div>
                         </div>
-                        
                         
                         <div class="row mb-3 align-items-center">
                                             <label class="col-sm-2 col-form-label">상담일자</label>
                                             <div class="col-sm-3">
-                                                <input type="date" class="form-control" disabled>
+                                                <input type="date" class="form-control">
                                             </div>
                                             <label class="col-sm-2 col-form-label">상담시간</label>
                                             <div class="col-sm-3">
-                                                <input type="time" class="form-control" disabled>
+                                                 <select class="form-select" aria-label="상담시간 선택">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                </select>
                                             </div>
                                         </div>
 
@@ -96,7 +89,7 @@
                                         <div class="row mb-3 align-items-center">
                                             <label class="col-sm-2 col-form-label">상담장소</label>
                                             <div class="col-sm-3">
-                                                <input type="text" class="form-control" value="-" disabled>
+                                                <input type="text" class="form-control" value="자동으로 배정됩니다." disabled>
                                             </div>
                                             <label class="col-sm-2 col-form-label">상담상태</label>
                                             <div class="col-sm-3">

@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cms.ca.counsel_dto;
 import com.cms.ca.student_dto;
 import com.cms.ca.view_counsel_dto;
 
@@ -51,6 +52,11 @@ public class counsel_service_impl implements counsel_service {
 		List<view_counsel_dto> counsellist_one_data = this.counsel_repo.counsel_search_list(mp);
 		
 		return counsellist_one_data;
+	}
+
+	@Override
+	public int addcounsel(counsel_dto csdto) {
+		return this.counsel_repo.counsel_add(csdto);
 	}
 	
 }

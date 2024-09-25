@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cms.ca.CDNFileUploader;
 import com.cms.ca.ImageFileService;
+import com.cms.ca.counsel_dto;
 import com.cms.ca.employee_dto;
 import com.cms.ca.imgfile_dto;
 import com.cms.ca.student_dto;
@@ -245,13 +246,13 @@ public class AdminController {
 			}
 			int result = this.emuser_service.employee_modify(emdto);
 			if (result > 0) {
-				this.pw.print("<script>" + "alert('교직원정보가 수정되었습니다.');" + "location.href='./stlistmod';" + "</script>");
+				this.pw.print("<script>" + "alert('교직원 정보가 수정되었습니다.');" + "location.href='./emlistmod';" + "</script>");
 			} else {
-				this.pw.print("<script>" + "alert('오류로 인해 교직원정보가 수정되지 않았습니다.');" + "history.go(-1);" + "</script>");
+				this.pw.print("<script>" + "alert('오류로 인해 교직원 정보가 수정되지 않았습니다.');" + "history.go(-1);" + "</script>");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			this.pw.print("<script>" + "alert('오류로 인해 교직원정보가 수정되지 않았습니다. 확인해주세요!');" + "history.go(-1);" + "</script>");
+			this.pw.print("<script>" + "alert('오류로 인해 교직원 정보가 수정되지 않았습니다. 확인해주세요!');" + "history.go(-1);" + "</script>");
 		} finally {
 			this.pw.close();
 		}
@@ -292,48 +293,48 @@ public class AdminController {
 	
 	
 	// 학생 사용자 세부정보 수정
-		@PostMapping("/adminuser_detail_update")
-		public void adminuser_detail_update(@ModelAttribute employee_dto emdto, @RequestPart(name = "uphoto_file", required = false) MultipartFile uphoto_file,
-				ServletResponse sr, String previousFileName) {
-			sr.setContentType("text/html; charset=utf-8");
-			
-			try {
-				this.pw = sr.getWriter();
-				
-				if (uphoto_file != null && !uphoto_file.getOriginalFilename().isEmpty()) {
-					CDNFileUploader fileUploader = new CDNFileUploader(uphoto_file);
-					
-					boolean delck = fileUploader.deleteFile(previousFileName);
-					if (delck) {
-						this.img_service.deleteImageFile(previousFileName);
-					}
-					imgfile_dto imgdto = fileUploader.uploadFile();
-					int dbck = this.img_service.addImageFile(imgdto);
-					if (dbck > 0) {
-						emdto.setEmp_photo(imgdto.getImg_file_nm());
-					}
-					else {
-						// insert 실패했을 때 FTP 파일 삭제 처리
-						// -> 실패 시 Exception 발동으로 삭제하지 못할 수도 있음
-						fileUploader.deleteFile(imgdto.getImg_file_nm());
-					}
-				}
-				int result = this.aduser_service.admin_detail_update(emdto);
-				if (result > 0) {
-					this.pw.print("<script>" + "alert('관리자 정보가 수정되었습니다.');" + "location.href='./adminlistmod';" + "</script>");
-				} else {
-					this.pw.print("<script>" + "alert('오류로 인해 관리자 정보가 수정되지 않았습니다.');" + "history.go(-1);" + "</script>");
-				}
+	@PostMapping("/adminuser_detail_update")
+	public void adminuser_detail_update(@ModelAttribute employee_dto emdto,
+			@RequestPart(name = "uphoto_file", required = false) MultipartFile uphoto_file, ServletResponse sr,
+			String previousFileName) {
+		sr.setContentType("text/html; charset=utf-8");
 
-			} catch (Exception e) {
-				e.printStackTrace();
-				this.pw.print("<script>" + "alert('오류로 인해 관리자 정보가 수정되지 않았습니다. 확인해주세요!');" + "history.go(-1);" + "</script>");
-			} finally {
-				this.pw.close();
+		try {
+			this.pw = sr.getWriter();
+
+			if (uphoto_file != null && !uphoto_file.getOriginalFilename().isEmpty()) {
+				CDNFileUploader fileUploader = new CDNFileUploader(uphoto_file);
+
+				boolean delck = fileUploader.deleteFile(previousFileName);
+				if (delck) {
+					this.img_service.deleteImageFile(previousFileName);
+				}
+				imgfile_dto imgdto = fileUploader.uploadFile();
+				int dbck = this.img_service.addImageFile(imgdto);
+				if (dbck > 0) {
+					emdto.setEmp_photo(imgdto.getImg_file_nm());
+				} else {
+					// insert 실패했을 때 FTP 파일 삭제 처리
+					// -> 실패 시 Exception 발동으로 삭제하지 못할 수도 있음
+					fileUploader.deleteFile(imgdto.getImg_file_nm());
+				}
 			}
+			int result = this.aduser_service.admin_detail_update(emdto);
+			if (result > 0) {
+				this.pw.print(
+						"<script>" + "alert('관리자 정보가 수정되었습니다.');" + "location.href='./adminlistmod';" + "</script>");
+			} else {
+				this.pw.print("<script>" + "alert('오류로 인해 관리자 정보가 수정되지 않았습니다.');" + "history.go(-1);" + "</script>");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.pw.print(
+					"<script>" + "alert('오류로 인해 관리자 정보가 수정되지 않았습니다. 확인해주세요!');" + "history.go(-1);" + "</script>");
+		} finally {
+			this.pw.close();
 		}
-	
-	
+	}
 	
 	
 	
@@ -361,6 +362,32 @@ public class AdminController {
 		return "admin/allcounselmod";
 	}
 
+	//상담추가
+	@PostMapping("/counsel_add")
+	public String allcounsellist_counsel_add(Model m, ServletResponse res, counsel_dto csl_dto) {
+		try {
+			res.setContentType("text/html;charset=utf-8");
+			this.pw=res.getWriter();
+			int result=this.counsel_service.addcounsel(csl_dto);
+			if(result>0) {
+				this.pw.print("<script>"
+						+ "alert('상담이 정상적으로 신청되었습니다.');"
+						+ "if(confirm('상담 리스트로 이동하시겠습니까?'))"
+						+ "{ location.href='/employee/empy_counsel_confirm'; }"
+						+ "else{ location.href='/employee/empy_counsel_add'; }"
+						+ "</script>");
+			}
+			else {
+				this.pw.print("<script>"
+						+ "alert('데이터베이스 연결 오류가 발생했습니다.\\n다시 시도해주세요.');"
+						+ "history.go(-1);"
+						+ "</script>");
+			}			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	
 	@ResponseBody
