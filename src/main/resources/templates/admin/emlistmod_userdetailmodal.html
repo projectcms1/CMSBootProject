@@ -27,51 +27,50 @@
 													style="height: 200px; background-color: #f8f9fa; display: flex; align-items: center; justify-content: center;">
 
 												</div>
-												<br> <input type="file" accept="image/*"
-													name="uphoto_file" class="form-control"
-													onchange="setstuser_img(event);"> <input
-													type="hidden" name="previousFileName" id="prev_file">
+												<br> <input type="file" accept="image/*" name="uphoto_file"
+													class="form-control" onchange="setstuser_img(event);">
+												<input type="hidden" name="previousFileName" id="prev_file">
 											</div>
 											<div class="col-md-4 col-lg-4">
 												<div class="row mb-1">
 													<label class="col-sm-4 col-form-label right-tag">이름</label>
 													<div class="col-sm-5 right-tag">
-														<input type="text" class="form-control" id="STDNT_FLNM"
+														<input type="text" class="form-control" id="full_name"
 															disabled>
 													</div>
 												</div>
 												<div class="row mb-1">
 													<label class="col-sm-4 col-form-label right-tag">교번</label>
 													<div class="col-sm-5 right-tag">
-														<input type="text" class="form-control" id="STDNT_NO"
+														<input type="text" class="form-control" id="employee_number"
 															name="stdnt_no" readonly>
 													</div>
 												</div>
 												<div class="row mb-1">
 													<label class="col-sm-4 col-form-label right-tag">생년월일</label>
 													<div class="col-sm-5 right-tag">
-														<input type="text" class="form-control" id="BRDT" disabled>
+														<input type="text" class="form-control" id="birth_day" disabled>
 													</div>
 												</div>
 												<div class="row mb-1">
 													<label class="col-sm-4 col-form-label right-tag">이메일</label>
 													<div class="col-sm-5 right-tag">
-														<input type="text" class="form-control" id="USER_EML_ADDR"
-															name="user_eml_addr">
+														<input type="text" class="form-control" id="email_address"
+															name="emp_eml_addr">
 													</div>
 												</div>
 												<div class="row mb-1">
 													<label class="col-sm-4 col-form-label right-tag">전화번호</label>
 													<div class="col-sm-5 right-tag">
-														<input type="text" class="form-control" id="USER_TELNO"
-															name="user_telno">
+														<input type="text" class="form-control" id="telephone_number"
+															name="emp_telno">
 													</div>
 												</div>
 												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">상태구분</label>
+													<label class="col-sm-4 col-form-label right-tag">로그인계정 잠금여부</label>
 													<div class="col-sm-5 right-tag">
-														<select class="form-control" id="STDNT_STTS_SE"
-															name="stdnt_stts_se">
+														<select class="form-control" id="account_lock"
+															name="acnt_lck_yn">
 															<option value="Y">Y(활성화)</option>
 															<option value="N">N(비활성화)</option>
 														</select>
@@ -82,7 +81,7 @@
 												<div class="row mb-1">
 													<label class="col-sm-4 col-form-label right-tag">소속기관(단과대학)</label>
 													<div class="col-sm-6 right-tag">
-														<select class="form-control" id="OGDP_UNIV"
+														<select class="form-control" id="employee_company"
 															name="ogdp_univ" onchange="makeSelector(this.value)">
 															<option value="대학선택">대학 선택</option>
 															<option value="공과대학">공과대학</option>
@@ -96,14 +95,14 @@
 												<div class="row mb-1">
 													<label class="col-sm-4 col-form-label right-tag">소속부서(학과)</label>
 													<div class="col-sm-6 right-tag">
-														<input type="text" class="form-control" id="OGDP_SCSBJT"
+														<input type="text" class="form-control" id="emp_department"
 															name="ogdp_scsbjt" readonly>
 													</div>
 												</div>
 												<div class="row mb-1">
 													<label class="col-sm-4 col-form-label right-tag">교직(전공)</label>
 													<div class="col-sm-6 right-tag">
-														<input type="text" class="form-control" id="MJR"
+														<input type="text" class="form-control" id="employee_major"
 															name="mjr" readonly>
 													</div>
 												</div>
@@ -111,22 +110,25 @@
 												<div class="row mb-1">
 													<label class="col-sm-4 col-form-label right-tag">교원자격증번호</label>
 													<div class="col-sm-6 right-tag">
-														<input type="text" class="form-control" id="UNIV_PRD"
-															name="univ_prd">
+														<input type="text" class="form-control" id="edu_crtfct_no"
+															name="edu_crtfct_no">
 													</div>
 												</div>
 												<div class="row mb-1">
 													<label class="col-sm-4 col-form-label right-tag">교원자격증발급일자</label>
 													<div class="col-sm-6 right-tag">
-														<input type="text" class="form-control" id="UNIV_PRD"
-															name="univ_prd">
+														<input type="text" class="form-control" id="edu_crtfct_issu_ymd"
+															name="edu_crtfct_issu_ymd">
 													</div>
 												</div>
 												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">등록일시</label>
+													<label class="col-sm-4 col-form-label right-tag">직원상태</label>
 													<div class="col-sm-6 right-tag">
-														<input type="text" class="form-control" id="REG_DT"
-															disabled>
+														<select class="form-control" id="account_status" name="acnt_stts">
+															<option value="Y">활성화</option>
+															<option value="N">비활성화</option>
+															<option value="D">삭제</option>
+														</select>
 													</div>
 												</div>
 											</div>
@@ -143,8 +145,8 @@
 											<div class="row mb-2" style="margin-left: 5%;">
 												<label class="col-sm-1 col-form-label pd-left-3">우편번호</label>
 												<div class="col-sm-2">
-													<input type="text" class="form-control" id="USER_ZIP"
-														name="user_zip" required readonly>
+													<input type="text" class="form-control" id="employee_zipcode"
+														name="emp_zip" required readonly>
 												</div>
 												<button type="button" class="btn btn-primary"
 													id="emp_addr_search_btn"
@@ -154,15 +156,15 @@
 											<div class="row mb-2" style="margin-left: 5%;">
 												<label class="col-sm-1 col-form-label pd-left-3">주소</label>
 												<div class="col-sm-8">
-													<input type="text" class="form-control" id="USER_ADDR"
-														name="user_addr" required readonly>
+													<input type="text" class="form-control" id="employee_address"
+														name="emp_addr" required readonly>
 												</div>
 											</div>
 											<div class="row mb-3" style="margin-left: 5%;">
 												<label class="col-sm-1 col-form-label pd-left-3">상세주소</label>
 												<div class="col-sm-8">
-													<input type="text" class="form-control" id="USER_DADDR"
-														name="user_daddr" required>
+													<input type="text" class="form-control" id="detail_address"
+														name="emp_daddr" required>
 												</div>
 											</div>
 											<div id="stlistmod_detail_layer_add"
@@ -185,17 +187,17 @@
 										<div class="row mb-3">
 											<label class="col-sm-1 col-form-label pd-left-3">은행명</label>
 											<div class="col-sm-2">
-												<input type="text" class="form-control" id="DLNG_BANK_NM"
+												<input type="text" class="form-control" id="dlng_bank_nm"
 													name="dlng_bank_nm">
 											</div>
 											<label class="col-sm-1 col-form-label pd-left-3">계좌번호</label>
 											<div class="col-sm-3">
-												<input type="text" class="form-control" id="DLNG_ACTNO"
+												<input type="text" class="form-control" id="dlng_actno"
 													name="dlng_actno">
 											</div>
 											<label class="col-sm-1 col-form-label pd-left-3">예금주</label>
 											<div class="col-sm-2">
-												<input type="text" class="form-control" id="DPSTR_NM"
+												<input type="text" class="form-control" id="dpstr_nm"
 													name="dpstr_nm">
 											</div>
 										</div>
