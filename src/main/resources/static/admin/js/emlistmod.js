@@ -4,7 +4,6 @@ const USER_SCSBJT = ['-', '기계공학과', '정치학과', '철학과', '생�
 const USER_MJR = ['-', '기계공학', '정치학', '철학', '생물학', ''];
 
 function makeSelector(selectedUniv) {
-	console.log("Selected University:", selectedUniv);
 
 	const scsbjtField = document.getElementById("OGDP_SCSBJT");
 	const mjrField = document.getElementById("MJR");
@@ -16,15 +15,12 @@ function makeSelector(selectedUniv) {
 	USER_UNIV.forEach(function(data, index) {
 		if (selectedUniv === data) {
 			scsbjtField.value = USER_SCSBJT[index];
-			console.log("OGDP_SCSBJT set to:", scsbjtField.value);
 
 			if (selectedUniv === "심리상담센터") {
 				mjrField.readOnly = false;
-				console.log("MJR field is editable");
 			} else {
 				mjrField.readOnly = true;
 				mjrField.value = USER_MJR[index];
-				console.log("MJR field is readonly with value:", mjrField.value);
 			}
 		}
 	});
