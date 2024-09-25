@@ -146,14 +146,28 @@ public class AdminController {
 		}
 	}
 
+	
+	
+	
+	
+	// 교직원 사용자 리스트 출력 및 검색
 	@GetMapping("/emlistmod")
-	public String emlist_mod(Model m) {
+	public String emlist_mod(Model m, @RequestParam(value = "", required = false) String search_part,
+			@RequestParam(value = "", required = false) String search_word) {
 
-		List<employee_dto> employee_list_data = this.emuser_service.employee_list();
-		m.addAttribute("employee_list", employee_list_data);
+		// 검색파트 및 리스트출력
+		if (search_part == null || search_word == null || search_part.equals("") || search_word.equals("")) {
+			m.addAttribute("employee_list", this.emuser_service.employee_list());
+		} else {
+			m.addAttribute("search_part", search_part);
+			m.addAttribute("search_word", search_word);
+			m.addAttribute("employee_list", this.emuser_service.employee_search_list(search_part, search_word));
+		}
 
 		return "admin/emlistmod";
 	}
+	
+	
 	
 	@ResponseBody
 	@PostMapping("/admin_employee_detail/{emp_no}")
@@ -166,14 +180,24 @@ public class AdminController {
 		return "admin/emlistmod_adduser";
 	}
 	
+	
+	// 관리자 사용자 리스트 출력 및 검색
 	@GetMapping("/adminlistmod")
-	public String adminlist_mod(Model m) {
+	public String adminlist_mod(Model m, @RequestParam(value = "", required = false) String search_part,
+			@RequestParam(value = "", required = false) String search_word) {
 
-		List<employee_dto> admin_list_data = this.aduser_service.admin_list();
-		m.addAttribute("admin_list", admin_list_data);
+		// 검색파트 및 리스트출력
+		if (search_part == null || search_word == null || search_part.equals("") || search_word.equals("")) {
+			m.addAttribute("admin_list", this.aduser_service.admin_list());
+		} else {
+			m.addAttribute("search_part", search_part);
+			m.addAttribute("search_word", search_word);
+			m.addAttribute("admin_list", this.aduser_service.admin_search_list(search_part, search_word));
+		}
 
 		return "admin/adminlistmod";
 	}
+	
 	
 	@GetMapping("/adminlistmod_adduser")
 	public String adminlistmod_adduser() {
@@ -182,15 +206,24 @@ public class AdminController {
 	}
 	
 
-	// 상담 내역 리스트 출력
+	// 상담 내역 리스트 출력 및 검색
 	@GetMapping("/allcounselmod")
-	public String allcounselmod(Model m) {
+	public String allcounselmod(Model m, @RequestParam(value = "", required = false) String search_part,
+			@RequestParam(value = "", required = false) String search_word) {
 
-		List<view_counsel_dto> counsel_list_data = this.counsel_service.counsel_list();
-		m.addAttribute("counsel_list", counsel_list_data);
+		// 검색파트 및 리스트출력
+		if (search_part == null || search_word == null || search_part.equals("") || search_word.equals("")) {
+			m.addAttribute("counsel_list", this.counsel_service.counsel_list());
+		} else {
+			m.addAttribute("search_part", search_part);
+			m.addAttribute("search_word", search_word);
+			m.addAttribute("counsel_list", this.counsel_service.counsel_search_list(search_part, search_word));
+		}
 
 		return "admin/allcounselmod";
 	}
+
+	
 	
 	@ResponseBody
 	@PostMapping("/admin_counsel_detail/{aply_sn}")

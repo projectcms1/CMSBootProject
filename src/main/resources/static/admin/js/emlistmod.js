@@ -26,6 +26,22 @@ function makeSelector(selectedUniv) {
 	});
 }
 
+
+//교직원 사용자 검색
+function emlist_search() {
+
+    var frmSearch = document.getElementById('frmSearch');
+    var inputState = frmSearch.elements['search_part'];
+    var searchInput = frmSearch.elements['search_word'];
+    
+    frmSearch.method = "GET";
+    frmSearch.action = "./emlistmod?search_part=" + inputState.value + "&search_word=" + searchInput.value;
+    frmSearch.submit();
+    return false;
+}
+
+
+
 //다음 주소 찾기
  var element_layer = document.getElementById('stlistmod_detail_layer_add');
  function closeDaumPostcode() {

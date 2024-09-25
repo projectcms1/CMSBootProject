@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.cms.ca.student_dto;
 import com.cms.ca.view_counsel_dto;
 
 @Mapper
@@ -15,4 +16,6 @@ public interface counsel_repo {
 	int getCountRound(int aply_sn);
 	
 	List<view_counsel_dto> counsel_detail(String aply_sn);
+	
+	List<view_counsel_dto> counsel_search_list(Map<String, String> search_counsel_data);
 }
