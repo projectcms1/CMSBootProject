@@ -21,7 +21,7 @@ import jakarta.servlet.ServletResponse;
 public class StudentController {
 
 	// ==== 로그인 구현 이전, 세션의 임시 학번 데이터 ======
-	String STD_NUMBER = "20245125";
+	String STD_NUMBER = "20240905";
 	// =======================================
 	String viewName = "page_blank";
 	
@@ -79,22 +79,17 @@ public class StudentController {
 	@GetMapping("/std_counsel_list")
 	public String std_counsel_loglist(Model m,
 			@RequestParam(value = "", required = false) String search_part,
-			@RequestParam(value = "", required = false) String search_word,
-			@RequestParam(value = "", required = false) Integer page) {
+			@RequestParam(value = "", required = false) String search_word) {
 		try {
-			int datacount = 20;
-			page = (page == null) ? 1 : page;
 			if (search_part == null || search_word == null || search_part.equals("") || search_word.equals("")) {
 				int listCount = this.stdSrvc.getCountData(this.STD_NUMBER);
 				
-				m.addAttribute("dataCount", listCount);
-				m.addAttribute("pageCount", Math.ceil((double) listCount / datacount));
-				m.addAttribute("counselList", this.stdSrvc.getAllListCounsel(this.STD_NUMBER, ((page - 1) * datacount), datacount));
+				m.addAttribute("counselList", this.stdSrvc.getAllListCounsel(this.STD_NUMBER));
 			}
 			else {
 				m.addAttribute("search_part", search_part);
 				m.addAttribute("search_word", search_word);
-				m.addAttribute("counselList", this.stdSrvc.getAllListCounselSearch(this.STD_NUMBER, ((page - 1) * datacount), datacount, search_part, search_word));
+				m.addAttribute("counselList", this.stdSrvc.getAllListCounselSearch(this.STD_NUMBER, search_part, search_word));
 			}
 			this.viewName = "student/std_counsel_list";
 		} catch (Exception e) {

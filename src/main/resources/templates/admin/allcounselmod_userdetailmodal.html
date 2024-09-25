@@ -1,0 +1,68 @@
+<div th:fragment="counsel_userdetailmodal" class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg"> <!-- modal-lg로 크기 조정 가능 -->
+        <div class="modal-content">
+
+            <!-- 모달 헤더 -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailModalLabel">상담 상세 정보</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- 경고 메시지 -->
+            <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
+                상담결과는 상담 관련자만 볼 수 있습니다!
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <!-- 모달 바디 -->
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">상담정보</h5>
+
+                        <!-- 상담자 정보 -->
+                        <div class="row mb-3 align-items-center">
+                            <label class="col-sm-2 col-form-label">상담자명</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="emp_nm" value="이름" disabled>
+                            </div>
+                            <label class="col-sm-2 col-form-label">학번</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="emp_no" value="학번" disabled>
+                            </div>
+                        </div>
+
+                        <!-- 내담자 정보 -->
+                        <div class="row mb-3 align-items-center">
+                            <label class="col-sm-2 col-form-label">내담자명</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="std_nm" value="이름" disabled>
+                            </div>
+                            <label class="col-sm-2 col-form-label">교번</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="std_no" value="교번" disabled>
+                            </div>
+                        </div>
+
+                        <!-- 아코디언 시작 -->
+                        <div class="accordion" id="counsel_accordion">
+                        
+							<!-- Java Script innerHTML -->
+						
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 모달 푸터 -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary" onclick="update_counseldata()">
+                    <i class="ri-edit-2-line"></i> 수정
+                </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- 모달 끝 -->

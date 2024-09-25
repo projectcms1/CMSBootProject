@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<title>전체 상담 관리</title>
+<!-- Bootstrap core CSS -->
+<link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+<link href="/admin/css/font-awesome.min.css" rel="stylesheet">
+<link href="/admin/css/style.css" rel="stylesheet">
+<link href="/admin/css/nav.css" rel="stylesheet">
+<link href="/admin/css/shCoreEclipse.css" type="text/css" rel="stylesheet" />
+<link href="/admin/css/shThemeEclipse.css" type="text/css" rel="Stylesheet" />
+<link href="/admin/css/global.css" rel="stylesheet">
+<link href="/admin/css/baseui.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+<link href="/admin/css/listmod.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+	<!--header시작-->
+	<div th:replace="~{/admin/header :: admin_header}"></div>
+	<!--header끝-->
+
+	<!--nav시작 -->
+	<section id="menu_big" class="sticky-top" th:insert="~{/admin/nav :: admin_nav}">
+	</section>
+		<!--nav끝 -->
+
+	<div class="container-fluid">
+		<div class="row">
+
+			<main class="col-md-9 ms-sm-auto common col-lg-10 px-md-4">
+				<div class="row crm_1">
+					<div class="col-md-3">
+						<div class="analytic_1l">
+							<h5 class="mb-0">상담 관리</h5>
+						</div>
+					</div>
+					<div class="col-md-9">
+						<div class="crm_1r pull-right">
+							<ul>
+								<li class="col_3 d-inline-block"><a href="#">상담관리</a> <i
+									style="margin-left: 5px; vertical-align: middle;"
+									class="fa fa-chevron-right"></i></li>
+								<li class="col_3 d-inline-block">상담내역</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<!-- 검색기능 -->
+				<div class="prod_1i mt-3 row">
+					<div class="col-lg-6 col-md-8 col-sm-12">
+						<div class="prod_1il d-flex align-items-center w-100">
+							<div class="d-flex align-items-center">
+								<form id="frmSearch" class="search-form d-flex align-items-center"
+								th:onsubmit="return counsellist_search()">
+								<select class="form-select form-select-sm ms-2 me-2"
+									name="search_part" id="inputState"
+									style="width: 150px; height: 38px;">
+									<option value="STDNT_FLNM" th:selected="${ search_part == 'STDNT_FLNM' }">내담자명</option>
+									<option value="EMP_FLNM" th:selected="${ search_part == 'EMP_FLNM' }">상담사명</option>
+									<option value="STDNT_NO" th:selected="${ search_part == 'STDNT_NO' }">학번</option>
+									<option value="EMP_NO" th:selected="${ search_part == 'EMP_NO' }">교번</option>
+									<option value="RSVT_DT" th:selected="${ search_part == 'RSVT_DT' }">상담일시</option>
+								</select>
+								
+								<!-- 입력 텍스트 필드 -->
+								<input class="form-control ms-2" id="searchInput" type="text"
+									name="search_word" th:value="${ search_word }"
+									style="flex-grow: 1; width: 100%; min-width: 200px; height: 38px;">
+
+								<!-- 검색 버튼 -->
+								<button class="btn btn-primary bg_1 ms-3" type="submit"
+									style="height: 38px; padding: 0 20px; display: flex; align-items: center; justify-content: center;">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+										fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+									<path
+											d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+								</svg>
+								</button>
+								</form>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="d-flex justify-content-end">
+						<a class="buttton_1"  href="/addcounsel"
+							style="height: 38px; display: flex; align-items: center; justify-content: center;">
+							상담 추가 <i class="fa fa-plus-circle ms-2"></i>
+						</a>
+					</div>
+				</div>
+
+
+
+				<div class="table-responsive">
+					<table
+						class="table table-responsive table-striped table-borderless m-0 mt-2">
+						<thead>
+							<tr>
+								<th scope="col">
+									<div class="form-check">
+										<input type="checkbox" class="form-check-input dt-checkboxes"><label
+											class="form-check-label">&nbsp;</label>
+									</div>
+								</th>
+								<th scope="col">내담자</th>
+								<th scope="col">상담사</th>
+								<th scope="col">학번</th>
+								<th scope="col">교번</th>
+								<th scope="col">상담일시</th>
+								<th scope="col">시간구분</th>
+								<th scope="col">상세보기</th>
+							</tr>
+						</thead>
+
+						<tbody id="counselTableBody">
+							<tr th:each="counsel_data : ${counsel_list}">
+								<td>
+									<div class="form-check">
+										<input type="checkbox" class="form-check-input dt-checkboxes">
+										<label class="form-check-label">&nbsp;</label>
+									</div>
+								</td>
+								<td>
+									<h6 class="font_14 col_3"
+									th:text="${counsel_data.getStdnt_flnm()}"></h6>
+								</td>
+
+								<td>
+									<h6 class="bg_3 text-center font_12 p-1 mb-0"
+									th:text="${counsel_data.getEmp_flnm()}"></h6>
+								</td>
+								<td>
+									<h6 class="font_14 col_3"
+										th:text="${counsel_data.getStdnt_no()}"></h6>
+								</td>
+								<td>
+									<h6 class="bg_3 text-center font_12 p-1 mb-0"
+										th:text="${counsel_data.getEmp_no()}"></h6>
+								</td>
+								<td>
+									<h6 class="font_14 col_3"
+										th:text="${counsel_data.getRsvt_dt()}"></h6>
+								</td>
+								<td>
+									<h6 class="font_14 col_3"
+										th:text="${counsel_data.getHr_se()}"></h6>
+								</td>
+								<td>
+									<!-- 모달 트리거 버튼 -->
+									<button type="button" class="btn btn-primary bg_1" th:onclick="openDetailModal([[${ counsel_data.getAply_sn() }]])"
+										data-bs-toggle="modal" data-bs-target="#detailModal">
+										<i class="fa fa-cog"> 상세보기</i>
+									</button>
+								</td>
+							</tr>
+						</tbody>
+
+					</table>
+				</div>
+					<!-- 페이징처리 -->
+    			<br><div id="totalPagesDisplay" class="text-muted"></div>
+				<div class="prod_1i1r pages" style="text-align: right;">
+					<ul class="mb-0" id="counsel_list_paging">
+						<!-- << 버튼 (첫 페이지로 이동) -->
+						<li><a id="first-page"><i class="fa fa-angle-double-left"></i></a></li>
+						<!-- < 버튼 (이전 페이지로 이동) -->
+						<li><a id="prev-page"><i class="fa fa-chevron-left"></i></a></li>
+						<!-- 페이지 번호는 JavaScript로 동적으로 생성 -->
+						<!-- > 버튼 (다음 페이지로 이동) -->
+						<li><a id="next-page"><i class="fa fa-chevron-right"></i></a></li>
+						<!-- >> 버튼 (마지막 페이지로 이동) -->
+						<li><a id="last-page"><i class="fa fa-angle-double-right"></i></a></li>
+					</ul>
+				</div>
+		</main>
+	</div>
+</div>
+
+
+
+	
+	
+	<!-- 상세정보 모달 -->
+	<div th:replace="~{/admin/allcounselmod_userdetailmodal :: counsel_userdetailmodal}"></div>
+
+	<!--footer시작 -->
+	<div th:replace="~{/admin/footer :: admin_footer}"></div>
+	<!--footer끝 -->
+
+	<script src="/admin/js/bootstrap.bundle.min.js"></script>
+	<script src="/admin/js/global.js"></script>
+	<script src="/admin/js/counsel_list.js?v=2"></script>
+	
+	
+	
+	<script>
+	//리스트 검색기능
+	function list_search() {
+		console.log("test");
+		frmSearch.method = "GET";
+		frmSearch.action = "./allcounselmod?search_part="
+				+ frmSearch.inputState.value
+				+ "&search_word="
+				+ search_frm.search_word.value;
+		return true;
+	}
+	</script>
+
+
+</body>
+
+</html>

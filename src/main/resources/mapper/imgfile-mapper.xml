@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cms.ca.ImageFileRepository">
+
+	<select id="getImageFileByFileName" resultType="com.cms.ca.imgfile_dto" parameterType="String">
+		select * from IMG_FILE_STRG where IMG_FILE_NM = #{img_file_nm} order by IMG_SN desc
+	</select>
+
+	<insert id="addImageFile" parameterType="com.cms.ca.imgfile_dto">
+		insert into IMG_FILE_STRG (IMG_SN, IMG_FILE_NM, IMG_ORGNL_FILE_NM, IMG_FILE_PATH_NM, IMG_REG_DT)
+		values ('0', #{img_file_nm}, #{img_orgnl_file_nm}, #{img_file_path_nm}, now())
+	</insert>
+
+	<delete id="deleteImageFile" parameterType="String">
+		delete from IMG_FILE_STRG where IMG_FILE_NM = #{img_file_nm}
+	</delete>
+
+</mapper>

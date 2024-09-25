@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light p-0" th:fragment="admin_nav">
+  <div class="container-fluid">
+    <a class="navbar-brand col_1" style="padding-top:2px; padding-bottom:0;" href="/stlistmod">ADMINISTRATOR</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-lg-0">
+	    <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle tag_b active_tag" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i style="margin-right:5px;" class="fa fa-diamond"></i> 사용자 정보 관리
+              </a>
+          <ul class="dropdown-menu drop_b1" aria-labelledby="navbarDropdown">
+		    <li><a class="dropdown-item" href="/stlistmod"><i style="font-size:8px; vertical-align:middle; margin-right:5px;" class="fa fa-circle-o"></i> 학생 정보 관리</a></li>
+            <li><a class="dropdown-item" href="/emlistmod"><i style="font-size:8px; vertical-align:middle; margin-right:5px;" class="fa fa-circle-o"></i> 교직원 정보 관리</a></li>
+            <li><a class="dropdown-item" href="/adminlistmod"><i style="font-size:8px; vertical-align:middle; margin-right:5px;" class="fa fa-circle-o"></i> 관리자 정보 관리</a></li>
+          </ul>
+        </li>
+		
+		
+		
+		<li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle tag_b" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i style="margin-right:5px;" class="fa fa-table"></i> 상담관리
+          </a>
+          <ul class="dropdown-menu drop_b1" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/allcounselmod"><i style="font-size:8px; vertical-align:middle; margin-right:5px;" class="fa fa-circle-o"></i> 상담내역</a></li>
+          </ul>
+        </li>
+		
+		<li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle tag_b" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i style="margin-right:5px;" class="fa fa-file"></i> 학사관리
+          </a>
+    </li>
+		
+		<li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle tag_b" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i style="margin-right:5px;" class="fa fa-table"></i> 비교과 사이트 관리
+          </a>
+          <ul class="dropdown-menu drop_b1" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/extraculist"><i style="font-size:8px; vertical-align:middle; margin-right:5px;" class="fa fa-circle-o"></i> 비교과 프로그램 관리</a></li>
+            <li><a class="dropdown-item" href="/noticemod"><i style="font-size:8px; vertical-align:middle; margin-right:5px;" class="fa fa-circle-o"></i> 비교과 공지사항</a></li>
+            <li><a class="dropdown-item" href=""><i style="font-size:8px; vertical-align:middle; margin-right:5px;" class="fa fa-circle-o"></i> 비교과 사이트 관리</a></li>
+          </ul>
+    </li>
+		
+		<li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle tag_b" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i style="margin-right:5px;" class="fa fa-copy"></i> 포털 사이트 관리
+          </a>
+          <ul class="dropdown-menu drop_b1" aria-labelledby="navbarDropdown">
+			 <li><a target="_blank" class="dropdown-item" href="/noticemod"><i style="font-size:8px; vertical-align:middle; margin-right:5px;" class="fa fa-circle-o"></i> 공지사항 관리</a></li> 
+			 <li><a  class="dropdown-item" href="profile.html"><i style="font-size:8px; vertical-align:middle; margin-right:5px;" class="fa fa-circle-o"></i> 포털 사이트 정보 수정</a></li>
+          </ul>
+        </li>
+      </ul>
+      
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cms.ca.admin.emuser_repo">
+
+<!-- 교직원리스트 출력 -->
+<select id="employee_list" resultType="com.cms.ca.employee_dto" >
+select * from EMP_INFO where MNG_AUTHRT = 'P' or MNG_AUTHRT = 'C' order by EMP_NO desc
+</select>
+
+
+<!-- 교직원 상세 정보 MODAL -->
+<select id="employee_data" resultType="com.cms.ca.employee_dto" parameterType="String">
+select a.*, b.ACNT_LCK_YN from EMP_INFO as a JOIN LGN_ACNT_INFO as b where a.USER_NO = b.USER_NO and a.EMP_NO = #{emp_no}
+</select>
+
+
+<!-- 교직원 리스트 검색 기능 -->
+<select id="employee_search_list" resultType="com.cms.ca.employee_dto" parameterType="map">
+select * from EMP_INFO where ${search_part} like concat('%', #{search_word}, '%') order by EMP_NO desc
+</select>
+
+<!-- 교직원 상세 정보 수정 -->
+<update id="employee_modify" parameterType="com.cms.ca.employee_dto">
+update EMP_INFO as a JOIN LGN_ACNT_INFO as b set a.EMP_EML_ADDR = #{emp_eml_addr}, a.EMP_TELNO = #{emp_telno}, a.EMP_ZIP = #{emp_zip},
+a.EMP_ADDR = #{emp_addr}, a.EMP_DADDR = #{emp_daddr}, a.DLNG_BANK_NM = #{dlng_bank_nm}, a.DLNG_ACTNO = #{dlng_actno}, a.DPSTR_NM = #{dpstr_nm},
+a.OGDP_INST_NM = #{ogdp_inst_nm}, a.OGDP_DEPT_NM = #{ogdp_dept_nm}, a.JBGD_NM = #{jbgd_nm}, a.MJR = #{mjr}, a.ACNT_STTS = #{acnt_stts},
+b.ACNT_LCK_YN = #{acnt_lck_yn}<if test="emp_photo!=null">, a.EMP_PHOTO = #{emp_photo}</if> where a.EMP_NO = #{emp_no} or b.LGN_ID = #{emp_no}
+</update>
+
+<!-- 교직원 사용자 추가 시작 -->
+<insert id="add_emuser_login" parameterType="com.cms.ca.login_dto" >
+insert into LGN_ACNT_INFO (USER_NO, LGN_ID, PSWD,LAST_LGN_DT, ACNT_LCK_YN, REG_DT)
+values ('0', #{lgn_id}, #{pswd}, now(), 'N', now())
+</insert>
+
+<select id="match_em_userno" parameterType="com.cms.ca.login_dto" resultType="Integer">
+select USER_NO from LGN_ACNT_INFO where LGN_ID=#{lgn_id}
+</select>
+
+<insert id="add_emuser_detail" parameterType="com.cms.ca.employee_dto">
+insert into EMP_INFO
+(emp_no, emp_flnm, user_no, emp_eml_addr, emp_telno, emp_zip, emp_addr, emp_daddr, emp_photo, brdt, dlng_bank_nm, dlng_actno, dpstr_nm, 
+ogdp_inst_nm, ogdp_dept_nm, jbgd_nm, mjr, acnt_stts, mng_authrt)
+values (#{emp_no}, #{emp_flnm}, #{user_no}, #{emp_eml_addr}, #{emp_telno},
+#{emp_zip}, #{emp_addr}, #{emp_daddr}, #{emp_photo}, #{brdt},
+#{dlng_bank_nm}, #{dlng_actno}, #{dpstr_nm},
+#{ogdp_inst_nm}, #{ogdp_dept_nm}, #{jbgd_nm}, #{mjr}, "Y", #{mng_authrt})
+</insert>
+<!-- 교직원 사용자 추가 끝 -->
+
+
+</mapper>

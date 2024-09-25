@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>학생 사용자 추가</title>
+<!-- Bootstrap core CSS -->
+<link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+<link href="/admin/css/font-awesome.min.css" rel="stylesheet">
+<link href="/admin/css/style.css" rel="stylesheet">
+<link href="/admin/css/nav.css" rel="stylesheet">
+<link href="/admin/css/shCoreEclipse.css" rel="stylesheet" />
+<link href="/admin/css/shThemeEclipse.css" rel="stylesheet" />
+<link href="/admin/css/global.css" rel="stylesheet">
+<link href="/admin/css/baseui.css" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap"
+	rel="stylesheet">
+<link href="/admin/css/listmod.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<!-- Header 시작 -->
+	<div th:replace="~{/admin/header :: admin_header}"></div>
+	<!-- Header 끝 -->
+
+	<!-- Nav 시작 -->
+	<section id="menu_big" class="sticky-top"
+		th:insert="~{/admin/nav :: admin_nav}"></section>
+	<!-- Nav 끝 -->
+
+	<!-- Main 시작 -->
+	<div class="container-fluid">
+		<main class="col-md-12 ms-sm-auto col-lg-12 px-md-4">
+			<div class="card card-custom">
+				<div class="card-header">
+					<h3 class="mb-0">학생 사용자 추가</h3>
+				</div>
+				<div class="card-body">
+
+					<!-- Form 시작 -->
+					<form id="stuser_add_frm" method="post" action="./stuser_add" enctype="multipart/form-data">
+						<!-- 개인정보 섹션 -->
+						<div class="mb-4">
+							<h5 class="mb-3">개인정보</h5>
+							<div class="row mb-3">
+								<!-- 학생 사용자 이미지 -->
+								<div class="col-md-3 text-center">
+									<div name="USER_PHOTO" class="mb-2"
+										style="height: 200px; background-color: #f8f9fa; display: flex; align-items: center; justify-content: center;">
+										<!-- 이미지 미리보기 영역 -->
+										<span>이미지 미리보기</span>
+									</div>
+									<input type="file" accept="image/*" name="uphoto_file"
+										onchange="setstuser_img(event);" class="form-control">
+								</div>
+
+								<!-- 기본 정보 -->
+								<div class="col-md-9">
+									<div class="row mb-2">
+										<label class="col-sm-3 col-form-label">이름</label>
+										<div class="col-sm-9">
+											<input type="text" name="stdnt_flnm" class="form-control"
+												required>
+										</div>
+									</div>
+									<div class="row mb-2">
+										<label class="col-sm-3 col-form-label">생년월일</label>
+										<div class="col-sm-9">
+											<input type="date" name="brdt" class="form-control" required>
+										</div>
+									</div>
+									<div class="row mb-2">
+										<label class="col-sm-3 col-form-label">전화번호</label>
+										<div class="col-sm-9">
+											<input type="tel" name="user_telno" class="form-control"
+											placeholder="11자리 숫자만 입력해주세요!" maxlength="11" min="11"
+												required>
+										</div>
+									</div>
+									<div class="row mb-2">
+										<label class="col-sm-3 col-form-label">이메일</label>
+										<div class="col-sm-9">
+											<input type="email" name="user_eml_addr" class="form-control"
+												required>
+										</div>
+									</div>
+									<div class="row mb-2">
+										<label class="col-sm-3 col-form-label">입학년도</label>
+										<div class="col-sm-9">
+											<input type="number" id="entrance_year" name="entrance_year"
+												class="form-control" readonly>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- 개인정보 섹션 끝 -->
+						<div class="section-divider"></div>
+						<!-- 섹션 구분선 -->
+
+						<!-- 대학 정보 섹션 -->
+						<div class="mb-4">
+							<h5 class="mb-3">학적 정보</h5>
+							<div class="row mb-3">
+								<div class="col-md-4">
+									<label class="col-form-label">대학(원)</label>
+										<select class="form-select" id="OGDP_UNIV" name="ogdp_univ"
+											onchange="makeSelector(this.value)" required>
+											<option value="대학선택">대학선택</option>
+											<option value="공과대학">공과대학</option>
+											<option value="사회과학대학">사회과학대학</option>
+											<option value="인문대학">인문대학</option>
+											<option value="자연과학대학">자연과학대학</option>
+										</select>
+								</div>
+								<div class="col-md-4">
+									<label class="col-form-label">학과(부)</label>
+										<input type="text" class="form-control" id="OGDP_SCSBJT"
+											name="ogdp_scsbjt" readonly required>
+								</div>
+								<div class="col-md-4">
+									<label class="col-form-label">전공</label>
+										<input type="text" class="form-control" id="MJR" name="mjr"
+											readonly required>
+								</div>
+							</div>
+						</div>
+						<!-- 대학 정보 섹션 끝 -->
+						<div class="section-divider"></div>
+						<!-- 섹션 구분선 -->
+
+						<!-- 거주지 정보 섹션 -->
+						<div class="mb-4">
+							<h5 class="mb-3">거주지 정보</h5>
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">우편번호</label>
+								<div class="col-sm-3">
+									<input type="text" class="form-control" id="USER_ZIP"
+										name="user_zip" required readonly>
+								</div>
+								<div class="col-sm-3">
+									<button type="button" class="btn btn-primary w-30"
+										onclick="execDaumPostcode()">우편번호 검색</button>
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">주소</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="USER_ADDR"
+										name="user_addr" required readonly>
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">상세주소</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="USER_DADDR"
+										name="user_daddr" required>
+								</div>
+							</div>
+							<!-- 우편번호 검색 레이어 -->
+							<div id="layer_add"
+								style="display: none; position: fixed; overflow: hidden; z-index: 1051; -webkit-overflow-scrolling: touch;">
+								<img src="//t1.daumcdn.net/postcode/resource/images/close.png"
+									id="btnCloseLayer"
+									style="cursor: pointer; position: absolute; right: -10px; top: -10px; z-index: 1;"
+									onclick="closeDaumPostcode()" alt="닫기 버튼">
+							</div>
+						</div>
+						<!-- 거주지 정보 섹션 끝 -->
+						<div class="section-divider"></div>
+						<!-- 섹션 구분선 -->
+
+						<!-- 계좌 정보 섹션 -->
+						<div class="mb-4">
+							<h5 class="mb-3">계좌 정보</h5>
+							<div class="row mb-3">
+								<div class="col-md-4">
+									<label class="col-form-label">은행명</label> <input type="text"
+										name="dlng_bank_nm" class="form-control" required>
+								</div>
+								<div class="col-md-4">
+									<label class="col-form-label">계좌번호</label> <input type="text"
+										name="dlng_actno" class="form-control" required>
+								</div>
+								<div class="col-md-4">
+									<label class="col-form-label">예금주</label> <input type="text"
+										name="dpstr_nm" class="form-control" required>
+								</div>
+							</div>
+						</div>
+						<!-- 계좌 정보 섹션 끝 -->
+
+						<!-- 등록 버튼 -->
+						<div class="d-flex justify-content-end">
+							<button type="button" class="btn btn-outline-primary"
+								onclick="add_stuser()">
+								<i class="ri-edit-2-line"></i> 등록
+							</button>
+						</div>
+					</form>
+					<!-- Form 끝 -->
+				</div>
+			</div>
+		</main>
+	</div>
+	<br>
+	<!-- Main 끝 -->
+
+	<!-- Footer 시작 -->
+	<div th:replace="~{/admin/footer :: admin_footer}"></div>
+	<!-- Footer 끝 -->
+
+	<!-- Scripts -->
+	<script
+		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="/admin/js/stadduser.js"></script>
+	<script src="/admin/js/bootstrap.bundle.min.js"></script>
+	<script src="/admin/js/global.js"></script>
+</body>
+</html>

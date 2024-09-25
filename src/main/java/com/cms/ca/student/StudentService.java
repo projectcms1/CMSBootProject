@@ -25,9 +25,9 @@ public interface StudentService {
 	
 	List<employee_dto> getAllCounseler();
 	
-	List<view_counsel_dto> getAllListCounsel(String stdnt_no, Integer pno, Integer dno);
+	List<view_counsel_dto> getAllListCounsel(String stdnt_no);
 	
-	List<view_counsel_dto> getAllListCounselSearch(String stdnt_no, Integer pno, Integer dno, String search_part, String search_word);
+	List<view_counsel_dto> getAllListCounselSearch(String stdnt_no, String search_part, String search_word);
 	
 	List<view_counsel_dto> getListModalData(String aply_sn);
 	
