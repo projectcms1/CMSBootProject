@@ -2,24 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cms.ca.admin.counsel_repo">
 
-	<select id="counsel_list" resultType="com.cms.ca.view_counsel_dto" parameterType="Map" >
-	select APLY_SN, STDNT_NO, STDNT_FLNM, EMP_NO, EMP_FLNM, RSVT_DT, HR_SE from VIEW_DSCSN_APLY where BFR_APLY_SN IS NULL
-		<if test='part=="0"'>
-			and now() > RSVT_DT and (STTS_CD = '취소' or STTS_CD = '완료') and ${search_part} like concat('%', #{search_word}, '%')
-		</if>
-		<if test='part=="1"'> 
-			and now() > RSVT_DT and (STTS_CD = '취소' or STTS_CD = '완료')
-		</if>
-		<if test='part=="2"'>
-			and RSVT_DT >= now() and STTS_CD = '미승인'
-		</if>
-		<if test='part=="3"'>
-			and RSVT_DT >= now() and STTS_CD = '승인'
-		</if>
-		<if test='part=="4"'>
-			and RSVT_DT >= now() and (STTS_CD = '취소' or STTS_CD = '완료')
-		</if>
-		order by APLY_SN desc
+	<select id="counsel_list" resultType="com.cms.ca.view_counsel_dto">
+	select APLY_SN, STDNT_NO, STDNT_FLNM, EMP_NO, EMP_FLNM, RSVT_DT, HR_SE from VIEW_DSCSN_APLY where BFR_APLY_SN IS NULL order by APLY_SN desc
 	</select>
 	
 	
@@ -37,7 +21,7 @@
 		select * from VIEW_DSCSN_APLY where APLY_SN = #{aply_sn} or BFR_APLY_SN = #{aply_sn} order by APLY_SN desc
 	</select>
 	
-	<!-- 상담추가 -->
+	<!-- 상담추가 시작 -->
 	<insert id="counsel_add" parameterType="com.cms.ca.counsel_dto">
 		insert into DSCSN_APLY 
 		(aply_sn, bfr_aply_sn, hr_se, stdnt_no, emp_no, stts_cd, 
@@ -47,4 +31,10 @@
 		#{plc}, #{rsvt_dt}, now(), #{dscsn_mthd}, #{dscsn_knd})
 	</insert>
 
+	<!-- 추가된 상담이 교수인지 상담사인지 SELECT -->
+	<select id="getEmpStts" resultType="String" parameterType="String">
+		select MNG_AUTHRT from EMP_INFO where EMP_NO =#{emp_no}
+	</select>
+
+	<!-- 상담추가 끝 -->
 </mapper>

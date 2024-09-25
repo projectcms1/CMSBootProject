@@ -364,7 +364,7 @@ public class AdminController {
 
 	//상담추가
 	@PostMapping("/counsel_add")
-	public String allcounsellist_counsel_add(Model m, ServletResponse res, counsel_dto csl_dto) {
+	public void allcounsellist_counsel_add(Model m, ServletResponse res, counsel_dto csl_dto) {
 		try {
 			res.setContentType("text/html;charset=utf-8");
 			this.pw=res.getWriter();
@@ -374,7 +374,7 @@ public class AdminController {
 						+ "alert('상담이 정상적으로 신청되었습니다.');"
 						+ "if(confirm('상담 리스트로 이동하시겠습니까?'))"
 						+ "{ location.href='/employee/empy_counsel_confirm'; }"
-						+ "else{ location.href='/employee/empy_counsel_add'; }"
+						+ "else{ location.href='/addcounsel'; }"
 						+ "</script>");
 			}
 			else {
@@ -385,8 +385,9 @@ public class AdminController {
 			}			
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			this.pw.close();
 		}
-		return null;
 	}
 	
 	

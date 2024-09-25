@@ -11,7 +11,7 @@ import com.cms.ca.view_counsel_dto;
 @Mapper
 public interface counsel_repo {
 	
-	List<view_counsel_dto> counsel_list(Map<String, String> keymap);
+	List<view_counsel_dto> counsel_list();
 	
 	int getCountRound(int aply_sn);
 	
@@ -20,4 +20,6 @@ public interface counsel_repo {
 	List<view_counsel_dto> counsel_search_list(Map<String, String> search_counsel_data);
 	
 	int counsel_add(counsel_dto csdto);
+	
+	String getEmpStts(String emp_no);
 }

@@ -19,13 +19,10 @@ public class counsel_service_impl implements counsel_service {
 	@Autowired
 	private counsel_repo counsel_repo;
 	
-	Map<String, String> keymap = null;
 	
 	@Override
 	public List<view_counsel_dto> counsel_list() {
-		this.keymap = new HashMap<>();
-		this.keymap.put("part", "5");
-		List<view_counsel_dto> result = this.counsel_repo.counsel_list(this.keymap);
+		List<view_counsel_dto> result = this.counsel_repo.counsel_list();
 		for (view_counsel_dto vcdto : result) {
 			vcdto.setRsvt_dt(vcdto.getRsvt_dt().substring(0, 4) + "/" + vcdto.getRsvt_dt().substring(4, 6) + "/" + vcdto.getRsvt_dt().substring(6,8));
 			vcdto.setRoundCount(this.counsel_repo.getCountRound(vcdto.getAply_sn()));
@@ -56,6 +53,14 @@ public class counsel_service_impl implements counsel_service {
 
 	@Override
 	public int addcounsel(counsel_dto csdto) {
+		String emp_stts = this.counsel_repo.getEmpStts(csdto.getEmp_no());
+		csdto.setRsvt_dt(csdto.getRsvt_dt().replaceAll("-", ""));
+		if (emp_stts.equals("P")) {
+			csdto.setPlc((csdto.getDscsn_mthd().equals("대면")) ? "교수 연구실" : null);
+		}
+		else if (emp_stts.equals("C")) {
+			csdto.setPlc((csdto.getDscsn_mthd().equals("대면")) ? "상담 센터" : null);
+		}
 		return this.counsel_repo.counsel_add(csdto);
 	}
 	
