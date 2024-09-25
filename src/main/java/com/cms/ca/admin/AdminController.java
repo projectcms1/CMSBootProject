@@ -242,13 +242,14 @@ public class AdminController {
 					fileUploader.deleteFile(imgdto.getImg_file_nm());
 				}
 			}
-			int result = 0; this.emuser_service.employee_modify(emdto);
+			int result = this.emuser_service.employee_modify(emdto);
 			if (result > 0) {
 				this.pw.print("<script>" + "alert('교직원정보가 수정되었습니다.');" + "location.href='./stlistmod';" + "</script>");
 			} else {
 				this.pw.print("<script>" + "alert('오류로 인해 교직원정보가 수정되지 않았습니다.');" + "history.go(-1);" + "</script>");
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			this.pw.print("<script>" + "alert('오류로 인해 교직원정보가 수정되지 않았습니다. 확인해주세요!');" + "history.go(-1);" + "</script>");
 		} finally {
 			this.pw.close();

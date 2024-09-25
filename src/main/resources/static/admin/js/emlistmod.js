@@ -1,18 +1,23 @@
 // 모달 상세보기 INPUT
 const USER_PHOTO = document.getElementById("USER_PHOTO");
 const prev_file = document.getElementById("prev_file");
+
 const full_name = document.getElementById("full_name");
 const employee_number = document.getElementById("employee_number");
 const birth_day = document.getElementById("birth_day");
 const email_address = document.getElementById("email_address");
 const telephone_number = document.getElementById("telephone_number");
+const account_status = document.getElementById("account_status");
 const account_lock = document.getElementById("account_lock");
+
 const employee_company = document.getElementById("employee_company");
 const emp_department = document.getElementById("emp_department");
 const employee_major = document.getElementById("employee_major");
+const jbgd_name = document.getElementById("jbgd_name");
 const edu_crtfct_no = document.getElementById("edu_crtfct_no");
 const edu_crtfct_issu_ymd = document.getElementById("edu_crtfct_issu_ymd");
-const account_status = document.getElementById("account_status");
+const regist_date = document.getElementById("regist_date");
+
 const employee_zipcode = document.getElementById("employee_zipcode");
 const employee_address = document.getElementById("employee_address");
 const detail_address = document.getElementById("detail_address");
@@ -270,23 +275,31 @@ function openEmpInfo(empidx) {
 function makeOpeningModal(detailData) {
 	if (detailData.emp_photo != '') {
 		USER_PHOTO.innerHTML = `<img src="/img_file/${detailData.emp_photo}" />`;
-		prev_file.value = detailData.emp_photo;
 	}
+	else {
+		USER_PHOTO.innerHTML = '';
+	}
+	prev_file.value = detailData.emp_photo;
 	full_name.value = detailData.emp_flnm;
 	employee_number.value = detailData.emp_no;
 	birth_day.value = detailData.brdt;
 	email_address.value = detailData.emp_eml_addr;
 	telephone_number.value = detailData.emp_telno;
+	account_status.value = detailData.acnt_stts;
 	account_lock.value = detailData.acnt_lck_yn;
+	
 	employee_company.value = detailData.ogdp_inst_nm;
 	emp_department.value = detailData.ogdp_dept_nm;
 	employee_major.value = detailData.mjr;
+	jbgd_name.value = detailData.jbgd_nm;
 	edu_crtfct_no.value = detailData.edu_crtfct_no;
 	edu_crtfct_issu_ymd.value = detailData.edu_crtfct_issu_ymd;
-	account_status.value = detailData.acnt_stts;
+	regist_date.value = detailData.reg_dt;
+	
 	employee_zipcode.value = detailData.emp_zip;
 	employee_address.value = detailData.emp_addr;
 	detail_address.value = detailData.emp_daddr;
+	
 	dlng_bank_nm.value = detailData.dlng_bank_nm;
 	dlng_actno.value = detailData.dlng_actno;
 	dpstr_nm.value = detailData.dpstr_nm;
