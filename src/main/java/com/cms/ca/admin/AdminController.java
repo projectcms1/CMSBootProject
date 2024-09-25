@@ -373,7 +373,7 @@ public class AdminController {
 				this.pw.print("<script>"
 						+ "alert('상담이 정상적으로 신청되었습니다.');"
 						+ "if(confirm('상담 리스트로 이동하시겠습니까?'))"
-						+ "{ location.href='/employee/empy_counsel_confirm'; }"
+						+ "{ location.href='/allcounselmod'; }"
 						+ "else{ location.href='/addcounsel'; }"
 						+ "</script>");
 			}

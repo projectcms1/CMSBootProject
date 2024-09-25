@@ -41,22 +41,22 @@
 						        <div class="row mb-3 align-items-center">
                             <label class="col-sm-2 col-form-label">교번(상담사)</label>
                             <div class="col-sm-3">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="emp_no">
                             </div>
                             <label class="col-sm-2 col-form-label">학번(내담자)</label>
                             <div class="col-sm-3">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="stdnt_no">
                             </div>
                         </div>
                         
                         <div class="row mb-3 align-items-center">
                                             <label class="col-sm-2 col-form-label">상담일자</label>
                                             <div class="col-sm-3">
-                                                <input type="date" class="form-control">
+                                                <input type="date" class="form-control" name="rsvt_dt">
                                             </div>
                                             <label class="col-sm-2 col-form-label">상담시간</label>
                                             <div class="col-sm-3">
-                                                 <select class="form-select" aria-label="상담시간 선택">
+                                                 <select class="form-select" aria-label="상담시간 선택" name="hr_se">
                                                     <option value="1">1교시</option>
                                                     <option value="2">2교시</option>
                                                     <option value="3">3교시</option>
@@ -69,7 +69,7 @@
                                         <div class="row mb-3 align-items-center">
                                             <label class="col-sm-2 col-form-label">상담종류</label>
                                             <div class="col-sm-3">
-                                                <select class="form-select" aria-label="상담종류 선택">
+                                                <select class="form-select" aria-label="상담종류 선택" name="dscsn_knd">
                                                     <option value="학업">학업</option>
                                                     <option value="진로">진로</option>
                                                     <option value="심리">심리</option>
@@ -77,7 +77,7 @@
                                             </div>
                                             <label class="col-sm-2 col-form-label">상담방식</label>
                                             <div class="col-sm-3">
-                                                <select class="form-select" aria-label="상담방식 선택">
+                                                <select class="form-select" aria-label="상담방식 선택" name="dscsn_mthd">
                                                     <option value="대면">대면</option>
                                                     <option value="채팅">채팅</option>
                                                     <option value="화상">화상</option>
@@ -93,7 +93,7 @@
                                             </div>
                                             <label class="col-sm-2 col-form-label">상담상태</label>
                                             <div class="col-sm-3">
-                                                <select class="form-select" aria-label="상담상태 선택">
+                                                <select class="form-select" aria-label="상담상태 선택" name="stts_cd">
                                                     <option value="완료">완료</option>
                                                     <option value="취소">취소</option>
                                                     <option value="승인">승인</option>

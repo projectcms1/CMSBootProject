@@ -118,6 +118,7 @@
 								<th scope="col">교번</th>
 								<th scope="col">상담일시</th>
 								<th scope="col">시간구분</th>
+								<th scope="col">회차 수</th>
 								<th scope="col">상세보기</th>
 							</tr>
 						</thead>
@@ -154,6 +155,10 @@
 								<td>
 									<h6 class="font_14 col_3"
 										th:text="${counsel_data.getHr_se()}"></h6>
+								</td>
+								<td>
+									<h6 class="font_14 col_3"
+										th:text="${counsel_data.getRoundCount() + 1}"></h6>
 								</td>
 								<td>
 									<!-- 모달 트리거 버튼 -->
