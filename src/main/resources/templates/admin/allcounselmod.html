@@ -59,21 +59,22 @@
 					<div class="col-lg-6 col-md-8 col-sm-12">
 						<div class="prod_1il d-flex align-items-center w-100">
 							<div class="d-flex align-items-center">
-								<form id="frmSearch" class="search-form d-flex align-items-center" th:onsubmit="return list_search()">
+								<form id="frmSearch" class="search-form d-flex align-items-center"
+								th:onsubmit="return counsellist_search()">
 								<select class="form-select form-select-sm ms-2 me-2"
-									id="categorySelect" style="width: 150px; height: 38px;"
-									onchange="toggleFields()">
-									<option value="all" selected>전체</option>
-									<option value="STDNT_FLNM">내담자명</option>
-									<option value="EMP_FLNM">상담사명</option>
-									<option value="">학번</option>
-									<option value="">교번</option>
-									<option value="RSVT_DT">상담일시</option>
+									name="search_part" id="inputState"
+									style="width: 150px; height: 38px;">
+									<option value="STDNT_FLNM" th:selected="${ search_part == 'STDNT_FLNM' }">내담자명</option>
+									<option value="EMP_FLNM" th:selected="${ search_part == 'EMP_FLNM' }">상담사명</option>
+									<option value="STDNT_NO" th:selected="${ search_part == 'STDNT_NO' }">학번</option>
+									<option value="EMP_NO" th:selected="${ search_part == 'EMP_NO' }">교번</option>
+									<option value="RSVT_DT" th:selected="${ search_part == 'RSVT_DT' }">상담일시</option>
 								</select>
 								
-								<input class="form-control ms-2" id="search_word" type="text" name="search_word"
+								<!-- 입력 텍스트 필드 -->
+								<input class="form-control ms-2" id="searchInput" type="text"
+									name="search_word" th:value="${ search_word }"
 									style="flex-grow: 1; width: 100%; min-width: 200px; height: 38px;">
-									<button type="submit" title="찾기" class="btn" style="border-color: g"><i class="bi bi-search"></i></button>
 
 								<!-- 검색 버튼 -->
 								<button class="btn btn-primary bg_1 ms-3" type="submit"
@@ -198,7 +199,7 @@
 
 	<script src="/admin/js/bootstrap.bundle.min.js"></script>
 	<script src="/admin/js/global.js"></script>
-	<script src="/admin/js/counsel_list.js?v=1"></script>
+	<script src="/admin/js/counsel_list.js?v=2"></script>
 	
 	
 	

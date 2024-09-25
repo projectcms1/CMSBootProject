@@ -1,3 +1,19 @@
+//상담 내역 검색
+function counsellist_search() {
+
+    var frmSearch = document.getElementById('frmSearch');
+    var inputState = frmSearch.elements['search_part'];
+    var searchInput = frmSearch.elements['search_word'];
+    
+    frmSearch.method = "GET";
+    frmSearch.action = "./allcounselmod?search_part=" + inputState.value + "&search_word=" + searchInput.value;
+    frmSearch.submit();
+    return false;
+}
+
+
+
+
 // 상담 내역 상세보기 모달 내부 ID
 const accordionContainer = document.getElementById('counsel_accordion');
 const studentNumber = document.getElementById('std_no');

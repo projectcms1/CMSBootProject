@@ -1,6 +1,8 @@
 package com.cms.ca.admin;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,18 @@ public class emuser_service_impl implements emuser_service{
 		return employee_data;
 	}
 
+	@Override
+	public List<employee_dto> employee_search_list(String search_part, String search_word) {
+		
+		Map<String, String> mp = new HashMap<>();
+		mp.put("search_part", search_part);
+		mp.put("search_word", search_word);
+		List<employee_dto> employeelist_one_data = this.emuser_repo.employee_search_list(mp);
+		
+		return employeelist_one_data;
+		
+	}
+	
 	@Override
 	public int employee_modify(employee_dto dto) {
 		return this.emuser_repo.employee_modify(dto);

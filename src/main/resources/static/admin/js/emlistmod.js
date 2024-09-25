@@ -46,8 +46,24 @@ function makeSelector(selectedUniv) {
 	});
 }
 
+
+//교직원 사용자 검색
+function emlist_search() {
+
+    var frmSearch = document.getElementById('frmSearch');
+    var inputState = frmSearch.elements['search_part'];
+    var searchInput = frmSearch.elements['search_word'];
+    
+    frmSearch.method = "GET";
+    frmSearch.action = "./emlistmod?search_part=" + inputState.value + "&search_word=" + searchInput.value;
+    frmSearch.submit();
+    return false;
+}
+
+
+
 //다음 주소 찾기
- var element_layer = document.getElementById('stlistmod_detail_layer_add');
+ var element_layer = document.getElementById('emlistmod_detail_layer_add');
  function closeDaumPostcode() {
         // iframe을 넣은 element를 안보이게 한다.
         element_layer.style.display = 'none';
@@ -107,6 +123,9 @@ function makeSelector(selectedUniv) {
         element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
  }
 //===============다음 주소 끝=============
+
+
+
 
 //교직원 리스트 페이징 처리
 document.addEventListener('DOMContentLoaded', function() {
@@ -279,12 +298,4 @@ function update_emuserdata(){
 		emuser_detail_frm.submit();
 	}
 }
-
-
-/*
-//학생 사용자 추가 기능
-function add_stuser(){
-	stuser_add_frm.submit();
-}
-*/
 

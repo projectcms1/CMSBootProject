@@ -1,5 +1,19 @@
+//관리자 검색
+function adminlist_search() {
+
+    var frmSearch = document.getElementById('frmSearch');
+    var inputState = frmSearch.elements['search_part'];
+    var searchInput = frmSearch.elements['search_word'];
+    
+    frmSearch.method = "GET";
+    frmSearch.action = "./adminlistmod?search_part=" + inputState.value + "&search_word=" + searchInput.value;
+    frmSearch.submit();
+    return false;
+}
+
+
 //다음 주소 찾기
- var element_layer = document.getElementById('stlistmod_detail_layer_add');
+ var element_layer = document.getElementById('adminlistmod_detail_layer_add');
  function closeDaumPostcode() {
         // iframe을 넣은 element를 안보이게 한다.
         element_layer.style.display = 'none';
@@ -22,10 +36,10 @@
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('USER_ZIP').value = data.zonecode;
-                document.getElementById("USER_ADDR").value = addr;
+                document.getElementById('admin_zipcode').value = data.zonecode;
+                document.getElementById("admin_address").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("USER_DADDR").focus();
+                document.getElementById("admin_detail_address").focus();
 
                 // iframe을 넣은 element를 안보이게 한다.
                 // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
@@ -63,131 +77,69 @@
 
 
 
+// 모달 상세보기 INPUT
+const USER_PHOTO = document.getElementById("USER_PHOTO");
+const prev_file = document.getElementById("prev_file");
+const full_name = document.getElementById("full_name");
+const admin_number = document.getElementById("admin_number");
+const birth_day = document.getElementById("birth_day");
+const email_address = document.getElementById("email_address");
+const telephone_number = document.getElementById("telephone_number");
+const account_lock = document.getElementById("account_lock");
+const admin_company = document.getElementById("admin_company");
+const admin_department = document.getElementById("admin_department");
+const admin_jbgd_nm = document.getElementById("admin_jbgd_nm");
+const account_status = document.getElementById("account_status");
+const admin_zipcode = document.getElementById("admin_zipcode");
+const admin_address = document.getElementById("admin_address");
+const admin_detail_address = document.getElementById("admin_detail_address");
+const dlng_bank_nm = document.getElementById("dlng_bank_nm");
+const dlng_actno = document.getElementById("dlng_actno");
+const dpstr_nm = document.getElementById("dpstr_nm");
 
-/*
-//학생사용자 상세보기 모달에 값 넣기
-document.addEventListener('DOMContentLoaded', function () {
-    // 모달 요소 가져오기
-    var stuserdetailModal = document.getElementById('stuserdetailModal');
 
-    // 모달이 열릴 때 실행되는 이벤트 리스너 추가
-    stuserdetailModal.addEventListener('show.bs.modal', function (event) {
-        // 모달을 트리거한 버튼 요소 가져오기
-        var button = event.relatedTarget;
+//관리자 사용자 상세보기 모달에 값 넣기
+function openEmpInfo(empidx) {
+	fetch('./admin_detail/' + empidx, {
+		method : "POST",
+		headers : { "content-type" : "application/x-www-form-urlencoded" }
+	}).then(function(result_data) {
+		return result_data.json();
+	}).then(function(result_res) {
+		if (result_res == null) {
+			alert("오류 발생!");
+			location.reload();
+		}
+		else {
+			makeOpeningModal(result_res);
+		}
+	}).catch(function(error) {
+		console.log(error);
+		alert("통신 오류 발생!");
+	});
+}
 
-        // 버튼의 data- 속성에서 학생 이름 데이터 가져오기
-        var st_flnm = button.getAttribute('data-stdnt_flnm');
-        var st_no = button.getAttribute('data-stdnt_no');
-        var st_eml_addr = button.getAttribute('data-user_eml_addr');
-        var st_telno = button.getAttribute('data-user_telno');
-        var st_zip = button.getAttribute('data-user_zip');
-        var st_addr = button.getAttribute('data-user_addr');
-        var st_daddr = button.getAttribute('data-user_daddr');
-        var st_photo = button.getAttribute('data-user_photo');
-        var st_brdt = button.getAttribute('data-brdt');
-        var st_banknm = button.getAttribute('data-dlng_bank_nm');
-        var st_bankno = button.getAttribute('data-dlng_actno');
-        var st_dpnm = button.getAttribute('data-dpstr_nm');
-        var st_unpr = button.getAttribute('data-univ_prd');
-        var st_dpun = button.getAttribute('data-ogdp_univ');
-        var st_dpsc = button.getAttribute('data-ogdp_scsbjt');
-        var st_mjr = button.getAttribute('data-mjr');
-        var st_stse = button.getAttribute('data-stdnt_stts_se');
-        var st_grd = button.getAttribute('data-std_grade');
-        var st_acnt_yn = button.getAttribute('data-acnt_lck_yn');
-        var st_regdt = button.getAttribute('data-reg_dt');
-        
+function makeOpeningModal(detailData) {
+	if (detailData.emp_photo != '') {
+		USER_PHOTO.innerHTML = `<img src="/img_file/${detailData.emp_photo}" />`;
+		prev_file.value = detailData.emp_photo;
+	}
+	full_name.value = detailData.emp_flnm;
+	admin_number.value = detailData.emp_no;
+	birth_day.value = detailData.brdt;
+	email_address.value = detailData.emp_eml_addr;
+	telephone_number.value = detailData.emp_telno;
+	account_lock.value = detailData.acnt_lck_yn;
+	admin_company.value = detailData.ogdp_inst_nm;
+	admin_department.value = detailData.ogdp_dept_nm;
+	admin_jbgd_nm.value = detailData.jbgd_nm;
+	account_status.value = detailData.acnt_stts;
+	admin_zipcode.value = detailData.emp_zip;
+	admin_address.value = detailData.emp_addr;
+	admin_detail_address.value = detailData.emp_daddr;
+	dlng_bank_nm.value = detailData.dlng_bank_nm;
+	dlng_actno.value = detailData.dlng_actno;
+	dpstr_nm.value = detailData.dpstr_nm;
+}
 
-        // 모달 내의 입력 필드 요소 선택(html의 id)
-        var STDNT_NO = stuserdetailModal.querySelector('#STDNT_NO');
-        var STDNT_FLNM = stuserdetailModal.querySelector('#STDNT_FLNM');
-        var USER_EML_ADDR = stuserdetailModal.querySelector('#USER_EML_ADDR');
-        var USER_TELNO = stuserdetailModal.querySelector('#USER_TELNO');
-        var USER_ZIP = stuserdetailModal.querySelector('#USER_ZIP');
-        var USER_ADDR = stuserdetailModal.querySelector('#USER_ADDR');
-        var USER_DADDR = stuserdetailModal.querySelector('#USER_DADDR');
-        var USER_PHOTO = stuserdetailModal.querySelector('#USER_PHOTO');
-        var BRDT = stuserdetailModal.querySelector('#BRDT');
-        var DLNG_BANK_NM = stuserdetailModal.querySelector('#DLNG_BANK_NM');
-        var DLNG_ACTNO = stuserdetailModal.querySelector('#DLNG_ACTNO');
-        var DPSTR_NM = stuserdetailModal.querySelector('#DPSTR_NM');
-        var UNIV_PRD = stuserdetailModal.querySelector('#UNIV_PRD');
-        var OGDP_UNIV = stuserdetailModal.querySelector('#OGDP_UNIV');
-        var OGDP_SCSBJT = stuserdetailModal.querySelector('#OGDP_SCSBJT');
-        var MJR = stuserdetailModal.querySelector('#MJR');
-        var STDNT_STTS_SE = stuserdetailModal.querySelector('#STDNT_STTS_SE');
-        var STD_GRADE = stuserdetailModal.querySelector('#STD_GRADE');
-        var ENTRANCE_YEAR = stuserdetailModal.querySelector('#ENTRANCE_YEAR');
-        var ACNT_LCK_YN = stuserdetailModal.querySelector('#ACNT_LCK_YN');
-        var REG_DT = stuserdetailModal.querySelector('#REG_DT');
-        
 
-        // 입력 필드에 데이터 설정
-        if (STDNT_FLNM) {
-        	STDNT_FLNM.value = st_flnm;
-        }
-        if (STDNT_NO) {
-        	STDNT_NO.value = st_no;
-        }
-        if (USER_EML_ADDR) {
-        	USER_EML_ADDR.value = st_eml_addr;
-        }
-        if (USER_TELNO) {
-        	USER_TELNO.value = st_telno;
-        }
-        if (USER_ZIP) {
-        	USER_ZIP.value = st_zip;
-        }
-        if (USER_ADDR) {
-        	USER_ADDR.value = st_addr;
-        }
-        if (USER_DADDR) {
-        	USER_DADDR.value = st_daddr;
-        }
-        if (USER_PHOTO) {
-        	USER_PHOTO.value = st_photo;
-        }
-        if (BRDT) {
-        	BRDT.value = st_brdt;
-        }
-        if (DLNG_BANK_NM) {
-        	DLNG_BANK_NM.value = st_banknm;
-        }
-        if (DLNG_ACTNO) {
-        	DLNG_ACTNO.value = st_bankno;
-        }
-        if (DPSTR_NM) {
-        	DPSTR_NM.value = st_dpnm;
-        }
-        if (UNIV_PRD) {
-        	UNIV_PRD.value = st_unpr;
-        }
-        if (OGDP_UNIV) {
-        	OGDP_UNIV.value = st_dpun;
-        }
-        if (OGDP_SCSBJT) {
-        	OGDP_SCSBJT.value = st_dpsc;
-        }
-        if (MJR) {
-        	MJR.value = st_mjr;
-        }
-        if (STDNT_STTS_SE) {
-        	STDNT_STTS_SE.value = st_stse;
-        }
-        if (STD_GRADE) {
-        	STD_GRADE.value = st_grd;
-        }
-        if (ENTRANCE_YEAR) {
-        	ENTRANCE_YEAR.value = st_no.substring(0,4);
-        }
-        if (ACNT_LCK_YN) {
-        	ACNT_LCK_YN.value = st_acnt_yn;
-        }
-        if (REG_DT) {
-        	REG_DT.value = st_regdt;
-        }
-        
-    });
-});
-
-*/

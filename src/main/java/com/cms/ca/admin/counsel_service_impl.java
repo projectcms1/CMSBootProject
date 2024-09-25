@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cms.ca.student_dto;
 import com.cms.ca.view_counsel_dto;
 
 
@@ -39,6 +40,17 @@ public class counsel_service_impl implements counsel_service {
 			dto.setRsvt_dt(dto.getRsvt_dt().substring(0, 4) + "년 " + dto.getRsvt_dt().substring(4, 6) + "월 " + dto.getRsvt_dt().substring(6, 8) + "일");
 		}
 		return result;
+	}
+
+	@Override
+	public List<view_counsel_dto> counsel_search_list(String search_part, String search_word) {
+		
+		Map<String, String> mp = new HashMap<>();
+		mp.put("search_part", search_part);
+		mp.put("search_word", search_word);
+		List<view_counsel_dto> counsellist_one_data = this.counsel_repo.counsel_search_list(mp);
+		
+		return counsellist_one_data;
 	}
 	
 }

@@ -59,20 +59,21 @@
 						<div class="prod_1il d-flex align-items-center w-100">
 						<form id="frmSearch"
 								class="search-form d-flex align-items-center"
-								th:onsubmit="return list_search()">
+								th:onsubmit="return adminlist_search()">
 							<div class="d-flex align-items-center">
 								<select class="form-select form-select-sm ms-2 me-2"
 									name="search_part" id="inputState"
-									style="width: 150px; height:38px;" onchange="toggleFields()">
-									<option value="" th:selected="${ search_part == 'STDNT_FLNM' }">이름</option>
-									<option value="" th:selected="${ search_part == 'STDNT_FLNM' }">교번</option>
-									<option value="" th:selected="${ search_part == 'STDNT_FLNM' }">직급</option>
-									<option value="" th:selected="${ search_part == 'STDNT_FLNM' }">상태</option>
+									style="width: 150px; height:38px;">
+									<option value="EMP_FLNM" th:selected="${ search_part == 'EMP_FLNM' }">이름</option>
+									<option value="EMP_NO" th:selected="${ search_part == 'EMP_NO' }">교번</option>
+									<option value="JBGD_NM" th:selected="${ search_part == 'JBGD_NM' }">직급</option>
+									<option value="ACNT_STTS" th:selected="${ search_part == 'ACNT_STTS' }">상태</option>
 								</select>
 							</div>
 
 							<!-- 입력 텍스트 필드 -->
 							<input class="form-control ms-2" id="searchInput" type="text"
+								name="search_word" th:value="${ search_word }"
 								style="flex-grow: 1; width: 100%; min-width: 200px; height:38px;">
 
 							<!-- 검색 버튼 -->
@@ -126,8 +127,8 @@
 									<h6 class="bg_3 text-center font_12 p-1 mb-0" th:text="${admin_data.getAcnt_stts()}"></h6>
 								</td>
 								<td>
-									<button type="button" class="btn btn-primary bg_1" data-bs-toggle="modal"
-										data-bs-target="#adminuserdetailModal">
+									<button type="button" class="btn btn-primary bg_1" th:onclick="openEmpInfo([[${ admin_data.getEmp_no() }]])"
+									data-bs-toggle="modal" data-bs-target="#adminuserdetailModal">
 										<i class="fa fa-cog"> 상세보기</i></button>
 								</td>
 							</tr>
@@ -147,6 +148,9 @@
 	<!--footer시작 -->
 	<div th:replace="~{/admin/footer :: admin_footer}"></div>
 	<!--footer끝 -->
+	
+	<!-- script -->
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 다음 API 주소 -->
 	<script src="/admin/js/adminlistmod.js"></script>
 	<script src="/admin/js/bootstrap.bundle.min.js"></script>
 	<script src="/admin/js/global.js"></script>
