@@ -40,7 +40,7 @@
 				<div class="card-body">
 
 					<!-- Form 시작 -->
-					<form id="stuser_add_frm" method="post" action="./stuser_add" enctype="multipart/form-data">
+					<form id="emuser_add_frm" method="post" action="./emuser_add" enctype="multipart/form-data">
 						<!-- 개인정보 섹션 -->
 						<div class="mb-4">
 							<h5 class="mb-3">개인정보</h5>
@@ -53,7 +53,7 @@
 										<span>이미지 미리보기</span>
 									</div>
 									<input type="file" accept="image/*" name="uphoto_file"
-										onchange="setstuser_img(event);" class="form-control">
+										onchange="setemuser_img(event);" class="form-control">
 								</div>
 
 								<!-- 기본 정보 -->
@@ -61,7 +61,7 @@
 									<div class="row mb-2">
 										<label class="col-sm-3 col-form-label">이름</label>
 										<div class="col-sm-9">
-											<input type="text" name="stdnt_flnm" class="form-control"
+											<input type="text" name="emp_flnm" class="form-control"
 												required>
 										</div>
 									</div>
@@ -74,29 +74,29 @@
 									<div class="row mb-2">
 										<label class="col-sm-3 col-form-label">전화번호</label>
 										<div class="col-sm-9">
-											<input type="tel" name="user_telno" class="form-control"
-											placeholder="11자리 숫자만 입력해주세요!"
-												required>
+												<input type="text" class="form-control" name="emp_telno" 
+											onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="11" placeholder="11자리 숫자만 입력해주세요!"
+											onkeydown="this.value=this.value.replace(/[^0-9]/g,'');" pattern="[0-9]{11}" required>
 										</div>
 									</div>
 									<div class="row mb-2">
 										<label class="col-sm-3 col-form-label">이메일</label>
 										<div class="col-sm-9">
-											<input type="email" name="user_eml_addr" class="form-control"
+											<input type="email" name="emp_eml_addr" class="form-control"	
 												required>
 										</div>
 									</div>
 									<div class="row mb-2">
 										<label class="col-sm-3 col-form-label">입사년도</label>
 										<div class="col-sm-9">
-											<input type="number" id="entrance_year" name="entrance_year"
-												class="form-control" readonly>
+											<input type="number" id="entrance_year" name="entrance_year" min="1980"
+												class="form-control">
 										</div>
 									</div>
 									<div class="row mb-2">
 										<label class="col-sm-3 col-form-label">교원자격증번호</label>
 										<div class="col-sm-9">
-											<input type="text" name="" class="form-control"
+											<input type="text" name="edu_crtfct_no" class="form-control"
 												required>
 										</div>
 									</div>
@@ -104,7 +104,7 @@
 									<div class="row mb-2">
 										<label class="col-sm-3 col-form-label">교원자격증발급일자</label>
 										<div class="col-sm-9">
-											<input type="text" name="stdnt_flnm" class="form-control"
+											<input type="date" name="edu_crtfct_issu_ymd" class="form-control"
 												required>
 										</div>
 									</div>
@@ -118,29 +118,36 @@
 
 						<!-- 대학 정보 섹션 -->
 						<div class="mb-4">
-							<h5 class="mb-3">학적 정보</h5>
-							<div class="row mb-3">
-								<div class="col-md-4">
-									<label class="col-form-label">소속기관(단과대학)</label>
-										<select class="form-control" id="OGDP_UNIV" name="ogdp_univ"
-											onchange="makeSelector(this.value)" required>
-											<option value="대학선택">대학 선택</option>
-											<option value="공과대학">공과대학</option>
-											<option value="사회과학대학">사회과학대학</option>
-											<option value="인문대학">인문대학</option>
-											<option value="자연과학대학">자연과학대학</option>
-											<option value="심리상담센터">심리상담센터</option>
-											<option value="대학본부">대학본부</option>
-										</select>
+							<h5 class="mb-3">교적 정보</h5>
+							<div class="row mb-1">
+								<label class="col-sm-2 col-form-label">소속기관(단과대학)</label>
+								<div class="col-sm-4">
+									<select class="form-select" id="ogdp_inst_nm" name="ogdp_inst_nm"
+										onchange="makeSelector(this.value)" required>
+										<option value="대학선택">대학 선택</option>
+										<option value="공과대학">공과대학</option>
+										<option value="사회과학대학">사회과학대학</option>
+										<option value="인문대학">인문대학</option>
+										<option value="자연과학대학">자연과학대학</option>
+										<option value="심리상담센터">심리상담센터</option>
+										<option value="대학본부">대학본부</option>
+									</select>
 								</div>
+								<label class="col-sm-2 col-form-label">소속부서(학과)</label>
 								<div class="col-md-4">
-									<label class="col-form-label">소속부서(학과)</label>
-										<input type="text" class="form-control" id="OGDP_SCSBJT"
-											name="ogdp_scsbjt" readonly required>
+									<input type="text" class="form-control" id="ogdp_dept_nm"
+									name="ogdp_dept_nm" readonly required>
 								</div>
-								<div class="col-md-4">
-									<label class="col-form-label">교직(전공)</label>
-										<input type="text" class="form-control" id="MJR" name="mjr"
+							</div>
+							<div class="row mb-1">
+								<label class="col-sm-2 col-form-label">직급</label>
+								<div class="col-sm-4">
+										<input type="text" class="form-control" id="jbgd_nm" name="jbgd_nm"
+										required>
+								</div>
+								<label class="col-sm-2 col-form-label">교직(전공)</label>
+								<div class="col-sm-4">
+										<input type="text" class="form-control" id="mjr" name="mjr"
 											readonly required>
 								</div>
 							</div>
@@ -155,8 +162,8 @@
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">우편번호</label>
 								<div class="col-sm-3">
-									<input type="text" class="form-control" id="USER_ZIP"
-										name="user_zip" required readonly>
+									<input type="text" class="form-control" id="emp_zip"
+										name="emp_zip" required readonly>
 								</div>
 								<div class="col-sm-3">
 									<button type="button" class="btn btn-primary w-30"
@@ -166,15 +173,15 @@
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">주소</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="USER_ADDR"
-										name="user_addr" required readonly>
+									<input type="text" class="form-control" id="emp_addr"
+										name="emp_addr" required readonly>
 								</div>
 							</div>
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">상세주소</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="USER_DADDR"
-										name="user_daddr" required>
+									<input type="text" class="form-control" id="emp_daddr"
+										name="emp_daddr" required>
 								</div>
 							</div>
 							<!-- 우편번호 검색 레이어 -->
@@ -213,7 +220,7 @@
 						<!-- 등록 버튼 -->
 						<div class="d-flex justify-content-end">
 							<button type="button" class="btn btn-outline-primary"
-								onclick="add_stuser()">
+								onclick="add_emuser()">
 								<i class="ri-edit-2-line"></i> 등록
 							</button>
 						</div>

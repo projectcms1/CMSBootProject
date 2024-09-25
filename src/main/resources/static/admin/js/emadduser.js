@@ -4,10 +4,8 @@ const USER_SCSBJT = ['-', '기계공학과', '정치학과', '철학과', '생�
 const USER_MJR = ['-', '기계공학', '정치학', '철학', '생물학', '', '-'];
 
 function makeSelector(selectedUniv) {
-	console.log("Selected University:", selectedUniv);
-
-	const scsbjtField = document.getElementById("OGDP_SCSBJT");
-	const mjrField = document.getElementById("MJR");
+	const scsbjtField = document.getElementById("ogdp_dept_nm");
+	const mjrField = document.getElementById("mjr");
 
 	scsbjtField.value = "";
 	mjrField.readOnly = true;
@@ -16,15 +14,12 @@ function makeSelector(selectedUniv) {
 	USER_UNIV.forEach(function(data, index) {
 		if (selectedUniv === data) {
 			scsbjtField.value = USER_SCSBJT[index];
-			console.log("OGDP_SCSBJT set to:", scsbjtField.value);
 
 			if (selectedUniv === "심리상담센터") {
 				mjrField.readOnly = false;
-				console.log("MJR field is editable");
 			} else {
 				mjrField.readOnly = true;
 				mjrField.value = USER_MJR[index];
-				console.log("MJR field is readonly with value:", mjrField.value);
 			}
 		}
 	});
@@ -32,7 +27,7 @@ function makeSelector(selectedUniv) {
 
 
 //사용자 추가시 이미지 미리보기 로드
-function setstuser_img(event) {
+function setemuser_img(event) {
     const output = document.querySelector('[name="USER_PHOTO"]');
     const file = event.target.files[0];
     if (file) {
@@ -70,10 +65,10 @@ function execDaumPostcode() {
 			}
 
 			// 우편번호와 주소 정보를 해당 필드에 넣는다.
-			document.getElementById('USER_ZIP').value = data.zonecode;
-			document.getElementById("USER_ADDR").value = addr;
+			document.getElementById("emp_zip").value = data.zonecode;
+			document.getElementById("emp_addr").value = addr;
 			// 커서를 상세주소 필드로 이동한다.
-			document.getElementById("USER_DADDR").focus();
+			document.getElementById("emp_daddr").focus();
 
 			// iframe을 넣은 element를 안보이게 한다.
 			// (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
@@ -109,7 +104,73 @@ function initLayerPosition() {
 }
 //===============다음 주소 끝=============
 
-
+//교직원 사용자 추가 기능
+function add_emuser(){
+	if(document.querySelector("input[name='emp_flnm']").value==""){
+		document.querySelector("input[name='emp_flnm']").focus();
+		alert("이름을 입력해주세요.");
+	}
+	else if(document.querySelector("input[name='brdt']").value==""){
+		document.querySelector("input[name='brdt']").focus();
+		alert("생년월일을 입력해주세요.");
+	}
+	else if(document.querySelector("input[name='emp_telno']").value==""){
+		document.querySelector("input[name='emp_telno']").focus();
+		alert("전화번호를 입력해주세요.");
+	}
+	else if(document.querySelector("input[name='emp_eml_addr']").value==""){
+		document.querySelector("input[name='emp_eml_addr']").focus();
+		alert("이메일을 입력해주세요.");
+	}
+	else if(document.querySelector("input[name='entrance_year']").value==""){
+		document.querySelector("input[name='entrance_year']").focus();
+		alert("입사년도를 입력해주세요.");
+	}
+	else if(document.querySelector("input[name='edu_crtfct_no']").value==""){
+		document.querySelector("input[name='edu_crtfct_no']").focus();
+		alert("교원 자격증 번호를 입력해주세요.");
+	}
+	else if(document.querySelector("input[name='edu_crtfct_issu_ymd']").value==""){
+		document.querySelector("input[name='edu_crtfct_issu_ymd']").focus();
+		alert("교원 자격증 발급일자를 입력해주세요.");
+	}
+	else if(document.querySelector("select[name='ogdp_inst_nm']").value=="대학선택"){
+		document.querySelector("select[name='ogdp_inst_nm']").focus();
+		alert("소속기관(단과대학)을 선택해주세요.");
+	}
+	else if(document.querySelector("input[name='jbgd_nm']").value==""){
+		document.querySelector("input[name='jbgd_nm']").focus();
+		alert("직급을 입력해주세요.");
+	}
+	else if(document.querySelector("input[name='mjr']").value==""){
+		document.querySelector("input[name='mjr']").focus();
+		alert("교직(전공)을 선택해주세요.");
+	}
+	else if(document.querySelector("input[name='emp_zip']").value==""){
+		alert("주소를 검색해주세요.");
+	}
+	else if(document.querySelector("input[name='emp_daddr']").value==""){
+		document.querySelector("input[name='emp_daddr']").focus();
+		alert("상세주소를 입력해주세요.");
+	}
+	else if(document.querySelector("input[name='dlng_bank_nm']").value==""){
+		document.querySelector("input[name='dlng_bank_nm']").focus();
+		alert("은행명을 입력해주세요.");
+	}
+	else if(document.querySelector("input[name='dlng_actno']").value==""){
+		document.querySelector("input[name='dlng_actno']").focus();
+		alert("계좌번호를 입력해주세요.");
+	}
+	else if(document.querySelector("input[name='dpstr_nm']").value==""){
+		document.querySelector("input[name='dpstr_nm']").focus();
+		alert("예금주를 입력해주세요.");
+	}
+	else{
+		if(confirm("입력하신 정보로 상담을 추가하시겠습니까?")){
+			emuser_add_frm.submit();
+		}
+	}
+}
 
 //관리자 사용자 (adminlistmod.html) 검색기능 분류 스크립트
 function toggleFields() {
