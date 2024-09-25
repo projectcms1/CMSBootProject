@@ -67,6 +67,16 @@
 													</div>
 												</div>
 												<div class="row mb-1">
+													<label class="col-sm-4 col-form-label right-tag">직원상태</label>
+													<div class="col-sm-5 right-tag">
+														<select class="form-control" id="account_status" name="acnt_stts">
+															<option value="Y">활성화</option>
+															<option value="N">비활성화</option>
+															<option value="D">삭제</option>
+														</select>
+													</div>
+												</div>
+												<div class="row mb-1">
 													<label class="col-sm-4 col-form-label right-tag">로그인계정 잠금여부</label>
 													<div class="col-sm-5 right-tag">
 														<select class="form-control" id="account_lock"
@@ -82,7 +92,7 @@
 													<label class="col-sm-4 col-form-label right-tag">소속기관(단과대학)</label>
 													<div class="col-sm-6 right-tag">
 														<select class="form-control" id="employee_company"
-															name="ogdp_univ" onchange="makeSelector(this.value)">
+															name="ogdp_inst_nm" onchange="makeSelector(this.value)">
 															<option value="대학선택">대학 선택</option>
 															<option value="공과대학">공과대학</option>
 															<option value="사회과학대학">사회과학대학</option>
@@ -96,7 +106,7 @@
 													<label class="col-sm-4 col-form-label right-tag">소속부서(학과)</label>
 													<div class="col-sm-6 right-tag">
 														<input type="text" class="form-control" id="emp_department"
-															name="ogdp_scsbjt" readonly>
+															name="ogdp_dept_nm" readonly>
 													</div>
 												</div>
 												<div class="row mb-1">
@@ -106,7 +116,13 @@
 															name="mjr" readonly>
 													</div>
 												</div>
-
+												<div class="row mb-1">
+													<label class="col-sm-4 col-form-label right-tag">직급명</label>
+													<div class="col-sm-6 right-tag">
+														<input type="text" class="form-control" id="jbgd_name"
+															name="jbgd_nm" readonly>
+													</div>
+												</div>
 												<div class="row mb-1">
 													<label class="col-sm-4 col-form-label right-tag">교원자격증번호</label>
 													<div class="col-sm-6 right-tag">
@@ -122,13 +138,9 @@
 													</div>
 												</div>
 												<div class="row mb-1">
-													<label class="col-sm-4 col-form-label right-tag">직원상태</label>
+													<label class="col-sm-4 col-form-label right-tag">입사날짜</label>
 													<div class="col-sm-6 right-tag">
-														<select class="form-control" id="account_status" name="acnt_stts">
-															<option value="Y">활성화</option>
-															<option value="N">비활성화</option>
-															<option value="D">삭제</option>
-														</select>
+														<input type="text" class="form-control" id="regist_date" disabled>
 													</div>
 												</div>
 											</div>

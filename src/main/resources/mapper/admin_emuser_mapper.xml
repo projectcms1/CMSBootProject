@@ -10,7 +10,7 @@ select * from EMP_INFO where MNG_AUTHRT = 'P' or MNG_AUTHRT = 'C' order by EMP_N
 
 <!-- 교직원 상세 정보 MODAL -->
 <select id="employee_data" resultType="com.cms.ca.employee_dto" parameterType="String">
-select a.*, b.ACNT_LCK_YN from EMP_INFO as a JOIN LGN_ACNT_INFO as b where a.USER_NO = b.USER_NO and a.EMP_NO = #{emp_no}
+select a.*, b.ACNT_LCK_YN, b.REG_DT from EMP_INFO as a JOIN LGN_ACNT_INFO as b where a.USER_NO = b.USER_NO and a.EMP_NO = #{emp_no}
 </select>
 
 
@@ -24,7 +24,8 @@ select * from EMP_INFO where ${search_part} like concat('%', #{search_word}, '%'
 update EMP_INFO as a JOIN LGN_ACNT_INFO as b set a.EMP_EML_ADDR = #{emp_eml_addr}, a.EMP_TELNO = #{emp_telno}, a.EMP_ZIP = #{emp_zip},
 a.EMP_ADDR = #{emp_addr}, a.EMP_DADDR = #{emp_daddr}, a.DLNG_BANK_NM = #{dlng_bank_nm}, a.DLNG_ACTNO = #{dlng_actno}, a.DPSTR_NM = #{dpstr_nm},
 a.OGDP_INST_NM = #{ogdp_inst_nm}, a.OGDP_DEPT_NM = #{ogdp_dept_nm}, a.JBGD_NM = #{jbgd_nm}, a.MJR = #{mjr}, a.ACNT_STTS = #{acnt_stts},
-b.ACNT_LCK_YN = #{acnt_lck_yn}<if test="emp_photo!=null">, a.EMP_PHOTO = #{emp_photo}</if> where a.EMP_NO = #{emp_no} or b.LGN_ID = #{emp_no}
+b.ACNT_LCK_YN = #{acnt_lck_yn}<if test="emp_photo!=null">, a.EMP_PHOTO = #{emp_photo}</if>
+where a.USER_NO = b.USER_NO and (a.EMP_NO = #{emp_no} or b.LGN_ID = #{emp_no})
 </update>
 
 <!-- 교직원 사용자 추가 시작 -->
