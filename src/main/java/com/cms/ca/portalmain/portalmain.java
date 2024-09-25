@@ -16,7 +16,7 @@ public class portalmain {
 		return "default-header";
 	}
 	
-	@GetMapping("/login")
+	@GetMapping("/logindo")
 	public String loginPage() {
 		return "login";
 	}

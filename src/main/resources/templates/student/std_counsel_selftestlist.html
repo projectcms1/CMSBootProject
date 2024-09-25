@@ -28,10 +28,7 @@
 
   <!-- Template Main CSS File -->
   <link href="/assets/css/style.css" rel="stylesheet">
-<<<<<<< HEAD
-=======
   <link href="/assets/css/selftest.css?v=1" rel="stylesheet">
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 
   <!-- =======================================================
   * Template Name: NiceAdmin
@@ -69,33 +66,6 @@
             <div class="card">
                 <div class="card-body">
                   	<h5 class="card-title">자가심리검사 리스트</h5>
-<<<<<<< HEAD
-		          	<!-- List group with custom content -->
-		            <ol class="list-group list-group-numbered">
-		                <li class="list-group-item d-flex justify-content-between align-items-start">
-		                  	<div class="ms-2 me-auto">
-		                    	<div class="fw-bold">검사1</div>
-		                    	검사1 간단한 설명
-		                  	</div>
-		                  	<button class="btn btn-primary rounded-pill" style="margin-left: 5px; align-self: center;">검사하기</button>
-		                  	<button class="btn btn-success rounded-pill" style="margin-left: 5px; align-self: center;">결과보기</button>
-		                </li>
-		                <li class="list-group-item d-flex justify-content-between align-items-start">
-		                  	<div class="ms-2 me-auto">
-		                    	<div class="fw-bold">검사2</div>
-		                    	검사2 간단한 설명
-		                  	</div>
-		                  	<button class="btn btn-primary rounded-pill" style="margin-left: 5px; align-self: center;">검사하기</button>
-		                  	<button class="btn btn-success rounded-pill" style="margin-left: 5px; align-self: center;">결과보기</button>
-		                </li>
-		                <li class="list-group-item d-flex justify-content-between align-items-start">
-		                  	<div class="ms-2 me-auto">
-		                    	<div class="fw-bold">검사3</div>
-		                    	검사3 간단한 설명
-		                  	</div>
-		                  	<button class="btn btn-primary rounded-pill" style="margin-left: 5px; align-self: center;">검사하기</button>
-		                  	<button class="btn btn-success rounded-pill" style="margin-left: 5px; align-self: center;">결과보기</button>
-=======
                   	
                   	<div th:replace="~{/student/std_selftest_modal :: std_selftest_modal}"></div>	<!-- SelfTest Modal -->
                   	<div th:replace="~{/student/std_testrslt_modal :: std_testrslt_modal}"></div>	<!-- TestResult Modal -->
@@ -109,7 +79,6 @@
 		                  	</div>
 		                  	<button class="btn btn-primary rounded-pill modal-button" th:value="${ inspData.getInsp_no() }" data-bs-toggle="modal" data-bs-target="#modalSelfTesting" style="margin-left: 5px; align-self: center; min-width: 90px;">검사하기</button>
 		                  	<button class="btn btn-success rounded-pill result-button" th:value="${ inspData.getInsp_no() }" data-bs-toggle="modal" data-bs-target="#modalSelfTestResult" style="margin-left: 5px; align-self: center; min-width: 90px;">결과보기</button>
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 		                </li>
 		           	</ol>
 		           	<!-- End 자가심리검사목록 Card -->
@@ -138,10 +107,7 @@
 
   <!-- Template Main JS File -->
   <script src="/assets/js/main.js"></script>
-<<<<<<< HEAD
-=======
   <script src="/js/student/selftest.js?v=2"></script>
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 
 </body>
 

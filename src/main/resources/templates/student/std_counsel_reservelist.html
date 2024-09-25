@@ -29,10 +29,8 @@
   <!-- Template Main CSS File -->
   <link href="/assets/css/style.css" rel="stylesheet">  
   <link href="/assets/css/empy.css" rel="stylesheet">
-<<<<<<< HEAD
-  <link href="/assets/vendor/simple-daatatables/datatable.css" rel="stylesheet">
-=======
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
+  <link href="/assets/css/list_paging.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
   <style>
     .btn-cancel {
@@ -77,124 +75,6 @@
 	        <div class="col-lg-12">
 	        
 	          <!-- ======= 대기중 상담 Card ======= -->
-<<<<<<< HEAD
-	          <div class="card">
-	            <div class="card-body">
-	              <h5 class="card-title">대기중 상담</h5>
-			      <table id="waiting_table">	
-	                <thead>
-	                  <tr>
-                    	<th>상담일</th>
-                    	<th>학년</th>
-                    	<th>학기</th>
-                    	<th>상담자</th>
-                    	<th>상담종류</th>
-                  	  </tr>
-	                </thead>
-	                <tbody>
-	                  <tr>
-                    	<td>2021/02/11</td>
-                    	<td>1학년</td>
-                    	<td>2학기</td>
-                    	<td>교수A</td>
-                    	<td>
-                    		학업상담
-						<button type="button" class="btn btn-outline-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
-                    	</td>
-                 	  </tr>
-                 	  <tr>
-                   		<td>2023/06/24</td>
-                    	<td>3학년</td>
-                    	<td>6학기</td>
-                    	<td>상담사B</td>
-                    	<td>
-                    		진로상담
-						<button type="button" class="btn btn-outline-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
-                    	</td>
-                 	  </tr>
-	                </tbody>
-	              </table>
-	            </div>
-	          </div>
-	          <!-- End 대기중 상담 Card -->
-	          
-	          <!-- ======= 확정 상담 Card ======= -->
-	          <div class="card">
-	            <div class="card-body">
-	              <h5 class="card-title">확정 상담</h5>
-			      <table id="ok_table">	
-	                <thead>
-	                  <tr>
-                    	<th>상담일</th>
-                    	<th>학년</th>
-                    	<th>학기</th>
-                    	<th>상담자</th>
-                    	<th>상담종류</th>
-                  	  </tr>
-	                </thead>
-	                <tbody>
-	                  <tr>
-                    	<td>2021/02/11</td>
-                    	<td>1학년</td>
-                    	<td>2학기</td>
-                    	<td>교수A</td>
-                    	<td>
-                    		학업상담
-						<button type="button" class="btn btn-outline-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
-                    	</td>
-                 	  </tr>
-                 	  <tr>
-                   		<td>2023/06/24</td>
-                    	<td>3학년</td>
-                    	<td>6학기</td>
-                    	<td>상담사B</td>
-                    	<td>
-                    		진로상담
-						<button type="button" class="btn btn-outline-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
-                    	</td>
-                 	  </tr>
-	                </tbody>
-	              </table>
-	            </div>
-	          </div>
-	          <!-- End 확정 상담 Card -->
-	          
-	          <!-- ======= 지난 상담 Card ======= -->
-	          <div class="card">
-	            <div class="card-body">
-	              <h5 class="card-title">지난 상담</h5>
-			      <table id="last_table">	
-	                <thead>
-	                  <tr>
-                    	<th>상담일</th>
-                    	<th>학년</th>
-                    	<th>학기</th>
-                    	<th>상담자</th>
-                    	<th>상담종류</th>
-                  	  </tr>
-	                </thead>
-	                <tbody>
-	                  <tr>
-                    	<td>2021/02/11</td>
-                    	<td>1학년</td>
-                    	<td>2학기</td>
-                    	<td>교수A</td>
-                    	<td>학업상담</td>
-                 	  </tr>
-                 	  <tr>
-                   		<td>2023/06/24</td>
-                    	<td>3학년</td>
-                    	<td>6학기</td>
-                    	<td>상담사B</td>
-                    	<td>진로상담</td>
-                 	  </tr>
-	                </tbody>
-	              </table>
-	            </div>
-	          </div>
-	          <!-- End 지난 상담 Card -->
-	          
-=======
           		<div class="card">
             		<div class="card-body">
               			<h5 class="card-title">대기중 상담</h5>
@@ -317,40 +197,8 @@
 		              	
 		              	<!-- 지난상담 Table-->
 				     	<div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
-				     		
-				     		<div class="datatable-top">
-				     			<!-- per-page Dropdown -->
-		    					<div class="datatable-dropdown">
-		            				<label>
-		                				<select class="datatable-selector" name="per-page">
-		                					<option value="5" selected>5개씩 보기</option>
-		                					<option value="10">10개씩 보기</option>
-		                					<option value="-1">전체 보기</option>
-		                				</select>
-		            				</label>
-		        				</div>
-		        				<!-- End per-page Dropdown -->
-		        				
-		        				<!-- Search Bar -->
-			    				<div class="search-bar ">
-						      		<form class="search-form d-flex align-items-center" method="POST" action="#">
-					                  	<select id="inputState" class="form-select" style="width: 180px;">
-					                    	<option selected>전체</option>
-					                    	<option>상담일자</option>
-					                    	<option>학년</option>
-					                    	<option>학기</option>
-					                    	<option>상담자</option>
-					                    	<option>상담종류</option>
-					                  	</select>
-				                  		<input type="text" class="form-control" placeholder="Search" style="margin-left: 5px;">
-						        		<button type="submit" title="Search" class="btn" style="border-color: g"><i class="bi bi-search"></i></button>
-						      		</form>
-						    	</div>
-						    	<!-- End Search Bar -->
-							</div>
-							
 							<div class="datatable-container">
-								<table id="demo-table" class="table datatable datatable-table">
+								<table id="demo-table_rest" class="table datatable datatable-table">
 									<thead>
 										<tr>
 				                    		<th data-format="YYYY/DD/MM" data-sortable="true" data-type="date" style="width: 20%;">
@@ -389,25 +237,15 @@
 		    					</div>
 		    					
 		    					<!-- 페이징 Div-->
-		    					<nav aria-label="Page navigation example">
-				                	<ul class="pagination">
-				                  		<li class="page-item">
-				                    		<a class="page-link" href="#" aria-label="Previous">
-				                      			<span aria-hidden="true">&laquo;</span>
-				                    		</a>
-				                  		</li>
-				                  		<li class="page-item"><a class="page-link" href="#">1</a></li>
-				                  		<li class="page-item"><a class="page-link" href="#">2</a></li>
-				                  		<li class="page-item"><a class="page-link" href="#">3</a></li>
-				                  		<li class="page-item">
-				                    		<a class="page-link" href="#" aria-label="Next">
-				                      			<span aria-hidden="true">&raquo;</span>
-				                    		</a>
-				                  		</li>
-				                	</ul>
-				              	</nav>
+									<div class="prod_1i1r pages">
+										<ul id="std_rescounsel_list_paging">
+											<li><a id="first-rpage"><i class="fa fa-angle-double-left"></i></a></li>
+											<li><a id="prev-rpage"><i class="fa fa-chevron-left"></i></a></li>
+											<li><a id="next-rpage"><i class="fa fa-chevron-right"></i></a></li>
+											<li><a id="last-rpage"><i class="fa fa-angle-double-right"></i></a></li>
+										</ul>
+									</div>
 				              	<!-- End 페이징 Div-->
-							
 							</div>
 						</div>
 		             	<!-- End 지난상담 Table-->
@@ -418,7 +256,6 @@
 				<form id="frmCancel">
 					<input type="hidden" name="cancel_aply_sn" id="cancel_aply_idx" value="">
 				</form>
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 	        </div>
 	      </div>
 	    </section>           
@@ -439,116 +276,9 @@
 
   <!-- Template Main JS File -->
   <script src="/assets/js/main.js"></script>
-<<<<<<< HEAD
-  
-	<script type="module">
-    	import {DataTable} from "/assets/vendor/simple-datatables/simple-datatables.js"
-       	window.dt = new DataTable("#waiting_table", {
-			perPageSelect: [5, 10, ["All", -1]],
-			columns: [
-           		{
-            		select: 2,
-                    sortSequence: ["asc", "desc"]
-                }
-            ],
-            tableRender: (_data, table, type) => {
-                if (type === "print") {
-                    return table
-                }
-                const tHead = table.childNodes[0]
-                const filterHeaders = {
-                    nodeName: "TR",
-                    childNodes: tHead.childNodes[0].childNodes.map(
-                        (_th, index) => ({nodeName: "TH",
-                            childNodes: [
-                                {
-                                    nodeName: "INPUT",
-                                    attributes: {
-                                        class: "datatable-input",
-                                        type: "search",
-                                        "data-columns": `[${index}]`
-                                    }
-                                }
-                            ]})
-                    )
-                }
-                tHead.childNodes.push(filterHeaders)
-                return table
-            }
-        })
-
-		window.dt = new DataTable("#ok_table", {
-			perPageSelect: [5, 10, ["All", -1]],
-			columns: [
-           		{
-            		select: 2,
-                    sortSequence: ["asc", "desc"]
-                }
-            ],
-            tableRender: (_data, table, type) => {
-                if (type === "print") {
-                    return table
-                }
-                const tHead = table.childNodes[0]
-                const filterHeaders = {
-                    nodeName: "TR",
-                    childNodes: tHead.childNodes[0].childNodes.map(
-                        (_th, index) => ({nodeName: "TH",
-                            childNodes: [
-                                {
-                                    nodeName: "INPUT",
-                                    attributes: {
-                                        class: "datatable-input",
-                                        type: "search",
-                                        "data-columns": `[${index}]`
-                                    }
-                                }
-                            ]})
-                    )
-                }
-                tHead.childNodes.push(filterHeaders)
-                return table
-            }
-        })
-		
-		window.dt = new DataTable("#last_table", {
-			perPageSelect: [5, 10, 15, ["All", -1]],
-			columns: [
-           		{
-            		select: 2,
-                    sortSequence: ["asc", "desc"]
-                }
-            ],
-            tableRender: (_data, table, type) => {
-                if (type === "print") {
-                    return table
-                }
-                const tHead = table.childNodes[0]
-                const filterHeaders = {
-                    nodeName: "TR",
-                    childNodes: tHead.childNodes[0].childNodes.map(
-                        (_th, index) => ({nodeName: "TH",
-                            childNodes: [
-                                {
-                                    nodeName: "INPUT",
-                                    attributes: {
-                                        class: "datatable-input",
-                                        type: "search",
-                                        "data-columns": `[${index}]`
-                                    }
-                                }
-                            ]})
-                    )
-                }
-                tHead.childNodes.push(filterHeaders)
-                return table
-            }
-        })
-    </script>
-    
-=======
   <script src="/js/student/counsel_reservlist.js?v=1"></script>
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
+  <script src="/js/student/list_paging_r.js"></script>
+  
 </body>
 <script>
 window.onload=function(){

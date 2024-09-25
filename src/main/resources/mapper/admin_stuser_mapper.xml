@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cms.ca.admin.stuser_repo">
+
+
+<!--학생리스트 출력-->
+<select id="student_list" resultType="com.cms.ca.student_dto" >
+select a.*, b.ACNT_LCK_YN, b.REG_DT
+from STDNT_INFO as a INNER JOIN LGN_ACNT_INFO as b
+where a.USER_NO = b.USER_NO order by STDNT_NO desc
+</select>
+
+<!-- 학생 리스트 검색 기능 -->
+<select id="student_search_list" resultType="com.cms.ca.student_dto" parameterType="map">
+select a.*, b.ACNT_LCK_YN, b.REG_DT
+from STDNT_INFO as a INNER JOIN LGN_ACNT_INFO as b where a.USER_NO = b.USER_NO and ${search_part} like concat('%', #{search_word}, '%') order by STDNT_NO desc
+</select>
+
+<!-- 학생 사용자 상세정보 수정 시작-->
+<update id="student_detail_update" parameterType="com.cms.ca.student_dto">
+update STDNT_INFO set 
+USER_EML_ADDR = #{user_eml_addr}, USER_TELNO = #{user_telno}, USER_ZIP = #{user_zip}, USER_ADDR = #{user_addr},
+USER_DADDR = #{user_daddr}, DLNG_BANK_NM = #{dlng_bank_nm}, DLNG_ACTNO = #{dlng_actno},
+DPSTR_NM = #{dpstr_nm}, UNIV_PRD = #{univ_prd}, OGDP_UNIV = #{ogdp_univ}, OGDP_SCSBJT = #{ogdp_scsbjt},
+MJR = #{mjr}, STDNT_STTS_SE = #{stdnt_stts_se} <if test="user_photo!=null">, USER_PHOTO = #{user_photo}</if>
+  where STDNT_NO = #{stdnt_no}
+</update>
+
+<update id="student_detail_login_update" parameterType="com.cms.ca.student_dto">
+update LGN_ACNT_INFO set ACNT_LCK_YN = #{acnt_lck_yn} where LGN_ID = #{stdnt_no}
+</update>
+<!-- 학생 사용자 상세정보 수정 끝-->
+
+
+<!-- 학생 사용자 추가 시작 -->
+<insert id="add_stuser_login" parameterType="com.cms.ca.login_dto" >
+insert into LGN_ACNT_INFO (USER_NO, LGN_ID, PSWD,LAST_LGN_DT, ACNT_LCK_YN, REG_DT)
+values ('0', #{lgn_id}, #{pswd}, now(), 'N', now())
+</insert>
+
+<select id="match_st_userno" parameterType="com.cms.ca.login_dto" resultType="Integer">
+select USER_NO from LGN_ACNT_INFO where LGN_ID=#{lgn_id}
+</select>
+
+<insert id="add_stuser_detail" parameterType="com.cms.ca.student_dto">
+insert into STDNT_INFO
+(stdnt_no, stdnt_flnm, user_no, user_eml_addr, user_telno, user_zip, user_addr, user_daddr, user_photo, brdt, dlng_bank_nm, dlng_actno, dpstr_nm, univ_prd, ogdp_univ, ogdp_scsbjt, mjr, stdnt_stts_se)
+values (#{stdnt_no}, #{stdnt_flnm}, #{user_no}, #{user_eml_addr}, #{user_telno},
+#{user_zip}, #{user_addr}, #{user_daddr}, #{user_photo}, #{brdt},
+#{dlng_bank_nm}, #{dlng_actno}, #{dpstr_nm}, '1', 
+#{ogdp_univ}, #{ogdp_scsbjt}, #{mjr}, '재학')
+</insert>
+
+<insert id="match_leadpro" parameterType="com.cms.ca.std_emp_dto">
+insert into STDNT_ACAVSR_INFO (stdnt_no, emp_no, tkcg_yn, bgng_ymd, end_ymd)
+values (#{stdnt_no}, (select MAX(EMP_NO) from EMP_INFO where MJR = #{mjr} and MNG_AUTHRT = 'P'), 'Y', #{matchtime}, '')
+</insert>
+<!-- 학생 사용자 추가 끝 -->
+
+</mapper>

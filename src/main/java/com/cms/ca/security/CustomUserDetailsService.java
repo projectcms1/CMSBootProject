@@ -1,23 +1,20 @@
 package com.cms.ca.security;
 
-import com.cms.ca.mapper.AccountMapper;
-import com.cms.ca.model.employee_dto;
-import com.cms.ca.model.login_dto;
-import com.cms.ca.model.student_dto;
-import com.cms.ca.service.AccountService;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.cms.ca.employee_dto;
+import com.cms.ca.login_dto;
+import com.cms.ca.student_dto;
+import com.cms.ca.service.AccountService;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {

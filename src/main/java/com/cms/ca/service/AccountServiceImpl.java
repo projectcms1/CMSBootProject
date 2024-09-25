@@ -1,9 +1,9 @@
 package com.cms.ca.service;
 
+import com.cms.ca.employee_dto;
+import com.cms.ca.login_dto;
+import com.cms.ca.student_dto;
 import com.cms.ca.mapper.AccountMapper;
-import com.cms.ca.model.employee_dto;
-import com.cms.ca.model.login_dto;
-import com.cms.ca.model.student_dto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -27,11 +27,7 @@
   <link href="/assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-<<<<<<< HEAD
-  <link href="/assets/css/style.css" rel="stylesheet">  
-=======
   <link href="/assets/css/style.css" rel="stylesheet">
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
   <link href="/assets/css/empy.css" rel="stylesheet">
   <link href="/assets/css/calendar.css" rel="stylesheet">
   
@@ -112,29 +108,17 @@
               			<p class="card-text text-muted">
               				상담사와 지도교수 중 선택하여 상담예약을 신청하실 수 있습니다.<br>
               				상담사에게 상담 신청시 바로 승인 처리되며, 지도 교수 상담 신청시에는 교수님의 확인 이후 승인/미승인 처리됩니다.<br>  
-<<<<<<< HEAD
-              				상담 종류에는 ~~~~~~~가 있으며, 상담 방식으로는 ~~~~~가 있습니다.<br>
-=======
               				상담 종류에는 학업, 진로,심리가 있으며, 상담 방식으로는 대면, 화상, 전화, 채팅이 있습니다.<br>
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
               				자가심리검사 탭에서 간단한 심리검사를 진행할 수 있으니 참고해주세요.
               			</p>
             		</div>
           		</div>
           		<!-- End Chatting Counsel Card -->
-<<<<<<< HEAD
-          		
-=======
 
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
           		<!-- ======= 상담 신청 Card ======= -->
 	            <div class="card">
 	                <div class="card-body">
 	                  <h5 class="card-title" >상담신청</h5>
-<<<<<<< HEAD
-	                  
-=======
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 			          <!-- 상담신청 탭 리스트 -->
 	                  <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist" style="font-size: 25px;">
 	                    <li class="nav-item flex-fill" role="presentation">
@@ -148,43 +132,23 @@
 		              
 		              <!-- 상담신청 탭 콘텐츠 -->
 	                  <div class="tab-content pt-2" id="borderedTabJustifiedContent">
-<<<<<<< HEAD
-	                  
-=======
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 		                <!-- 상담사 탭 -->
 	                    <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel" aria-labelledby="home-tab">
 	                      <div class="row">
 		                      <div class="col-md-4" style="display: flex; flex-wrap: wrap; margin: auto; margin-top: 30px;">
 			                    <div style="margin-left: 35px;">
-<<<<<<< HEAD
-			                      <select class="form-select">
-			                        <option>전체</option>
-			                        <option>상담사1</option>
-			                        <option>상담사2</option>
-			                        <option>상담사3</option>
-			                        <option>상담사4</option>
-			                        <option>상담사5</option>
-=======
 			                      <select class="form-select" id="counseler_number" onchange="updateCnslrName(this.value)">
 			                        <option value="all">전체</option>
 			                        <option th:each="empData : ${counseler_list}" th:value="${ empData.getEmp_no() }">[[${ empData.getEmp_flnm() }]]</option>
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 			                      </select>
 								  <p>* 상담사를 선택하시면 해당 상담사의 일정만 표시됩니다.</p>
 			                    </div>
 		
 			                    <div class="reser-calendar">
 			                      <div class="calendar-header">
-<<<<<<< HEAD
-			                        <button id="prevMonth">&lt;</button>
-			                        <h2 id="monthAndYear"></h2>
-			                        <button id="nextMonth">&gt;</button>
-=======
 			                        <button type="button" id="prevMonth">&lt;</button>
 			                        <h2 id="monthAndYear"></h2>
 			                        <button type="button" id="nextMonth">&gt;</button>
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 			                      </div>
 			                      <table id="calendarTable">
 			                        <thead id="calendarHeader">
@@ -200,19 +164,6 @@
 		                      <div class="col-md-4 counsel-optn-box" style="margin: auto;">
 		                      	<p>희망 날짜 선택 후, 아래 내용을 선택해주세요.</p>
 		                        <hr>
-<<<<<<< HEAD
-		                        <ul>
-		                          <li><i class="bx bx-check"></i>상담사</li>
-		                          <li><div id="">전체</div></li>
-		                          <li><i class="bx bx-check"></i>예약시간</li>
-		                          <li><div id=""></div></li>
-		                          <li><i class="bx bx-check"></i>시간 구분</li>
-		                          <li>
-		                            <select class="form-select">
-		                              <option>1교시(09:00~10:15)</option>
-		                              <option>2교시(10:30~11:45)</option>
-		                              <option>3교시(12:00~13:15)</option>
-=======
 		                        <form id="frmCounseler">
 		                        <ul>
 		                          <li><i class="bx bx-check"></i>상담사</li>
@@ -228,38 +179,19 @@
 		                              <option value="3">3교시(13:00~14:15)</option>
 		                              <option value="4">4교시(14:30~15:45)</option>
 		                              <option value="5">5교시(16:00~17:15)</option>
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 		                            </select>
 		                          </li>
 		                          <li><i class="bx bx-check"></i>상담 종류</li>
 		                          <li>
-<<<<<<< HEAD
-		                            <select class="form-select">
-		                              <option>진로</option>
-		                              <option>학업</option>
-		                              <option>블라블라</option>
-=======
 		                            <select class="form-select" name="dscsn_knd">
 		                              <option value="">종류 선택</option>
 		                              <option value="학업">학업</option>
 		                              <option value="진로">진로</option>
 		                              <option value="심리">심리</option>
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 		                            </select>
 		                          </li>
 		                          <li><i class="bx bx-check"></i>상담 방식</li>
 		                          <li>
-<<<<<<< HEAD
-		                            <select class="form-select">
-		                              <option>대면</option>
-		                              <option>화상</option>
-		                              <option>전화</option>
-		                              <option>채팅</option>
-		                            </select>
-		                          </li>
-		                          <li><button type="button" class="btn btn-primary btn-lg">신청하기</button></li>
-		                        </ul>
-=======
 		                            <select class="form-select" name="dscsn_mthd">
 		                              <option value="">방식 선택</option>
 		                              <option value="대면">대면</option>
@@ -275,28 +207,10 @@
 		                          </li>
 		                        </ul>
 		                        </form>
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 		                      </div>
 	                      </div>
 	                    </div>
 	                    <!-- End 상담사 탭 -->
-<<<<<<< HEAD
-	                    
-	                    <!-- 교수 탭 -->
-	                    <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab">
-							<div class="col-md-4 counsel-optn-box">
-		                        <ul>
-		                          <li><i class="bx bx-check"></i>시간 구분</li>
-		                          <li>
-		                          	<input type="date" class="form-control">
-		                          </li>
-		                          <li><i class="bx bx-check"></i>시간 구분</li>
-		                          <li>
-		                            <select class="form-select">
-		                              <option>뭐가</option>
-		                              <option>필요</option>
-		                              <option>하지</option>
-=======
 
 	                    <!-- 교수 탭 -->
 	                    <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -311,39 +225,19 @@
 		                          <li>
 		                            <select class="form-select" name="hr_se" id="prfsSelectTime">
 		                              <option value="">날짜를 먼저 선택해주세요.</option>
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 		                            </select>
 		                          </li>
 		                          <li><i class="bx bx-check"></i>상담 종류</li>
 		                          <li>
-<<<<<<< HEAD
-		                            <select class="form-select">
-		                              <option>진로</option>
-		                              <option>학업</option>
-		                              <option>블라블라</option>
-=======
 		                            <select class="form-select" name="dscsn_knd">
 		                              <option value="">종류 선택</option>
 		                              <option value="학업">학업</option>
 		                              <option value="진로">진로</option>
 		                              <option value="심리">심리</option>
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 		                            </select>
 		                          </li>
 		                          <li><i class="bx bx-check"></i>상담 방식</li>
 		                          <li>
-<<<<<<< HEAD
-		                            <select class="form-select">
-		                              <option>대면</option>
-		                              <option>화상</option>
-		                              <option>전화</option>
-		                              <option>채팅</option>
-		                            </select>
-		                          </li>
-		                          <li><button type="button" class="btn btn-primary btn-lg">신청하기</button></li>
-		                        </ul>
-							</div>
-=======
 		                            <select class="form-select" name="dscsn_mthd">
 		                              <option value="">방식 선택</option>
 		                              <option value="대면">대면</option>
@@ -359,7 +253,6 @@
 		                        </ul>
 							</div>
 						  </form>
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 	                    </div>
 	                    <!-- End 교수탭 -->
 	                    
@@ -369,11 +262,7 @@
 	                </div>
 	            </div>
 				<!-- End 상담신청 Card -->
-<<<<<<< HEAD
-				
-=======
 
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 	        </div>
 	      </div>
 	    </section>
@@ -394,12 +283,8 @@
 
   <!-- Template Main JS File -->
   <script src="/assets/js/main.js"></script>
-<<<<<<< HEAD
-  <script src="/js/student/calendar.js"></script>
-=======
   
   <script src="/js/student/calendar.js?v=12"></script>
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 </body>
 <script>
 window.onload=function(){

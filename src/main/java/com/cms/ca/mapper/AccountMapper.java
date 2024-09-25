@@ -2,9 +2,11 @@ package com.cms.ca.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.cms.ca.model.employee_dto;
-import com.cms.ca.model.login_dto;
-import com.cms.ca.model.student_dto;
+import com.cms.ca.employee_dto;
+import com.cms.ca.login_dto;
+import com.cms.ca.student_dto;
+
+
 
 @Mapper
 public interface AccountMapper {

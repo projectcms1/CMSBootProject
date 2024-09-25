@@ -1,6 +1,5 @@
 package com.cms.ca.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -38,8 +37,8 @@ public class SecurityConfig {
                         .requestMatchers("/index","/login", "/public/**").permitAll()
                         .requestMatchers("/superadmin/**").hasRole("SUPER_ADMIN")
                         .requestMatchers("/admin/**").hasAnyRole("ADMIN", "SUPER_ADMIN")
-                        .requestMatchers("/professor/**").hasRole("PROFESSOR")
-                        .requestMatchers("/counselor/**").hasRole("COUNSELOR")
+                        .requestMatchers("/employee/**").hasRole("PROFESSOR")
+                        .requestMatchers("/employee/**").hasRole("COUNSELOR")
                         .requestMatchers("/staff/**").hasAnyRole("STAFF", "ADMIN", "SUPER_ADMIN")
                         .requestMatchers("/index/**").hasAnyRole("USER", "STAFF", "COUNSELOR", "PROFESSOR", "ADMIN", "SUPER_ADMIN")
                         .anyRequest().authenticated()

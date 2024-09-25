@@ -46,9 +46,6 @@
 			and BFR_APLY_SN IS NULL and (STTS_CD = '취소' or STTS_CD = '완료')
 		</if>
 		order by APLY_SN desc
-		<if test='part=="0" or part=="1"'>
-			limit ${pageno}, ${datano}
-		</if>
 	</select>
 
 	<select id="getListCounselInfo" resultType="com.cms.ca.view_counsel_dto" parameterType="String">

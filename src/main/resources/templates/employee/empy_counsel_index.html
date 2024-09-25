@@ -178,17 +178,15 @@
 		        				
 		        				<!-- Search Bar -->
 			    				<div class="search-bar ">
-						      		<form class="search-form d-flex align-items-center" method="POST" action="#">
-					                  	<select id="inputState" class="form-select" style="width: 180px;">
-					                    	<option value="">전체</option>
-					                    	<option value="${counsel.getRsvt_dt}">상담일자</option>
-					                    	<option value="${counsel.getStdnt_flnm}">학생이름</option>
-					                    	<option value="${counsel.getStdnt_no}">학생학번</option>
-					                    	<option value="${counsel.getDscsn_knd}">상담종류</option>
-					                    	<option value="${counsel.getAply_sn}">상담방식</option>
+						      		<form id="searchForm" class="search-form d-flex align-items-center" method="get">
+					                  	<select name="searchType" class="form-select" style="width: 180px;">
+					                    	<option value="all" th:selected="${params.getSearchType}=='' or ${params.getSearchType}==null">전체</option>
+					                    	<option value="rsvt_dt" th:selected="${params.getSearchType}=='rsvt_dt'">상담일자</option>
+					                    	<option value="stdnt_flnm" th:selected="${params.getSearchType}=='stdnt_flnm'">학생이름</option>
+					                    	<option value="stdnt_no" th:selected="${params.getSearchType}=='stdnt_no'">학생학번</option>
 					                  	</select>
-				                  		<input type="text" class="form-control" placeholder="Search" style="margin-left: 5px;">
-						        		<button type="submit" title="Search" class="btn" style="border-color: g"><i class="bi bi-search"></i></button>
+				                  		<input type="text" name="searchValue" class="form-control" placeholder="Search" style="margin-left: 5px;" th:value="${params.getSearchValue}">
+						        		<button type="button" title="Search" class="btn" onclick="searchData()" style="border-color: g"><i class="bi bi-search"></i></button>
 						      		</form>
 						    	</div>
 						    	<!-- End Search Bar -->
@@ -226,9 +224,9 @@
 							                <td th:text="${counsel.getDscsn_knd}"/>
 							                <td>[[${counsel.getDscsn_mthd}]]
 							                    <button type="button" class="btn btn-outline-info btn-sm rounded-pill" 
-												data-bs-toggle="modal" data-bs-target="#modalDialogScrollable" 
+												data-bs-toggle="modal" data-bs-target="#counselDetailModal" 
 												style="float: right; margin-left: 5px;" 
-												th:value="${counsel.getAply_sn}">상세보기</button>
+												th:value="${counsel.getAply_sn}" onclick="madalDataSet(this.value)">상세보기</button>
 							                </td>
 							            </tr>
 					                </tbody>
@@ -236,14 +234,22 @@
 				            </div>
 				            
 							<div class="datatable-bottom">
-		    					<div class="datatable-info" th:if="${counsel_list_count}<${params.getPage()}*${params.getSize()} and ${maxpage}>=${params.getPage()}"> <!-- 마지막 페이지일때 -->
-		    						<input type="hidden" id="counsel_count" th:value="${counsel_list_count}">
-		    						<div>총 [[${counsel_list_count}]]개 중 [[(${params.getPage}-1)*${params.size}]]~[[${counsel_list_count}]]번째</div>
-		    					</div>
-		    					<div class="datatable-info" th:if="${counsel_list_count}>=${params.getPage}*${params.size} and ${maxpage}>=${params.getPage()}"> <!-- 마지막 페이지가 아닐 때 -->
-		    						<input type="hidden" id="counsel_count" th:value="${counsel_list_count}">
-		    						<div>총 [[${counsel_list_count}]]개 중 [[(${params.getPage}-1)*${params.size}+1]]~[[${params.getPage}*${params.size}]]번째</div>
-		    					</div>
+								<th:block th:if="${counsel_list_count==0}">	<!-- 데이터가 없을 때 -->
+									<div class="datatable-info"> 
+			    						<input type="hidden" id="counsel_count" th:value="0">
+			    					<div>총 0개의 데이터</div>
+			    					</div>
+								</th:block>
+								<th:block th:if="${counsel_list_count!=0}">
+			    					<div class="datatable-info" th:if="${counsel_list_count}<${params.getPage()}*${params.getSize()} and ${maxpage}>=${params.getPage()}"> <!-- 마지막 페이지일때 -->
+			    						<input type="hidden" id="counsel_count" th:value="${counsel_list_count}">
+			    						<div>총 [[${counsel_list_count}]]개 중 [[(${params.getPage}-1)*${params.size}+1]]~[[${counsel_list_count}]]번째</div>
+			    					</div>
+			    					<div class="datatable-info" th:if="${counsel_list_count}>=${params.getPage}*${params.size} and ${maxpage}>=${params.getPage()}"> <!-- 마지막 페이지가 아닐 때 -->
+			    						<input type="hidden" id="counsel_count" th:value="${counsel_list_count}">
+			    						<div>총 [[${counsel_list_count}]]개 중 [[(${params.getPage}-1)*${params.size}+1]]~[[${params.getPage}*${params.size}]]번째</div>
+			    					</div>
+		    					</th:block>
 		    					
 		    					<!-- 페이징 Div-->
 		    					<nav class="datatable-pagination" aria-label="Page navigation example">
@@ -255,7 +261,12 @@
 				                      			<span aria-hidden="true">&laquo;</span>
 				                    		</a>
 				                  		</li>
-				                  		<th:block th:if="${maxpage}<=4"> <!-- 최대 페이지가 4이하일때는 모든 페이지 출력 -->
+				                  		<th:block th:if="${maxpage}==0"> <!-- 해당되는 데이터가 없을 때 1페이지만 출력 -->
+					                  		<li class="datatable-pagination-list-item">
+					                  			<a class="datatable-pagination-list-item-link selectedPage">1</a>
+					                  		</li>
+										</th:block>
+				                  		<th:block th:if="${maxpage}<=4 and ${maxpage}>0"> <!-- 최대 페이지가 4이하일때는 모든 페이지 출력 -->
 					                  		<li class="datatable-pagination-list-item" th:each="num:${#numbers.sequence(1, maxpage)}">
 					                  			<a class="datatable-pagination-list-item-link selectedPage">[[${num}]]</a>
 					                  		</li>
@@ -380,10 +391,13 @@ window.onload=function(){
 	window.onload=function(){
 		document.getElementById('counsel-nav').className = 'nav-link';
 		document.getElementById('counsel-nav1').className += ' show';
-    	document.getElementById('counsel-nav-1').className += ' active';	
+    	document.getElementById('counsel-nav-1').className += ' active';
 	}
 </script>
+
 <script src="/js/employee/empy_counsel.js"></script>
+<script src="/js/employee/empy_counsel_index_modal.js"></script>
+<script src="/js/employee/empy_paging.js"></script>
 
 >>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 </html>

@@ -39,12 +39,66 @@
 	
 	<select id="getAllCounsel" parameterType="HashMap" resultType="com.cms.ca.view_counsel_dto">
 		select * from VIEW_DSCSN_APLY 
-		where emp_no=#{emp_no} and bfr_aply_sn is null and stts_cd="완료"
+		where emp_no=#{emp_no} and bfr_aply_sn is null and stts_cd=#{stts_cd}
+		<include refid="search" />
 		order by aply_sn desc 
 		limit #{offset}, #{size}
 	</select>
 	
-	<select id="getAllCounselCount" resultType="int">
-		select count(*) as cnt from VIEW_DSCSN_APLY where emp_no=#{emp_no} and bfr_aply_sn is null and stts_cd="완료"
+	<select id="getAllCounselCount" parameterType="HashMap" resultType="int">
+		select count(*) as cnt from VIEW_DSCSN_APLY 
+		where emp_no=#{emp_no} and bfr_aply_sn is null and stts_cd=#{stts_cd}
+		<include refid="search" />
 	</select>
+	
+	<sql id="search">
+        <!-- 검색 키워드가 있을 때 -->
+        <if test="searchValue != null and searchValue != ''">
+            <choose>
+	            <when test="'rsvt_dt'.equals( searchType )">
+	            	AND rsvt_dt LIKE CONCAT('%', #{searchValue}, '%')
+	            </when>
+	            <when test="'stdnt_flnm'.equals( searchType )">
+	            	AND stdnt_flnm LIKE CONCAT('%', #{searchValue}, '%')
+	            </when>
+	            <when test="'stdnt_no'.equals( searchType )">
+	            	AND stdnt_no LIKE CONCAT('%', #{searchValue}, '%')
+	            </when>
+            	<when test="'all'.equals( searchType )">
+            		AND (
+            			rsvt_dt LIKE CONCAT('%', #{searchValue}, '%')
+            			OR stdnt_flnm LIKE CONCAT('%', #{searchValue}, '%')
+            			OR stdnt_no LIKE CONCAT('%', #{searchValue}, '%')
+            		)
+            	</when>
+            </choose>
+        </if>
+    </sql>
+	
+	<select id="getOneCounsel" parameterType="HashMap" resultType="com.cms.ca.view_counsel_dto">
+		select * from VIEW_DSCSN_APLY 
+		where (aply_sn=#{aply_sn} or bfr_aply_sn=#{aply_sn})
+		order by aply_sn asc 
+	</select>
+	
+	<select id="getCounselResult" parameterType="int" resultType="String">
+		select dscsn_cn from DSCSN_RSLT 
+		where aply_sn=#{aply_sn}
+		order by aply_sn asc 
+	</select>
+	
+	<select id="getPastCounsel" parameterType="HashMap" resultType="com.cms.ca.view_counsel_dto">
+		select * from VIEW_DSCSN_APLY 
+		where emp_no=#{emp_no} and bfr_aply_sn is null and (stts_cd="완료" or stts_cd="취소")
+		<include refid="search" />
+		order by aply_sn desc 
+		limit #{offset}, #{size}
+	</select>
+	
+	<update id="updateCounselStatus" parameterType="HashMap">
+		update DSCSN_APLY 
+		set stts_cd=#{stts_cd}
+		where aply_sn=#{aply_sn} 
+	</update>
+	
 </mapper>
