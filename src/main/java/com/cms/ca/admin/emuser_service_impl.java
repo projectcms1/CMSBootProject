@@ -27,5 +27,10 @@ public class emuser_service_impl implements emuser_service{
 		employee_dto employee_data = this.emuser_repo.employee_data(emp_no);
 		return employee_data;
 	}
+
+	@Override
+	public int employee_modify(employee_dto dto) {
+		return this.emuser_repo.employee_modify(dto);
+	}
 	
 }

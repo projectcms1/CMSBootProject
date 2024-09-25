@@ -64,7 +64,8 @@ public class AdminController {
 
 	// 학생 사용자 세부정보 수정
 	@PostMapping("/stuser_detail_update")
-	public void stuser_detail_update(@ModelAttribute student_dto stdto, @RequestPart(name = "uphoto_file", required = false) MultipartFile uphoto_file, ServletResponse sr, String previousFileName) {
+	public void stuser_detail_update(@ModelAttribute student_dto stdto, @RequestPart(name = "uphoto_file", required = false) MultipartFile uphoto_file,
+			ServletResponse sr, String previousFileName) {
 		sr.setContentType("text/html; charset=utf-8");
 		
 		try {
@@ -159,6 +160,16 @@ public class AdminController {
 	@PostMapping("/admin_employee_detail/{emp_no}")
 	public employee_dto admin_employee_detail(@PathVariable(name = "emp_no") String emp_no) {
 		return this.emuser_service.employee_data(emp_no);
+	}
+	
+	// 교직원 사용자 세부 정보 수정
+	@PostMapping("/emuser_detail_update")
+	public void emuser_detail_update(@ModelAttribute employee_dto emdto, @RequestPart(name = "uphoto_file", required = false) MultipartFile uphoto_file,
+			ServletResponse sr, String previousFileName) {
+		System.out.println(emdto.getEmp_no());
+		System.out.println(emdto.getEmp_flnm());
+		System.out.println(emdto.getEmp_eml_addr());
+		System.out.println(uphoto_file);
 	}
 	
 	@GetMapping("/emlistmod_adduser")
