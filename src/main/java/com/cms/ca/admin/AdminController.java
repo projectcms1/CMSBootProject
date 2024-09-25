@@ -154,7 +154,13 @@ public class AdminController {
 
 		return "admin/emlistmod";
 	}
-
+	
+	@ResponseBody
+	@PostMapping("/admin_employee_detail/{emp_no}")
+	public employee_dto admin_employee_detail(@PathVariable(name = "emp_no") String emp_no) {
+		return this.emuser_service.employee_data(emp_no);
+	}
+	
 	@GetMapping("/emlistmod_adduser")
 	public String emlistmod_adduser() {
 		return "admin/emlistmod_adduser";

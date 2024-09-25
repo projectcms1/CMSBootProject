@@ -11,4 +11,6 @@ import com.cms.ca.student_dto;
 public interface emuser_repo {
 	
 	List<employee_dto> employee_list();
+	
+	employee_dto employee_data(String emp_no);
 }
