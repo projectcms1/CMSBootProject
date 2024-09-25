@@ -156,7 +156,7 @@
 								</td>
 								<td>
 									<!-- 모달 트리거 버튼 -->
-									<button type="button" class="btn btn-primary bg_1"
+									<button type="button" class="btn btn-primary bg_1" th:onclick="openDetailModal([[${ counsel_data.getAply_sn() }]])"
 										data-bs-toggle="modal" data-bs-target="#detailModal">
 										<i class="fa fa-cog"> 상세보기</i>
 									</button>
@@ -198,7 +198,7 @@
 
 	<script src="/admin/js/bootstrap.bundle.min.js"></script>
 	<script src="/admin/js/global.js"></script>
-	<script src="/admin/js/counsel_list.js"></script>
+	<script src="/admin/js/counsel_list.js?v=1"></script>
 	
 	
 	
