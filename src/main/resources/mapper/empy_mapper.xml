@@ -101,4 +101,19 @@
 		where aply_sn=#{aply_sn} 
 	</update>
 	
+	<insert id="addConnectedCounsel" parameterType="com.cms.ca.view_counsel_dto">
+		insert into DSCSN_APLY 
+		(aply_sn, bfr_aply_sn, hr_se, stdnt_no, emp_no, stts_cd, 
+		plc, rsvt_dt, aply_dt, dscsn_mthd, dscsn_knd)
+		values 
+		('0', #{aply_sn}, #{hr_se}, #{stdnt_no}, #{emp_no}, #{stts_cd}, 
+		#{plc}, #{rsvt_dt}, now(), #{dscsn_mthd}, #{dscsn_knd})
+	</insert>
+	
+	<insert id="addCounselResult" parameterType="HashMap">
+		insert into DSCSN_RSLT
+		(dscsn_cn, aply_sn)
+		values
+		(#{dscsn_cn}, #{aply_sn})
+	</insert>
 </mapper>

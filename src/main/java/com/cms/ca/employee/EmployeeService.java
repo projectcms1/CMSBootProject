@@ -19,4 +19,6 @@ public interface EmployeeService {
 	List<view_counsel_dto> getPastCounsel(String emp_no, search_dto search_dto);
 	int updateCounselStatus(String stts_cd, int aply_sn);
 	String getCounselResult(int aply_sn);
+	int addConnectedCounsel(view_counsel_dto view_csl_dto, String emp_no);
+	int addCounselResult(String dscsn_cn,int aply_sn);
 }
