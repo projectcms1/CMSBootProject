@@ -8,7 +8,7 @@ select * from EMP_INFO where MNG_AUTHRT = 'P' or MNG_AUTHRT = 'C' order by EMP_N
 </select>
 
 <select id="employee_data" resultType="com.cms.ca.employee_dto" parameterType="String">
-select a.*, b.ACNT_LCK_YN, b.REG_DT from EMP_INFO as a JOIN LGN_ACNT_INFO as b where a.USER_NO = b.USER_NO and a.EMP_NO = #{emp_no}
+select a.*, b.ACNT_LCK_YN from EMP_INFO as a JOIN LGN_ACNT_INFO as b where a.USER_NO = b.USER_NO and a.EMP_NO = #{emp_no}
 </select>
 
 <!-- 교직원 리스트 검색 기능 -->

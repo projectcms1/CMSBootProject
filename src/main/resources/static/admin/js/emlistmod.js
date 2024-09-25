@@ -1,3 +1,26 @@
+// 모달 상세보기 INPUT
+const USER_PHOTO = document.getElementById("USER_PHOTO");
+const prev_file = document.getElementById("prev_file");
+const full_name = document.getElementById("full_name");
+const employee_number = document.getElementById("employee_number");
+const birth_day = document.getElementById("birth_day");
+const email_address = document.getElementById("email_address");
+const telephone_number = document.getElementById("telephone_number");
+const account_lock = document.getElementById("account_lock");
+const employee_company = document.getElementById("employee_company");
+const emp_department = document.getElementById("emp_department");
+const employee_major = document.getElementById("employee_major");
+const edu_crtfct_no = document.getElementById("edu_crtfct_no");
+const edu_crtfct_issu_ymd = document.getElementById("edu_crtfct_issu_ymd");
+const account_status = document.getElementById("account_status");
+const employee_zipcode = document.getElementById("employee_zipcode");
+const employee_address = document.getElementById("employee_address");
+const detail_address = document.getElementById("detail_address");
+const dlng_bank_nm = document.getElementById("dlng_bank_nm");
+const dlng_actno = document.getElementById("dlng_actno");
+const dpstr_nm = document.getElementById("dpstr_nm");
+
+
 //교직원 사용자 상세보기 정보 중 대학교 내 대학분류, 학과, 전공 데이터
 const USER_UNIV = ['대학선택', '공과대학', '사회과학대학', '인문대학', '자연과학대학', '심리상담센터'];
 const USER_SCSBJT = ['-', '기계공학과', '정치학과', '철학과', '생물학과', '심리상담센터'];
@@ -5,22 +28,19 @@ const USER_MJR = ['-', '기계공학', '정치학', '철학', '생물학', ''];
 
 function makeSelector(selectedUniv) {
 
-	const scsbjtField = document.getElementById("OGDP_SCSBJT");
-	const mjrField = document.getElementById("MJR");
-
-	scsbjtField.value = "";
-	mjrField.readOnly = true;
-	mjrField.value = "";
+	emp_department.value = "";
+	employee_major.readOnly = true;
+	employee_major.value = "";
 
 	USER_UNIV.forEach(function(data, index) {
 		if (selectedUniv === data) {
-			scsbjtField.value = USER_SCSBJT[index];
+			emp_department.value = USER_SCSBJT[index];
 
 			if (selectedUniv === "심리상담센터") {
-				mjrField.readOnly = false;
+				employee_major.readOnly = false;
 			} else {
-				mjrField.readOnly = true;
-				mjrField.value = USER_MJR[index];
+				employee_major.readOnly = true;
+				employee_major.value = USER_MJR[index];
 			}
 		}
 	});
@@ -56,7 +76,6 @@ function emlist_search() {
                 // 각 주소의 노출 규칙에 따라 주소를 조합한다.
                 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                 var addr = ''; // 주소 변수
-                var extraAddr = ''; // 참고항목 변수
 
                 //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
                 if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
@@ -66,10 +85,10 @@ function emlist_search() {
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('USER_ZIP').value = data.zonecode;
-                document.getElementById("USER_ADDR").value = addr;
+                document.getElementById('employee_zipcode').value = data.zonecode;
+                document.getElementById("employee_address").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("USER_DADDR").focus();
+                document.getElementById("detail_address").focus();
 
                 // iframe을 넣은 element를 안보이게 한다.
                 // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
@@ -232,14 +251,43 @@ function openEmpInfo(empidx) {
 	}).then(function(result_data) {
 		return result_data.json();
 	}).then(function(result_res) {
-		console.log(result_res);
-		console.log(result_res.size);
-		//makeOpeningModal();
+		if (result_res == null) {
+			alert("오류 발생!");
+			location.reload();
+		}
+		else {
+			makeOpeningModal(result_res);
+		}
 	}).catch(function(error) {
+		console.log(error);
 		alert("통신 오류 발생!");
 	});
 }
 
+function makeOpeningModal(detailData) {
+	if (detailData.emp_photo != '') {
+		USER_PHOTO.innerHTML = `<img src="/img_file/${detailData.emp_photo}" />`;
+		prev_file.value = detailData.emp_photo;
+	}
+	full_name.value = detailData.emp_flnm;
+	employee_number.value = detailData.emp_no;
+	birth_day.value = detailData.brdt;
+	email_address.value = detailData.emp_eml_addr;
+	telephone_number.value = detailData.emp_telno;
+	account_lock.value = detailData.acnt_lck_yn;
+	employee_company.value = detailData.ogdp_inst_nm;
+	emp_department.value = detailData.ogdp_dept_nm;
+	employee_major.value = detailData.mjr;
+	edu_crtfct_no.value = detailData.edu_crtfct_no;
+	edu_crtfct_issu_ymd.value = detailData.edu_crtfct_issu_ymd;
+	account_status.value = detailData.acnt_stts;
+	employee_zipcode.value = detailData.emp_zip;
+	employee_address.value = detailData.emp_addr;
+	detail_address.value = detailData.emp_daddr;
+	dlng_bank_nm.value = detailData.dlng_bank_nm;
+	dlng_actno.value = detailData.dlng_actno;
+	dpstr_nm.value = detailData.dpstr_nm;
+}
 
 /*
 //학생 사용자 상세정보 수정 기능
