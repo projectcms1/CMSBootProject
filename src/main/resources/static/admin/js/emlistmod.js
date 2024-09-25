@@ -63,7 +63,7 @@ function emlist_search() {
 
 
 //다음 주소 찾기
- var element_layer = document.getElementById('stlistmod_detail_layer_add');
+ var element_layer = document.getElementById('emlistmod_detail_layer_add');
  function closeDaumPostcode() {
         // iframe을 넣은 element를 안보이게 한다.
         element_layer.style.display = 'none';
@@ -123,6 +123,9 @@ function emlist_search() {
         element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
  }
 //===============다음 주소 끝=============
+
+
+
 
 //교직원 리스트 페이징 처리
 document.addEventListener('DOMContentLoaded', function() {
@@ -288,17 +291,3 @@ function makeOpeningModal(detailData) {
 	dlng_actno.value = detailData.dlng_actno;
 	dpstr_nm.value = detailData.dpstr_nm;
 }
-
-/*
-//학생 사용자 상세정보 수정 기능
-function update_stuserdata(){
-	stuser_detail_frm.submit();
-}
-
-
-//학생 사용자 추가 기능
-function add_stuser(){
-	stuser_add_frm.submit();
-}
-*/
-

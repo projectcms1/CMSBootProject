@@ -32,5 +32,11 @@ public class aduser_service_impl implements aduser_service {
 		
 		return adminlist_one_data;
 	}
+
+	@Override
+	public employee_dto amdin_data(String emp_no) {
+		employee_dto admin_data = this.aduser_repo.admin_data(emp_no);
+		return admin_data;
+	}
 	
 }

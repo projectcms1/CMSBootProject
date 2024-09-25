@@ -168,13 +168,14 @@ public class AdminController {
 	}
 	
 	
-	
+	//교직원 사용자 상세보기 데이터 로드
 	@ResponseBody
 	@PostMapping("/admin_employee_detail/{emp_no}")
 	public employee_dto admin_employee_detail(@PathVariable(name = "emp_no") String emp_no) {
 		return this.emuser_service.employee_data(emp_no);
 	}
 	
+	//교직원 및 관리자 사용자 추가
 	@GetMapping("/emlistmod_adduser")
 	public String emlistmod_adduser() {
 		return "admin/emlistmod_adduser";
@@ -196,6 +197,14 @@ public class AdminController {
 		}
 
 		return "admin/adminlistmod";
+	}
+	
+	
+	//관리자 사용자 상세보기 데이터 로드
+	@ResponseBody
+	@PostMapping("/admin_detail/{emp_no}")
+	public employee_dto admin_detail(@PathVariable(name = "emp_no") String emp_no) {
+		return this.aduser_service.amdin_data(emp_no);
 	}
 	
 	

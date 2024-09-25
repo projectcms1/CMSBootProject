@@ -127,8 +127,8 @@
 									<h6 class="bg_3 text-center font_12 p-1 mb-0" th:text="${admin_data.getAcnt_stts()}"></h6>
 								</td>
 								<td>
-									<button type="button" class="btn btn-primary bg_1" data-bs-toggle="modal"
-										data-bs-target="#adminuserdetailModal">
+									<button type="button" class="btn btn-primary bg_1" th:onclick="openEmpInfo([[${ admin_data.getEmp_no() }]])"
+									data-bs-toggle="modal" data-bs-target="#adminuserdetailModal">
 										<i class="fa fa-cog"> 상세보기</i></button>
 								</td>
 							</tr>
@@ -148,6 +148,9 @@
 	<!--footer시작 -->
 	<div th:replace="~{/admin/footer :: admin_footer}"></div>
 	<!--footer끝 -->
+	
+	<!-- script -->
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 다음 API 주소 -->
 	<script src="/admin/js/adminlistmod.js"></script>
 	<script src="/admin/js/bootstrap.bundle.min.js"></script>
 	<script src="/admin/js/global.js"></script>
