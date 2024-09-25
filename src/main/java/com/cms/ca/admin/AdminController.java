@@ -205,10 +205,40 @@ public class AdminController {
 	@PostMapping("/emuser_detail_update")
 	public void emuser_detail_update(@ModelAttribute employee_dto emdto, @RequestPart(name = "uphoto_file", required = false) MultipartFile uphoto_file,
 			ServletResponse sr, String previousFileName) {
-		System.out.println(emdto.getEmp_no());
-		System.out.println(emdto.getEmp_flnm());
-		System.out.println(emdto.getEmp_eml_addr());
-		System.out.println(uphoto_file);
+		sr.setContentType("text/html; charset=utf-8");
+		
+		try {
+			this.pw = sr.getWriter();
+			
+			if (uphoto_file != null && !uphoto_file.getOriginalFilename().isEmpty()) {
+				CDNFileUploader fileUploader = new CDNFileUploader(uphoto_file);
+				
+				boolean delck = fileUploader.deleteFile(previousFileName);
+				if (delck) {
+					this.img_service.deleteImageFile(previousFileName);
+				}
+				imgfile_dto imgdto = fileUploader.uploadFile();
+				int dbck = this.img_service.addImageFile(imgdto);
+				if (dbck > 0) {
+					emdto.setEmp_photo(imgdto.getImg_file_nm());
+				}
+				else {
+					// insert 실패했을 때 FTP 파일 삭제 처리
+					// -> 실패 시 Exception 발동으로 삭제하지 못할 수도 있음
+					fileUploader.deleteFile(imgdto.getImg_file_nm());
+				}
+			}
+			int result = 0; this.emuser_service.employee_modify(emdto);
+			if (result > 0) {
+				this.pw.print("<script>" + "alert('교직원정보가 수정되었습니다.');" + "location.href='./stlistmod';" + "</script>");
+			} else {
+				this.pw.print("<script>" + "alert('오류로 인해 교직원정보가 수정되지 않았습니다.');" + "history.go(-1);" + "</script>");
+			}
+		} catch (Exception e) {
+			this.pw.print("<script>" + "alert('오류로 인해 교직원정보가 수정되지 않았습니다. 확인해주세요!');" + "history.go(-1);" + "</script>");
+		} finally {
+			this.pw.close();
+		}
 	}
 	
 	@GetMapping("/emlistmod_adduser")
