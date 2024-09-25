@@ -142,7 +142,7 @@
 								</td>
 								<td>
 									<!-- 상세보기 모달 버튼 -->
-									<button type="button" class="btn btn-primary bg_1"
+									<button type="button" class="btn btn-primary bg_1" th:onclick="openEmpInfo([[${ employee_data.getEmp_no() }]])"
 										data-bs-toggle="modal" data-bs-target="#emuserdetailModal">
 										<i class="fa fa-cog"> 상세보기</i>
 									</button>
