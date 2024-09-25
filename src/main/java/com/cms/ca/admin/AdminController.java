@@ -156,6 +156,45 @@ public class AdminController {
 		return "admin/emlistmod";
 	}
 	
+	// 학생 사용자 추가
+		@PostMapping("/emuser_add")
+		public void emuser_add(@ModelAttribute employee_dto emdto, @RequestPart(name = "uphoto_file", required = false) MultipartFile uphoto_file,
+				@RequestParam(value = "", required = false) String entrance_year, ServletResponse sr) {
+			sr.setContentType("text/html; charset=utf-8");
+			try {
+				this.pw = sr.getWriter();
+				int detail_result = 0;
+				
+				if (uphoto_file != null && !uphoto_file.getOriginalFilename().isEmpty()) {
+					CDNFileUploader fileUploader = new CDNFileUploader(uphoto_file);
+					imgfile_dto imgdto = fileUploader.uploadFile();
+					int dbck = this.img_service.addImageFile(imgdto);
+					if (dbck > 0) {
+						emdto.setEmp_photo(imgdto.getImg_file_nm());
+					}
+					else {
+						// insert 실패했을 때 FTP 파일 삭제 처리
+						// -> 실패 시 Exception 발동으로 삭제하지 못할 수도 있음
+						fileUploader.deleteFile(imgdto.getImg_file_nm());
+					}
+				}
+				detail_result = this.emuser_service.add_emuser_detail(emdto, entrance_year);
+				
+				if (detail_result > 0) {
+					this.pw.print("<script>" + "alert('교직원 계정이 추가되었습니다.');" + "location.href='./emlistmod';" + "</script>");
+				} else {
+					this.pw.print(
+							"<script>" + "alert('오류로 인해 교직원 계정이 추가되지 않았습니다. 확인해주세요!');" + "history.go(-1);" + "</script>");
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				this.pw.print("<script>" + "alert('오류로 인해 교직원 계정이 추가되지 않았습니다. 확인해주세요!');" + "history.go(-1);" + "</script>");
+			} finally {
+				this.pw.close();
+			}
+		}
+	
 	@ResponseBody
 	@PostMapping("/admin_employee_detail/{emp_no}")
 	public employee_dto admin_employee_detail(@PathVariable(name = "emp_no") String emp_no) {
