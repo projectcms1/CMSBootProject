@@ -104,6 +104,7 @@
 							<form id="counsel_form">
 						        <input type="hidden" name="statue">
 								<input type="hidden" name="aply_sn">
+								<input type="hidden" name="bfr_aply_sn">
 								<table id="demo-table" class="table datatable datatable-table">
 									<thead>
 										<tr>
@@ -138,7 +139,7 @@
 							                    <button type="button" class="btn btn-primary btn-sm rounded-pill" 
 												data-bs-toggle="modal" data-bs-target="#counselDetailModal" 
 												style="float: right; margin-left: 5px;" 
-												th:value="${counsel.getAply_sn}" onclick="madalDataSet(this.value)">완료</button>
+												th:onclick="madalDataSet([[${counsel.getAply_sn}]])">완료</button>
 							                </td>
 							            </tr>
 					                </tbody>
