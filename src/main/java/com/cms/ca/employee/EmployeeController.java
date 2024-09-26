@@ -24,23 +24,24 @@ import jakarta.servlet.ServletResponse;
 @Controller
 public class EmployeeController {
 	
+	@Resource(name = "empy_service")
+	private EmployeeService empyService;
+
 	String emp_no="2024632";
 	String viewName = "/employee/empy_blankpage";
 	employee_dto oneData=null;
 	PrintWriter pw=null;
 	
-	@Resource(name = "empy_service")
-	private EmployeeService empyService;
 	
 	@GetMapping("/employee/empy_info")	//교직원 정보 페이지 
 	public String employeeInfoPage(Model m) {
 		try {
-			this.oneData = this.empyService.getEmployeeInfo(emp_no);	//교번으로 교직원 데이터 read
+			this.oneData = this.empyService.getEmployeeInfo(this.emp_no);	//교번으로 교직원 데이터 read
 			if (this.oneData.getEmp_no()==null) { // 교번과 매칭되는 사람이 없을시
 				viewName = "/employee/empy_blankpage";
 			}
 			else {
-				if((this.oneData.getEdu_crtfct_issu_ymd().equals("")) || (this.oneData.getEdu_crtfct_no().equals(""))) {	//교원자격증번호 및 발급일자가 null(교수가 아닐 때)
+				if((this.oneData.getEdu_crtfct_issu_ymd()==null) || (this.oneData.getEdu_crtfct_issu_ymd().equals(""))) {	//교원자격증번호 및 발급일자가 null(교수가 아닐 때)
 					this.oneData.setEdu_crtfct_issu_ymd("-");
 					this.oneData.setEdu_crtfct_no("-");
 				}
@@ -55,6 +56,9 @@ public class EmployeeController {
 			e.printStackTrace();
 			viewName = "/employee/empy_blankpage";
 		}
+
+		String mng_authrt=this.empyService.getEmployeeInfo(this.emp_no).getMng_authrt();
+		m.addAttribute("employee_job", mng_authrt);
 		m.addAttribute("empy_info", this.oneData);
 		return viewName;
 	}
@@ -93,8 +97,8 @@ public class EmployeeController {
 	@GetMapping("/employee/empy_counsel_index")	//상담이력조회 페이지, 교번에 해당하는 완료 상담 정보와 개수 로드
 	public String employeeCounselIndexPage(Model m, @ModelAttribute("params") search_dto params, ServletResponse res) {	
 		try {
-			List<view_counsel_dto> counsel_list = this.empyService.getAllCounsel(emp_no, "완료", params);
-			int counsel_list_count = this.empyService.getAllCounselCount(emp_no, "완료", params);	
+			List<view_counsel_dto> counsel_list = this.empyService.getAllCounsel(this.emp_no, "완료", params);
+			int counsel_list_count = this.empyService.getAllCounselCount(this.emp_no, "완료", params);	
 			int maxpage=(int)Math.ceil((double)counsel_list_count/params.getSize());
 			
 			if(maxpage<params.getPage() && maxpage!=0) {	//파라미터로 요청한 페이지가 실제 로드되는 페이지와 매칭되지 않을때
@@ -107,6 +111,8 @@ public class EmployeeController {
 				this.pw.close();
 			}
 			
+			String mng_authrt=this.empyService.getEmployeeInfo(emp_no).getMng_authrt();
+			m.addAttribute("employee_job", mng_authrt);
 			m.addAttribute("counsel_list", counsel_list);
 			m.addAttribute("counsel_list_count", counsel_list_count);
 			m.addAttribute("maxpage", maxpage);
@@ -147,7 +153,9 @@ public class EmployeeController {
 					+ "</script>");
 				this.pw.close();
 			}
-			
+
+			String mng_authrt=this.empyService.getEmployeeInfo(emp_no).getMng_authrt();
+			m.addAttribute("employee_job", mng_authrt);
 			m.addAttribute("counsel_list", counsel_list);
 			m.addAttribute("counsel_list_count", counsel_list_count);
 			m.addAttribute("maxpage", maxpage);
@@ -213,7 +221,9 @@ public class EmployeeController {
 					+ "</script>");
 				this.pw.close();
 			}
-			
+
+			String mng_authrt=this.empyService.getEmployeeInfo(emp_no).getMng_authrt();
+			m.addAttribute("employee_job", mng_authrt);
 			m.addAttribute("counsel_list", counsel_list);
 			m.addAttribute("counsel_list_count", counsel_list_count);
 			m.addAttribute("maxpage", maxpage);
@@ -342,7 +352,9 @@ public class EmployeeController {
 					+ "</script>");
 				this.pw.close();
 			}
-			
+
+			String mng_authrt=this.empyService.getEmployeeInfo(emp_no).getMng_authrt();
+			m.addAttribute("employee_job", mng_authrt);
 			m.addAttribute("counsel_list", counsel_list_cancle);
 			m.addAttribute("counsel_list_count", counsel_list_count);
 			m.addAttribute("maxpage", maxpage);
@@ -355,6 +367,8 @@ public class EmployeeController {
 	
 	@GetMapping("/employee/empy_counsel_add")	//상담신청 페이지 불러오기
 	public String employeeCounselAddPage(Model m, counsel_dto csl_dto) {
+		String mng_authrt=this.empyService.getEmployeeInfo(this.emp_no).getMng_authrt();
+		m.addAttribute("employee_job", mng_authrt);
 		m.addAttribute("csl_dto", csl_dto);
 		
 		return "employee/empy_counsel_add";
@@ -404,17 +418,23 @@ public class EmployeeController {
 	
 	
 	@GetMapping("/employee/empy_counsel_chatting")
-	public String employeeCounselChattingPage() {
+	public String employeeCounselChattingPage(Model m) {
+		String mng_authrt=this.empyService.getEmployeeInfo(this.emp_no).getMng_authrt();
+		m.addAttribute("employee_job", mng_authrt);
 		return "employee/empy_counsel_chatting";
 	}
 	
 	@GetMapping("/employee/empy_academy_index")
-	public String employeeAcademyIndexPage() {
+	public String employeeAcademyIndexPage(Model m) {
+		String mng_authrt=this.empyService.getEmployeeInfo(this.emp_no).getMng_authrt();
+		m.addAttribute("employee_job", mng_authrt);
 		return "employee/empy_academy_index";
 	}
 	
 	@GetMapping("/employee/empy_blankpage")
-	public String employeeBlankPage() {
+	public String employeeBlankPage(Model m) {
+		String mng_authrt=this.empyService.getEmployeeInfo(this.emp_no).getMng_authrt();
+		m.addAttribute("employee_job", mng_authrt);
 		return "employee/empy_blankpage";
 	}
 }

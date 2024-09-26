@@ -16,10 +16,15 @@
 	        <li><a href="/">HOME</a></li>
 			<li>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</li>
 			<li><a href="/employee/empy_info">교직원정보</a></li>
-			<li>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</li>
-			<li><a href="/employee/empy_academy_index">학사관리</a></li>
-			<li>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</li>
-			<li><a href="/employee/empy_counsel_index">상담관리</a></li>
+			
+			<th:block th:if="${employee_job}=='P'" >
+				<li>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</li>
+				<li><a href="/employee/empy_academy_index">학사관리</a></li>
+			</th:block>
+			<th:block th:if="${employee_job}=='P' or ${employee_job}=='C'" >
+				<li>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</li>
+				<li><a href="/employee/empy_counsel_index">상담관리</a></li>
+			</th:block>
 	    </ul>
 	</nav>
 	<!-- End Left Header Nav -->

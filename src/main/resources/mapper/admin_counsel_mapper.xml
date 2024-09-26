@@ -37,4 +37,11 @@
 	</select>
 
 	<!-- 상담추가 끝 -->
+
+	<!-- 상담 내용 수정 -->
+	<update id="update_counsel" parameterType="com.cms.ca.counsel_dto">
+		update DSCSN_APLY set RSVT_DT = #{rsvt_dt}, HR_SE = #{hr_se}, PLC = #{plc},
+		DSCSN_KND = #{dscsn_knd}, DSCSN_MTHD = #{dscsn_mthd}, STTS_CD = #{stts_cd} where APLY_SN = #{aply_sn}
+	</update>
+
 </mapper>
