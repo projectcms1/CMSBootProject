@@ -70,4 +70,12 @@
     <select id="findStudentByAccountId" parameterType="Integer" resultMap="studentResultMap">
         SELECT * FROM STDNT_INFO WHERE USER_NO = #{user_no}
     </select>
+    
+    <!-- 로그인 실패 시 계정 잠금 -->
+    <select id="isLocked" resultType="String">
+    SELECT ACNT_LCK_YN FROM LGN_ACNT_INFO WHERE LGN_ID = #{lgn_id}
+    </select>    
+    <update id="lockAccount">
+    update LGN_ACNT_INFO set ACNT_LCK_YN = 'Y' where LGN_ID = #{lgn_id}
+    </update>
 </mapper>
