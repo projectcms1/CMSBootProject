@@ -11,6 +11,8 @@ public interface aduser_service {
 	
 	List<employee_dto> admin_search_list(String search_part, String search_word);
 	
+	int admin_detail_update(employee_dto dto);
+	
 	employee_dto amdin_data(String emp_no);
 }
 

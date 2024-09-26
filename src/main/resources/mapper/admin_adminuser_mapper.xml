@@ -12,6 +12,15 @@ select * from EMP_INFO where MNG_AUTHRT = 'A' order by EMP_NO desc
 select a.*, b.ACNT_LCK_YN from EMP_INFO as a JOIN LGN_ACNT_INFO as b where a.USER_NO = b.USER_NO and a.EMP_NO = #{emp_no}
 </select>
 
+<!-- 관리자 상세정보 수정-->
+<update id="admin_detail_update" parameterType="com.cms.ca.employee_dto">
+update EMP_INFO as a JOIN LGN_ACNT_INFO as b set a.EMP_EML_ADDR = #{emp_eml_addr}, a.EMP_TELNO = #{emp_telno}, a.EMP_ZIP = #{emp_zip},
+a.EMP_ADDR = #{emp_addr}, a.EMP_DADDR = #{emp_daddr}, a.DLNG_BANK_NM = #{dlng_bank_nm}, a.DLNG_ACTNO = #{dlng_actno}, a.DPSTR_NM = #{dpstr_nm},
+a.JBGD_NM = #{jbgd_nm}, a.ACNT_STTS = #{acnt_stts}, b.ACNT_LCK_YN = #{acnt_lck_yn}<if test="emp_photo!=null">, a.EMP_PHOTO = #{emp_photo}</if>
+where a.USER_NO = b.USER_NO and (a.EMP_NO = #{emp_no} or b.LGN_ID = #{emp_no})
+</update>
+
+
 <!-- 관리자 리스트 검색 기능 -->
 <select id="admin_search_list" resultType="com.cms.ca.employee_dto" parameterType="map">
 select * from EMP_INFO where ${search_part} like concat('%', #{search_word}, '%') order by EMP_NO desc

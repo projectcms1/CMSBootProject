@@ -14,5 +14,7 @@ public interface aduser_repo {
 	
 	List<employee_dto> admin_search_list(Map<String, String> search_adminuser_data);
 	
+	int admin_detail_update(employee_dto dto);
+	
 	employee_dto admin_data(String emp_no);
 }

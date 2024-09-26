@@ -11,15 +11,14 @@ function counsellist_search() {
     return false;
 }
 
-
-
-
 // 상담 내역 상세보기 모달 내부 ID
 const accordionContainer = document.getElementById('counsel_accordion');
 const studentNumber = document.getElementById('std_no');
 const studentName = document.getElementById('std_nm');
 const employeeNumber = document.getElementById('emp_no');
 const employeeName = document.getElementById('emp_nm');
+const mng_authrt = document.getElementById('mng_authrt');
+const cnslModifyButton = document.getElementById("cnslModifyBtn");
 
 // 상세 내역 데이터 저장
 let detailData = [];
@@ -42,6 +41,14 @@ function openDetailModal(aply_sn) {
 	}).catch(function(error) {
 		alert("통신 오류 발생!");
 	});
+}
+
+function update_counseldata() {
+	if (confirm("해당 내용으로 상담을 수정하시겠습니까?")) {
+		update_frm.method = "POST";
+		update_frm.action = "./admin_counsel_update";
+		update_frm.submit();
+	}
 }
 
 // 상담 리스트 페이징 처리
@@ -165,13 +172,16 @@ document.addEventListener('DOMContentLoaded', function() {
     showPage(1);
 });
 
+// 상담 내역 데이터에 맞춰 Modal 내부 HTML 생성
 function makeOpeningModal() {
 	accordionContainer.innerHTML = ''; // 기존 내용 초기화
+	cnslModifyButton.disabled = false; // 버튼 disabled 속성 초기화
 	
 	studentNumber.value = detailData[0].stdnt_no;
 	studentName.value = detailData[0].stdnt_flnm;
 	employeeNumber.value = detailData[0].emp_no;
 	employeeName.value = detailData[0].emp_flnm;
+	mng_authrt.value = detailData[0].mng_authrt;
 	
 	detailData.forEach((counsel, index) => {
 	  const sessionNumber = index + 1;
@@ -182,23 +192,30 @@ function makeOpeningModal() {
 	          ${sessionNumber}회차
 	        </button>
 	      </h2>
+	      <input type="hidden" name="aply_sn" value="${counsel.aply_sn}" ${(counsel.stts_cd === '완료' || counsel.stts_cd === '취소') ? 'disabled' : ''}>
 	      <div id="collapse_${sessionNumber}" class="accordion-collapse collapse" aria-labelledby="heading_${sessionNumber}" data-bs-parent="#counsel_accordion">
 	        <div class="accordion-body">
 	          <div class="row mb-3 align-items-center">
 	            <label class="col-sm-2 col-form-label">상담일자</label>
 	            <div class="col-sm-3">
-	              <input type="text" class="form-control" value="${counsel.rsvt_dt}" disabled>
+	              <input type="date" class="form-control" name="rsvt_dt" value="${counsel.rsvt_dt}" ${(counsel.stts_cd === '완료' || counsel.stts_cd === '취소') ? 'disabled' : ''}>
 	            </div>
 	            <label class="col-sm-2 col-form-label">상담시간</label>
 	            <div class="col-sm-3">
-	              <input type="text" class="form-control" value="${counsel.hr_se}교시" disabled>
+	              <select class="form-select" name="hr_se" ${(counsel.stts_cd === '완료' || counsel.stts_cd === '취소') ? 'disabled' : ''}>
+	                <option value="1" ${counsel.hr_se === '1' ? 'selected' : ''}>1교시</option>
+	                <option value="2" ${counsel.hr_se === '2' ? 'selected' : ''}>2교시</option>
+	                <option value="3" ${counsel.hr_se === '3' ? 'selected' : ''}>3교시</option>
+	                <option value="4" ${counsel.hr_se === '4' ? 'selected' : ''}>4교시</option>
+	                <option value="5" ${counsel.hr_se === '5' ? 'selected' : ''}>5교시</option>
+	              </select>
 	            </div>
 	          </div>
 	
 	          <div class="row mb-3 align-items-center">
 	            <label class="col-sm-2 col-form-label">상담종류</label>
 	            <div class="col-sm-3">
-	              <select class="form-select" disabled>
+	              <select class="form-select" name="dscsn_knd" ${(counsel.stts_cd === '완료' || counsel.stts_cd === '취소') ? 'disabled' : ''}>
 	                <option value="학업" ${counsel.dscsn_knd === '학업' ? 'selected' : ''}>학업</option>
 	                <option value="진로" ${counsel.dscsn_knd === '진로' ? 'selected' : ''}>진로</option>
 	                <option value="심리" ${counsel.dscsn_knd === '심리' ? 'selected' : ''}>심리</option>
@@ -206,7 +223,7 @@ function makeOpeningModal() {
 	            </div>
 	            <label class="col-sm-2 col-form-label">상담방식</label>
 	            <div class="col-sm-3">
-	              <select class="form-select" disabled>
+	              <select class="form-select" name="dscsn_mthd" ${(counsel.stts_cd === '완료' || counsel.stts_cd === '취소') ? 'disabled' : ''}>
 	                <option value="대면" ${counsel.dscsn_mthd === '대면' ? 'selected' : ''}>대면</option>
 	                <option value="채팅" ${counsel.dscsn_mthd === '채팅' ? 'selected' : ''}>채팅</option>
 	                <option value="화상" ${counsel.dscsn_mthd === '화상' ? 'selected' : ''}>화상</option>
@@ -222,7 +239,7 @@ function makeOpeningModal() {
 	            </div>
 	            <label class="col-sm-2 col-form-label">상담상태</label>
 	            <div class="col-sm-3">
-	              <select class="form-select" disabled>
+	              <select class="form-select" name="stts_cd" ${(counsel.stts_cd === '완료' || counsel.stts_cd === '취소') ? 'disabled' : ''}>
 	                <option value="완료" ${counsel.stts_cd === '완료' ? 'selected' : ''}>완료</option>
 	                <option value="취소" ${counsel.stts_cd === '취소' ? 'selected' : ''}>취소</option>
 	                <option value="승인" ${counsel.stts_cd === '승인' ? 'selected' : ''}>승인</option>
@@ -234,7 +251,9 @@ function makeOpeningModal() {
 	      </div>
 	    </div>
 	  `;
-	
 	  accordionContainer.innerHTML += accordionItem;
+	  if ((counsel.stts_cd === '완료' || counsel.stts_cd === '취소') && detailData.length == sessionNumber) {
+		cnslModifyButton.disabled = true;
+	  }
 	});
 }

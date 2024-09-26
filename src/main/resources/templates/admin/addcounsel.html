@@ -37,58 +37,51 @@
 				<div class="card-body">
 
 					<!-- Form 시작 -->
-					<form id="stuser_add_frm" method="post" action="./stuser_add" enctype="multipart/form-data">
+					<form id="counsel_add_frm" method="post" action="./counsel_add">
 						        <div class="row mb-3 align-items-center">
-                            <label class="col-sm-2 col-form-label">상담자명</label>
+                            <label class="col-sm-2 col-form-label">교번(상담사)</label>
                             <div class="col-sm-3">
-                                <input type="text" class="form-control" value="이름" disabled>
+                                <input type="text" class="form-control" name="emp_no">
                             </div>
-                            <label class="col-sm-2 col-form-label">학번</label>
+                            <label class="col-sm-2 col-form-label">학번(내담자)</label>
                             <div class="col-sm-3">
-                                <input type="text" class="form-control" value="학번" disabled>
-                            </div>
-                        </div>
-
-                        <!-- 내담자 정보 -->
-                        <div class="row mb-3 align-items-center">
-                            <label class="col-sm-2 col-form-label">내담자명</label>
-                            <div class="col-sm-3">
-                                <input type="text" class="form-control" value="이름" disabled>
-                            </div>
-                            <label class="col-sm-2 col-form-label">교번</label>
-                            <div class="col-sm-3">
-                                <input type="text" class="form-control" value="교번" disabled>
+                                <input type="text" class="form-control" name="stdnt_no">
                             </div>
                         </div>
-                        
                         
                         <div class="row mb-3 align-items-center">
                                             <label class="col-sm-2 col-form-label">상담일자</label>
                                             <div class="col-sm-3">
-                                                <input type="date" class="form-control" disabled>
+                                                <input type="date" class="form-control" name="rsvt_dt">
                                             </div>
                                             <label class="col-sm-2 col-form-label">상담시간</label>
                                             <div class="col-sm-3">
-                                                <input type="time" class="form-control" disabled>
+                                                 <select class="form-select" aria-label="상담시간 선택" name="hr_se">
+                                                    <option value="1">1교시</option>
+                                                    <option value="2">2교시</option>
+                                                    <option value="3">3교시</option>
+                                                    <option value="4">4교시</option>
+                                                    <option value="5">5교시</option>
+                                                </select>
                                             </div>
                                         </div>
 
                                         <div class="row mb-3 align-items-center">
                                             <label class="col-sm-2 col-form-label">상담종류</label>
                                             <div class="col-sm-3">
-                                                <select class="form-select" aria-label="상담종류 선택">
-                                                    <option value="1">학업</option>
-                                                    <option value="2">진로</option>
-                                                    <option value="3">심리</option>
+                                                <select class="form-select" aria-label="상담종류 선택" name="dscsn_knd">
+                                                    <option value="학업">학업</option>
+                                                    <option value="진로">진로</option>
+                                                    <option value="심리">심리</option>
                                                 </select>
                                             </div>
                                             <label class="col-sm-2 col-form-label">상담방식</label>
                                             <div class="col-sm-3">
-                                                <select class="form-select" aria-label="상담방식 선택">
-                                                    <option value="1">대면</option>
-                                                    <option value="2">채팅</option>
-                                                    <option value="3">화상</option>
-                                                    <option value="4">전화</option>
+                                                <select class="form-select" aria-label="상담방식 선택" name="dscsn_mthd">
+                                                    <option value="대면">대면</option>
+                                                    <option value="채팅">채팅</option>
+                                                    <option value="화상">화상</option>
+                                                    <option value="전화">전화</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -96,14 +89,13 @@
                                         <div class="row mb-3 align-items-center">
                                             <label class="col-sm-2 col-form-label">상담장소</label>
                                             <div class="col-sm-3">
-                                                <input type="text" class="form-control" value="-" disabled>
+                                                <input type="text" class="form-control" value="자동으로 배정됩니다." disabled>
                                             </div>
                                             <label class="col-sm-2 col-form-label">상담상태</label>
                                             <div class="col-sm-3">
-                                                <select class="form-select" aria-label="상담상태 선택">
-                                                    <option value="1">완료</option>
-                                                    <option value="2">취소</option>
-                                                    <option value="3">예정</option>
+                                                <select class="form-select" aria-label="상담상태 선택" name="stts_cd">
+                                                    <option value="승인">승인</option>
+                                                    <option value="미승인">미승인</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -115,7 +107,7 @@
 						<!-- 등록 버튼 -->
 						<div class="d-flex justify-content-end">
 							<button type="button" class="btn btn-outline-primary"
-								onclick="add_stuser()">
+								onclick="add_counsel()">
 								<i class="ri-edit-2-line"></i> 등록
 							</button>
 						</div>
@@ -134,9 +126,13 @@
 
 	<!-- Scripts -->
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script src="/admin/js/adduser.js"></script>
 	<script src="/admin/js/bootstrap.bundle.min.js"></script>
-	<script src="/admin/js/global.js"></script>
-	<script src="/admin/js/stlistmod_useraddimg.js"></script>
+	<script>
+		function add_counsel() {
+			if (confirm("입력하신 정보로 상담을 추가하시겠습니까?")) {
+				counsel_add_frm.submit();
+			}
+		}
+	</script>
 </body>
 </html>
