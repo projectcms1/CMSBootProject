@@ -27,4 +27,8 @@ public interface AccountMapper {
     void insertEmployee(employee_dto employee);
     void updateEmployee(employee_dto employee);
     void deleteEmployee(int userNo);
+    
+    //로그인 실패 시 계정 잠금
+    String isLocked(String user_no);
+    void lockAccount(String user_no);
 }

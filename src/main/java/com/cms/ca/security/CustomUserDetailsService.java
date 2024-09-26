@@ -35,6 +35,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         System.out.println("getlgnid : " + account.getLgn_id());
         System.out.println("getUser_no : " + account.getUser_no());
         
+        if(account.getAcnt_lck_yn().equals("Y")) {
+        	throw new UsernameNotFoundException("계정잠금된 계정입니다. " + lgn_id);
+        }
         // 사용자 권한 설정 로직
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         employee_dto employee = accountService.findEmployeeByAccountId(account.getUser_no());
