@@ -1,23 +1,60 @@
+//상담 내역 검색
+function counsellist_search() {
+
+    var frmSearch = document.getElementById('frmSearch');
+    var inputState = frmSearch.elements['search_part'];
+    var searchInput = frmSearch.elements['search_word'];
+    
+    frmSearch.method = "GET";
+    frmSearch.action = "./allcounselmod?search_part=" + inputState.value + "&search_word=" + searchInput.value;
+    frmSearch.submit();
+    return false;
+}
+
 // 상담 내역 상세보기 모달 내부 ID
-//const accordionContainer = document.getElementById('counsel_accordion');
+const accordionContainer = document.getElementById('counsel_accordion');
+const studentNumber = document.getElementById('std_no');
+const studentName = document.getElementById('std_nm');
+const employeeNumber = document.getElementById('emp_no');
+const employeeName = document.getElementById('emp_nm');
+const mng_authrt = document.getElementById('mng_authrt');
+const cnslModifyButton = document.getElementById("cnslModifyBtn");
+
+// 상세 내역 데이터 저장
+let detailData = [];
 
 // 상담 내역 상세보기 AJAX
 function openDetailModal(aply_sn) {
 	fetch('./admin_counsel_detail/' + aply_sn, {
-		method : "GET",
+		method : "POST",
 		headers : { "content-type" : "application/x-www-form-urlencoded" }
 	}).then(function(result_data) {
-		return result_data.text();
+		return result_data.json();
 	}).then(function(result_res) {
-		console.log(result_res);
+		if (result_res.length == 0) {
+			alert("잘못된 접근입니다.");
+		}
+		else {
+			detailData = result_res;
+		}
+		makeOpeningModal();
 	}).catch(function(error) {
 		alert("통신 오류 발생!");
 	});
 }
 
+function update_counseldata() {
+	if (confirm("해당 내용으로 상담을 수정하시겠습니까?")) {
+		update_frm.method = "POST";
+		update_frm.action = "./admin_counsel_update";
+		update_frm.submit();
+	}
+}
+
 // 상담 리스트 페이징 처리
 document.addEventListener('DOMContentLoaded', function() {
-    const rowsPerPage = 10; // 한 페이지당 표시할 행의 수
+	
+	const rowsPerPage = 10; // 한 페이지당 표시할 행의 수
     const tableBody = document.getElementById('counselTableBody');
     const pagination = document.getElementById('counsel_list_paging');
     const totalPagesDisplay = document.getElementById('totalPagesDisplay');
@@ -130,7 +167,92 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
+	
     // 초기 페이지 표시
     showPage(1);
 });
+
+// 상담 내역 데이터에 맞춰 Modal 내부 HTML 생성
+function makeOpeningModal() {
+	accordionContainer.innerHTML = ''; // 기존 내용 초기화
+	cnslModifyButton.disabled = false; // 버튼 disabled 속성 초기화
+	studentNumber.value = detailData[0].stdnt_no;
+	studentName.value = detailData[0].stdnt_flnm;
+	employeeNumber.value = detailData[0].emp_no;
+	employeeName.value = detailData[0].emp_flnm;
+	mng_authrt.value = detailData[0].mng_authrt;
+	
+	detailData.forEach((counsel, index) => {
+	  const sessionNumber = index + 1;
+	  const accordionItem = `
+	    <div class="accordion-item">
+	      <h2 class="accordion-header" id="heading_${sessionNumber}">
+	        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_${sessionNumber}" aria-expanded="true" aria-controls="collapse_${sessionNumber}">
+	          ${sessionNumber}회차
+	        </button>
+	      </h2>
+	      <input type="hidden" name="aply_sn" value="${counsel.aply_sn}" ${(counsel.stts_cd === '완료' || counsel.stts_cd === '취소') ? 'disabled' : ''}>
+	      <div id="collapse_${sessionNumber}" class="accordion-collapse collapse" aria-labelledby="heading_${sessionNumber}" data-bs-parent="#counsel_accordion">
+	        <div class="accordion-body">
+	          <div class="row mb-3 align-items-center">
+	            <label class="col-sm-2 col-form-label">상담일자</label>
+	            <div class="col-sm-3">
+	              <input type="date" class="form-control" name="rsvt_dt" value="${counsel.rsvt_dt}" ${(counsel.stts_cd === '완료' || counsel.stts_cd === '취소') ? 'disabled' : ''}>
+	            </div>
+	            <label class="col-sm-2 col-form-label">상담시간</label>
+	            <div class="col-sm-3">
+	              <select class="form-select" name="hr_se" ${(counsel.stts_cd === '완료' || counsel.stts_cd === '취소') ? 'disabled' : ''}>
+	                <option value="1" ${counsel.hr_se === '1' ? 'selected' : ''}>1교시</option>
+	                <option value="2" ${counsel.hr_se === '2' ? 'selected' : ''}>2교시</option>
+	                <option value="3" ${counsel.hr_se === '3' ? 'selected' : ''}>3교시</option>
+	                <option value="4" ${counsel.hr_se === '4' ? 'selected' : ''}>4교시</option>
+	                <option value="5" ${counsel.hr_se === '5' ? 'selected' : ''}>5교시</option>
+	              </select>
+	            </div>
+	          </div>
+	
+	          <div class="row mb-3 align-items-center">
+	            <label class="col-sm-2 col-form-label">상담종류</label>
+	            <div class="col-sm-3">
+	              <select class="form-select" name="dscsn_knd" ${(counsel.stts_cd === '완료' || counsel.stts_cd === '취소') ? 'disabled' : ''}>
+	                <option value="학업" ${counsel.dscsn_knd === '학업' ? 'selected' : ''}>학업</option>
+	                <option value="진로" ${counsel.dscsn_knd === '진로' ? 'selected' : ''}>진로</option>
+	                <option value="심리" ${counsel.dscsn_knd === '심리' ? 'selected' : ''}>심리</option>
+	              </select>
+	            </div>
+	            <label class="col-sm-2 col-form-label">상담방식</label>
+	            <div class="col-sm-3">
+	              <select class="form-select" name="dscsn_mthd" ${(counsel.stts_cd === '완료' || counsel.stts_cd === '취소') ? 'disabled' : ''}>
+	                <option value="대면" ${counsel.dscsn_mthd === '대면' ? 'selected' : ''}>대면</option>
+	                <option value="채팅" ${counsel.dscsn_mthd === '채팅' ? 'selected' : ''}>채팅</option>
+	                <option value="화상" ${counsel.dscsn_mthd === '화상' ? 'selected' : ''}>화상</option>
+	                <option value="전화" ${counsel.dscsn_mthd === '전화' ? 'selected' : ''}>전화</option>
+	              </select>
+	            </div>
+	          </div>
+	
+	          <div class="row mb-3 align-items-center">
+	            <label class="col-sm-2 col-form-label">상담장소</label>
+	            <div class="col-sm-3">
+	              <input type="text" class="form-control" value="${counsel.plc}" disabled>
+	            </div>
+	            <label class="col-sm-2 col-form-label">상담상태</label>
+	            <div class="col-sm-3">
+	              <select class="form-select" name="stts_cd" ${(counsel.stts_cd === '완료' || counsel.stts_cd === '취소') ? 'disabled' : ''}>
+	                <option value="완료" ${counsel.stts_cd === '완료' ? 'selected' : ''}>완료</option>
+	                <option value="취소" ${counsel.stts_cd === '취소' ? 'selected' : ''}>취소</option>
+	                <option value="승인" ${counsel.stts_cd === '승인' ? 'selected' : ''}>승인</option>
+	                <option value="미승인" ${counsel.stts_cd === '미승인' ? 'selected' : ''}>미승인</option>
+	              </select>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	  `;
+	  accordionContainer.innerHTML += accordionItem;
+	  if (counsel.stts_cd === '취소' && detailData.length == sessionNumber) {
+		cnslModifyButton.disabled = true;
+	  }
+	});
+}

@@ -1,6 +1,8 @@
 package com.cms.ca.admin;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,5 +21,27 @@ public class aduser_service_impl implements aduser_service {
 		List<employee_dto> admin_data = this.aduser_repo.admin_list();
 		return admin_data;
 	}
-	
+
+	@Override
+	public List<employee_dto> admin_search_list(String search_part, String search_word) {
+
+		Map<String, String> mp = new HashMap<>();
+		mp.put("search_part", search_part);
+		mp.put("search_word", search_word);
+		List<employee_dto> adminlist_one_data = this.aduser_repo.admin_search_list(mp);
+		
+		return adminlist_one_data;
+	}
+
+	@Override
+	public int admin_detail_update(employee_dto dto) {
+		return this.aduser_repo.admin_detail_update(dto);
+	}
+
+	@Override
+	public employee_dto amdin_data(String emp_no) {
+		employee_dto admin_data = this.aduser_repo.admin_data(emp_no);
+		return admin_data;
+	}
+
 }

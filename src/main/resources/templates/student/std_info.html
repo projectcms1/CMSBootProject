@@ -80,9 +80,17 @@
 							<h5 class="card-title">개인정보(한글은 폰트 적용X)</h5>
 							<div class="row mb-1">
 								<!-- row 1 -->
-								<div class="col-md-2 col-lg-2">
-									<img src="/assets/img/3.jpeg" alt="Profile" class="rounded-4" style="margin-left: 25%;" width="80%" height="225px">
-								</div>
+								<th:block th:if="${std_data.getUser_photo() == null || std_data.getUser_photo() == '' }">
+									<div class="col-md-2 col-lg-2">
+									</div>
+								</th:block>
+								<th:block th:unless="${std_data.getUser_photo() == null || std_data.getUser_photo() == '' }">
+									<div class="col-md-2 col-lg-2">
+									 <img th:src="|/img_file/${ std_data.getUser_photo() }|" 
+									 class="rounded-4"  style="margin-left: 25%;" width="80%"  height="225px">
+									</div>
+								</th:block>
+								
 								<div class="col-md-4 col-lg-4">
 									<div class="row mb-1">
 										<label class="col-sm-4 col-form-label right-tag">입학년도</label>

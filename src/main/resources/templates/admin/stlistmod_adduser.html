@@ -75,7 +75,7 @@
 										<label class="col-sm-3 col-form-label">전화번호</label>
 										<div class="col-sm-9">
 											<input type="tel" name="user_telno" class="form-control"
-											placeholder="11자리 숫자만 입력해주세요!"
+											placeholder="11자리 숫자만 입력해주세요!" maxlength="11" min="11"
 												required>
 										</div>
 									</div>
@@ -106,9 +106,9 @@
 							<div class="row mb-3">
 								<div class="col-md-4">
 									<label class="col-form-label">대학(원)</label>
-										<select class="form-control" id="OGDP_UNIV" name="ogdp_univ"
+										<select class="form-select" id="OGDP_UNIV" name="ogdp_univ"
 											onchange="makeSelector(this.value)" required>
-											<option value="">대학 선택</option>
+											<option value="대학선택">대학선택</option>
 											<option value="공과대학">공과대학</option>
 											<option value="사회과학대학">사회과학대학</option>
 											<option value="인문대학">인문대학</option>
@@ -215,8 +215,7 @@
 	<!-- Scripts -->
 	<script
 		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script src="/admin/js/adduser.js"></script>
+	<script src="/admin/js/stadduser.js"></script>
 	<script src="/admin/js/bootstrap.bundle.min.js"></script>
-	<script src="/admin/js/global.js"></script>
 </body>
 </html>

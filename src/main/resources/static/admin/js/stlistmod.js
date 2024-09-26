@@ -228,156 +228,125 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
 //학생 리스트 페이징 처리
-	document.addEventListener('DOMContentLoaded', function() {
-	    const rowsPerPage = 10; // 한 페이지당 표시할 행의 수
-	    const tableBody = document.getElementById('studentTableBody');
-	    const pagination = document.getElementById('stlist_paging');
-	    const rows = Array.from(tableBody.getElementsByTagName('tr'));
-	    const totalRows = rows.length;
-	    const totalPages = Math.ceil(totalRows / rowsPerPage);
-	    let currentPage = 1;
-	    const maxPageNumbers = 5; // 최대 페이지 번호 표시 개수
+document.addEventListener('DOMContentLoaded', function() {
+    const rowsPerPage = 10; // 한 페이지당 표시할 행의 수
+    const tableBody = document.getElementById('studentTableBody');
+	const pagination = document.getElementById('stlist_paging');
+    const totalPagesDisplay = document.getElementById('totalPagesDisplay');
 
-	    // 페이지 표시 함수
-	    function showPage(page) {
-	        currentPage = page;
-	        const start = (page - 1) * rowsPerPage;
-	        const end = start + rowsPerPage;
+    if (!tableBody) {
+        console.error('counselTableBody 요소를 찾을 수 없습니다.');
+        return;
+    }
 
-	        rows.forEach((row, index) => {
-	            if (index >= start && index < end) {
-	                row.style.display = '';
-	            } else {
-	                row.style.display = 'none';
-	            }
-	        });
+    // 모든 tr 요소를 선택합니다.
+    const rows = Array.from(tableBody.getElementsByTagName('tr'));
+    const totalRows = rows.length;
+    const totalPages = Math.ceil(totalRows / rowsPerPage);
+    let currentPage = 1;
 
-	        updatePagination();
-	    }
+    // 페이지 표시 함수
+    function showPage(page) {
+        currentPage = page;
+        const start = (page - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
 
-	    // 페이지 네비게이션 업데이트 함수
-	    function updatePagination() {
-	        // 페이지 번호 버튼을 동적으로 생성하기 위해 기존 페이지 번호 제거
-	        // <<, <, >, >> 버튼은 유지
-	        const pageNumbers = pagination.querySelectorAll('.page-number');
-	        pageNumbers.forEach(btn => btn.remove());
+        rows.forEach((row, index) => {
+            if (index >= start && index < end) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
 
-	        // 페이지 번호 범위 계산
-	        let startPage = 1;
-	        let endPage = totalPages;
+        updatePagination();
+    }
 
-	        if (totalPages > maxPageNumbers) {
-	            const half = Math.floor(maxPageNumbers / 2);
-	            if (currentPage <= half + 1) {
-	                startPage = 1;
-	                endPage = maxPageNumbers;
-	            } else if (currentPage + half >= totalPages) {
-	                startPage = totalPages - maxPageNumbers + 1;
-	                endPage = totalPages;
-	            } else {
-	                startPage = currentPage - half;
-	                endPage = currentPage + half;
-	                if (maxPageNumbers % 2 === 0) {
-	                    endPage -= 1;
-	                }
-	            }
-	        }
+    // 페이지 네비게이션 업데이트 함수
+    function updatePagination() {
+        // 기존 총 페이지 수 표시 제거
+        if (totalPagesDisplay.firstChild) {
+            totalPagesDisplay.removeChild(totalPagesDisplay.firstChild);
+        }
 
-	        // 페이지 번호 버튼 생성
-	        for (let i = startPage; i <= endPage; i++) {
-	            const li = document.createElement('li');
-	            li.classList.add('page-number');
+        // 총 페이지 수 표시 추가
+        const span = document.createElement('span');
+        span.textContent = `총 페이지: ${totalPages}`;
+        totalPagesDisplay.appendChild(span);
 
-	            const a = document.createElement('a');
-	            a.href = '#';
-	            a.textContent = i;
-	            a.dataset.page = i;
+        // << 버튼 활성화/비활성화
+        const firstBtn = document.getElementById('first-page');
+        if (currentPage === 1) {
+            firstBtn.classList.add('disabled');
+        } else {
+            firstBtn.classList.remove('disabled');
+        }
 
-	            if (i === currentPage) {
-	                li.classList.add('act'); // 활성화된 페이지에 클래스 추가
-	            }
+        // < 버튼 활성화/비활성화
+        const prevBtn = document.getElementById('prev-page');
+        if (currentPage === 1) {
+            prevBtn.classList.add('disabled');
+        } else {
+            prevBtn.classList.remove('disabled');
+        }
 
-	            a.addEventListener('click', function(e) {
-	                e.preventDefault();
-	                const selectedPage = parseInt(this.dataset.page);
-	                if (selectedPage !== currentPage) {
-	                    showPage(selectedPage);
-	                }
-	            });
+        // > 버튼 활성화/비활성화
+        const nextBtn = document.getElementById('next-page');
+        if (currentPage === totalPages) {
+            nextBtn.classList.add('disabled');
+        } else {
+            nextBtn.classList.remove('disabled');
+        }
 
-	            li.appendChild(a);
-	            // Insert before the > 버튼 (3번째 위치부터)
-	            //pagination.insertBefore(li, pagination.querySelector('#next-page'));
-	        }
+        // >> 버튼 활성화/비활성화
+        const lastBtn = document.getElementById('last-page');
+        if (currentPage === totalPages) {
+            lastBtn.classList.add('disabled');
+        } else {
+            lastBtn.classList.remove('disabled');
+        }
+    }
 
-	        // << 버튼 활성화/비활성화
-	        const firstBtn = document.getElementById('first-page');
-	        if (currentPage === 1) {
-	            firstBtn.classList.add('disabled');
-	        } else {
-	            firstBtn.classList.remove('disabled');
-	        }
+    // 버튼 클릭 이벤트 설정
+    const firstBtn = document.getElementById('first-page');
+    const prevBtn = document.getElementById('prev-page');
+    const nextBtn = document.getElementById('next-page');
+    const lastBtn = document.getElementById('last-page');
 
-	        // < 버튼 활성화/비활성화
-	        const prevBtn = document.getElementById('prev-page');
-	        if (currentPage === 1) {
-	            prevBtn.classList.add('disabled');
-	        } else {
-	            prevBtn.classList.remove('disabled');
-	        }
+    if (firstBtn && prevBtn && nextBtn && lastBtn) {
+        firstBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (currentPage !== 1) {
+                showPage(1);
+            }
+        });
 
-	        // > 버튼 활성화/비활성화
-	        const nextBtn = document.getElementById('next-page');
-	        if (currentPage === totalPages) {
-	            nextBtn.classList.add('disabled');
-	        } else {
-	            nextBtn.classList.remove('disabled');
-	        }
+        prevBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (currentPage > 1) {
+                showPage(currentPage - 1);
+            }
+        });
 
-	        // >> 버튼 활성화/비활성화
-	        const lastBtn = document.getElementById('last-page');
-	        if (currentPage === totalPages) {
-	            lastBtn.classList.add('disabled');
-	        } else {
-	            lastBtn.classList.remove('disabled');
-	        }
-	    }
+        nextBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (currentPage < totalPages) {
+                showPage(currentPage + 1);
+            }
+        });
 
-	    // 버튼 클릭 이벤트 설정
-	    document.getElementById('first-page').addEventListener('click', function(e) {
-	        e.preventDefault();
-	        if (currentPage !== 1) {
-	            showPage(1);
-	        }
-	    });
+        lastBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (currentPage !== totalPages) {
+                showPage(totalPages);
+            }
+        });
+    }
 
-	    document.getElementById('prev-page').addEventListener('click', function(e) {
-	        e.preventDefault();
-	        if (currentPage > 1) {
-	            showPage(currentPage - 1);
-	        }
-	    });
-
-	    document.getElementById('next-page').addEventListener('click', function(e) {
-	        e.preventDefault();
-	        if (currentPage < totalPages) {
-	            showPage(currentPage + 1);
-	        }
-	    });
-
-	    document.getElementById('last-page').addEventListener('click', function(e) {
-	        e.preventDefault();
-	        if (currentPage !== totalPages) {
-	            showPage(totalPages);
-	        }
-	    });
-
-	    // 초기 페이지 표시
-	    showPage(1);
-	});
-	
+    // 초기 페이지 표시
+    showPage(1);
+});
 	
 
 

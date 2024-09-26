@@ -25,7 +25,6 @@
 	<select id="getFreeCounseler" resultType="String">
 		select MAX(EMP_NO) from EMP_INFO where 1=1 and MNG_AUTHRT = 'C'
 		and EMP_NO NOT IN (select EMP_NO from DSCSN_APLY where RSVT_DT = '20240918' and HR_SE = '2')
-	
 	</select>
 
 	<select id="getListCounsel" resultType="com.cms.ca.view_counsel_dto" parameterType="Map">
@@ -49,7 +48,7 @@
 	</select>
 
 	<select id="getListCounselInfo" resultType="com.cms.ca.view_counsel_dto" parameterType="String">
-		select * from VIEW_DSCSN_APLY where APLY_SN = #{aply_sn} or BFR_APLY_SN = #{aply_sn} order by APLY_SN asc
+		select * from VIEW_DSCSN_APLY where (APLY_SN = #{aply_sn} or BFR_APLY_SN = #{aply_sn}) and STTS_CD = '완료' order by APLY_SN asc
 	</select>
 
 	<select id="getCountData" resultType="int" parameterType="String">
