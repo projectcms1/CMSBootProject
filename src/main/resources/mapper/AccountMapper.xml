@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cms.ca.mapper.AccountMapper">
+    <resultMap id="AccountResultMap" type="com.cms.ca.login_dto">
+        <id column="USER_NO" property="user_no" />
+        <result column="LGN_ID" property="lgn_id" />
+        <result column="PSWD" property="pswd" />
+        <result column="LAST_LGN_DT" property="last_lgn_dt" />
+        <result column="ACNT_LCK_YN" property="acnt_lck_yn" />
+        <result column="REG_DT" property="reg_dt" />
+    </resultMap>
+    
+    <resultMap id="studentResultMap" type="com.cms.ca.student_dto">
+	    <id column="STDNT_NO" property="stdnt_no" />
+	    <result column="STDNT_FLNM" property="stdnt_flnm" />
+	    <result column="USER_NO" property="user_no" />
+	    <result column="USER_EML_ADDR" property="user_eml_addr" />
+	    <result column="USER_TELNO" property="user_telno" />
+	    <result column="USER_ZIP" property="user_zip" />
+	    <result column="USER_ADDR" property="user_addr" />
+	    <result column="USER_DADDR" property="user_daddr" />
+	    <result column="USER_PHOTO" property="user_photo" />
+	    <result column="BRDT" property="brdt" />
+	    <result column="DLNG_BANK_NM" property="dlng_bank_nm" />
+	    <result column="DLNG_ACTNO" property="dlng_actno" />
+	    <result column="DPSTR_NM" property="dpstr_nm" />
+	    <result column="UNIV_PRD" property="univ_prd" />
+	    <result column="OGDP_UNIV" property="ogdp_univ" />
+	    <result column="OGDP_SCSBJT" property="ogdp_scsbjt" />
+	    <result column="MJR" property="mjr" />
+	    <result column="STDNT_STTS_SE" property="stdnt_stts_se" />
+	</resultMap>
+	
+	<resultMap id="employeeResultMap" type="com.cms.ca.employee_dto">
+	    <id column="EMP_NO" property="emp_no" />
+	    <result column="EMP_FLNM" property="emp_flnm" />
+	    <result column="USER_NO" property="user_no" />
+	    <result column="EMP_EML_ADDR" property="emp_eml_addr" />
+	    <result column="EMP_TELNO" property="emp_telno" />
+	    <result column="EMP_ZIP" property="emp_zip" />
+	    <result column="EMP_ADDR" property="emp_addr" />
+	    <result column="EMP_DADDR" property="emp_daddr" />
+	    <result column="EMP_PHOTO" property="emp_photo" />
+	    <result column="EDU_CRTFCT_NO" property="edu_crtfct_no" />
+	    <result column="EDU_CRTFCT_ISSU_YMD" property="edu_crtfct_issu_ymd" />
+	    <result column="BRDT" property="brdt" />
+	    <result column="DLNG_BANK_NM" property="dlng_bank_nm" />
+	    <result column="DLNG_ACTNO" property="dlng_actno" />
+	    <result column="DPSTR_NM" property="dpstr_nm" />
+	    <result column="OGDP_INST_NM" property="ogdp_inst_nm" />
+	    <result column="OGDP_DEPT_NM" property="ogdp_dept_nm" />
+	    <result column="JBGD_NM" property="jbgd_nm" />
+	    <result column="MJR" property="mjr" />
+	    <result column="ACNT_STTS" property="acnt_stts" />
+	    <result column="MNG_AUTHRT" property="mng_authrt" />
+	</resultMap>
+	
+    <!-- 사용자 이름(lgnId)으로 계정 정보 조회 -->
+    <select id="findAccountByUsername" parameterType="String" resultMap="AccountResultMap">
+        SELECT * FROM LGN_ACNT_INFO WHERE LGN_ID = #{lgn_id}
+    </select>
+
+    <!-- USER_NO로 임직원 정보 조회 -->
+    <select id="findEmployeeByAccountId" parameterType="Integer" resultMap="employeeResultMap">
+        SELECT * FROM EMP_INFO WHERE USER_NO = #{user_no}
+    </select>
+
+    <!-- USER_NO로 학생 정보 조회 -->
+    <select id="findStudentByAccountId" parameterType="Integer" resultMap="studentResultMap">
+        SELECT * FROM STDNT_INFO WHERE USER_NO = #{user_no}
+    </select>
+</mapper>
