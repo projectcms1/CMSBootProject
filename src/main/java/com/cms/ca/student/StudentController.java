@@ -21,7 +21,7 @@ import jakarta.servlet.ServletResponse;
 public class StudentController {
 
 	// ==== 로그인 구현 이전, 세션의 임시 학번 데이터 ======
-	String STD_NUMBER = "20245125";
+	String STD_NUMBER = "20249987";
 	// =======================================
 	String viewName = "page_blank";
 	
