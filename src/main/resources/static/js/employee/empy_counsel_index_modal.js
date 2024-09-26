@@ -1,5 +1,12 @@
 function madalDataSet(aply_sn){
-	var url=window.location.href;
+	var url;
+	if(window.location.href.includes("?")){
+		url=window.location.href.substring(0, window.location.href.indexOf("?"));
+	}
+	else{
+		url=window.location.href;
+	}
+	
 	fetch(url+"ok.do?aply_sn="+aply_sn)
 	    .then(res => res.json()) //응답 결과를 json으로 파싱
 	    .then(data => {

@@ -50,7 +50,7 @@
 	  <header id="header" class="header fixed-top d-flex align-items-center">
 	
 	    <div class="d-flex align-items-center justify-content-between">
-	      <a href="index" class="logo d-flex align-items-center">
+	      <a href="/index" class="logo d-flex align-items-center">
 	        <img src="/assets/img/logo.png" alt="" style="width: 30px;">
 	        <span class="d-none d-lg-block">중앙정보대학교</span>
 	      </a>      
@@ -65,6 +65,11 @@
 			<div th:replace="~{/student/std_sidebar :: std_sidebar}"></div>	<!-- Std Sidebar -->
 	</div>
 	
+	<!-- 임직원 로그인 시 헤더&사이드바 -->
+	<div th:if="${#authorization.expression('hasRole(''PROFESSOR'') or hasRole(''COUNSELOR'')')}">
+			<div th:replace="~{/employee/empy_header :: empy_header}"></div>	<!-- Empy Header -->
+			<div th:replace="~{/employee/empy_sidebar :: empy_sidebar}"></div>	<!-- Empy Sidebar -->
+	</div>
 
 	<!-- ======= Header END ======= -->
   <!-- ======= main ======= -->
@@ -85,6 +90,12 @@
 			    <p>학생 로그인</p>
 			</div>
 			
+			<!-- 임직원 로그인 성공 -->
+			<div th:if="${#authorization.expression('hasRole(''PROFESSOR'') or hasRole(''COUNSELOR'')')}">
+			 <h3>Employee Section</h3>
+			    <p>임직원 로그인</p>
+			</div>
+			
             <!-- Information Links 
             <ul class="info-links">
                 <li><a href="extra_indexok.do">비교과프로그램</a></li>
@@ -94,7 +105,7 @@
             </ul>-->
             <div class="navigation-container">
         <div class="navigation-row">        
-            <a href="extra_indexok.do" class="navigation-item">
+            <a href="#" class="navigation-item">
                 <i class="bx bx-category"></i>
                 <div class="nav-text">
                     <h3>비교과 프로그램</h3>
@@ -136,7 +147,9 @@
                     <h2>공지사항</h2>
                     <div class="category-tabs">
                         <button class="category active" data-category="academic">학사</button>
+                        <div th:if="${#authorization.expression('hasRole(''PROFESSOR'') or hasRole(''COUNSELOR'')')}">
                         <button class="category" data-category="scholarship">교직원</button>
+                        </div>
                         <button class="category" data-category="volunteer">비교과</button>
                     </div>
                 </div>

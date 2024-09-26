@@ -29,11 +29,7 @@
 <!-- Template Main CSS File -->
 <link href="/assets/css/style.css" rel="stylesheet">
 <link href="/assets/css/empy.css" rel="stylesheet">
-<<<<<<< HEAD
-<link href="/assets/vendor/simple-daatatables/datatable.css" rel="stylesheet">
-=======
 
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 <!-- =======================================================
   * Template Name: NiceAdmin
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -44,100 +40,12 @@
 </head>
 
 <body>
-<<<<<<< HEAD
-=======
 
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 	<div th:replace="~{/employee/empy_header :: empy_header}"></div>	<!-- Empy Header -->
 	<div th:replace="~{/employee/empy_sidebar :: empy_sidebar}"></div>	<!-- Empy Sidebar -->
 	
 	<main id="main" class="main">
     
-<<<<<<< HEAD
-    	<!-- ======= Page Title ======= -->
-    	<div class="pagetitle">
-    	  	<h1>상담관리</h1>
-      		<nav>
-        	  	<ol class="breadcrumb">
-          			<li class="breadcrumb-item"><a href="/empy_counsel_index">상담관리</a></li>
-          			<li class="breadcrumb-item active">상담이력조회</li>
-        	  	</ol>
-      		</nav>
-    	</div> 
-    	<!-- End Page Title -->
-		
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">상담이력검색</h5>
-
-              <!-- 상담 이력 Table -->
-              <table id="search_table">
-                <thead>
-                  <tr>
-                    <th>상담일시</th>
-                    <th>학생이름</th>
-                    <th>학생학번</th>
-                    <th>상담종류</th>
-                    <th>상담방식</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>2021/02/11</td>
-                    <td>김하나</td>
-                    <td>20201423</td>
-                    <td>학업상담</td>
-                    <td>
-                    	채팅상담
-						<button type="button" class="btn btn-outline-info btn-sm rounded-pill" style="float: right; margin-left: 5px;">상세보기</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2021/02/14</td>
-                    <td>이지혜</td>
-                    <td>20181423</td>
-                    <td>진로상담</td>
-                    <td>
-                    	대면상담
-						<button type="button" class="btn btn-outline-info btn-sm rounded-pill" style="float: right; margin-left: 5px;">상세보기</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2021/07/24</td>
-                    <td>김하나</td>
-                    <td>20201423</td>
-                    <td>진로상담</td>
-                    <td>
-                    	대면상담
-						<button type="button" class="btn btn-outline-info btn-sm rounded-pill" style="float: right; margin-left: 5px;">상세보기</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2017/04/21</td>
-                    <td>허준</td>
-                    <td>20051231</td>
-                    <td>진로상담</td>
-                    <td>
-                    	화상상담
-						<button type="button" class="btn btn-outline-info btn-sm rounded-pill" style="float: right; margin-left: 5px;">상세보기</button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <!-- End 상담 이력 Table -->
-
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-                  
-</main>
-=======
     <div class="pagetitle">
       	<h1>상담관리</h1>
      		<nav>
@@ -226,7 +134,7 @@
 							                    <button type="button" class="btn btn-outline-info btn-sm rounded-pill" 
 												data-bs-toggle="modal" data-bs-target="#counselDetailModal" 
 												style="float: right; margin-left: 5px;" 
-												th:value="${counsel.getAply_sn}" onclick="madalDataSet(this.value)">상세보기</button>
+												th:value="${counsel.getAply_sn}" th:onclick="madalDataSet([[${counsel.getAply_sn}]])">상세보기</button>
 							                </td>
 							            </tr>
 					                </tbody>
@@ -320,7 +228,6 @@
 	</section>
 	       
 	</main>
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 	<!-- End #main -->
 	
 	<div th:replace="~{/employee/empy_footer :: empy_footer}"></div>	<!-- 교직원 footer -->
@@ -337,53 +244,6 @@
 
 	<!-- Template Main JS File -->
 	<script src="/assets/js/main.js"></script>
-<<<<<<< HEAD
-	<script type="module">
-    	import {DataTable} from "/assets/vendor/simple-datatables/simple-datatables.js"
-       	window.dt = new DataTable("#search_table", {
-			perPageSelect: [10, 50, ["All", -1]],
-			columns: [
-           		{
-            		select: 2,
-                    sortSequence: ["asc", "desc"]
-                }
-            ],
-            tableRender: (_data, table, type) => {
-                if (type === "print") {
-                    return table
-                }
-                const tHead = table.childNodes[0]
-                const filterHeaders = {
-                    nodeName: "TR",
-                    childNodes: tHead.childNodes[0].childNodes.map(
-                        (_th, index) => ({nodeName: "TH",
-                            childNodes: [
-                                {
-                                    nodeName: "INPUT",
-                                    attributes: {
-                                        class: "datatable-input",
-                                        type: "search",
-                                        "data-columns": `[${index}]`
-                                    }
-                                }
-                            ]})
-                    )
-                }
-                tHead.childNodes.push(filterHeaders)
-                return table
-            }
-        })
-
-    </script>
-</body>
-<script>
-window.onload=function(){
-	document.getElementById('counsel-nav').className = 'nav-link';
-	document.getElementById('counsel-nav1').className += ' show';
-    document.getElementById('counsel-nav-1').className += ' active';	
-}
-</script>
-=======
     
 </body>
 
@@ -399,5 +259,4 @@ window.onload=function(){
 <script src="/js/employee/empy_counsel_index_modal.js"></script>
 <script src="/js/employee/empy_paging.js"></script>
 
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 </html>

@@ -1,12 +1,4 @@
-<<<<<<< HEAD
-/*개인적인 추가 css*/
-.right-tag {
-	margin-left: auto;
-}
 
-.pd-left-3{
-	padding-left: 3%;
-=======
 /*개인적인 추가 css*/
 .right-tag {
 	margin-left: auto;
@@ -89,5 +81,5 @@ body{
 @-o-keyframes rotate-loading {
     0%  {transform: rotate(0deg);-ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg);}
     100% {transform: rotate(360deg);-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); -o-transform: rotate(360deg); -moz-transform: rotate(360deg);}
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
+
 }

@@ -29,11 +29,7 @@
 <!-- Template Main CSS File -->
 <link href="/assets/css/style.css" rel="stylesheet">
 <link href="/assets/css/empy.css" rel="stylesheet">
-<<<<<<< HEAD
-<link href="/assets/vendor/simple-daatatables/datatable.css" rel="stylesheet">
-=======
 
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 <!-- =======================================================
   * Template Name: NiceAdmin
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -44,179 +40,12 @@
 </head>
 
 <body>
-<<<<<<< HEAD
-=======
 
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 	<div th:replace="~{/employee/empy_header :: empy_header}"></div>	<!-- Empy Header -->
 	<div th:replace="~{/employee/empy_sidebar :: empy_sidebar}"></div>	<!-- Empy Sidebar -->
 	
 	<main id="main" class="main">
 	   
-<<<<<<< HEAD
-	    <!-- ======= Page Title ======= -->
-	    <div class="pagetitle">
-	      	<h1>상담관리</h1>
-	      	<nav>
-	        	<ol class="breadcrumb">
-	          		<li class="breadcrumb-item"><a href="/empy_counsel_index">상담관리</a></li>
-	          		<li class="breadcrumb-item active">상담예약관리</li>
-	        	</ol>
-	      	</nav>
-	    </div> 
-	    <!-- End Page Title -->
-			
-	    <section class="section">
-	      <div class="row">
-	        <div class="col-lg-12">
-	        
-	          <!-- ======= 대기중 상담 Card ======= -->
-	          <div class="card">
-	            <div class="card-body">
-	              <h5 class="card-title">대기중 상담</h5>
-			      <table id="waiting_table">	
-	                <thead>
-	                  <tr>
-	                    <th>상담일시</th>
-	                    <th>학생이름</th>
-	                    <th>학생학번</th>
-	                    <th>상담종류</th>
-	                    <th>상담방식</th>
-	                  </tr>
-	                </thead>
-	                <tbody>
-	                  <tr>
-	                    <td>2021/02/11</td>
-	                    <td>김하나</td>
-	                    <td>20201423</td>
-	                    <td>학업상담</td>
-	                    <td>
-	                    	채팅상담
-	                    	<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">미승인</button>
-		                    <button type="button" class="btn btn-primary btn-sm rounded-pill" style="float: right; margin-left: 5px;">승인</button>
-	                    </td>
-	                  </tr>
-	                  <tr>
-	                    <td>2021/02/14</td>
-	                    <td>이지혜</td>
-	                    <td>20181423</td>
-	                    <td>진로상담</td>
-	                    <td>
-	                    	대면상담
-	                    	<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">미승인</button>
-		                    <button type="button" class="btn btn-primary btn-sm rounded-pill" style="float: right; margin-left: 5px;">승인</button>
-	                    </td>
-	                  </tr>
-	                  <tr>
-	                    <td>2021/07/24</td>
-	                    <td>김하나</td>
-	                    <td>20201423</td>
-	                    <td>진로상담</td>
-	                    <td>
-	                    	화상상담
-	                    	<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">미승인</button>
-		                    <button type="button" class="btn btn-primary btn-sm rounded-pill" style="float: right; margin-left: 5px;">승인</button>
-		                </td>
-	                  </tr>
-	                  <tr>
-	                    <td>2017/04/21</td>
-	                    <td>허준</td>
-	                    <td>20051231</td>
-	                    <td>진로상담</td>
-	                    <td>
-	                    	대면상담
-	                    	<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">미승인</button>
-		                    <button type="button" class="btn btn-primary btn-sm rounded-pill" style="float: right; margin-left: 5px;">승인</button>
-	                    </td>
-	                  </tr>
-	                </tbody>
-	              </table>
-	            </div>
-	          </div>
-	          <!-- End 대기중 상담 Card -->
-	          
-	          <!-- ======= 확정 상담 Card ======= -->
-	          <div class="card">
-	            <div class="card-body">
-	              <h5 class="card-title">확정 상담</h5>
-			      <table id="ok_table">	
-	                <thead>
-	                  <tr>
-	                    <th>상담일시</th>
-	                    <th>학생이름</th>
-	                    <th>학생학번</th>
-	                    <th>상담종류</th>
-	                    <th>상담방식</th>
-	                  </tr>
-	                </thead>
-	                <tbody>
-	                  <tr>
-	                    <td>2021/07/24</td>
-	                    <td>김하나</td>
-	                    <td>20201423</td>
-	                    <td>진로상담</td>
-	                    <td>
-	                    	화상상담
-	                    	<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
-		                    <button type="button" class="btn btn-primary btn-sm rounded-pill" style="float: right; margin-left: 5px;">완료</button>
-	                    </td>
-	                  </tr>
-	                  <tr>
-	                    <td>2017/04/21</td>
-	                    <td>허준</td>
-	                    <td>20051231</td>
-	                    <td>진로상담</td>
-	                    <td>
-	                    	대면상담
-	                    	<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;">취소</button>
-		                    <button type="button" class="btn btn-primary btn-sm rounded-pill" style="float: right; margin-left: 5px;">완료</button>
-	                    </td>
-	                  </tr>
-	                </tbody>
-	              </table>
-	            </div>
-	          </div>
-	          <!-- End 확정 상담 Card -->
-	          
-	          <!-- ======= 지난 상담 Card ======= -->
-	          <div class="card">
-	            <div class="card-body">
-	              <h5 class="card-title">지난 상담</h5>
-			      <table id="last_table">	
-	                <thead>
-	                  <tr>
-	                    <th>상담일시</th>
-	                    <th>학생이름</th>
-	                    <th>학생학번</th>
-	                    <th>상담종류</th>
-	                    <th>상담상태</th>
-	                  </tr>
-	                </thead>
-	                <tbody>
-	                  <tr>
-	                    <td>2021/07/24</td>
-	                    <td>김하나</td>
-	                    <td>20201423</td>
-	                    <td>진로상담</td>
-	                    <td>취소</td>
-	                  </tr>
-	                  <tr>
-	                    <td>2017/04/21</td>
-	                    <td>허준</td>
-	                    <td>20051231</td>
-	                    <td>진로상담</td>
-	                    <td>완료</td>
-	                  </tr>
-	                </tbody>
-	              </table>
-	            </div>
-	          </div>
-	          <!-- End 지난 상담 Card -->
-	          
-	        </div>
-	      </div>
-	    </section>           
-=======
 	<div class="pagetitle">
 		<h1>상담관리</h1>
 	    <nav>
@@ -609,7 +438,6 @@
 	    </div>
 	</section>           
 	
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 	</main>
 	<!-- End #main -->
 	
@@ -627,121 +455,6 @@
 
 	<!-- Template Main JS File -->
 	<script src="/assets/js/main.js"></script>
-<<<<<<< HEAD
-	<script type="module">
-    	import {DataTable} from "/assets/vendor/simple-datatables/simple-datatables.js"
-       	window.dt = new DataTable("#waiting_table", {
-			perPageSelect: [10, 5, ["All", -1]],
-			columns: [
-           		{
-            		select: 2,
-                    sortSequence: ["asc", "desc"]
-                }
-            ],
-            tableRender: (_data, table, type) => {
-                if (type === "print") {
-                    return table
-                }
-                const tHead = table.childNodes[0]
-                const filterHeaders = {
-                    nodeName: "TR",
-                    childNodes: tHead.childNodes[0].childNodes.map(
-                        (_th, index) => ({nodeName: "TH",
-                            childNodes: [
-                                {
-                                    nodeName: "INPUT",
-                                    attributes: {
-                                        class: "datatable-input",
-                                        type: "search",
-                                        "data-columns": `[${index}]`
-                                    }
-                                }
-                            ]})
-                    )
-                }
-                tHead.childNodes.push(filterHeaders)
-                return table
-            }
-        })
-
-		window.dt = new DataTable("#ok_table", {
-			perPageSelect: [5, 10, ["All", -1]],
-			columns: [
-           		{
-            		select: 2,
-                    sortSequence: ["asc", "desc"]
-                }
-            ],
-            tableRender: (_data, table, type) => {
-                if (type === "print") {
-                    return table
-                }
-                const tHead = table.childNodes[0]
-                const filterHeaders = {
-                    nodeName: "TR",
-                    childNodes: tHead.childNodes[0].childNodes.map(
-                        (_th, index) => ({nodeName: "TH",
-                            childNodes: [
-                                {
-                                    nodeName: "INPUT",
-                                    attributes: {
-                                        class: "datatable-input",
-                                        type: "search",
-                                        "data-columns": `[${index}]`
-                                    }
-                                }
-                            ]})
-                    )
-                }
-                tHead.childNodes.push(filterHeaders)
-                return table
-            }
-        })
-		
-		window.dt = new DataTable("#last_table", {
-			perPageSelect: [5, 10, 15, ["All", -1]],
-			columns: [
-           		{
-            		select: 2,
-                    sortSequence: ["asc", "desc"]
-                }
-            ],
-            tableRender: (_data, table, type) => {
-                if (type === "print") {
-                    return table
-                }
-                const tHead = table.childNodes[0]
-                const filterHeaders = {
-                    nodeName: "TR",
-                    childNodes: tHead.childNodes[0].childNodes.map(
-                        (_th, index) => ({nodeName: "TH",
-                            childNodes: [
-                                {
-                                    nodeName: "INPUT",
-                                    attributes: {
-                                        class: "datatable-input",
-                                        type: "search",
-                                        "data-columns": `[${index}]`
-                                    }
-                                }
-                            ]})
-                    )
-                }
-                tHead.childNodes.push(filterHeaders)
-                return table
-            }
-        })
-    </script>
-    
-</body>
-<script>
-window.onload=function(){
-	document.getElementById('counsel-nav').className = 'nav-link';
-	document.getElementById('counsel-nav1').className += ' show';
-    document.getElementById('counsel-nav-2').className += ' active';	
-}
-</script>
-=======
     
 </body>
 
@@ -753,5 +466,4 @@ window.onload=function(){
 	}
 </script>
 
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 </html>

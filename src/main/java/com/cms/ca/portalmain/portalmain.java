@@ -11,13 +11,4 @@ public class portalmain {
 		return "page_blank";
 	}
 	
-	@GetMapping("/")
-	public String portalMain() {
-		return "default-header";
-	}
-	
-	@GetMapping("/logindo")
-	public String loginPage() {
-		return "login";
-	}
 }

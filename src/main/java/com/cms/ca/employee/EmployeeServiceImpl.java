@@ -88,8 +88,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public List<view_counsel_dto> getOneCounsel(int aply_sn) {
-		List<view_counsel_dto> counsel_detail=this.empyRepo.getOneCounsel(aply_sn);
+	public List<view_counsel_dto> getOneCounsel(int aply_sn, String stts_cd) {
+		List<view_counsel_dto> counsel_detail=this.empyRepo.getOneCounsel(aply_sn, stts_cd);
 		int i=0;
 		while(i<counsel_detail.size()) {
 			if(counsel_detail.get(i).getPlc()==null || counsel_detail.get(i).getPlc().equals("")) {
@@ -122,8 +122,57 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return update_result;
 	}
 
-	
-	
+	@Override
+	public int addConnectedCounsel(view_counsel_dto csl_dto, String emp_no) {	//재귀 상담 추가(교직원 분류에 따라 장소 변경 및 날짜 포멧 수정)
+		csl_dto.setEmp_no(emp_no);
+		csl_dto.setStts_cd("승인");
+		if(csl_dto.getDscsn_mthd().equals("대면")) {
+			csl_dto.setPlc("상담 센터");			
+		}
+		else {
+			csl_dto.setPlc(null);	
+		}
+		csl_dto.setRsvt_dt(csl_dto.getRsvt_dt().substring(0, 4)+csl_dto.getRsvt_dt().substring(5,7)+csl_dto.getRsvt_dt().substring(8,10));
+		/*
+		if(사용자관리권한=="P"){	//교수
+			csl_dto.setPlc("교수 연구실");
+		}
+		else if(사용자관리권한=="C"){	//상담사
+			csl_dto.setPlc("상담 센터");
+		}
+		*/
+		int insertResult=this.empyRepo.addConnectedCounsel(csl_dto);
+		return insertResult;
+	}
 
+	@Override
+	public int addCounselResult(String dscsn_cn, int aply_sn) {
+		int addResult=this.empyRepo.addCounselResult(dscsn_cn, aply_sn);
+		return addResult;
+	}
+	
+	@Override
+	public List<view_counsel_dto> getConnectedCounsel(int aply_sn) {
+		List<view_counsel_dto> counsel_list=this.empyRepo.getOneCounsel(aply_sn, "");
+		List<view_counsel_dto> counsel_detail=null;
+		if(counsel_list.get(0).getBfr_aply_sn()!=null) {
+			counsel_detail=this.empyRepo.getConnectedCounsel(aply_sn, counsel_list.get(0).getBfr_aply_sn());			
+		}
+		else {
+			counsel_detail=counsel_list;
+		}
+		int i=0;
+		while(i<counsel_detail.size()) {
+			if(counsel_detail.get(i).getPlc()==null || counsel_detail.get(i).getPlc().equals("")) {
+				counsel_detail.get(i).setPlc("-");
+			}
+			String result=getCounselResult(counsel_detail.get(i).getAply_sn());
+			if(result!=null) {
+				counsel_detail.get(i).setDscsn_cn(result);
+			}
+			i++;
+		}
+		return counsel_detail;
+	}
 	
 }

@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
 let exreservData = new Object();
 
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 const monthAndYear = document.getElementById("monthAndYear");
 const calendarBody = document.getElementById("calendarBody");
 const prevMonthBtn = document.getElementById("prevMonth");
@@ -14,8 +11,6 @@ const todayDate = today.getDate();
 const todayMonth = today.getMonth();
 const todayYear = today.getFullYear();
 
-<<<<<<< HEAD
-=======
 const prfsSelectDate = document.getElementById("prfsSelectDate");
 const prfsSelectTime = document.getElementById("prfsSelectTime");
 prfsSelectDate.setAttribute("min", today.toISOString().split("T")[0]);
@@ -48,7 +43,6 @@ const TimeTableList = ["<option value=''>시간 선택</option>", "<option value
 	});
 }());
 
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 // 한국어 월 이름과 요일 이름 배열
 const monthNames = [
     "1월", "2월", "3월", "4월", "5월", "6월",
@@ -93,8 +87,6 @@ function showCalendar(year, month) {
     });
     calendarBody.appendChild(dayRow);
 
-<<<<<<< HEAD
-=======
 	var cnslrTimeData = new Array();
 	// 예약 가능한 교시가 없을 때 날짜 비활성화 처리를 위한 배열 생성
 	cnslrDateTimeList.forEach(function(data) {
@@ -102,17 +94,13 @@ function showCalendar(year, month) {
 		cnslrTimeData.push(date_dump);
 	});
 
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
     let date = 1;
     for (let i = 0; i < 6; i++) {
         let row = document.createElement("tr");
 
         for (let j = 0; j < 7; j++) {
             let cell = document.createElement("td");
-<<<<<<< HEAD
-=======
 
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
             const currentDate = new Date(year, month, date);
 
             if (i === 0 && j < firstDay) {
@@ -121,15 +109,11 @@ function showCalendar(year, month) {
                 break;
             } else {
                 cell.innerHTML = date;
-<<<<<<< HEAD
-
-=======
                 
                 var current_date = setDateInTDTag(year, month, date);
                 
                 cell.setAttribute("datedata", current_date);
                 
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
                 // 오늘 이전의 날짜를 비활성화(disable) 처리
                 if (
                     (year < todayYear) ||
@@ -143,24 +127,18 @@ function showCalendar(year, month) {
                 if (j === 0 || j === 6 || isPublicHoliday(currentDate)) {
                     cell.classList.add("disabled");
                 }
-<<<<<<< HEAD
-
-=======
                 
                 // 예약 가능한 교시가 없을 때 날짜 비활성화 처리
                 if (cnslrTimeData.filter(element => current_date === element).length == 5) {
 					cell.classList.add("disabled");
 				}
                 
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
                 date++;
             }
             row.appendChild(cell);
         }
         calendarBody.appendChild(row);
     }
-<<<<<<< HEAD
-=======
     search_tdtag();
 }
 
@@ -171,7 +149,6 @@ function setDateInTDTag(y, m, d) {
 	var fdate = (d > 9) ? d : "0" + d;
 	result = y + "" + fmonth + "" + fdate;
 	return result;
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 }
 
 function initCalendar() {
@@ -187,10 +164,7 @@ prevMonthBtn.addEventListener("click", () => {
         currentYear--;
     }
     showCalendar(currentYear, currentMonth);
-<<<<<<< HEAD
-=======
     
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 });
 
 nextMonthBtn.addEventListener("click", () => {
@@ -202,9 +176,6 @@ nextMonthBtn.addEventListener("click", () => {
     showCalendar(currentYear, currentMonth);
 });
 
-<<<<<<< HEAD
-initCalendar();
-=======
 function updateCnslrName(empNo) {
 	var emp_name = document.querySelector('#counseler_number > option:checked').innerText;
 	document.getElementById("selectedCnslrName").innerText = emp_name;
@@ -321,4 +292,3 @@ function setTimeSelecter2(selectedDate) {
 	});
 	prfsSelectTime.innerHTML = html;
 }
->>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
