@@ -22,4 +22,6 @@ public interface counsel_repo {
 	int counsel_add(counsel_dto csdto);
 	
 	String getEmpStts(String emp_no);
+	
+	int update_counsel(counsel_dto csdto);
 }

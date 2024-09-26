@@ -15,6 +15,8 @@ public interface counsel_service {
 	List<view_counsel_dto> counsel_search_list(String search_part, String search_word);
 	
 	int addcounsel(counsel_dto csdto);
+	
+	int update_counsel(counsel_dto csdto, String mng_authrt);
 }
 
 

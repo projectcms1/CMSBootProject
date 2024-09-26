@@ -364,7 +364,7 @@ public class AdminController {
 
 	//상담추가
 	@PostMapping("/counsel_add")
-	public void allcounsellist_counsel_add(Model m, ServletResponse res, counsel_dto csl_dto) {
+	public void allcounsellist_counsel_add(ServletResponse res, counsel_dto csl_dto) {
 		try {
 			res.setContentType("text/html;charset=utf-8");
 			this.pw=res.getWriter();
@@ -384,18 +384,52 @@ public class AdminController {
 						+ "</script>");
 			}			
 		} catch (Exception e) {
-			e.printStackTrace();
+			this.pw.print("<script>"
+					+ "alert('교번과 학번을 다시 확인해주세요.');"
+					+ "history.go(-1);"
+					+ "</script>");
 		} finally {
 			this.pw.close();
 		}
 	}
 	
-	
+	// 상담내역 모달 데이터 불러오기
 	@ResponseBody
 	@PostMapping("/admin_counsel_detail/{aply_sn}")
 	public List<view_counsel_dto> counseldetail(@PathVariable(name = "aply_sn") String aply_sn) {
 		List<view_counsel_dto> result = this.counsel_service.counsel_detail(aply_sn);
 		return result;
+	}
+
+	// 상담내역 모달 데이터 수정
+	@PostMapping("/admin_counsel_update")
+	public void admin_counsel_update(@ModelAttribute counsel_dto cdto, @RequestParam String mng_authrt, ServletResponse res) {
+		try {
+			System.out.println(mng_authrt);
+			res.setContentType("text/html;charset=utf-8");
+			this.pw=res.getWriter();
+			int result=this.counsel_service.update_counsel(cdto, mng_authrt);
+			if(result>0) {
+				this.pw.print("<script>"
+						+ "alert('상담이 정상적으로 수정되었습니다.');"
+						+ "location.href = './allcounselmod';"
+						+ "</script>");
+			}
+			else {
+				this.pw.print("<script>"
+						+ "alert('데이터베이스 연결 오류가 발생했습니다.\\n다시 시도해주세요.');"
+						+ "history.go(-1);"
+						+ "</script>");
+			}			
+		} catch (Exception e) {
+			this.pw.print("<script>"
+					+ "alert('오류가 발생하여 상담내역 수정에 실패하였습니다.\\n다시 시도해주세요.');"
+					+ "history.go(-1);"
+					+ "</script>");
+		} finally {
+			this.pw.close();
+		}
+		
 	}
 
 	@GetMapping("/addcounsel")

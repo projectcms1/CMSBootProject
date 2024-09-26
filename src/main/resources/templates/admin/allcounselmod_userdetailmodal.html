@@ -44,19 +44,22 @@
                             </div>
                         </div>
 
+                        <form id="update_frm">
+                        <input type="hidden" name="mng_authrt" id="mng_authrt">
                         <!-- 아코디언 시작 -->
                         <div class="accordion" id="counsel_accordion">
                         
 							<!-- Java Script innerHTML -->
 						
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
 
             <!-- 모달 푸터 -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-primary" onclick="update_counseldata()">
+                <button type="button" class="btn btn-outline-primary" id="cnslModifyBtn" onclick="update_counseldata()">
                     <i class="ri-edit-2-line"></i> 수정
                 </button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
