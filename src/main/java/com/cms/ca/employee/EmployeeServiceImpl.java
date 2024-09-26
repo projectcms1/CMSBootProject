@@ -151,6 +151,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return addResult;
 	}
 	
+	
 	@Override
 	public List<view_counsel_dto> getConnectedCounsel(int aply_sn) {
 		List<view_counsel_dto> counsel_list=this.empyRepo.getOneCounsel(aply_sn, "");
@@ -174,5 +175,4 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}
 		return counsel_detail;
 	}
-	
 }

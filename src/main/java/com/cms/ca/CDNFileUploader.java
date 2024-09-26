@@ -1,16 +1,11 @@
 package com.cms.ca;
 
-import java.io.IOException;
-import java.net.SocketException;
 import java.util.UUID;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPClientConfig;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
-
-import jakarta.annotation.Resource;
 
 public class CDNFileUploader {
 

@@ -1,6 +1,7 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <nav class="navbar navbar-expand-md navbar-light bg-light p-0" th:fragment="admin_nav">
   <div class="container-fluid">
-    <a class="navbar-brand col_1" style="padding-top:2px; padding-bottom:0;" href="/stlistmod">ADMINISTRATOR</a>
+    <a class="navbar-brand col_1" style="padding-top:2px; padding-bottom:0;" href="/admin/stlistmod">ADMINISTRATOR</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -11,9 +12,13 @@
                 <i style="margin-right:5px;" class="fa fa-diamond"></i> 사용자 정보 관리
               </a>
           <ul class="dropdown-menu drop_b1" aria-labelledby="navbarDropdown">
-		    <li><a class="dropdown-item" href="/stlistmod"><i style="font-size:8px; vertical-align:middle; margin-right:5px;" class="fa fa-circle-o"></i> 학생 정보 관리</a></li>
-            <li><a class="dropdown-item" href="/emlistmod"><i style="font-size:8px; vertical-align:middle; margin-right:5px;" class="fa fa-circle-o"></i> 교직원 정보 관리</a></li>
-            <li><a class="dropdown-item" href="/adminlistmod"><i style="font-size:8px; vertical-align:middle; margin-right:5px;" class="fa fa-circle-o"></i> 관리자 정보 관리</a></li>
+		    <li><a class="dropdown-item" href="/admin/stlistmod"><i style="font-size:8px; vertical-align:middle; margin-right:5px;" class="fa fa-circle-o"></i> 학생 정보 관리</a></li>
+            <li><a class="dropdown-item" href="/admin/emlistmod"><i style="font-size:8px; vertical-align:middle; margin-right:5px;" class="fa fa-circle-o"></i> 교직원 정보 관리</a></li>
+            
+            <div th:if="${#authorization.expression('hasRole(''SUPER_ADMIN'')')}">
+            <li><a class="dropdown-item" href="/admin/adminlistmod"><i style="font-size:8px; vertical-align:middle; margin-right:5px;" class="fa fa-circle-o"></i> 관리자 정보 관리</a></li>
+            </div>
+            
           </ul>
         </li>
 		
@@ -24,7 +29,7 @@
                 <i style="margin-right:5px;" class="fa fa-table"></i> 상담관리
           </a>
           <ul class="dropdown-menu drop_b1" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="/allcounselmod"><i style="font-size:8px; vertical-align:middle; margin-right:5px;" class="fa fa-circle-o"></i> 상담내역</a></li>
+            <li><a class="dropdown-item" href="/admin/allcounselmod"><i style="font-size:8px; vertical-align:middle; margin-right:5px;" class="fa fa-circle-o"></i> 상담내역</a></li>
           </ul>
         </li>
 		
@@ -39,7 +44,7 @@
             <i style="margin-right:5px;" class="fa fa-table"></i> 비교과 사이트 관리
           </a>
           <ul class="dropdown-menu drop_b1" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="/extraculist"><i style="font-size:8px; vertical-align:middle; margin-right:5px;" class="fa fa-circle-o"></i> 비교과 프로그램 관리</a></li>
+            <li><a class="dropdown-item" href="/admin/extraculist"><i style="font-size:8px; vertical-align:middle; margin-right:5px;" class="fa fa-circle-o"></i> 비교과 프로그램 관리</a></li>
             <li><a class="dropdown-item" href="#"><i style="font-size:8px; vertical-align:middle; margin-right:5px;" class="fa fa-circle-o"></i> 비교과 사이트 관리</a></li>
           </ul>
     </li>
@@ -49,7 +54,7 @@
             <i style="margin-right:5px;" class="fa fa-copy"></i> 포털 사이트 관리
           </a>
           <ul class="dropdown-menu drop_b1" aria-labelledby="navbarDropdown">
-			 <li><a target="_blank" class="dropdown-item" href="/noticemod"><i style="font-size:8px; vertical-align:middle; margin-right:5px;" class="fa fa-circle-o"></i> 공지사항 관리</a></li> 
+			 <li><a target="_blank" class="dropdown-item" href="/admin/noticemod"><i style="font-size:8px; vertical-align:middle; margin-right:5px;" class="fa fa-circle-o"></i> 공지사항 관리</a></li> 
 			 <li><a  class="dropdown-item" href="#"><i style="font-size:8px; vertical-align:middle; margin-right:5px;" class="fa fa-circle-o"></i> 포털 사이트 정보 수정</a></li>
           </ul>
         </li>
