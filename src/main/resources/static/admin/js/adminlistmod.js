@@ -124,7 +124,7 @@ function makeOpeningModal(detailData) {
 		USER_PHOTO.innerHTML = `<img src="/img_file/${detailData.emp_photo}" />`;
 		prev_file.value = detailData.emp_photo;
 	}
-		else {
+	else {
 		USER_PHOTO.innerHTML = '';
 	}
 	

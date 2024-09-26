@@ -43,10 +43,6 @@ public class UserController {
         return "index"; // index.html 템플릿을 반환
     }
 
-    @GetMapping("/admin/stlistmod")
-    public String adminDashboard() {
-        return "/admin/stlistmod"; // admin/dashboard.html 템플릿을 반환
-    }
 
     @GetMapping("/professor/home")
     public String professorHome() {
