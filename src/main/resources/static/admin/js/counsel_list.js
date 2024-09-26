@@ -176,7 +176,6 @@ document.addEventListener('DOMContentLoaded', function() {
 function makeOpeningModal() {
 	accordionContainer.innerHTML = ''; // 기존 내용 초기화
 	cnslModifyButton.disabled = false; // 버튼 disabled 속성 초기화
-	
 	studentNumber.value = detailData[0].stdnt_no;
 	studentName.value = detailData[0].stdnt_flnm;
 	employeeNumber.value = detailData[0].emp_no;
@@ -252,7 +251,7 @@ function makeOpeningModal() {
 	    </div>
 	  `;
 	  accordionContainer.innerHTML += accordionItem;
-	  if ((counsel.stts_cd === '완료' || counsel.stts_cd === '취소') && detailData.length == sessionNumber) {
+	  if (counsel.stts_cd === '취소' && detailData.length == sessionNumber) {
 		cnslModifyButton.disabled = true;
 	  }
 	});

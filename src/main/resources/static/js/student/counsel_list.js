@@ -87,6 +87,8 @@ function makeModal(detailData) {
 	document.querySelector("#counseler_name").value = detailData[0]['emp_flnm'];
 	document.querySelector("#counseler_se").value = detailData[0]['mng_authrt'];
 	
+	console.log(detailData);
+	
 	detailData.forEach(function(data, node) {
 		accordionContainer.innerHTML += createAccordionItem(node, data);
 	});

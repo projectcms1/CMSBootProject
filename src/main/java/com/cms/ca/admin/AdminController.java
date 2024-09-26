@@ -405,7 +405,6 @@ public class AdminController {
 	@PostMapping("/admin_counsel_update")
 	public void admin_counsel_update(@ModelAttribute counsel_dto cdto, @RequestParam String mng_authrt, ServletResponse res) {
 		try {
-			System.out.println(mng_authrt);
 			res.setContentType("text/html;charset=utf-8");
 			this.pw=res.getWriter();
 			int result=this.counsel_service.update_counsel(cdto, mng_authrt);
