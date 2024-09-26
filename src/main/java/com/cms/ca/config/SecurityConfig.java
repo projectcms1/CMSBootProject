@@ -45,10 +45,10 @@ public class SecurityConfig {
                         .requestMatchers("/index","/login", "/public/**").permitAll()
                         .requestMatchers("/superadmin/**").hasRole("SUPER_ADMIN")
                         .requestMatchers("/admin/**").hasAnyRole("ADMIN", "SUPER_ADMIN")
-                        .requestMatchers("/employee/**").hasRole("PROFESSOR")
-                        .requestMatchers("/employee/**").hasRole("COUNSELOR")
+                        .requestMatchers("/employee/**").hasAnyRole("STAFF", "PROFESSOR", "COUNSELOR")
                         .requestMatchers("/staff/**").hasAnyRole("STAFF", "ADMIN", "SUPER_ADMIN")
                         .requestMatchers("/index/**").hasAnyRole("USER", "STAFF", "COUNSELOR", "PROFESSOR", "ADMIN", "SUPER_ADMIN")
+                        .requestMatchers("/img_file/**").hasAnyRole("USER", "STAFF", "COUNSELOR", "PROFESSOR", "ADMIN", "SUPER_ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

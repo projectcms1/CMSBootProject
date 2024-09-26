@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,10 +23,6 @@ import jakarta.annotation.Resource;
 @RequestMapping("/student")
 public class AjaxController {
 
-	// ==== 로그인 구현 이전, 세션의 임시 학번 데이터 ======
-	String STD_NUMBER = "20245125";
-	// =======================================
-	
 	@Resource(name = "stdnt_service")
 	private StudentService stdSrvc;
 	
@@ -37,9 +35,10 @@ public class AjaxController {
 	// 상담사+지도교수 시간표 SELECT - AJAX
 	@GetMapping("/api/professor_time")
 	public String professor_time() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String callback = "";
 		try {
-			callback = this.stdSrvc.getAllEmpTimeTable(this.STD_NUMBER);
+			callback = this.stdSrvc.getAllEmpTimeTable(authentication.getName());
 		} catch (Exception e) {
 			this.errorObj = new JSONObject();
 			this.errorObj.put("cnslr", "error");
@@ -81,9 +80,10 @@ public class AjaxController {
 	@PostMapping("/selftest_result/{insp_no}")
 	public @ResponseBody String selftest_result_insert(@PathVariable(name = "insp_no") String insp_no,
 			@RequestBody Map<String, Map<String, String>> bodyData) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String callback = "";
 		try {
-			callback = this.inspSrvc.saveUserTestResult(this.STD_NUMBER, insp_no, bodyData);
+			callback = this.inspSrvc.saveUserTestResult(authentication.getName(), insp_no, bodyData);
 		} catch (Exception e) {
 			callback = "error";
 		}
@@ -93,11 +93,11 @@ public class AjaxController {
 	// 자가진단 심리검사 결과 데이터 조회
 	@GetMapping("/selftest_result/{insp_no}")
 	public String selftest_result_select(@PathVariable(name = "insp_no") String insp_no) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String callback = "";
 		try {
-			callback = this.inspSrvc.getUserSelfTestData(this.STD_NUMBER, insp_no);
+			callback = this.inspSrvc.getUserSelfTestData(authentication.getName(), insp_no);
 		} catch (Exception e) {
-			e.printStackTrace();
 			this.errorObj = new JSONObject();
 			this.errorObj.put("insp_dt", "error");
 			callback = this.errorObj.toString();

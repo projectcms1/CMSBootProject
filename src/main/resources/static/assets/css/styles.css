@@ -74,11 +74,6 @@ body {
     overflow-y: auto;
 }
 
-.logo img {
-    width: 150px;
-    margin-bottom: 20px;
-}
-
 .login-button {
     display: block;
     width: 100%;

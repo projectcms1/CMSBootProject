@@ -83,9 +83,6 @@
 						<h5 class="card-title">개인정보(한글은 폰트 적용X)</h5>
 						
 						<div class="row mb-1">
-							<div class="col-md-2 col-lg-2">
-								<img th:src="|/img_file/${ empy_info.getEmp_photo() }|" alt="Profile" class="rounded-4" style="margin-left: 25%;" width="80%" height="225px">
-							</div>
 							<th:block th:if="${ empy_info.getEmp_photo() == null || empy_info.getEmp_photo() == '' }">
 								<div class="col-md-2 col-lg-2">
 								</div>
