@@ -124,6 +124,10 @@ function makeOpeningModal(detailData) {
 		USER_PHOTO.innerHTML = `<img src="/img_file/${detailData.emp_photo}" />`;
 		prev_file.value = detailData.emp_photo;
 	}
+		else {
+		USER_PHOTO.innerHTML = '';
+	}
+	
 	full_name.value = detailData.emp_flnm;
 	admin_number.value = detailData.emp_no;
 	birth_day.value = detailData.brdt;

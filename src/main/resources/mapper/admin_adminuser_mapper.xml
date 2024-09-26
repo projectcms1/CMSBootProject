@@ -23,7 +23,7 @@ where a.USER_NO = b.USER_NO and (a.EMP_NO = #{emp_no} or b.LGN_ID = #{emp_no})
 
 <!-- 관리자 리스트 검색 기능 -->
 <select id="admin_search_list" resultType="com.cms.ca.employee_dto" parameterType="map">
-select * from EMP_INFO where ${search_part} like concat('%', #{search_word}, '%') order by EMP_NO desc
+select * from EMP_INFO where ${search_part} like concat('%', #{search_word}, '%') and MNG_AUTHRT = 'A' order by EMP_NO desc
 </select>
 
 </mapper>

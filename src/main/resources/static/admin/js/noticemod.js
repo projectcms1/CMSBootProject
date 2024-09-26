@@ -1,4 +1,3 @@
-
 // 모든 카테고리 버튼에 대해 클릭 이벤트를 설정합니다.
 document.querySelectorAll('.category').forEach(button => {
 	button.addEventListener('click', function () {
