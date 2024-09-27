@@ -305,7 +305,7 @@ function makeOpeningModal(detailData) {
 	dpstr_nm.value = detailData.dpstr_nm;
 }
 
-//학생 사용자 상세정보 수정 기능
+//교직원 사용자 상세정보 수정 기능
 function update_emuserdata(){
 	if (confirm("정말로 정보를 수정하시겠습니까?")) {
 		emuser_detail_frm.submit();
