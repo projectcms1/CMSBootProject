@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cms.ca.admin.notice_repo">
 
-	<select id="notice_list" resultType="com.cms.ca.view_notice_dto">
+	<select id="notice_list" resultType="com.cms.ca.notice_dto">
 	select APLY_SN, STDNT_NO, STDNT_FLNM, EMP_NO, EMP_FLNM, RSVT_DT, HR_SE from VIEW_DSCSN_APLY where BFR_APLY_SN IS NULL order by APLY_SN desc
 	</select>
 	
 	
 	<!-- 공지사항 리스트 검색 기능 -->
-	<select id="notice_search_list" resultType="com.cms.ca.view_notice_dto" parameterType="map">
+	<select id="notice_search_list" resultType="com.cms.ca.notice_dto" parameterType="map">
 	select * from VIEW_DSCSN_APLY where ${search_part} like concat('%', #{search_word}, '%') order by APLY_SN desc
 	</select>
 	
@@ -17,7 +17,7 @@
 		select count(BFR_APLY_SN) from VIEW_DSCSN_APLY where BFR_APLY_SN = #{aply_sn}
 	</select>
 
-	<select id="notice_detail" resultType="com.cms.ca.view_notice_dto" parameterType="String">
+	<select id="notice_detail" resultType="com.cms.ca.notice_dto" parameterType="String">
 		select * from VIEW_DSCSN_APLY where APLY_SN = #{aply_sn} or BFR_APLY_SN = #{aply_sn} order by APLY_SN asc
 	</select>
 	

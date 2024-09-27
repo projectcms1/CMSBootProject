@@ -434,16 +434,30 @@ public class AdminController {
 		
 	}
 
+	
+	//상담 추가
 	@GetMapping("/admin/addcounsel")
 	public String addcounsel() {
 		return "admin/addcounsel";
 	}
 
 
+	//공지사항 리스트 출력 및 검색
 	@GetMapping("/admin/noticemod")
 	public String portalnotice_mod() {
 		return "admin/noticemod";
 	}
+	
+	
+	//공지사항 추가
+	@GetMapping("/admin/notice_add")
+	public String addnotice() {
+		return "admin/notice_add";
+	}
+	
+	
+	
+	
 
 	// 비교과 프로그램 리스트 출력 및 검색
 	@GetMapping("/admin/extraculist")
@@ -468,3 +482,6 @@ public class AdminController {
 	}
 
 }
+
+
+
