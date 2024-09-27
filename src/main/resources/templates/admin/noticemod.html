@@ -43,7 +43,7 @@
 					<div class="col-md-9">
 						<div class="crm_1r pull-right">
 							<ul>
-								<li class="col_3 d-inline-block"><a href="/admin/stlistmod">포털 사이트 관리</a>
+								<li class="col_3 d-inline-block"><a href="/admin/noticemod">포털 사이트 관리</a>
 									<i style="margin-left: 5px; vertical-align: middle;"
 									class="fa fa-chevron-right"></i></li>
 								<li class="col_3 d-inline-block">공지사항 관리</li>
@@ -117,7 +117,7 @@
 							</tr>
 						</thead>
 
-						<tbody id="notcieTableBody">
+						<tbody id="noticeTableBody">
 							<tr th:each="notice_data : ${notice_list}">
 
 								<td>
@@ -144,7 +144,7 @@
 									<!-- 공지별 상세정보 모달 버튼 -->
 									<button type="button" class="btn btn-primary bg_1" th:onclick="openEmpInfo([[${ employee_data.getEmp_no() }]])"
 										data-bs-toggle="modal" data-bs-target="#noticedetailModal">
-										<i class="fa fa-cog"> 상세보기</i>
+										<i class="fa fa-cog"> 보기</i>
 									</button>
 								</td>
 							</tr>
@@ -156,7 +156,7 @@
 				<!-- 페이징처리 -->
 				<br><div id="totalPagesDisplay" class="text-muted"></div>
 				<div class="prod_1i1r pages" style="text-align: right;">
-					<ul class="mb-0" id="stlist_paging">
+					<ul class="mb-0" id="notcielist_paging">
 						<!-- << 버튼 (첫 페이지로 이동) -->
 						<li><a id="first-page"><i class="fa fa-angle-double-left"></i></a></li>
 						<!-- < 버튼 (이전 페이지로 이동) -->
@@ -172,7 +172,7 @@
 		
 			</div>
 	<!-- 학생별 상세정보 모달 시작 -->
-	<div th:insert="~{/admin/stlistmod_userdetailmodal :: notcie_userdetailmodal}"></div>
+	<div th:insert="~{/admin/noticemod_detailmodal :: notciedetailmodal}"></div>
 	<!-- 학생별 상세정보 모달 끝 -->
 
 	<!--footer시작 -->

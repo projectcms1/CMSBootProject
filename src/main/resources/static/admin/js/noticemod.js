@@ -41,12 +41,11 @@ function noticelist_search() {
 
 
 
-
 //공지 리스트 페이징 처리
 document.addEventListener('DOMContentLoaded', function() {
     const rowsPerPage = 10; // 한 페이지당 표시할 행의 수
     const tableBody = document.getElementById('noticeTableBody');
-    const pagination = document.getElementById('emlist_paging');
+    const pagination = document.getElementById('notcielist_paging');
     const totalPagesDisplay = document.getElementById('totalPagesDisplay');
 
     if (!tableBody) {
