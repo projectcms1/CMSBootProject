@@ -40,6 +40,9 @@ public class AdminController {
 
 	@Autowired
 	private counsel_service counsel_service;
+	
+	@Autowired
+	private extracu_service extracu_service;
 
 	@Resource(name = "img_service")
 	private ImageFileService img_service;
@@ -431,19 +434,45 @@ public class AdminController {
 		
 	}
 
+	
+	//상담 추가
 	@GetMapping("/admin/addcounsel")
 	public String addcounsel() {
 		return "admin/addcounsel";
 	}
 
 
+	//공지사항 리스트 출력 및 검색
 	@GetMapping("/admin/noticemod")
 	public String portalnotice_mod() {
 		return "admin/noticemod";
 	}
+	
+	
+	//공지사항 추가
+	@GetMapping("/admin/notice_add")
+	public String addnotice() {
+		return "admin/notice_add";
+	}
+	
+	
+	
+	
 
+	// 비교과 프로그램 리스트 출력 및 검색
 	@GetMapping("/admin/extraculist")
-	public String extra_notice() {
+	public String extra_notice(Model m, @RequestParam(value = "", required = false) String search_part,
+			@RequestParam(value = "", required = false) String search_word) {
+		
+		// 검색파트 및 리스트출력
+		if (search_part == null || search_word == null || search_part.equals("") || search_word.equals("")) {
+			m.addAttribute("extracu_list", "");//this.extracu_service.student_list());
+		} else {
+			m.addAttribute("search_part", search_part);
+			m.addAttribute("search_word", search_word);
+			m.addAttribute("extracu_list", "");//this.extracu_service.student_search_list(search_part, search_word));
+		}
+		
 		return "admin/extraculist";
 	}
 
@@ -453,3 +482,6 @@ public class AdminController {
 	}
 
 }
+
+
+

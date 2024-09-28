@@ -32,13 +32,16 @@ public class AjaxController {
 	JSONObject errorObj = null;
 	JSONArray errorArr = null;
 	
+	// Session 데이터
+	private Authentication authentication = null;
+	
 	// 상담사+지도교수 시간표 SELECT - AJAX
 	@GetMapping("/api/professor_time")
 	public String professor_time() {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		this.authentication = SecurityContextHolder.getContext().getAuthentication();
 		String callback = "";
 		try {
-			callback = this.stdSrvc.getAllEmpTimeTable(authentication.getName());
+			callback = this.stdSrvc.getAllEmpTimeTable(this.authentication.getName());
 		} catch (Exception e) {
 			this.errorObj = new JSONObject();
 			this.errorObj.put("cnslr", "error");
@@ -80,10 +83,10 @@ public class AjaxController {
 	@PostMapping("/selftest_result/{insp_no}")
 	public @ResponseBody String selftest_result_insert(@PathVariable(name = "insp_no") String insp_no,
 			@RequestBody Map<String, Map<String, String>> bodyData) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		this.authentication = SecurityContextHolder.getContext().getAuthentication();
 		String callback = "";
 		try {
-			callback = this.inspSrvc.saveUserTestResult(authentication.getName(), insp_no, bodyData);
+			callback = this.inspSrvc.saveUserTestResult(this.authentication.getName(), insp_no, bodyData);
 		} catch (Exception e) {
 			callback = "error";
 		}
@@ -93,10 +96,10 @@ public class AjaxController {
 	// 자가진단 심리검사 결과 데이터 조회
 	@GetMapping("/selftest_result/{insp_no}")
 	public String selftest_result_select(@PathVariable(name = "insp_no") String insp_no) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		this.authentication = SecurityContextHolder.getContext().getAuthentication();
 		String callback = "";
 		try {
-			callback = this.inspSrvc.getUserSelfTestData(authentication.getName(), insp_no);
+			callback = this.inspSrvc.getUserSelfTestData(this.authentication.getName(), insp_no);
 		} catch (Exception e) {
 			this.errorObj = new JSONObject();
 			this.errorObj.put("insp_dt", "error");
