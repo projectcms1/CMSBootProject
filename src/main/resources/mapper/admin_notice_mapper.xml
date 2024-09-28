@@ -2,46 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cms.ca.admin.notice_repo">
 
+	<!-- 공지사항 리스트 출력 기능 -->
 	<select id="notice_list" resultType="com.cms.ca.notice_dto">
-	select APLY_SN, STDNT_NO, STDNT_FLNM, EMP_NO, EMP_FLNM, RSVT_DT, HR_SE from VIEW_DSCSN_APLY where BFR_APLY_SN IS NULL order by APLY_SN desc
+	select NTC_MTTR_SN, NTC_MTTR_TTL, NTC_CLSF_NM, EMP_NO, WRTR_NM, WRT_DT from NTC_MTTR order by NTC_MTTR_SN desc
 	</select>
-	
 	
 	<!-- 공지사항 리스트 검색 기능 -->
 	<select id="notice_search_list" resultType="com.cms.ca.notice_dto" parameterType="map">
-	select * from VIEW_DSCSN_APLY where ${search_part} like concat('%', #{search_word}, '%') order by APLY_SN desc
+	select * from NTC_MTTR where ${search_part} like concat('%', #{search_word}, '%') order by NTC_MTTR_SN desc
 	</select>
 	
-	
-	<select id="getCountRound" resultType="int" parameterType="int">
-		select count(BFR_APLY_SN) from VIEW_DSCSN_APLY where BFR_APLY_SN = #{aply_sn}
-	</select>
-
-	<select id="notice_detail" resultType="com.cms.ca.notice_dto" parameterType="String">
-		select * from VIEW_DSCSN_APLY where APLY_SN = #{aply_sn} or BFR_APLY_SN = #{aply_sn} order by APLY_SN asc
-	</select>
-	
-	<!-- 공지사항추가 시작 -->
+	<!-- 공지사항 추가 시작 -->
 	<insert id="notice_add" parameterType="com.cms.ca.notice_dto">
-		insert into DSCSN_APLY 
-		(aply_sn, bfr_aply_sn, hr_se, stdnt_no, emp_no, stts_cd, 
-		plc, rsvt_dt, aply_dt, dscsn_mthd, dscsn_knd)
-		values
-		('0', null, #{hr_se}, #{stdnt_no}, #{emp_no}, #{stts_cd}, 
-		#{plc}, #{rsvt_dt}, now(), #{dscsn_mthd}, #{dscsn_knd})
+		insert into NTC_MTTR 
+		(ntc_mttr_sn, ntc_mttr_ttl, ntc_cn, ntc_fix_yn, atch_file_nm, orgnl_atch_file_nm, ntc_clsf_nm, inq_cnt, emp_no, wrtr_nm, wrt_dt)
+		values ('0', #{ntc_mttr_ttl}, #{ntc_cn}, #{ntc_fix_yn}, #{atch_file_nm}, #{orgnl_atch_file_nm}, #{ntc_clsf_nm}, #{inq_cnt}, #{emp_no}, #{wrtr_nm}, now())
 	</insert>
-
-	<!-- 추가된 공지사항이 교수인지 공지사항사인지 SELECT -->
-	<select id="getEmpStts" resultType="String" parameterType="String">
-		select MNG_AUTHRT from EMP_INFO where EMP_NO =#{emp_no}
-	</select>
-
-	<!-- 공지사항추가 끝 -->
-
-	<!-- 공지사항 내용 수정 -->
-	<update id="update_notice" parameterType="com.cms.ca.notice_dto">
-		update DSCSN_APLY set RSVT_DT = #{rsvt_dt}, HR_SE = #{hr_se}, PLC = #{plc},
-		DSCSN_KND = #{dscsn_knd}, DSCSN_MTHD = #{dscsn_mthd}, STTS_CD = #{stts_cd} where APLY_SN = #{aply_sn}
-	</update>
 
 </mapper>

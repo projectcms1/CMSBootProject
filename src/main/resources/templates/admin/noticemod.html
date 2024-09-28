@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
-<title>포털 사이트 관리_공지사항 관리</title>
+<title>사용자 정보 관리_교직원정보관리</title>
 
 <!-- Bootstrap core CSS -->
 <link href="/admin/css/bootstrap.min.css" rel="stylesheet">
@@ -20,6 +20,7 @@
 <link href="/admin/css/listmod.css" rel="stylesheet">
 </head>
 
+<body>
 
 	<!--header시작-->
 	<div th:replace="~{/admin/header :: admin_header}"></div>
@@ -58,20 +59,20 @@
 						<div class="prod_1il d-flex align-items-center w-100">
 							<form id="frmSearch"
 								class="search-form d-flex align-items-center"
-								th:onsubmit="return list_search()">
+								th:onsubmit="return noticelist_search()">
 							<div class="d-flex align-items-center">
 								<select class="form-select form-select-sm ms-2 me-2"
 									name="search_part" id="inputState"
 									style="width: 150px; height: 38px;">
-									<option value="STDNT_FLNM"
+									<option value="NTC_MTTR_SN"
 										th:selected="${ search_part == 'NTC_MTTR_SN' }">일련번호</option>
-									<option value="OGDP_UNIV"
+									<option value="NTC_MTTR_TTL"
 										th:selected="${ search_part == 'NTC_MTTR_TTL' }">제목</option>
-									<option value="OGDP_SCSBJT"
+									<option value="NTC_CLSF_NM"
 										th:selected="${ search_part == 'NTC_CLSF_NM' }">공지분류</option>
-									<option value="STDNT_NO"
+									<option value="WRTR_NM"
 										th:selected="${ search_part == 'WRTR_NM' }">작성자명</option>
-									<option value="STDNT_NO"
+									<option value="WRT_DT"
 										th:selected="${ search_part == 'WRT_DT' }">작성일시</option>
 								</select>
 								</div>
@@ -117,32 +118,32 @@
 							</tr>
 						</thead>
 
-						<tbody id="noticeTableBody">
+						 <tbody id="noticeTableBody">
 							<tr th:each="notice_data : ${notice_list}">
 
 								<td>
 									<h6 class="font_14 col_3"
-										th:text="${notcie_data.getStdnt_flnm()}"></h6>
+										th:text="${notice_data.getNtc_mttr_sn()}"></h6>
 								</td>
 								<td>
 									<h6 class="font_14 col_3"
-										th:text="${notcie_data.getOgdp_univ()}"></h6>
+										th:text="${notice_data.getNtc_mttr_ttl()}"></h6>
 								</td>
 								<td>
 									<h6 class="font_14 col_3"
-										th:text="${notcie_data.getOgdp_scsbjt()}"></h6>
+										th:text="${notice_data.getNtc_clsf_nm()}"></h6>
 								</td>
 								<td>
 									<h6 class="font_14 col_3"
-										th:text="${notcie_data.getStdnt_no()}"></h6>
+										th:text="${notice_data.getWrtr_nm()}"></h6>
 								</td>
 								<td>
 									<h6 class="bg_3 text-center font_12 p-1 mb-0"
-										th:text="${notcie_data.getStdnt_stts_se()}"></h6>
+										th:text="${notice_data.getWrt_dt()}"></h6>
 								</td>
 								<td>
 									<!-- 공지별 상세정보 모달 버튼 -->
-									<button type="button" class="btn btn-primary bg_1" th:onclick="openEmpInfo([[${ employee_data.getEmp_no() }]])"
+									<button type="button" class="btn btn-primary bg_1" th:onclick="openNoticeInfo([[${ notice_data.getNtc_mttr_sn() }]])"
 										data-bs-toggle="modal" data-bs-target="#noticedetailModal">
 										<i class="fa fa-cog"> 보기</i>
 									</button>
@@ -156,7 +157,7 @@
 				<!-- 페이징처리 -->
 				<br><div id="totalPagesDisplay" class="text-muted"></div>
 				<div class="prod_1i1r pages" style="text-align: right;">
-					<ul class="mb-0" id="notcielist_paging">
+					<ul class="mb-0" id="noticelist_paging">
 						<!-- << 버튼 (첫 페이지로 이동) -->
 						<li><a id="first-page"><i class="fa fa-angle-double-left"></i></a></li>
 						<!-- < 버튼 (이전 페이지로 이동) -->
@@ -182,3 +183,7 @@
 
 	<!-- script part -->
 	<script src="/admin/js/noticemod.js?v=2"></script>
+	<script src="/admin/js/bootstrap.bundle.min.js"></script>
+	
+</body>
+</html>

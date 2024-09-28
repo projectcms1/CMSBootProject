@@ -41,24 +41,24 @@
 				<div class="card-body">
 
 					<!-- Form 시작 -->
-					<form id="notice_add_frm" method="post" action="./emuser_add"
+					<form id="notice_add_frm" method="post" action="./notice_add"
 						enctype="multipart/form-data">
 
 						<div class="col-md-12 mb-2">
 							<label class="col-form-label">제목</label> <input type="text"
-								name="notice_title" class="form-control" required>
+								name="ntc_mttr_ttl" class="form-control" required>
 						</div>
 
 						<div class="row mb-3">
 							<!-- 작성자 -->
 							<div class="col-md-4">
 								<label class="col-form-label">작성자</label> <input type="text"
-									name="author" class="form-control" required>
+									name="wrtr_nm" class="form-control" required>
 							</div>
 							<!-- 공지분류 -->
 							<div class="col-md-4">
 								<label class="col-form-label">공지분류</label> <select
-									class="form-select" id="ogdp_inst_nm" name="ogdp_inst_nm"
+									class="form-select" id="ntc_clsf_nm" name="ntc_clsf_nm"
 									required>
 									<option value="" disabled selected>선택하세요</option>
 									<option value="학사">학사</option>
@@ -71,7 +71,7 @@
 							<!-- 공지 사용 여부 -->
 							<div class="col-md-4">
 								<label class="col-form-label">공지 고정 여부</label> <select
-									class="form-select" id="ogdp_inst_nm" name="ogdp_inst_nm"
+									class="form-select" id="ntc_fix_yn" name="ntc_fix_yn"
 									required>
 									<option value="비교과">활성화</option>
 									<option value="교직원">비활성화</option>
@@ -82,14 +82,14 @@
 						<!-- 내용 -->
 						<div class="col-md-12 mb-2">
 							<label class="col-form-label">내용</label>
-							<textarea name="notice_content" class="form-control" rows="4"
+							<textarea name="ntc_cn" class="form-control" rows="4"
 								required></textarea>
 						</div>
 
 						<!-- 첨부파일 -->
 						<div class="col-md-12 mb-2">
 							<label class="col-form-label">첨부파일</label> <input type="file"
-								name="attachment" class="form-control">
+								name="orgnl_atch_file_nm" class="form-control">
 						</div>
 						<br>
 
