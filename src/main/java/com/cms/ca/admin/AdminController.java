@@ -4,6 +4,8 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,7 +52,8 @@ public class AdminController {
 
 	PrintWriter pw = null;
 	
-	
+	// Session 데이터
+	private Authentication authentication = null;
 	
 	/*=============================================학생=============================================*/
 	
@@ -484,6 +487,13 @@ public class AdminController {
 		return "admin/noticemod";
 	}
 	
+	// 공지사항 보기 모달 데이터 출력
+	@PostMapping("/admin/admin_notice_detail/{notice_number}")
+	@ResponseBody
+	public notice_dto admin_notice_detail(@PathVariable(name = "notice_number") String ntc_mttr_sn) {
+		return this.notice_service.notice_modal(ntc_mttr_sn);
+	}
+	
 	//공지사항 추가 페이지 로드
 	@GetMapping("/admin/notice_add")
 	public String notice_add() {
@@ -493,16 +503,13 @@ public class AdminController {
 	//공지사항 추가 (insert)
 	@PostMapping("/admin/notice_insert")
 	public void addnotice(ServletResponse res, notice_dto ntdto, @RequestPart(name = "attchment_file") MultipartFile mfile) {
-		System.out.println(ntdto.getNtc_mttr_ttl());
-		System.out.println(ntdto.getNtc_cn());
-		System.out.println(ntdto.getNtc_clsf_nm());
-		System.out.println(ntdto.getNtc_fix_yn());
-		System.out.println(mfile.getOriginalFilename());
-		/*
 		res.setContentType("text/html;charset=utf-8");
 		try {
+			this.authentication = SecurityContextHolder.getContext().getAuthentication();
+			ntdto.setEmp_no(this.authentication.getName());
 			this.pw=res.getWriter();
-			int result=this.notice_service.addnotice(ntdto);
+			int result = 0;
+			result=this.notice_service.addnotice(mfile, ntdto);
 			if(result > 0) {
 				this.pw.print("<script>"
 						+ "alert('공지사항이 정상적으로 등록되었습니다.');"
@@ -525,7 +532,7 @@ public class AdminController {
 			e.printStackTrace();
 		} finally {
 			this.pw.close();
-		}*/
+		}
 	}
 	
 	

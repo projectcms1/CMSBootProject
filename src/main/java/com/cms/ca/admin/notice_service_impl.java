@@ -6,7 +6,9 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.cms.ca.FileHandler;
 import com.cms.ca.notice_dto;
 
 @Service
@@ -33,10 +35,22 @@ public class notice_service_impl implements notice_service {
 	}
 
 	@Override
-	public int addnotice(notice_dto ntdto) {
-		
-		//ntdto.setWrt_dt(ntdto.getWrt_dt().replaceAll("-", ""));
+	public notice_dto notice_modal(String ntc_mttr_sn) {
+		return this.notice_repo.notice_modal(ntc_mttr_sn);
+	}
+
+	@Override
+	public int addnotice(MultipartFile mfile, notice_dto ntdto) throws Exception {
+		if (!mfile.isEmpty()) {
+			ntdto.setOrgnl_atch_file_nm(mfile.getOriginalFilename());
+			ntdto.setAtch_file_nm(new FileHandler().uploadFile(mfile));
+		}
 		return this.notice_repo.notice_add(ntdto);
+	}
+
+	@Override
+	public int notice_modify(notice_dto ntdto) {
+		return this.notice_repo.notice_modify(ntdto);
 	}
 	
 }
