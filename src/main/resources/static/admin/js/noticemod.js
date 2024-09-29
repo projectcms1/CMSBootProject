@@ -215,6 +215,6 @@ function makeOpeningModal(detailData) {
 //공지사항 상세정보 수정 기능
 function update_noticedata(){
 	if (confirm("정말로 정보를 수정하시겠습니까?")) {
-		notcie_detail_frm.submit();
+		notice_detail_frm.submit();
 	}
 }
