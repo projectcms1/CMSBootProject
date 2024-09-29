@@ -17,7 +17,7 @@
 	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap"
 	rel="stylesheet">
 <link href="/admin/css/listmod.css" rel="stylesheet">
-<link rel="stylesheet" href="./css/editor_style.css?v=2">
+<link rel="stylesheet" href="/admin/css/notice_editor.cs">
 <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/42.0.2/ckeditor5.css" />
 </head>
 
@@ -43,7 +43,7 @@
 				<div class="card-body">
 
 					<!-- Form 시작 -->
-					<form id="notice_add_frm" method="post" action="./notice_add"
+					<form id="notice_add_frm" method="post" action="./notice_insert"
 						enctype="multipart/form-data">
 
 						<div class="col-md-12 mb-2">
@@ -82,7 +82,6 @@
 						<!-- 내용 -->
 						<div class="col-md-12 mb-2">
 							<label class="col-form-label">내용</label>
-							<textarea name="ntc_cn" class="form-control" rows="4" required></textarea>
 							<div class="main-container">
 	    						<div class="editor-container editor-container_classic-editor editor-container_include-style" id="editor-container">
 		    						<div class="editor-container__editor">
@@ -95,7 +94,7 @@
 						<!-- 첨부파일 -->
 						<div class="col-md-12 mb-2">
 							<label class="col-form-label">첨부파일</label>
-							<input type="file" name="orgnl_atch_file_nm" class="form-control">
+							<input type="file" name="attchment_file" class="form-control">
 						</div>
 						<br>
 
@@ -136,5 +135,5 @@
 		}
 	}
 </script>
-<script type="module" src="/admin/js/noticeadd.js?v=1"></script>
+<script type="module" src="/admin/js/noticeadd.js?v=2"></script>
 </html>

@@ -484,11 +484,21 @@ public class AdminController {
 		return "admin/noticemod";
 	}
 	
-
-	
 	//공지사항 추가 페이지 로드
 	@GetMapping("/admin/notice_add")
-	public String addnotice(ServletResponse res, notice_dto ntdto) {
+	public String notice_add() {
+		return "admin/notice_add";
+	}
+	
+	//공지사항 추가 (insert)
+	@PostMapping("/admin/notice_insert")
+	public void addnotice(ServletResponse res, notice_dto ntdto, @RequestPart(name = "attchment_file") MultipartFile mfile) {
+		System.out.println(ntdto.getNtc_mttr_ttl());
+		System.out.println(ntdto.getNtc_cn());
+		System.out.println(ntdto.getNtc_clsf_nm());
+		System.out.println(ntdto.getNtc_fix_yn());
+		System.out.println(mfile.getOriginalFilename());
+		/*
 		res.setContentType("text/html;charset=utf-8");
 		try {
 			this.pw=res.getWriter();
@@ -515,13 +525,8 @@ public class AdminController {
 			e.printStackTrace();
 		} finally {
 			this.pw.close();
-		}
-		
-		return "admin/notice_add";
+		}*/
 	}
-	
-	
-
 	
 	
 	/*=============================================기타=============================================*/

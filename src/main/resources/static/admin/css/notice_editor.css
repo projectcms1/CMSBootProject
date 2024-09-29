@@ -19,13 +19,12 @@
 	font-family: 'Lato';
 	line-height: 1.6;
 	word-break: break-word;
-	min-height: 355px;
-	max-height: 355px;
+	min-height: 500px;
+	max-height: 500px;
 }
 
 .editor-container_classic-editor .editor-container__editor {
-	min-width: 770px;
-	max-width: 770px;
+	width: 100%;
 }
 
 .ck-content h3.category {
