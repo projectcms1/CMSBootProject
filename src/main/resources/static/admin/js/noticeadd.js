@@ -1,4 +1,3 @@
-
 //공지사항 사용자 추가 기능
 function add_notice(){
 	if(document.querySelector("input[name='emp_flnm']").value==""){
