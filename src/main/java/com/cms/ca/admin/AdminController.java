@@ -41,9 +41,6 @@ public class AdminController {
 	@Autowired
 	private counsel_service counsel_service;
 	
-	@Autowired
-	private extracu_service extracu_service;
-
 	@Resource(name = "img_service")
 	private ImageFileService img_service;
 
