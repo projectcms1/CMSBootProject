@@ -13,7 +13,7 @@
 	</select>
 	
 	<!-- 공지사항 Modal 정보 출력 -->
-	<select id="notice_modal" resultType="com.cms.ca.notice_dto" parameterType="String">
+	<select id="notice_modal" resultType="com.cms.ca.notice_dto" parameterType="Integer">
 	select * from NTC_MTTR where NTC_MTTR_SN = #{ntc_mttr_sn} order by NTC_MTTR_SN desc
 	</select>
 	
@@ -26,7 +26,7 @@
 
 	<!-- 공지사항 수정 -->
 	<update id="notice_modify" parameterType="com.cms.ca.notice_dto">
-		update NTC_MTTR set NTC_MTTR_TTL = #{ntc_mttr_ttl}, NTC_CN = #{ntc_cn}, NTC_FIX_YN = #{NTC_FIX_YN},
+		update NTC_MTTR set NTC_MTTR_TTL = #{ntc_mttr_ttl}, NTC_CN = #{ntc_cn}, NTC_FIX_YN = #{ntc_fix_yn},
 		ATCH_FILE_NM = #{atch_file_nm}, ORGNL_ATCH_FILE_NM = #{orgnl_atch_file_nm}, NTC_CLSF_NM = #{ntc_clsf_nm}
 		where NTC_MTTR_SN = #{ntc_mttr_sn}
 	</update>

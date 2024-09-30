@@ -490,7 +490,7 @@ public class AdminController {
 	// 공지사항 보기 모달 데이터 출력
 	@PostMapping("/admin/admin_notice_detail/{notice_number}")
 	@ResponseBody
-	public notice_dto admin_notice_detail(@PathVariable(name = "notice_number") String ntc_mttr_sn) {
+	public notice_dto admin_notice_detail(@PathVariable(name = "notice_number") Integer ntc_mttr_sn) {
 		return this.notice_service.notice_modal(ntc_mttr_sn);
 	}
 	
@@ -519,6 +519,9 @@ public class AdminController {
 					+ "alert('오류가 발생하여 공지사항 수정에 실패하였습니다.\\n다시 시도해주세요.');"
 					+ "history.go(-1);"
 					+ "</script>");
+			
+			System.out.println(e);
+			e.printStackTrace();
 		} finally {
 			this.pw.close();
 		}
