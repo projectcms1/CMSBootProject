@@ -15,7 +15,7 @@ public interface notice_repo {
 	
 	List<notice_dto> notice_search_list(Map<String, String> search_notice_data);
 	
-	notice_dto notice_modal(String ntc_mttr_sn);
+	notice_dto notice_modal(Integer ntc_mttr_sn);
 	
 	int notice_add(notice_dto ntdto);
 	

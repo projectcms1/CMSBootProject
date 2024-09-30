@@ -269,20 +269,26 @@ document.querySelectorAll(".notice-modal-button").forEach(function(oneModalButto
 
 function makeOpeningModal(detailData) {
 	notice_title.value = detailData.ntc_mttr_ttl;
-	notice_number.value = detailData.ntc_mttr_ttl;
+	notice_number.value = detailData.ntc_mttr_sn;
 	writer_name.value = detailData.wrtr_nm;
 	inq_cnt.value = detailData.inq_cnt;
 	write_date.value = detailData.wrt_dt;
 	ntc_clsf_nm.value = detailData.ntc_clsf_nm;
 	ntc_fix_yn.value = detailData.ntc_fix_yn;
-	existingOriginName.value = detailData.atchfile_original_name;
-	existingFileName.value = detailData.atchfile_name;
+	if (detailData.atch_file_nm != null) {
+		document.getElementById("existingFileBlock").style.display = "block";
+		existingOriginName.value = detailData.orgnl_atch_file_nm;
+		existingFileName.value = detailData.atch_file_nm;
+	}
+	else {
+		document.getElementById("existingFileBlock").style.display = "none";
+	}
 	editor.setData(detailData.ntc_cn);
 }
 
 //공지사항 상세정보 수정 기능
-function update_noticedata(){
+document.querySelector("#update_noticedata").addEventListener('click', function() {
 	if (confirm("정말로 정보를 수정하시겠습니까?")) {
 		notice_detail_frm.submit();
 	}
-}
+});

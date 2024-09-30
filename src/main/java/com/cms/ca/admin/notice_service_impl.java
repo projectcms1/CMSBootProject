@@ -35,7 +35,7 @@ public class notice_service_impl implements notice_service {
 	}
 
 	@Override
-	public notice_dto notice_modal(String ntc_mttr_sn) {
+	public notice_dto notice_modal(Integer ntc_mttr_sn) {
 		return this.notice_repo.notice_modal(ntc_mttr_sn);
 	}
 
@@ -49,7 +49,13 @@ public class notice_service_impl implements notice_service {
 	}
 
 	@Override
-	public int notice_modify(notice_dto ntdto) {
+	public int notice_modify(MultipartFile mfile, notice_dto ntdto) throws Exception {
+		if (!mfile.isEmpty()) {
+			ntdto.setOrgnl_atch_file_nm(mfile.getOriginalFilename());
+			FileHandler fh = new FileHandler();
+			fh.deletFile(ntdto.getAtch_file_nm());
+			ntdto.setAtch_file_nm(fh.uploadFile(mfile));
+		}
 		return this.notice_repo.notice_modify(ntdto);
 	}
 	

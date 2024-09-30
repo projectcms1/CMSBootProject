@@ -14,7 +14,6 @@
 					<section class="section">
 						<div class="row">
 
-
 							<div class="col-md-12 mb-2">
 								<label class="col-form-label">제목</label> <input type="text"
 									name="ntc_mttr_ttl" id="notice_title" class="form-control" required>
@@ -22,8 +21,8 @@
 
 							<div class="row mb-3">
 								<div class="col-md-3">
-									<label class="col-form-label">공지 번호</label> <input type="text" name="nct_mttr_sn"
-										id="notice_number" class="form-control" required>
+									<label class="col-form-label">공지 번호</label> <input type="text" name="ntc_mttr_sn"
+										id="notice_number" class="form-control" readonly>
 								</div>
 								<div class="col-md-3">
 									<label class="col-form-label">작성자</label> <input type="text"
@@ -71,13 +70,13 @@
         					</div>
 							</div>
 
-							<div class="col-md-12 mb-2">
-								<label class="col-form-label">첨부파일</label> <input type="text"
-									name="orgnl_atch_file_nm" id="atchfile_original_name" class="form-control">
+							<div class="col-md-12 mb-2" id="existingFileBlock">
+								<label class="col-form-label">기존 첨부파일</label> <input type="text"
+									name="orgnl_atch_file_nm" id="atchfile_original_name" class="form-control" readonly>
 								<input type="hidden" name="atch_file_nm" id="atchfile_name">
 							</div>
 							<div class="col-md-12 mb-2">
-								<label class="col-form-label">첨부파일</label> <input type="file"
+								<label class="col-form-label">첨부파일 변경</label> <input type="file"
 									name="attchment_file" class="form-control">
 							</div>
 
@@ -89,7 +88,7 @@
 
 			<div class="modal-footer">
 				<button type="button" class="btn btn-outline-primary float-end"
-					onclick="update_noticedata()" style="margin-left: auto;">
+					id="update_noticedata" style="margin-left: auto;">
 					<i class="ri-edit-2-line"></i> 수정
 				</button>
 				<button type="button" class="btn btn-secondary"
