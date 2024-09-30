@@ -275,8 +275,16 @@ function makeOpeningModal(detailData) {
 	write_date.value = detailData.wrt_dt;
 	ntc_clsf_nm.value = detailData.ntc_clsf_nm;
 	ntc_fix_yn.value = detailData.ntc_fix_yn;
-	existingOriginName.value = detailData.atchfile_original_name;
-	existingFileName.value = detailData.atchfile_name;
+	
+	if (detailData.atchfile_name != '') {
+		document.getElementById("existingFileBlock").display = "block";
+		existingOriginName.value = detailData.atchfile_original_name;
+		existingFileName.value = detailData.atchfile_name;
+	}
+	else {
+		document.getElementById("existingFileBlock").display = "none";
+	}
+	
 	editor.setData(detailData.ntc_cn);
 }
 
