@@ -16,10 +16,16 @@ public class CDNFileUploader {
 	
 	private FTPClient ftp = null;
 	private FTPClientConfig cf = null;
+	
 	private String host = "172.30.1.7";
+	//private String host = "172.17.0.4";
+	
 	private String user = "sej";
 	private String pass = "a1234";
+	
 	private int port = 9005;
+	//private int port = 21;
+	
 	// 모든 이용자의 사진을 한 폴더에 올리기 때문에 String 변수에 폴더명을 적어둠
 	private String file_path_url = "http://172.30.1.7:9009/cacms/";
 	

@@ -4,6 +4,8 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,7 @@ import com.cms.ca.ImageFileService;
 import com.cms.ca.counsel_dto;
 import com.cms.ca.employee_dto;
 import com.cms.ca.imgfile_dto;
+import com.cms.ca.notice_dto;
 import com.cms.ca.student_dto;
 import com.cms.ca.view_counsel_dto;
 
@@ -41,10 +44,19 @@ public class AdminController {
 	@Autowired
 	private counsel_service counsel_service;
 	
+	@Autowired
+	private notice_service notice_service;
+
 	@Resource(name = "img_service")
 	private ImageFileService img_service;
 
 	PrintWriter pw = null;
+	
+	// Session 데이터
+	private Authentication authentication = null;
+	
+	/*=============================================학생=============================================*/
+	
 
 	// 학생 사용자 리스트 출력 및 검색
 	@GetMapping("/admin/stlistmod")
@@ -63,6 +75,7 @@ public class AdminController {
 		return "admin/stlistmod";
 	}
 
+	
 	// 학생 사용자 세부정보 수정
 	@PostMapping("/admin/stuser_detail_update")
 	public void stuser_detail_update(@ModelAttribute student_dto stdto, @RequestPart(name = "uphoto_file", required = false) MultipartFile uphoto_file,
@@ -93,7 +106,7 @@ public class AdminController {
 			int result = this.stuser_service.student_detail_update(stdto);
 			int login_result = this.stuser_service.student_detail_login_update(stdto);
 			if (result > 0 && login_result > 0) {
-				this.pw.print("<script>" + "alert('학생정보가 수정되었습니다.');" + "location.href='./stlistmod';" + "</script>");
+				this.pw.print("<script>" + "alert('학생정보가 수정되었습니다.');" + "location.href='/admin/stlistmod';" + "</script>");
 			} else {
 				this.pw.print("<script>" + "alert('오류로 인해 학생정보가 수정되지 않았습니다.');" + "history.go(-1);" + "</script>");
 			}
@@ -105,11 +118,14 @@ public class AdminController {
 		}
 	}
 	
+	
+	//학생 사용자 추가 페이지 로드
 	@GetMapping("/admin/stlistmod_adduser")
 	public String stlistmod_adduser() {
 		return "admin/stlistmod_adduser";
 	}
 
+	
 	// 학생 사용자 추가
 	@PostMapping("/admin/stuser_add")
 	public void stuser_add(@ModelAttribute student_dto stdto, @RequestPart(name = "uphoto_file", required = false) MultipartFile uphoto_file,
@@ -135,7 +151,7 @@ public class AdminController {
 			detail_result = this.stuser_service.add_stuser_detail(stdto, entrance_year);
 			
 			if (detail_result > 0) {
-				this.pw.print("<script>" + "alert('학생 계정이 추가되었습니다.');" + "location.href='./stlistmod';" + "</script>");
+				this.pw.print("<script>" + "alert('학생 계정이 추가되었습니다.');" + "location.href='/admin/stlistmod';" + "</script>");
 			} else {
 				this.pw.print(
 						"<script>" + "alert('오류로 인해 학생 계정이 추가되지 않았습니다. 확인해주세요!');" + "history.go(-1);" + "</script>");
@@ -150,6 +166,8 @@ public class AdminController {
 
 	
 	
+	
+	/*=============================================교직원=============================================*/
 	
 	
 	// 교직원 사용자 리스트 출력 및 검색
@@ -195,7 +213,7 @@ public class AdminController {
 				detail_result = this.emuser_service.add_emuser_detail(emdto, entrance_year);
 				
 				if (detail_result > 0) {
-					this.pw.print("<script>" + "alert('교직원 계정이 추가되었습니다.');" + "location.href='./emlistmod';" + "</script>");
+					this.pw.print("<script>" + "alert('교직원 계정이 추가되었습니다.');" + "location.href='/admin/emlistmod';" + "</script>");
 				} else {
 					this.pw.print(
 							"<script>" + "alert('오류로 인해 교직원 계정이 추가되지 않았습니다. 확인해주세요!');" + "history.go(-1);" + "</script>");
@@ -246,7 +264,7 @@ public class AdminController {
 			}
 			int result = this.emuser_service.employee_modify(emdto);
 			if (result > 0) {
-				this.pw.print("<script>" + "alert('교직원 정보가 수정되었습니다.');" + "location.href='./emlistmod';" + "</script>");
+				this.pw.print("<script>" + "alert('교직원 정보가 수정되었습니다.');" + "location.href='/admin/emlistmod';" + "</script>");
 			} else {
 				this.pw.print("<script>" + "alert('오류로 인해 교직원 정보가 수정되지 않았습니다.');" + "history.go(-1);" + "</script>");
 			}
@@ -263,6 +281,10 @@ public class AdminController {
 	public String emlistmod_adduser() {
 		return "admin/emlistmod_adduser";
 	}
+	
+	
+	
+	/*=============================================관리자=============================================*/
 	
 	
 	// 관리자 사용자 리스트 출력 및 검색
@@ -292,7 +314,7 @@ public class AdminController {
 	
 	
 	
-	// 학생 사용자 세부정보 수정
+	//관리자 사용자 세부정보 수정
 	@PostMapping("/admin/adminuser_detail_update")
 	public void adminuser_detail_update(@ModelAttribute employee_dto emdto,
 			@RequestPart(name = "uphoto_file", required = false) MultipartFile uphoto_file, ServletResponse sr,
@@ -322,7 +344,7 @@ public class AdminController {
 			int result = this.aduser_service.admin_detail_update(emdto);
 			if (result > 0) {
 				this.pw.print(
-						"<script>" + "alert('관리자 정보가 수정되었습니다.');" + "location.href='./adminlistmod';" + "</script>");
+						"<script>" + "alert('관리자 정보가 수정되었습니다.');" + "location.href='/admin/adminlistmod';" + "</script>");
 			} else {
 				this.pw.print("<script>" + "alert('오류로 인해 관리자 정보가 수정되지 않았습니다.');" + "history.go(-1);" + "</script>");
 			}
@@ -337,19 +359,23 @@ public class AdminController {
 	}
 	
 	
-	
+	//관리자 사용자 추가 페이지 로드
 	@GetMapping("/admin/adminlistmod_adduser")
 	public String adminlistmod_adduser() {
 		return "admin/admin"
 				+ "listmod_adduser";
 	}
 	
+	
+	
+	/*=============================================상담=============================================*/
+	
 
 	// 상담 내역 리스트 출력 및 검색
 	@GetMapping("/admin/allcounselmod")
 	public String allcounselmod(Model m, @RequestParam(value = "", required = false) String search_part,
 			@RequestParam(value = "", required = false) String search_word) {
-
+		
 		// 검색파트 및 리스트출력
 		if (search_part == null || search_word == null || search_part.equals("") || search_word.equals("")) {
 			m.addAttribute("counsel_list", this.counsel_service.counsel_list());
@@ -362,7 +388,7 @@ public class AdminController {
 		return "admin/allcounselmod";
 	}
 
-	//상담추가
+	//상담 추가
 	@PostMapping("/admin/counsel_add")
 	public void allcounsellist_counsel_add(ServletResponse res, counsel_dto csl_dto) {
 		try {
@@ -373,8 +399,8 @@ public class AdminController {
 				this.pw.print("<script>"
 						+ "alert('상담이 정상적으로 신청되었습니다.');"
 						+ "if(confirm('상담 리스트로 이동하시겠습니까?'))"
-						+ "{ location.href='/allcounselmod'; }"
-						+ "else{ location.href='/addcounsel'; }"
+						+ "{ location.href='/admin/allcounselmod'; }"
+						+ "else{ location.href='/admin/addcounsel'; }"
 						+ "</script>");
 			}
 			else {
@@ -411,7 +437,7 @@ public class AdminController {
 			if(result>0) {
 				this.pw.print("<script>"
 						+ "alert('상담이 정상적으로 수정되었습니다.');"
-						+ "location.href = './allcounselmod';"
+						+ "location.href = '/admin/allcounselmod';"
 						+ "</script>");
 			}
 			else {
@@ -432,47 +458,87 @@ public class AdminController {
 	}
 
 	
-	//상담 추가
+	//상담 추가 페이지 로드
 	@GetMapping("/admin/addcounsel")
 	public String addcounsel() {
 		return "admin/addcounsel";
 	}
 
+	
+	
+	
+	
+	/*=============================================공지사항=============================================*/
+	
 
 	//공지사항 리스트 출력 및 검색
 	@GetMapping("/admin/noticemod")
-	public String portalnotice_mod() {
-		return "admin/noticemod";
-	}
-	
-	
-	//공지사항 추가
-	@GetMapping("/admin/notice_add")
-	public String addnotice() {
-		return "admin/notice_add";
-	}
-	
-	
-	
-	
-
-	// 비교과 프로그램 리스트 출력 및 검색
-	@GetMapping("/admin/extraculist")
-	public String extra_notice(Model m, @RequestParam(value = "", required = false) String search_part,
+	public String portalnotice_mod(Model m, @RequestParam(value = "", required = false) String search_part,
 			@RequestParam(value = "", required = false) String search_word) {
 		
-		// 검색파트 및 리스트출력
 		if (search_part == null || search_word == null || search_part.equals("") || search_word.equals("")) {
-			m.addAttribute("extracu_list", "");//this.extracu_service.student_list());
+			m.addAttribute("notice_list", this.notice_service.notice_list());
 		} else {
 			m.addAttribute("search_part", search_part);
 			m.addAttribute("search_word", search_word);
-			m.addAttribute("extracu_list", "");//this.extracu_service.student_search_list(search_part, search_word));
+			m.addAttribute("notice_list", this.notice_service.notice_search_list(search_part, search_word));
 		}
 		
-		return "admin/extraculist";
+		return "admin/noticemod";
 	}
-
+	
+	// 공지사항 보기 모달 데이터 출력
+	@PostMapping("/admin/admin_notice_detail/{notice_number}")
+	@ResponseBody
+	public notice_dto admin_notice_detail(@PathVariable(name = "notice_number") String ntc_mttr_sn) {
+		return this.notice_service.notice_modal(ntc_mttr_sn);
+	}
+	
+	//공지사항 추가 페이지 로드
+	@GetMapping("/admin/notice_add")
+	public String notice_add() {
+		return "admin/notice_add";
+	}
+	
+	//공지사항 추가 (insert)
+	@PostMapping("/admin/notice_insert")
+	public void addnotice(ServletResponse res, notice_dto ntdto, @RequestPart(name = "attchment_file") MultipartFile mfile) {
+		res.setContentType("text/html;charset=utf-8");
+		try {
+			this.authentication = SecurityContextHolder.getContext().getAuthentication();
+			ntdto.setEmp_no(this.authentication.getName());
+			this.pw=res.getWriter();
+			int result = 0;
+			result=this.notice_service.addnotice(mfile, ntdto);
+			if(result > 0) {
+				this.pw.print("<script>"
+						+ "alert('공지사항이 정상적으로 등록되었습니다.');"
+						+ "if(confirm('공지사항 리스트로 이동하시겠습니까?'))"
+						+ "{ location.href='/admin/noticemod'; }"
+						+ "else{ location.href='/admin/notice_add'; }"
+						+ "</script>");
+			}
+			else {
+				this.pw.print("<script>"
+						+ "alert('데이터베이스 연결 오류가 발생했습니다.\\n다시 시도해주세요.');"
+						+ "history.go(-1);"
+						+ "</script>");
+			}			
+		} catch (Exception e) {
+			this.pw.print("<script>"
+					+ "alert('작성 내용을 다시 확인해주세요.');"
+					+ "history.go(-1);"
+					+ "</script>");
+			e.printStackTrace();
+		} finally {
+			this.pw.close();
+		}
+	}
+	
+	
+	/*=============================================기타=============================================*/
+	
+	//에러페이지
 	@GetMapping("/admin/error")
 	public String error() {
 		return "error";
