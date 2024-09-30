@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cms.ca.admin.notice_repo">
+
+	<!-- 공지사항 리스트 출력 기능 -->
+	<select id="notice_list" resultType="com.cms.ca.notice_dto">
+	select NTC_MTTR_SN, NTC_MTTR_TTL, NTC_CLSF_NM, EMP_NO, WRTR_NM, WRT_DT from NTC_MTTR order by NTC_MTTR_SN desc
+	</select>
+	
+	<!-- 공지사항 리스트 검색 기능 -->
+	<select id="notice_search_list" resultType="com.cms.ca.notice_dto" parameterType="map">
+	select * from NTC_MTTR where ${search_part} like concat('%', #{search_word}, '%') order by NTC_MTTR_SN desc
+	</select>
+	
+	<!-- 공지사항 Modal 정보 출력 -->
+	<select id="notice_modal" resultType="com.cms.ca.notice_dto" parameterType="String">
+	select * from NTC_MTTR where NTC_MTTR_SN = #{ntc_mttr_sn} order by NTC_MTTR_SN desc
+	</select>
+	
+	<!-- 공지사항 추가 -->
+	<insert id="notice_add" parameterType="com.cms.ca.notice_dto">
+		insert into NTC_MTTR 
+		(ntc_mttr_sn, ntc_mttr_ttl, ntc_cn, ntc_fix_yn, atch_file_nm, orgnl_atch_file_nm, ntc_clsf_nm, inq_cnt, emp_no, wrtr_nm, wrt_dt)
+		values ('0', #{ntc_mttr_ttl}, #{ntc_cn}, #{ntc_fix_yn}, #{atch_file_nm}, #{orgnl_atch_file_nm}, #{ntc_clsf_nm}, '0', #{emp_no}, #{wrtr_nm}, now())
+	</insert>
+
+	<!-- 공지사항 수정 -->
+	<update id="notice_modify" parameterType="com.cms.ca.notice_dto">
+		update NTC_MTTR set NTC_MTTR_TTL = #{ntc_mttr_ttl}, NTC_CN = #{ntc_cn}, NTC_FIX_YN = #{NTC_FIX_YN},
+		ATCH_FILE_NM = #{atch_file_nm}, ORGNL_ATCH_FILE_NM = #{orgnl_atch_file_nm}, NTC_CLSF_NM = #{ntc_clsf_nm}
+		where NTC_MTTR_SN = #{ntc_mttr_sn}
+	</update>
+
+</mapper>

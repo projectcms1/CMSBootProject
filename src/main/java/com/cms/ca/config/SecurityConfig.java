@@ -41,7 +41,7 @@ public class SecurityConfig {
         http
         		.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
-                		.requestMatchers("/assets/**","/css/**","/js/**").permitAll()
+                		.requestMatchers("/assets/**","/css/**","/js/**","notice_file").permitAll()
                         .requestMatchers("/index","/login", "/public/**").permitAll()
                         .requestMatchers("/superadmin/**").hasRole("SUPER_ADMIN")
                         .requestMatchers("/admin/**").hasAnyRole("ADMIN", "SUPER_ADMIN")
