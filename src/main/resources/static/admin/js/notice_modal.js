@@ -269,7 +269,7 @@ document.querySelectorAll(".notice-modal-button").forEach(function(oneModalButto
 
 function makeOpeningModal(detailData) {
 	notice_title.value = detailData.ntc_mttr_ttl;
-	notice_number.value = detailData.ntc_mttr_ttl;
+	notice_number.value = detailData.ntc_mttr_sn;
 	writer_name.value = detailData.wrtr_nm;
 	inq_cnt.value = detailData.inq_cnt;
 	write_date.value = detailData.wrt_dt;

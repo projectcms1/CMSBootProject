@@ -35,7 +35,7 @@ public class notice_service_impl implements notice_service {
 	}
 
 	@Override
-	public notice_dto notice_modal(String ntc_mttr_sn) {
+	public notice_dto notice_modal(Integer ntc_mttr_sn) {
 		return this.notice_repo.notice_modal(ntc_mttr_sn);
 	}
 

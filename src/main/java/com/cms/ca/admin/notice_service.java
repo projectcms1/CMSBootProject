@@ -12,7 +12,7 @@ public interface notice_service {
 	
 	List<notice_dto> notice_search_list(String search_part, String search_word);
 	
-	notice_dto notice_modal(String ntc_mttr_sn);
+	notice_dto notice_modal(Integer ntc_mttr_sn);
 	
 	int addnotice(MultipartFile mfile, notice_dto ntdto) throws Exception;
 	
