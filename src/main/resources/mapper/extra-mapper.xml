@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cms.ca.nsbjt.ExtraRepository">
+<resultMap id="ProgramsResultMap" type="com.cms.ca.extra_dto">
+    <result column="PGM_NO" property="pgmNo"/>
+    <result column="PGM_FLNM" property="pgmFlNm"/>
+    <result column="PGM_EXPLN" property="pgmExpln"/>
+    <result column="PGM_BGNG_DT" property="pgmBgngDt"/>
+    <result column="PGM_END_DT" property="pgmEndDt"/>
+    <result column="APLY_BGNG_DT" property="aplyBgngDt"/>
+    <result column="APLY_END_DT" property="aplyEndDt"/>
+    <result column="CTGRY_NM" property="ctgryNm"/>
+    <result column="OPER_INST_NM" property="operInstNm"/>
+    <result column="MAX_NOPE" property="maxNope"/>
+    <result column="EMP_NOPGM_IMG" property="empNopgmImg"/>
+</resultMap>
+    
+<select id="getAllPrograms" resultMap="ProgramsResultMap">
+		select * from NSBJT_PGM_INFO
+</select>
+
+<select id="getOneProgram" resultMap="ProgramsResultMap" parameterType="Long">
+	select * from NSBJT_PGM_INFO where PGM_NO= #{PGM_NO}
+</select>
+
+</mapper>
