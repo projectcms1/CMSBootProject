@@ -23,4 +23,17 @@
 	select * from NSBJT_PGM_INFO where PGM_NO= #{PGM_NO}
 </select>
 
+<select id="Bycategory" resultMap="ProgramsResultMap" parameterType="String">
+	select * from NSBJT_PGM_INFO where CTGRY_NM= #{CTGRY_NM}
+</select>
+
+<!-- 프로그램 신청 정보 저장 -->
+<insert id="saveProgramApplication" parameterType="com.cms.ca.extra_dto">
+    INSERT INTO PGM_APLY_INFO (PGM_APLY_SN, PGM_NO, STDNT_NO, APLY_DT, PRGRS_STTS)
+    VALUES (#{pgmAplySn}, #{pgmNo}, #{stdntNo}, #{aplyDt}, #{prgrsStts})
+</insert>
+
+<select id="findProgramsByStudent" resultType="com.cms.ca.extra_dto" parameterType="int">
+    SELECT * FROM PGM_APLY_INFO WHERE STDNT_NO = #{stdntNo}
+</select>
 </mapper>

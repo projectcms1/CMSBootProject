@@ -70,16 +70,13 @@
 
           <div class="col-lg-6 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
             <h3>중앙정보대학교, 비교과 프로그램</h3>
-            <p class="fst-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
-            </p>
+            <p class="fst-italic"></p>
             <ul>
               <li><i class="bi bi-check-circle"></i> <span>각종 센터에서 주최하는 인기 프로그램 신청</span></li>
               <li><i class="bi bi-check-circle"></i> <span>진로/학업 관련 컨설팅, 전문가와 함께</span></li>
               <li><i class="bi bi-check-circle"></i> <span>어학 관련 추가 학력 준비하기</span></li>
             </ul>
-            <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+            <a href="extracurricular" class="read-more"><span>보러가기</span><i class="bi bi-arrow-right"></i></a>
           </div>
 
         </div>
@@ -88,56 +85,11 @@
 
     </section><!-- /About Section -->
 
-    <!-- Counts Section -->
-    <section id="counts" class="section counts light-background">
 
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="1232" data-purecounter-duration="1" class="purecounter"></span>
-              <p>진행 프로그램</p>
-            </div>
-          </div><!-- End Stats Item -->
-
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="64" data-purecounter-duration="1" class="purecounter"></span>
-              <p>신청 수</p>
-            </div>
-          </div><!-- End Stats Item -->
-
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="42" data-purecounter-duration="1" class="purecounter"></span>
-              <p>마감 임박 프로그램</p>
-            </div>
-          </div><!-- End Stats Item -->
-
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="24" data-purecounter-duration="1" class="purecounter"></span>
-              <p>예정 프로그램</p>
-            </div>
-          </div><!-- End Stats Item -->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Counts Section -->
-
-
-    <!-- Features Section -->
+    <!-- 카테고리 Section -->
     <section id="features" class="features section">
-
       <div class="container">
-
         <div class="row gy-4">
-
-
           <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="700">
             <div class="features-item">
               <i class="bi bi-x-diamond" style="color: #11dbcf;"></i>
@@ -165,41 +117,21 @@
               <h3><a href="" class="stretched-link">현장학습/인턴</a></h3>
             </div>
           </div><!-- End Feature Item -->
-
-          <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="1100">
-            <div class="features-item">
-              <i class="bi bi-activity" style="color: #ff5828;"></i>
-              <h3><a href="" class="stretched-link">사회공헌/봉사</a></h3>
-            </div>
-          </div><!-- End Feature Item -->
-
-          <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="1200">
-            <div class="features-item">
-              <i class="bi bi-brightness-high" style="color: #29cc61;"></i>
-              <h3><a href="" class="stretched-link">기타</a></h3>
-            </div>
-          </div><!-- End Feature Item -->
-
         </div>
-
       </div>
-
     </section><!-- /Features Section -->
 
-    <!-- 마감임박 Section -->
+    <!-- 교육 Section -->
     <section id="courses" class="courses section">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Programs</h2>
-        <p>마감임박 프로그램</p>
+        <p>교육 프로그램</p>
       </div><!-- End Section Title -->
-
       <div class="container">
-
         <div class="row">
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+          <div th:each="program : ${edu_programs}" class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
             <div class="course-item">
               <img src="assets/img/course-1.jpg" class="img-fluid" alt="...">
               <div class="course-content">
@@ -208,315 +140,105 @@
                   <p class="price">D-1</p> 
                 </div>
 
-                <h3><a href="course-details.html">영어 프레젠테이션 준비하기</a></h3>
-                <p class="description">설득력 있는 영어 프레젠테이션 준비하기(구체적 예시와 유용한 표현을 중심으로)</p>
+                <h3><a th:href="@{'/extracurricular_info/' + ${program.pgmNo}}" th:text="${program.pgmFlNm}"></a></h3>
+                <p th:text="${program.pgmExpln}" class="description"></p>
                 <div class="trainer d-flex justify-content-between align-items-center">
                   <div class="trainer-profile d-flex align-items-center">
                     <img src="assets/img/trainers/trainer-1-2.jpg" class="img-fluid" alt="">
-                    <a href="extracurricular_infook.do" class="trainer-link">인재개발원</a>
+                    <a href="extracurricular_info" class="trainer-link" th:text="${program.operInstNm}"></a>
                   </div>
                   <div class="trainer-rank d-flex align-items-center">
-                    <i class="bi bi-person user-icon"></i>&nbsp;50
+                    <i class="bi bi-person user-icon"></i>&nbsp;
                     &nbsp;&nbsp;
-                    <i class="bi bi-heart heart-icon"></i>&nbsp;65
+                    <i class="bi bi-heart heart-icon"></i>&nbsp;
                   </div>
                 </div>
               </div>
             </div>
           </div> <!-- End Course Item-->
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
-            <div class="course-item">
-              <img src="assets/img/course-3.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <p class="category">Content</p>
-                  <p class="price">$180</p>
-                </div>
-
-                <h3><a href="course-details.html">Copywriting</a></h3>
-                <p class="description">Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
-                <div class="trainer d-flex justify-content-between align-items-center">
-                  <div class="trainer-profile d-flex align-items-center">
-                    <img src="assets/img/trainers/trainer-3-2.jpg" class="img-fluid" alt="">
-                    <a href="" class="trainer-link">Brandon</a>
-                  </div>
-                  <div class="trainer-rank d-flex align-items-center">
-                    <i class="bi bi-person user-icon"></i>&nbsp;20
-                    &nbsp;&nbsp;
-                    <i class="bi bi-heart heart-icon"></i>&nbsp;85
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-
         </div>
-
       </div>
+    </section><!-- 교육 프로그램 Section -->
 
-    </section><!-- /마감임박 Section -->
-
+    <!-- 상담 Section -->
     <section id="courses" class="courses section">
 
-      <!-- 인기프로그램 Title -->
+      <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Programs</h2>
-        <p>인기 프로그램</p>
+        <p>집단상담 프로그램</p>
       </div><!-- End Section Title -->
-
       <div class="container">
-
         <div class="row">
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+          <div th:each="program : ${counsel_programs}" class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
             <div class="course-item">
               <img src="assets/img/course-1.jpg" class="img-fluid" alt="...">
               <div class="course-content">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                  <p class="category">Web Development</p>
-                  <p class="price">$169</p>
+                  <p class="category">모집중</p>
+                  <p class="price">D-1</p> 
                 </div>
 
-                <h3><a href="course-details.html">Website Design</a></h3>
-                <p class="description">Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
+                <h3><a th:href="@{'/extracurricular_info/' + ${program.pgmNo}}" th:text="${program.pgmFlNm}"></a></h3>
+                <p th:text="${program.pgmExpln}" class="description"></p>
                 <div class="trainer d-flex justify-content-between align-items-center">
                   <div class="trainer-profile d-flex align-items-center">
                     <img src="assets/img/trainers/trainer-1-2.jpg" class="img-fluid" alt="">
-                    <a href="" class="trainer-link">Antonio</a>
+                    <a href="extracurricular_info" class="trainer-link" th:text="${program.operInstNm}"></a>
                   </div>
                   <div class="trainer-rank d-flex align-items-center">
-                    <i class="bi bi-person user-icon"></i>&nbsp;50
+                    <i class="bi bi-person user-icon"></i>&nbsp;
                     &nbsp;&nbsp;
-                    <i class="bi bi-heart heart-icon"></i>&nbsp;65
+                    <i class="bi bi-heart heart-icon"></i>&nbsp;
                   </div>
                 </div>
               </div>
             </div>
           </div> <!-- End Course Item-->
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="course-item">
-              <img src="assets/img/course-2.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <p class="category">Marketing</p>
-                  <p class="price">$250</p>
-                </div>
-
-                <h3><a href="course-details.html">Search Engine Optimization</a></h3>
-                <p class="description">Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
-                <div class="trainer d-flex justify-content-between align-items-center">
-                  <div class="trainer-profile d-flex align-items-center">
-                    <img src="assets/img/trainers/trainer-2-2.jpg" class="img-fluid" alt="">
-                    <a href="" class="trainer-link">Lana</a>
-                  </div>
-                  <div class="trainer-rank d-flex align-items-center">
-                    <i class="bi bi-person user-icon"></i>&nbsp;35
-                    &nbsp;&nbsp;
-                    <i class="bi bi-heart heart-icon"></i>&nbsp;42
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
-            <div class="course-item">
-              <img src="assets/img/course-3.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <p class="category">Content</p>
-                  <p class="price">$180</p>
-                </div>
-
-                <h3><a href="course-details.html">Copywriting</a></h3>
-                <p class="description">Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
-                <div class="trainer d-flex justify-content-between align-items-center">
-                  <div class="trainer-profile d-flex align-items-center">
-                    <img src="assets/img/trainers/trainer-3-2.jpg" class="img-fluid" alt="">
-                    <a href="" class="trainer-link">Brandon</a>
-                  </div>
-                  <div class="trainer-rank d-flex align-items-center">
-                    <i class="bi bi-person user-icon"></i>&nbsp;20
-                    &nbsp;&nbsp;
-                    <i class="bi bi-heart heart-icon"></i>&nbsp;85
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-
         </div>
-
       </div>
-
-    </section><!-- /인기프로그램 Section -->
-
+    </section><!-- 교육 프로그램 Section -->
+    
+        <!-- 교육 Section -->
     <section id="courses" class="courses section">
 
-      <!-- 상담프로그램 Title -->
+      <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Programs</h2>
-        <p>상담 프로그램</p>
+        <p>학습/진로 프로그램</p>
       </div><!-- End Section Title -->
-
       <div class="container">
-
         <div class="row">
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+          <div th:each="program : ${work_programs}" class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
             <div class="course-item">
               <img src="assets/img/course-1.jpg" class="img-fluid" alt="...">
               <div class="course-content">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                  <p class="category">Web Development</p>
-                  <p class="price">$169</p>
+                  <p class="category">모집중</p>
+                  <p class="price">D-1</p> 
                 </div>
 
-                <h3><a href="course-details.html">Website Design</a></h3>
-                <p class="description">Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
+                <h3><a th:href="@{'/extracurricular_info/' + ${program.pgmNo}}" th:text="${program.pgmFlNm}"></a></h3>
+                <p th:text="${program.pgmExpln}" class="description"></p>
                 <div class="trainer d-flex justify-content-between align-items-center">
                   <div class="trainer-profile d-flex align-items-center">
                     <img src="assets/img/trainers/trainer-1-2.jpg" class="img-fluid" alt="">
-                    <a href="" class="trainer-link">Antonio</a>
+                    <a href="extracurricular_info" class="trainer-link" th:text="${program.operInstNm}"></a>
                   </div>
                   <div class="trainer-rank d-flex align-items-center">
-                    <i class="bi bi-person user-icon"></i>&nbsp;50
+                    <i class="bi bi-person user-icon"></i>&nbsp;
                     &nbsp;&nbsp;
-                    <i class="bi bi-heart heart-icon"></i>&nbsp;65
+                    <i class="bi bi-heart heart-icon"></i>&nbsp;
                   </div>
                 </div>
               </div>
             </div>
           </div> <!-- End Course Item-->
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="course-item">
-              <img src="assets/img/course-2.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <p class="category">Marketing</p>
-                  <p class="price">$250</p>
-                </div>
-
-                <h3><a href="course-details.html">Search Engine Optimization</a></h3>
-                <p class="description">Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
-                <div class="trainer d-flex justify-content-between align-items-center">
-                  <div class="trainer-profile d-flex align-items-center">
-                    <img src="assets/img/trainers/trainer-2-2.jpg" class="img-fluid" alt="">
-                    <a href="" class="trainer-link">Lana</a>
-                  </div>
-                  <div class="trainer-rank d-flex align-items-center">
-                    <i class="bi bi-person user-icon"></i>&nbsp;35
-                    &nbsp;&nbsp;
-                    <i class="bi bi-heart heart-icon"></i>&nbsp;42
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
-            <div class="course-item">
-              <img src="assets/img/course-3.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <p class="category">Content</p>
-                  <p class="price">$180</p>
-                </div>
-
-                <h3><a href="course-details.html">Copywriting</a></h3>
-                <p class="description">Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
-                <div class="trainer d-flex justify-content-between align-items-center">
-                  <div class="trainer-profile d-flex align-items-center">
-                    <img src="assets/img/trainers/trainer-3-2.jpg" class="img-fluid" alt="">
-                    <a href="" class="trainer-link">Brandon</a>
-                  </div>
-                  <div class="trainer-rank d-flex align-items-center">
-                    <i class="bi bi-person user-icon"></i>&nbsp;20
-                    &nbsp;&nbsp;
-                    <i class="bi bi-heart heart-icon"></i>&nbsp;85
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-
         </div>
-
       </div>
+    </section><!-- 교육 프로그램 Section -->
 
-    </section><!--/상담프로그램 section-->
-
-    <!-- Trainers Index Section -->
-    <section id="trainers-index" class="section trainers-index">
-
-      <div class="container">
-
-        <div class="row">
-
-          <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
-            <div class="member">
-              <img src="assets/img/trainers/trainer-1.jpg" class="img-fluid" alt="">
-              <div class="member-content">
-                <h4>취업 컨설팅</h4>
-                <span>Web Development</span>
-                <p>
-                  Magni qui quod omnis unde et eos fuga et exercitationem. Odio veritatis perspiciatis quaerat qui aut aut aut
-                </p>
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-            </div>
-          </div><!-- End Team Member -->
-
-          <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
-            <div class="member">
-              <img src="assets/img/trainers/trainer-2.jpg" class="img-fluid" alt="">
-              <div class="member-content">
-                <h4>학습상담</h4>
-                <span>Marketing</span>
-                <p>
-                  Repellat fugiat adipisci nemo illum nesciunt voluptas repellendus. In architecto rerum rerum temporibus
-                </p>
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-            </div>
-          </div><!-- End Team Member -->
-
-          <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
-            <div class="member">
-              <img src="assets/img/trainers/trainer-3.jpg" class="img-fluid" alt="">
-              <div class="member-content">
-                <h4>1:1 채팅상담</h4>
-                <span>Content</span>
-                <p>
-                  Voluptas necessitatibus occaecati quia. Earum totam consequuntur qui porro et laborum toro des clara
-                </p>
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-            </div>
-          </div><!-- End Team Member -->
-
-        </div>
-
-      </div>
-
-    </section><!-- /상담프로그램 Index Section -->
+  
 
   </main>
 
