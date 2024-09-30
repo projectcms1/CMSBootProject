@@ -482,6 +482,10 @@ url("./fonts/bootstrap-icons.woff?dd67030699838ea613ee6dbda90effa6") format("wof
 .bi-code-slash::before { content: "\f2c6"; }
 .bi-code-square::before { content: "\f2c7"; }
 .bi-code::before { content: "\f2c8"; }
+<<<<<<< HEAD
+.bi-collection-fill	 { content: "\f2c9"; }
+=======
+>>>>>>> 84ade8d5e6e5924e2a15996f60a7982bb80d32b7
 .bi-collection-fill::before { content: "\f2c9"; }
 .bi-collection-play-fill::before { content: "\f2ca"; }
 .bi-collection-play::before { content: "\f2cb"; }

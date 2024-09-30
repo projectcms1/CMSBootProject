@@ -16,7 +16,7 @@ select a.*, b.ACNT_LCK_YN, b.REG_DT from EMP_INFO as a JOIN LGN_ACNT_INFO as b w
 
 <!-- 교직원 리스트 검색 기능 -->
 <select id="employee_search_list" resultType="com.cms.ca.employee_dto" parameterType="map">
-select * from EMP_INFO where ${search_part} like concat('%', #{search_word}, '%') order by EMP_NO desc
+select * from EMP_INFO where ${search_part} like concat('%', #{search_word}, '%') and (MNG_AUTHRT = 'P' or MNG_AUTHRT = 'C') order by EMP_NO desc
 </select>
 
 <!-- 교직원 상세 정보 수정 -->

@@ -42,7 +42,9 @@ public class CDNImageViewerCtrl {
 			imgByte = null;
 		} finally {
 			try {
-				is.close(); //I/O 종료
+				if (is != null) {
+					is.close(); //I/O 종료
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

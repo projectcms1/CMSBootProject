@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,18 +29,19 @@ public class EmployeeController {
 	@Resource(name = "empy_service")
 	private EmployeeService empyService;
 
-	String emp_no="2024632";
-	String viewName = "/employee/empy_blankpage";
+	String viewName = "error";
 	employee_dto oneData=null;
 	PrintWriter pw=null;
 	
 	
 	@GetMapping("/employee/empy_info")	//교직원 정보 페이지 
 	public String employeeInfoPage(Model m) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String emp_no=authentication.getName();
 		try {
-			this.oneData = this.empyService.getEmployeeInfo(this.emp_no);	//교번으로 교직원 데이터 read
+			this.oneData = this.empyService.getEmployeeInfo(emp_no);	//교번으로 교직원 데이터 read
 			if (this.oneData.getEmp_no()==null) { // 교번과 매칭되는 사람이 없을시
-				viewName = "/employee/empy_blankpage";
+				this.viewName = "error";
 			}
 			else {
 				if((this.oneData.getEdu_crtfct_issu_ymd()==null) || (this.oneData.getEdu_crtfct_issu_ymd().equals(""))) {	//교원자격증번호 및 발급일자가 null(교수가 아닐 때)
@@ -49,18 +52,18 @@ public class EmployeeController {
 					this.oneData.setDateWithDot();		//교원자격증 발급일자 출력 형태 변경					
 				}
 				this.oneData.setDashInTelNumber();	//전화번호 출력 형태 변경
-				viewName = "/employee/empy_info";
+				this.viewName = "/employee/empy_info";
 			}
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
-			viewName = "/employee/empy_blankpage";
+			this.viewName = "error";
 		}
-
-		String mng_authrt=this.empyService.getEmployeeInfo(this.emp_no).getMng_authrt();
+		
+		String mng_authrt=this.empyService.getEmployeeInfo(emp_no).getMng_authrt();
 		m.addAttribute("employee_job", mng_authrt);
 		m.addAttribute("empy_info", this.oneData);
-		return viewName;
+		return this.viewName;
 	}
 	
 	
@@ -86,7 +89,7 @@ public class EmployeeController {
 			}
 		
 		} catch (Exception e) {
-			this.pw.print("<script>location.href='/employee/empy_blankpage';</script>");	//에러 페이지 이동
+			this.pw.print("<script>location.href='/error';</script>");	//에러 페이지 이동
 			e.printStackTrace();
 		}
 		finally {
@@ -97,8 +100,10 @@ public class EmployeeController {
 	@GetMapping("/employee/empy_counsel_index")	//상담이력조회 페이지, 교번에 해당하는 완료 상담 정보와 개수 로드
 	public String employeeCounselIndexPage(Model m, @ModelAttribute("params") search_dto params, ServletResponse res) {	
 		try {
-			List<view_counsel_dto> counsel_list = this.empyService.getAllCounsel(this.emp_no, "완료", params);
-			int counsel_list_count = this.empyService.getAllCounselCount(this.emp_no, "완료", params);	
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			String emp_no=authentication.getName();
+			List<view_counsel_dto> counsel_list = this.empyService.getAllCounsel(emp_no, "완료", params);
+			int counsel_list_count = this.empyService.getAllCounselCount(emp_no, "완료", params);	
 			int maxpage=(int)Math.ceil((double)counsel_list_count/params.getSize());
 			
 			if(maxpage<params.getPage() && maxpage!=0) {	//파라미터로 요청한 페이지가 실제 로드되는 페이지와 매칭되지 않을때
@@ -116,11 +121,13 @@ public class EmployeeController {
 			m.addAttribute("counsel_list", counsel_list);
 			m.addAttribute("counsel_list_count", counsel_list_count);
 			m.addAttribute("maxpage", maxpage);
+			this.viewName="/employee/empy_counsel_index";
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
+			this.viewName="error";
 		}
-		return "employee/empy_counsel_index";
+		return this.viewName;
 	}
 	
 	@ResponseBody
@@ -140,6 +147,8 @@ public class EmployeeController {
 	@GetMapping("/employee/empy_counsel_waiting")	//대기중상담관리 페이지
 	public String employeeCounselWaitingPage(Model m, @ModelAttribute("params") search_dto params, ServletResponse res) {	//교번에 해당하는 완료 상담 정보와 개수 로드
 		try {
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			String emp_no=authentication.getName();
 			List<view_counsel_dto> counsel_list = this.empyService.getAllCounsel(emp_no, "미승인", params);
 			int counsel_list_count = this.empyService.getAllCounselCount(emp_no, "미승인", params);	
 			int maxpage=(int)Math.ceil((double)counsel_list_count/params.getSize());
@@ -159,11 +168,13 @@ public class EmployeeController {
 			m.addAttribute("counsel_list", counsel_list);
 			m.addAttribute("counsel_list_count", counsel_list_count);
 			m.addAttribute("maxpage", maxpage);
+			this.viewName="/employee/empy_counsel_waiting";
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
+			this.viewName="error";
 		}
-		return "employee/empy_counsel_waiting";
+		return this.viewName;
 	}
 	
 	@PostMapping("/employee/empy_counsel_waiting")	//대기중상담관리 페이지, 상담 승인 및 미승인 처리
@@ -197,7 +208,7 @@ public class EmployeeController {
 			}
 		
 		} catch (Exception e) {
-			this.pw.print("<script>location.href='/employee/empy_blankpage';</script>");	//에러 페이지 이동
+			this.pw.print("<script>location.href='./error';</script>");	//에러 페이지 이동
 			e.printStackTrace();
 		}
 		finally {
@@ -207,6 +218,8 @@ public class EmployeeController {
 	
 	@GetMapping("/employee/empy_counsel_confirm")	//확정상담관리 페이지
 	public String employeeCounselConfirmPage(Model m, @ModelAttribute("params") search_dto params, ServletResponse res) {	//교번에 해당하는 완료 상담 정보와 개수 로드
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String emp_no=authentication.getName();
 		try {
 			List<view_counsel_dto> counsel_list = this.empyService.getAllCounsel(emp_no, "승인", params);
 			int counsel_list_count = this.empyService.getAllCounselCount(emp_no, "승인", params);	
@@ -227,11 +240,13 @@ public class EmployeeController {
 			m.addAttribute("counsel_list", counsel_list);
 			m.addAttribute("counsel_list_count", counsel_list_count);
 			m.addAttribute("maxpage", maxpage);
+			this.viewName="/employee/empy_counsel_confirm";
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
+			this.viewName="error";
 		}
-		return "employee/empy_counsel_confirm";
+		return this.viewName;
 	}
 	
 	@PostMapping("/employee/empy_counsel_confirm")	//확정상담관리 페이지, 상담 취소 처리
@@ -281,6 +296,8 @@ public class EmployeeController {
 	
 	@PostMapping("/employee/empy_counsel_confirm_add")	//확정상담관리 페이지, 상담 완료 및 회기 상담 추가
 	public String employeeCounselConfirmAdd(Model m, ServletResponse res, view_counsel_dto view_csl_dto, @Param("counsel_extend_ck") String counsel_extend_ck) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String emp_no=authentication.getName();
 		try {
 			res.setContentType("text/html;charset=utf-8");
 			this.pw=res.getWriter();
@@ -329,15 +346,18 @@ public class EmployeeController {
 			}
 			
 		} catch (Exception e) {
+			this.viewName="error";
 			e.printStackTrace();
 		} finally {
 			this.pw.close();
 		}
-		return null;
+		return this.viewName;
 	}
 	
 	@GetMapping("/employee/empy_counsel_past")
 	public String employeeCounselPastPage(Model m, @ModelAttribute("params") search_dto params, ServletResponse res) {	//교번에 해당하는 완료 상담 정보와 개수 로드
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String emp_no=authentication.getName();
 		try {
 			List<view_counsel_dto> counsel_list_cancle = this.empyService.getPastCounsel(emp_no, params);
 			int counsel_list_count = this.empyService.getAllCounselCount(emp_no, "완료", params)+this.empyService.getAllCounselCount(emp_no, "취소", params);	
@@ -358,24 +378,30 @@ public class EmployeeController {
 			m.addAttribute("counsel_list", counsel_list_cancle);
 			m.addAttribute("counsel_list_count", counsel_list_count);
 			m.addAttribute("maxpage", maxpage);
+			this.viewName="/employee/empy_counsel_past";
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
+			this.viewName="error";
 		}
-		return "employee/empy_counsel_past";
+		return this.viewName;
 	}
 	
 	@GetMapping("/employee/empy_counsel_add")	//상담신청 페이지 불러오기
 	public String employeeCounselAddPage(Model m, counsel_dto csl_dto) {
-		String mng_authrt=this.empyService.getEmployeeInfo(this.emp_no).getMng_authrt();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String emp_no=authentication.getName();
+		String mng_authrt=this.empyService.getEmployeeInfo(emp_no).getMng_authrt();
 		m.addAttribute("employee_job", mng_authrt);
 		m.addAttribute("csl_dto", csl_dto);
 		
-		return "employee/empy_counsel_add";
+		return "/employee/empy_counsel_add";
 	}
 	
 	@PostMapping("/employee/empy_counsel_addok")	//상담 신청 처리
 	public String employeeCounselAddSave(Model m, ServletResponse res, counsel_dto csl_dto) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String emp_no=authentication.getName();
 		try {
 			res.setContentType("text/html;charset=utf-8");
 			this.pw=res.getWriter();
@@ -395,11 +421,12 @@ public class EmployeeController {
 						+ "</script>");
 			}			
 		} catch (Exception e) {
+			this.viewName="error";
 			e.printStackTrace();
 		} finally {
 			this.pw.close();
 		}
-		return null;
+		return this.viewName;
 	}
 
 	@ResponseBody
@@ -419,22 +446,29 @@ public class EmployeeController {
 	
 	@GetMapping("/employee/empy_counsel_chatting")
 	public String employeeCounselChattingPage(Model m) {
-		String mng_authrt=this.empyService.getEmployeeInfo(this.emp_no).getMng_authrt();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String emp_no=authentication.getName();
+		String mng_authrt=this.empyService.getEmployeeInfo(emp_no).getMng_authrt();
 		m.addAttribute("employee_job", mng_authrt);
-		return "employee/empy_counsel_chatting";
+		return "/employee/empy_counsel_chatting";
 	}
 	
 	@GetMapping("/employee/empy_academy_index")
 	public String employeeAcademyIndexPage(Model m) {
-		String mng_authrt=this.empyService.getEmployeeInfo(this.emp_no).getMng_authrt();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String emp_no=authentication.getName();
+		String mng_authrt=this.empyService.getEmployeeInfo(emp_no).getMng_authrt();
 		m.addAttribute("employee_job", mng_authrt);
-		return "employee/empy_academy_index";
+		return "/employee/empy_academy_index";
 	}
 	
 	@GetMapping("/employee/empy_blankpage")
 	public String employeeBlankPage(Model m) {
-		String mng_authrt=this.empyService.getEmployeeInfo(this.emp_no).getMng_authrt();
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String emp_no=authentication.getName();
+		String mng_authrt=this.empyService.getEmployeeInfo(emp_no).getMng_authrt();
 		m.addAttribute("employee_job", mng_authrt);
-		return "employee/empy_blankpage";
+		return "/employee/empy_blankpage";
 	}
 }

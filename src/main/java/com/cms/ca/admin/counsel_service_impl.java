@@ -47,7 +47,9 @@ public class counsel_service_impl implements counsel_service {
 		mp.put("search_part", search_part);
 		mp.put("search_word", search_word);
 		List<view_counsel_dto> counsellist_one_data = this.counsel_repo.counsel_search_list(mp);
-		
+		for (view_counsel_dto vcdto : counsellist_one_data) {
+			vcdto.setRoundCount(this.counsel_repo.getCountRound(vcdto.getAply_sn()));
+		}
 		return counsellist_one_data;
 	}
 
@@ -75,7 +77,6 @@ public class counsel_service_impl implements counsel_service {
 		else if (mng_authrt.equals("C")) {
 			result = dscsn_mthd.equals("대면") ? "상담 센터" : null;
 		}
-		System.out.println("result : "+result);
 		return result;
 	}
 }

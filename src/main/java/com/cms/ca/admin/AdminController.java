@@ -47,7 +47,7 @@ public class AdminController {
 	PrintWriter pw = null;
 
 	// 학생 사용자 리스트 출력 및 검색
-	@GetMapping("/stlistmod")
+	@GetMapping("/admin/stlistmod")
 	public String stlist_mod(Model m, @RequestParam(value = "", required = false) String search_part,
 			@RequestParam(value = "", required = false) String search_word) {
 
@@ -64,7 +64,7 @@ public class AdminController {
 	}
 
 	// 학생 사용자 세부정보 수정
-	@PostMapping("/stuser_detail_update")
+	@PostMapping("/admin/stuser_detail_update")
 	public void stuser_detail_update(@ModelAttribute student_dto stdto, @RequestPart(name = "uphoto_file", required = false) MultipartFile uphoto_file,
 			ServletResponse sr, String previousFileName) {
 		sr.setContentType("text/html; charset=utf-8");
@@ -105,13 +105,13 @@ public class AdminController {
 		}
 	}
 	
-	@GetMapping("/stlistmod_adduser")
+	@GetMapping("/admin/stlistmod_adduser")
 	public String stlistmod_adduser() {
 		return "admin/stlistmod_adduser";
 	}
 
 	// 학생 사용자 추가
-	@PostMapping("/stuser_add")
+	@PostMapping("/admin/stuser_add")
 	public void stuser_add(@ModelAttribute student_dto stdto, @RequestPart(name = "uphoto_file", required = false) MultipartFile uphoto_file,
 			@RequestParam(value = "", required = false) String entrance_year, ServletResponse sr) {
 		sr.setContentType("text/html; charset=utf-8");
@@ -153,7 +153,7 @@ public class AdminController {
 	
 	
 	// 교직원 사용자 리스트 출력 및 검색
-	@GetMapping("/emlistmod")
+	@GetMapping("/admin/emlistmod")
 	public String emlist_mod(Model m, @RequestParam(value = "", required = false) String search_part,
 			@RequestParam(value = "", required = false) String search_word) {
 
@@ -171,7 +171,7 @@ public class AdminController {
 	
 
 	//교직원/관리자 사용자 추가
-	@PostMapping("/emuser_add")
+	@PostMapping("/admin/emuser_add")
 	public void emuser_add(@ModelAttribute employee_dto emdto, @RequestPart(name = "uphoto_file", required = false) MultipartFile uphoto_file,
 			@RequestParam(value = "", required = false) String entrance_year, ServletResponse sr) {
 			sr.setContentType("text/html; charset=utf-8");
@@ -212,13 +212,13 @@ public class AdminController {
 	
 	//교직원 사용자 상세정보 로드
 	@ResponseBody
-	@PostMapping("/admin_employee_detail/{emp_no}")
+	@PostMapping("/admin/admin_employee_detail/{emp_no}")
 	public employee_dto admin_employee_detail(@PathVariable(name = "emp_no") String emp_no) {
 		return this.emuser_service.employee_data(emp_no);
 	}
 	
 	// 교직원 사용자 세부 정보 수정
-	@PostMapping("/emuser_detail_update")
+	@PostMapping("/admin/emuser_detail_update")
 	public void emuser_detail_update(@ModelAttribute employee_dto emdto, @RequestPart(name = "uphoto_file", required = false) MultipartFile uphoto_file,
 			ServletResponse sr, String previousFileName) {
 		sr.setContentType("text/html; charset=utf-8");
@@ -259,14 +259,14 @@ public class AdminController {
 	}
 	
 	//교직원/관리자 추가 페이지 열기
-	@GetMapping("/emlistmod_adduser")
+	@GetMapping("/admin/emlistmod_adduser")
 	public String emlistmod_adduser() {
 		return "admin/emlistmod_adduser";
 	}
 	
 	
 	// 관리자 사용자 리스트 출력 및 검색
-	@GetMapping("/adminlistmod")
+	@GetMapping("/admin/adminlistmod")
 	public String adminlist_mod(Model m, @RequestParam(value = "", required = false) String search_part,
 			@RequestParam(value = "", required = false) String search_word) {
 
@@ -285,7 +285,7 @@ public class AdminController {
 	
 	//관리자 사용자 상세보기 데이터 로드
 	@ResponseBody
-	@PostMapping("/admin_detail/{emp_no}")
+	@PostMapping("/admin/admin_detail/{emp_no}")
 	public employee_dto admin_detail(@PathVariable(name = "emp_no") String emp_no) {
 		return this.aduser_service.amdin_data(emp_no);
 	}
@@ -293,7 +293,7 @@ public class AdminController {
 	
 	
 	// 학생 사용자 세부정보 수정
-	@PostMapping("/adminuser_detail_update")
+	@PostMapping("/admin/adminuser_detail_update")
 	public void adminuser_detail_update(@ModelAttribute employee_dto emdto,
 			@RequestPart(name = "uphoto_file", required = false) MultipartFile uphoto_file, ServletResponse sr,
 			String previousFileName) {
@@ -338,7 +338,7 @@ public class AdminController {
 	
 	
 	
-	@GetMapping("/adminlistmod_adduser")
+	@GetMapping("/admin/adminlistmod_adduser")
 	public String adminlistmod_adduser() {
 		return "admin/admin"
 				+ "listmod_adduser";
@@ -346,7 +346,7 @@ public class AdminController {
 	
 
 	// 상담 내역 리스트 출력 및 검색
-	@GetMapping("/allcounselmod")
+	@GetMapping("/admin/allcounselmod")
 	public String allcounselmod(Model m, @RequestParam(value = "", required = false) String search_part,
 			@RequestParam(value = "", required = false) String search_word) {
 
@@ -363,7 +363,7 @@ public class AdminController {
 	}
 
 	//상담추가
-	@PostMapping("/counsel_add")
+	@PostMapping("/admin/counsel_add")
 	public void allcounsellist_counsel_add(ServletResponse res, counsel_dto csl_dto) {
 		try {
 			res.setContentType("text/html;charset=utf-8");
@@ -395,17 +395,16 @@ public class AdminController {
 	
 	// 상담내역 모달 데이터 불러오기
 	@ResponseBody
-	@PostMapping("/admin_counsel_detail/{aply_sn}")
+	@PostMapping("/admin/admin_counsel_detail/{aply_sn}")
 	public List<view_counsel_dto> counseldetail(@PathVariable(name = "aply_sn") String aply_sn) {
 		List<view_counsel_dto> result = this.counsel_service.counsel_detail(aply_sn);
 		return result;
 	}
 
 	// 상담내역 모달 데이터 수정
-	@PostMapping("/admin_counsel_update")
+	@PostMapping("/admin/admin_counsel_update")
 	public void admin_counsel_update(@ModelAttribute counsel_dto cdto, @RequestParam String mng_authrt, ServletResponse res) {
 		try {
-			System.out.println(mng_authrt);
 			res.setContentType("text/html;charset=utf-8");
 			this.pw=res.getWriter();
 			int result=this.counsel_service.update_counsel(cdto, mng_authrt);
@@ -432,23 +431,23 @@ public class AdminController {
 		
 	}
 
-	@GetMapping("/addcounsel")
+	@GetMapping("/admin/addcounsel")
 	public String addcounsel() {
 		return "admin/addcounsel";
 	}
 
 
-	@GetMapping("/noticemod")
+	@GetMapping("/admin/noticemod")
 	public String portalnotice_mod() {
 		return "admin/noticemod";
 	}
 
-	@GetMapping("/extraculist")
+	@GetMapping("/admin/extraculist")
 	public String extra_notice() {
 		return "admin/extraculist";
 	}
 
-	@GetMapping("/error")
+	@GetMapping("/admin/error")
 	public String error() {
 		return "error";
 	}

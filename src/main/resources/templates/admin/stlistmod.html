@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko">
 
-<!-- 240923자 앞으로 추가해야하는 기능
-1. cdn 이미지 파일 첨부 + 비밀번호 암호화
--->
-
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <title>사용자 정보 관리_학생정보관리</title>
+
 <!-- Bootstrap core CSS -->
 <link href="/admin/css/bootstrap.min.css" rel="stylesheet">
 <link href="/admin/css/font-awesome.min.css" rel="stylesheet">
@@ -22,8 +19,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
 <link href="/admin/css/listmod.css" rel="stylesheet">
 </head>
+
 <!-- 학생사용자 상세보기 모달_ 이미지 업로드시 미리보기 -->
 <script src="/admin/js/add_img.js"></script>
+
 <body>
 
 	<!--header시작-->
@@ -48,7 +47,7 @@
 					<div class="col-md-9">
 						<div class="crm_1r pull-right">
 							<ul>
-								<li class="col_3 d-inline-block"><a href="#">사용자 정보 관리</a>
+								<li class="col_3 d-inline-block"><a href="/admin/stlistmod">사용자 정보 관리</a>
 									<i style="margin-left: 5px; vertical-align: middle;"
 									class="fa fa-chevron-right"></i></li>
 								<li class="col_3 d-inline-block">학생 정보 관리</li>
@@ -98,7 +97,7 @@
 
 					<!-- 사용자 추가 버튼 -->
 					<div class="d-flex justify-content-end">
-						<a class="buttton_1" href="/stlistmod_adduser"
+						<a class="buttton_1" href="/admin/stlistmod_adduser"
 							style="height: 38px; display: flex; align-items: center; justify-content: center;">
 							사용자 추가 <i class="fa fa-plus-circle ms-2"></i>
 						</a>
@@ -208,7 +207,6 @@
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 다음 API 주소 -->
 	<script src="/admin/js/stlistmod.js?v=2"></script>
 	<script src="/admin/js/bootstrap.bundle.min.js"></script>
-	<script src="/admin/js/global.js"></script>
 </body>
 
 

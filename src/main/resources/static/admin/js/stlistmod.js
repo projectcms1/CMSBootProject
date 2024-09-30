@@ -350,9 +350,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	
 
 
-
-
-
 //학생 사용자 상세정보 수정 기능
 function update_stuserdata(){
 	stuser_detail_frm.submit();
