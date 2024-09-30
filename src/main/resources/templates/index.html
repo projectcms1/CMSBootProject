@@ -83,7 +83,7 @@
         <div class="left-section" style="align-content: center;">
         
 	        <!-- 일반 사용자 권한이 없을 시 -->
-	        <div th:if="${!#authorization.expression('hasRole(''USER'') or hasRole(''PROFESSOR'') or hasRole(''SUPER_ADMIN'')')}">
+	        <div th:if="${!#authorization.expression('hasRole(''USER'') or hasRole(''PROFESSOR'') or hasRole(''SUPER_ADMIN'') or hasRole(''COUNSELOR'')')}">
 	            <a class="login-button" href="/login">로그인</a>
 	            <button class="login-button secondary">수강신청 전용 로그인</button>
             </div>

@@ -28,7 +28,7 @@
       		</li>
       		<!-- End 교직원정보 Nav -->
       		
-      		<th:block th:if="${employee_job}=='P'" >	<!-- 교수일때만 -->
+      		<th:block th:if="${#authorization.expression('hasRole(''PROFESSOR'')')}" >	<!-- 교수일때만 -->
 				<!-- ======= 학사관리 Nav ======= -->
 				<li class="nav-item">
 	        		<a id="academy-nav" class="nav-link collapsed" href="/employee/empy_academy_index" data-bs-target="#academy-nav1" 	>
@@ -39,7 +39,7 @@
 				<!-- End 학사관리 Nav -->
 			</th:block>
 		
-			<th:block th:if="${employee_job}=='P' or ${employee_job}=='C'" >
+			<th:block th:if="${#authorization.expression('hasRole(''PROFESSOR'') or hasRole(''COUNSELOR'')')}">
 				<!-- ======= 상담관리 Nav ======= -->
 				<li class="nav-item">
 					<a id="counsel-nav" class="nav-link collapsed" data-bs-target="#counsel-nav1" data-bs-toggle="collapse" href="#">
@@ -55,7 +55,7 @@
 							</a>
 						</li>
 						
-						<th:block th:if="${employee_job}=='P'" >	<!-- 교수일때만 -->
+						<th:block th:if="${#authorization.expression('hasRole(''PROFESSOR'')')}">	<!-- 교수일때만 -->
 						<li>
 							<a href="/employee/empy_counsel_waiting" id="counsel-nav-2"> 
 								<i class="bi bi-circle"></i>

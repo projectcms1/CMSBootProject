@@ -7,8 +7,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.cms.ca.employee_dto;
+import com.cms.ca.employee.EmployeeService;
+
+import jakarta.annotation.Resource;
+
 @Controller
 public class UserController {
+	
+	@Resource(name = "empy_service")
+	private EmployeeService empyService;
+	
     @GetMapping("/login")
     public String loginPage() {
         return "login"; // login.html 템플릿을 반환
@@ -34,9 +43,18 @@ public class UserController {
             // 로그를 남기거나 적절한 조치를 취합니다.
             System.out.println("Authentication is null");
         } else {
+        	String counselor="COUNSELOR";
+        	String professor="PROFESSOR";
+        	String auth=authentication.getAuthorities().toArray()[0].toString();
+        	employee_dto empy_info=null;
             System.out.println("Authentication is set: " + authentication.getName());
+            if(auth.contains(professor) || auth.contains(counselor)) {
+            	empy_info=this.empyService.getEmployeeInfo(authentication.getName());
+            	model.addAttribute("empy_info", empy_info);
+            }
         }
-
+        
+        	
         model.addAttribute("authentication", authentication);
 
 
