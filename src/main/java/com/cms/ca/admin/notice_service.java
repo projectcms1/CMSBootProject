@@ -16,5 +16,5 @@ public interface notice_service {
 	
 	int addnotice(MultipartFile mfile, notice_dto ntdto) throws Exception;
 	
-	int notice_modify(notice_dto ntdto);
+	int notice_modify(MultipartFile mfile, notice_dto ntdto) throws Exception;
 }

@@ -49,7 +49,13 @@ public class notice_service_impl implements notice_service {
 	}
 
 	@Override
-	public int notice_modify(notice_dto ntdto) {
+	public int notice_modify(MultipartFile mfile, notice_dto ntdto) throws Exception {
+		if (!mfile.isEmpty()) {
+			ntdto.setOrgnl_atch_file_nm(mfile.getOriginalFilename());
+			FileHandler fh = new FileHandler();
+			fh.deletFile(ntdto.getAtch_file_nm());
+			ntdto.setAtch_file_nm(fh.uploadFile(mfile));
+		}
 		return this.notice_repo.notice_modify(ntdto);
 	}
 	
