@@ -49,6 +49,7 @@ public class SecurityConfig {
                         .requestMatchers("/staff/**").hasAnyRole("STAFF", "ADMIN", "SUPER_ADMIN")
                         .requestMatchers("/index/**").hasAnyRole("USER", "STAFF", "COUNSELOR", "PROFESSOR", "ADMIN", "SUPER_ADMIN")
                         .requestMatchers("/img_file/**").hasAnyRole("USER", "STAFF", "COUNSELOR", "PROFESSOR", "ADMIN", "SUPER_ADMIN")
+                        .requestMatchers("/Extracurricular_programs/**").hasRole("USER")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

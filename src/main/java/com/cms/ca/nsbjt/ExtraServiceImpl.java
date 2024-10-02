@@ -1,6 +1,8 @@
 package com.cms.ca.nsbjt;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,13 +33,23 @@ public class ExtraServiceImpl implements ExtraService{
 	}
 	//프로그램 신청/저장
 	@Override
-	public void saveProgramApplication(extra_dto application) {
-		ExtraRepository.saveProgramApplication(application);
+	public int saveProgramApplication(extra_dto application) {
+		return ExtraRepository.saveProgramApplication(application);
 		
 	}
 	
 	@Override
 	public List<extra_dto> getMyPrograms(Integer stdntNo) {
+		System.out.println(stdntNo + "service test");
 		 return ExtraRepository.findProgramsByStudent(stdntNo);
+	}
+	
+	@Override
+	public void deleteProgramApplication(Integer pgmAplySn, Integer stdntNo) {
+		 Map<String, Object> delete = new HashMap<>();
+		 delete.put("pgmAplySn", pgmAplySn);
+		 delete.put("stdntNo", stdntNo);
+	     ExtraRepository.deleteProgramApplication(delete);
+		
 	}
 }

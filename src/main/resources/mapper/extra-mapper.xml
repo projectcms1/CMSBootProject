@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cms.ca.nsbjt.ExtraRepository">
 <resultMap id="ProgramsResultMap" type="com.cms.ca.extra_dto">
+    <!-- NSBJT_PGM_INFO 테이블의 컬럼들 -->
     <result column="PGM_NO" property="pgmNo"/>
     <result column="PGM_FLNM" property="pgmFlNm"/>
     <result column="PGM_EXPLN" property="pgmExpln"/>
@@ -14,7 +15,16 @@
     <result column="MAX_NOPE" property="maxNope"/>
     <result column="EMP_NOPGM_IMG" property="empNopgmImg"/>
 </resultMap>
-    
+<resultMap id="ProgramApplyInfoResultMap" type="com.cms.ca.extra_dto">
+    <!-- PGM_APLY_INFO 테이블의 컬럼들 -->
+    <result column="PGM_APLY_SN" property="pgmAplySn"/>
+    <result column="STDNT_NO" property="stdntNo"/>
+    <result column="APLY_DT" property="aplyDt"/>
+    <result column="PRGRS_STTS" property="prgrsStts"/>
+     <result column="pgmFlNm" property="pgmFlNm"/> <!-- 프로그램 명 추가 -->
+    <result column="operInstNm" property="operInstNm"/> <!-- 소속 기관명 추가 -->
+</resultMap> 
+
 <select id="getAllPrograms" resultMap="ProgramsResultMap">
 		select * from NSBJT_PGM_INFO
 </select>
@@ -30,10 +40,28 @@
 <!-- 프로그램 신청 정보 저장 -->
 <insert id="saveProgramApplication" parameterType="com.cms.ca.extra_dto">
     INSERT INTO PGM_APLY_INFO (PGM_APLY_SN, PGM_NO, STDNT_NO, APLY_DT, PRGRS_STTS)
-    VALUES (#{pgmAplySn}, #{pgmNo}, #{stdntNo}, #{aplyDt}, #{prgrsStts})
+    VALUES ('0', #{pgmNo}, #{stdntNo}, now(), #{prgrsStts})
 </insert>
 
-<select id="findProgramsByStudent" resultType="com.cms.ca.extra_dto" parameterType="int">
-    SELECT * FROM PGM_APLY_INFO WHERE STDNT_NO = #{stdntNo}
+<select id="findProgramsByStudent" resultMap="ProgramApplyInfoResultMap" parameterType="Integer">
+    SELECT 
+    a.PGM_APLY_SN,
+    a.PGM_NO,
+    a.STDNT_NO,
+    a.APLY_DT,
+    a.PRGRS_STTS,
+    (SELECT p.PGM_FLNM FROM NSBJT_PGM_INFO p WHERE p.PGM_NO = a.PGM_NO) AS pgmFlNm,
+    (SELECT p.OPER_INST_NM FROM NSBJT_PGM_INFO p WHERE p.PGM_NO = a.PGM_NO) AS operInstNm
+FROM 
+    PGM_APLY_INFO a
+WHERE 
+    a.STDNT_NO = #{stdntNo}
 </select>
+
+<delete id="deleteProgramApplication" parameterType="map">
+    DELETE FROM PGM_APLY_INFO 
+    WHERE PGM_APLY_SN = #{pgmAplySn} 
+    AND STDNT_NO = #{stdntNo}
+</delete>
+
 </mapper>

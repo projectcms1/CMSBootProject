@@ -9,6 +9,9 @@ public interface ExtraService {
 	List<extra_dto> getAllPrograms();	//모든 프로그램 조회
 	List<extra_dto> Bycategory(String ctgryNm);		//카테고리 별
 	
-	void saveProgramApplication(extra_dto application);
+	int saveProgramApplication(extra_dto application);
 	List<extra_dto> getMyPrograms(Integer stdntNo);
+	
+	void deleteProgramApplication(Integer pgmAplySn, Integer stdntNo);	//신청 취소(삭제)
+	
 }
