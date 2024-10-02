@@ -202,11 +202,11 @@ function makeOpeningModal() {
 	            <label class="col-sm-2 col-form-label">상담시간</label>
 	            <div class="col-sm-3">
 	              <select class="form-select" name="hr_se" ${(counsel.stts_cd === '완료' || counsel.stts_cd === '취소') ? 'disabled' : ''}>
-	                <option value="1" ${counsel.hr_se === '1' ? 'selected' : ''}>1교시</option>
-	                <option value="2" ${counsel.hr_se === '2' ? 'selected' : ''}>2교시</option>
-	                <option value="3" ${counsel.hr_se === '3' ? 'selected' : ''}>3교시</option>
-	                <option value="4" ${counsel.hr_se === '4' ? 'selected' : ''}>4교시</option>
-	                <option value="5" ${counsel.hr_se === '5' ? 'selected' : ''}>5교시</option>
+	                <option value="1" ${counsel.hr_se == '1' ? 'selected' : ''}>1교시</option>
+	                <option value="2" ${counsel.hr_se == '2' ? 'selected' : ''}>2교시</option>
+	                <option value="3" ${counsel.hr_se == '3' ? 'selected' : ''}>3교시</option>
+	                <option value="4" ${counsel.hr_se == '4' ? 'selected' : ''}>4교시</option>
+	                <option value="5" ${counsel.hr_se == '5' ? 'selected' : ''}>5교시</option>
 	              </select>
 	            </div>
 	          </div>

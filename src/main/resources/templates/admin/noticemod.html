@@ -5,7 +5,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
-<<<<<<< HEAD
 <title>포털 사이트 관리_공지사항 관리</title>
 
 <!-- Bootstrap core CSS -->
@@ -19,22 +18,7 @@
 <link href="/admin/css/baseui.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
 <link href="/admin/css/listmod.css" rel="stylesheet">
-=======
-<title>사용자 정보 관리_교직원정보관리</title>
-
-<!-- Bootstrap core CSS -->
-<link href="/admin/css/bootstrap.min.css" rel="stylesheet">
-<link href="/admin/css/font-awesome.min.css" rel="stylesheet">
-<link href="/admin/css/style.css" rel="stylesheet">
-<link href="/admin/css/nav.css" rel="stylesheet">
-<link href="/admin/css/shCoreEclipse.css" type="text/css" rel="stylesheet" />
-<link href="/admin/css/shThemeEclipse.css" type="text/css" rel="Stylesheet" />
-<link href="/admin/css/global.css" rel="stylesheet">
-<link href="/admin/css/baseui.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
-<link href="/admin/css/listmod.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/42.0.2/ckeditor5.css" />
->>>>>>> branch 'main' of https://github.com/projectcms1/CMSBootProject.git
 </head>
 
 
@@ -63,148 +47,6 @@
 					<div class="col-md-9">
 						<div class="crm_1r pull-right">
 							<ul>
-<<<<<<< HEAD
-								<li class="col_3 d-inline-block"><a href="/admin/stlistmod">포털 사이트 관리</a>
-									<i style="margin-left: 5px; vertical-align: middle;"
-									class="fa fa-chevron-right"></i></li>
-								<li class="col_3 d-inline-block">공지사항 관리</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-
-				<!-- 검색기능 -->
-				<div class="prod_1i mt-3 row">
-					<div class="col-lg-6 col-md-8 col-sm-12">
-						<div class="prod_1il d-flex align-items-center w-100">
-							<form id="frmSearch"
-								class="search-form d-flex align-items-center"
-								th:onsubmit="return list_search()">
-							<div class="d-flex align-items-center">
-								<select class="form-select form-select-sm ms-2 me-2"
-									name="search_part" id="inputState"
-									style="width: 150px; height: 38px;">
-									<option value="STDNT_FLNM"
-										th:selected="${ search_part == 'NTC_MTTR_SN' }">일련번호</option>
-									<option value="OGDP_UNIV"
-										th:selected="${ search_part == 'NTC_MTTR_TTL' }">제목</option>
-									<option value="OGDP_SCSBJT"
-										th:selected="${ search_part == 'NTC_CLSF_NM' }">공지분류</option>
-									<option value="STDNT_NO"
-										th:selected="${ search_part == 'WRTR_NM' }">작성자명</option>
-									<option value="STDNT_NO"
-										th:selected="${ search_part == 'WRT_DT' }">작성일시</option>
-								</select>
-								</div>
-								
-								<input class="form-control ms-2" id="searchInput" type="text"
-									name="search_word" th:value="${ search_word }"
-									style="flex-grow: 1; width: 100%; min-width: 200px; height: 38px;">
-
-								<button class="btn btn-primary bg_1 ms-3" type="submit"
-									style="height: 38px; padding: 0 20px; display: flex; align-items: center; justify-content: center;">
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-										fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-									<path
-											d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-								</svg>
-								</button>
-							</form>
-
-						</div>
-					</div>
-
-					<!-- 공지사항 추가 버튼 -->
-					<div class="d-flex justify-content-end">
-						<a class="buttton_1" href="/admin/noticelmod_add"
-							style="height: 38px; display: flex; align-items: center; justify-content: center;">
-							공지사항 추가 <i class="fa fa-plus-circle ms-2"></i>
-						</a>
-					</div>
-
-				</div>
-
-				<!-- 공지리스트 -->
-				<div class="table-responsive">
-					<table
-						class="table table-responsive table-striped table-borderless m-0 mt-2">
-						<thead>
-							<tr>
-								<th scope="col">일련번호</th>
-								<th scope="col">제목</th>
-								<th scope="col">공지분류</th>
-								<th scope="col">작성자명</th>
-								<th scope="col">작성일시</th>
-							</tr>
-						</thead>
-
-						<tbody id="notcieTableBody">
-							<tr th:each="notice_data : ${notice_list}">
-
-								<td>
-									<h6 class="font_14 col_3"
-										th:text="${notcie_data.getStdnt_flnm()}"></h6>
-								</td>
-								<td>
-									<h6 class="font_14 col_3"
-										th:text="${notcie_data.getOgdp_univ()}"></h6>
-								</td>
-								<td>
-									<h6 class="font_14 col_3"
-										th:text="${notcie_data.getOgdp_scsbjt()}"></h6>
-								</td>
-								<td>
-									<h6 class="font_14 col_3"
-										th:text="${notcie_data.getStdnt_no()}"></h6>
-								</td>
-								<td>
-									<h6 class="bg_3 text-center font_12 p-1 mb-0"
-										th:text="${notcie_data.getStdnt_stts_se()}"></h6>
-								</td>
-								<td>
-									<!-- 공지별 상세정보 모달 버튼 -->
-									<button type="button" class="btn btn-primary bg_1" th:onclick="openEmpInfo([[${ employee_data.getEmp_no() }]])"
-										data-bs-toggle="modal" data-bs-target="#noticedetailModal">
-										<i class="fa fa-cog"> 상세보기</i>
-									</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-
-
-				<!-- 페이징처리 -->
-				<br><div id="totalPagesDisplay" class="text-muted"></div>
-				<div class="prod_1i1r pages" style="text-align: right;">
-					<ul class="mb-0" id="stlist_paging">
-						<!-- << 버튼 (첫 페이지로 이동) -->
-						<li><a id="first-page"><i class="fa fa-angle-double-left"></i></a></li>
-						<!-- < 버튼 (이전 페이지로 이동) -->
-						<li><a id="prev-page"><i class="fa fa-chevron-left"></i></a></li>
-						<!-- 페이지 번호는 JavaScript로 동적으로 생성 -->
-						<!-- > 버튼 (다음 페이지로 이동) -->
-						<li><a id="next-page"><i class="fa fa-chevron-right"></i></a></li>
-						<!-- >> 버튼 (마지막 페이지로 이동) -->
-						<li><a id="last-page"><i class="fa fa-angle-double-right"></i></a></li>
-					</ul>
-				</div>
-		</main>
-	</div>
-	</div>
-	<!-- 학생별 상세정보 모달 시작 -->
-	<div th:insert="~{/admin/stlistmod_userdetailmodal :: notcie_userdetailmodal}"></div>
-	<!-- 학생별 상세정보 모달 끝 -->
-	
-	<!--footer시작 -->
-	<div th:replace="~{/admin/footer :: admin_footer}"></div>
-	<!--footer끝 -->
-
-
-	<!-- script part -->
-	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 다음 API 주소 -->
-	<script src="/admin/js/noticemod.js?v=2"></script>
-=======
 								<li class="col_3 d-inline-block"><a href="/admin/noticemod">포털 사이트 관리</a>
 									<i style="margin-left: 5px; vertical-align: middle;"
 									class="fa fa-chevron-right"></i></li>
@@ -343,16 +185,10 @@
 
 
 	<!-- script part -->
->>>>>>> branch 'main' of https://github.com/projectcms1/CMSBootProject.git
 	<script src="/admin/js/bootstrap.bundle.min.js"></script>
-<<<<<<< HEAD
-=======
 	<script src="/admin/js/noticemod.js?v=2"></script>
 	
->>>>>>> branch 'main' of https://github.com/projectcms1/CMSBootProject.git
 </body>
-<<<<<<< HEAD
-=======
 <script type="importmap">
 	{
 		"imports": {
@@ -361,6 +197,5 @@
 		}
 	}
 </script>
-<script type="module" src="/admin/js/notice_modal.js?v=3"></script>
->>>>>>> branch 'main' of https://github.com/projectcms1/CMSBootProject.git
+<script type="module" src="/admin/js/notice_modal.js?v=4"></script>
 </html>
