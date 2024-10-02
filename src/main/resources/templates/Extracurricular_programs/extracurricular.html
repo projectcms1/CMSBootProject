@@ -49,7 +49,7 @@
         <div class="container">
           <div class="row d-flex justify-content-center text-center">
             <div class="col-lg-8">
-              <h1>프로그램</h1>
+              <h1>전체 프로그램</h1>
               <p class="mb-0"></p>
             </div>
           </div>
@@ -65,29 +65,6 @@
       </nav>
     </div><!-- End Page Title -->
 
-    <section><!--검색기능-->
-      <div class="search-container">
-        <div class="search-group">
-            <label for="status">* 모집상태</label>
-            <select id="status">
-                <option value="all">모집중, 마감임박, 모집대기</option>
-            </select>
-        </div>
-        <div class="search-group">
-            <label for="program-type">* 프로그램 유형</label>
-            <select id="program-type">
-                <option value="all">전체</option>
-            </select>
-        </div>
-        <div class="search-group">
-            <label for="search">* 검색</label>
-            <input type="text" id="search" placeholder="프로그램명 또는 키워드를 검색해 보세요.">
-        </div>
-        <div class="search-buttons">
-            <button class="search-button">🔍 검색</button>
-        </div>
-    </div>
-    </section><!--검색기능-->
 
     <!-- Courses Section -->
     <section id="courses" class="courses section">
@@ -95,7 +72,7 @@
 
 <!-- 프로그램  -->
     <div class="container">
-        <h1>전체 프로그램 리스트</h1>
+       
 
         <div th:if="${not #lists.isEmpty(programs)}">
             <div class="row">
@@ -109,22 +86,20 @@
                             </div>
 
                             <h3>
-                                <a th:href="@{'/extracurricular_info/' + ${program.pgmNo}}"
-                                   th:text="${program.pgmFlNm}">프로그램 이름</a>
+                                <a th:href="|/Extracurricular_programs/extracurricular_info/${program.pgmNo}|" th:text="${program.pgmFlNm}"></a>
                             </h3>
-                            <p class="description" th:text="${program.pgmExpln}">프로그램 설명</p>
-                            <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
-                                <a th:href="@{/courses.html}" class="btn-get-started">신청하기</a>
+                            <p class="description" th:text="${program.pgmExpln}"></p>
+                            <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">                             
                             </div>
                             <div class="trainer d-flex justify-content-between align-items-center">
                                 <div class="trainer-profile d-flex align-items-center">
                                     <img src="/assets/img/trainers/trainer-1-2.jpg" class="img-fluid" alt="">
-                                    <a href="" class="trainer-link" th:text="${program.operInstNm}">강사 이름</a>
+                                    <a href="" class="trainer-link" th:text="${program.operInstNm}"></a>
                                 </div>
                                 <div class="trainer-rank d-flex align-items-center">
-                                    <i class="bi bi-person user-icon"></i>&nbsp;<span th:text="${program.maxNope}">50</span>
+                                    <i class="bi bi-person user-icon"></i>&nbsp;<span th:text="${program.maxNope}"></span>
                                     &nbsp;&nbsp;
-                                    <i class="bi bi-heart heart-icon"></i>&nbsp;<span th:text="${program.empNopgmImg}">65</span>
+                                    <i class="bi bi-heart heart-icon"></i>&nbsp;<span th:text="${program.empNopgmImg}"></span>
                                 </div>
                             </div>
                         </div>
@@ -139,9 +114,6 @@
     </div>
 <!-- 프로그램  -->
 
-        </div>
-
-      </div>
 
     </section><!-- /Courses Section -->
 
