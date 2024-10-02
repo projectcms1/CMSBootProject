@@ -1,5 +1,6 @@
 package com.cms.ca.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.cms.ca.employee_dto;
 import com.cms.ca.student_dto;
+import com.cms.ca.admin.notice_service;
 import com.cms.ca.employee.EmployeeService;
 import com.cms.ca.student.StudentService;
 
@@ -22,6 +24,9 @@ public class UserController {
 	
 	@Resource(name = "stdnt_service")
 	private StudentService stdSrvc;
+	
+	@Autowired
+	private notice_service notiSrvc;
 	
     @GetMapping("/login")
     public String loginPage() {
@@ -55,6 +60,9 @@ public class UserController {
         	String auth=authentication.getAuthorities().toArray()[0].toString();
         	employee_dto empy_info=null;
         	student_dto std_info=null;
+        	
+        	model.addAttribute("noticeList", this.notiSrvc.notice_list());
+        	
             System.out.println("Authentication is set: " + authentication.getName());
             if(auth.contains(professor) || auth.contains(counselor)) {
             	empy_info=this.empyService.getEmployeeInfo(authentication.getName());

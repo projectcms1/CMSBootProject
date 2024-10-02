@@ -159,14 +159,7 @@
                 </div>
                 <!-- Notices Lists -->
                 <ul class="notice-list" id="academic">
-                    <li><a href="#">2024-2학기 온라인 강좌 증원 추가 안내</a> <span class="date">2024-09-02</span></li>
-                    <li><a href="#">2024-2학기 소그룹채플 안내: 개강일, 소그룹 조배정 현황</a> <span class="date">2024-08-30</span></li>
-                    <li><a href="#">2024년 2학기 장학금 신청 안내</a> <span class="date">2024-08-30</span></li>
-                    <li><a href="#">취업박람회 참가자 모집 공고</a> <span class="date">2024-08-30</span></li>
-                    <li><a href="#">코로나19 대응 방침 업데이트</a> <span class="date">2024-08-30</span></li>
-                    <li><a href="#">2024-2학기 소그룹채플 안내: 개강일, 소그룹 조배정 현황</a> <span class="date">2024-08-30</span></li>
-                    <li><a href="#">산학협력 프로그램 참여 안내</a> <span class="date">2024-08-30</span></li>
-                    <li><a href="#">국제교류 프로그램 참가자 모집 공고</a> <span class="date">2024-08-30</span></li>
+                    <li th:each="ndata : ${noticeList}"><a href="#" th:text="${ndata.ntc_mttr_ttl}"></a> <span class="date" th:text="${ndata.wrt_dt}"></span></li>
                 </ul>
                 
                 <ul class="notice-list hidden" id="scholarship">
