@@ -21,96 +21,60 @@
     
     <nav class="header-nav ms-auto">
 		<ul class="d-flex align-items-center">
-        <li class="nav-item dropdown">
-          <a class="nav-link nav-icon" href="/index" data-bs-toggle="dropdown">
-            <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">1</span>
-          </a><!-- End Notification Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              You have 1 new notifications
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-		
-            <li class="notification-item">
-              <i class="bi bi-info-circle text-primary"></i>
-              <div>
-                <h4>알림 예시</h4>
-                <p>집에 가고싶다</p>
-                <p>26years ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li class="dropdown-footer">
-              <a href="#">Show all notifications</a>
-            </li>
-
-          </ul><!-- End Notification Dropdown Items -->
-
-        </li><!-- End Notification Nav -->
-
-        <li class="nav-item dropdown pe-3">
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="/assets/img/3.jpeg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">카피바라</span>
-          </a><!-- End Profile Iamge Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <li class="dropdown-header">
-              <h6>이름</h6>
-              <span>학과나 학번</span>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-gear"></i>
-                <span>비교과 프로그램</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>채팅상담</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="/perform_logout">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>로그아웃</span>
-              </a>
-            </li>
-          </ul>
-          <!-- End Profile Dropdown Items -->
-        </li>
-        <!-- End Profile Nav -->
+        <!-- Profile Nav -->
+        	<li class="nav-item dropdown pe-3">
+          		<a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            		<img src="/assets/img/3.jpeg" alt="Profile" class="rounded-circle">
+            		<span class="d-none d-md-block dropdown-toggle ps-2">[[${std_data.getStdnt_flnm}]]</span>
+          		</a><!-- End Profile Iamge Icon -->
+          		
+          		<!-- Profile Dropdown Items -->
+          		<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            		<li class="dropdown-header">
+              			<h6>[[${std_data.getStdnt_flnm}]]</h6>
+              			<span>[[${std_data.getOgdp_univ}]] [[${std_data.getOgdp_scsbjt}]]</span>
+           	 		</li>
+            		<li>
+              			<hr class="dropdown-divider">
+            		</li>
+            		<li>
+              			<a class="dropdown-item d-flex align-items-center" href="/student/std_info">
+                			<i class="bi bi-person"></i>
+                			<span>My Profile</span>
+              			</a>
+            		</li>
+            		<li>
+              			<hr class="dropdown-divider">
+            		</li>
+            		<li>
+              			<a class="dropdown-item d-flex align-items-center" href="#비교과프로그램">
+                			<i class="bi bi-gear"></i>
+                			<span>비교과 프로그램</span>
+              			</a>
+            		</li>
+            		<li>
+              			<hr class="dropdown-divider">
+            		</li>
+            		<li>
+              			<a class="dropdown-item d-flex align-items-center" href="#채팅상담">
+                			<i class="bi bi-question-circle"></i>
+                			<span>채팅 상담</span>
+              			</a>
+            		</li>
+            		<li>
+              			<hr class="dropdown-divider">
+	  	         	</li>
+            		<li>
+              			<a class="dropdown-item d-flex align-items-center" href="/perform_logout">
+                			<i class="bi bi-box-arrow-right"></i>
+                			<span>로그아웃</span>
+              			</a>
+            		</li>
+          		</ul>
+          		<!-- End Profile Dropdown Items -->
+          		
+        	</li>
+        	<!-- End Profile Nav -->
       </ul>
     </nav>
     <!-- End Icons Navigation -->

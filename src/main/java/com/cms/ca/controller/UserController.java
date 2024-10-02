@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.cms.ca.employee_dto;
+import com.cms.ca.student_dto;
 import com.cms.ca.employee.EmployeeService;
+import com.cms.ca.student.StudentService;
 
 import jakarta.annotation.Resource;
 
@@ -17,6 +19,9 @@ public class UserController {
 	
 	@Resource(name = "empy_service")
 	private EmployeeService empyService;
+	
+	@Resource(name = "stdnt_service")
+	private StudentService stdSrvc;
 	
     @GetMapping("/login")
     public String loginPage() {
@@ -45,12 +50,19 @@ public class UserController {
         } else {
         	String counselor="COUNSELOR";
         	String professor="PROFESSOR";
+        	String student="USER";
+        	
         	String auth=authentication.getAuthorities().toArray()[0].toString();
         	employee_dto empy_info=null;
+        	student_dto std_info=null;
             System.out.println("Authentication is set: " + authentication.getName());
             if(auth.contains(professor) || auth.contains(counselor)) {
             	empy_info=this.empyService.getEmployeeInfo(authentication.getName());
             	model.addAttribute("empy_info", empy_info);
+            }
+            else if(auth.contains(student)) {
+            	std_info=this.stdSrvc.getOneStudent(authentication.getName());
+            	model.addAttribute("std_data", std_info);
             }
         }
         

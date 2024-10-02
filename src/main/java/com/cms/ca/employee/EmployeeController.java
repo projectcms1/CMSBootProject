@@ -403,9 +403,10 @@ public class EmployeeController {
 		this.authentication = SecurityContextHolder.getContext().getAuthentication();
 		String emp_no=this.authentication.getName();
 		try {
+			this.oneData = this.empyService.getEmployeeInfo(emp_no);
 			res.setContentType("text/html;charset=utf-8");
 			this.pw=res.getWriter();
-			int result=this.empyService.addCounsel(csl_dto, emp_no);
+			int result=this.empyService.addCounsel(csl_dto, emp_no, this.oneData);
 			if(result>0) {
 				this.pw.print("<script>"
 						+ "alert('상담이 정상적으로 신청되었습니다.');"
