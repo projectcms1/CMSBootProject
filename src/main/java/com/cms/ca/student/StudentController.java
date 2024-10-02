@@ -24,6 +24,7 @@ public class StudentController {
 
 	String viewName = "error";
 	
+	student_dto onedata=null;
 	PrintWriter pw = null;
 	
 	@Resource(name = "stdnt_service")
@@ -80,6 +81,7 @@ public class StudentController {
 			@RequestParam(value = "", required = false) String search_word) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		try {
+			student_dto onedata = this.stdSrvc.getOneStudent(authentication.getName());
 			if (search_part == null || search_word == null || search_part.equals("") || search_word.equals("")) {
 				m.addAttribute("counselList", this.stdSrvc.getAllListCounsel(authentication.getName()));
 			}
@@ -88,6 +90,7 @@ public class StudentController {
 				m.addAttribute("search_word", search_word);
 				m.addAttribute("counselList", this.stdSrvc.getAllListCounselSearch(authentication.getName(), search_part, search_word));
 			}
+			m.addAttribute("std_data", onedata);
 			this.viewName = "student/std_counsel_list";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -100,6 +103,8 @@ public class StudentController {
 	public String std_counsel_reservelist(Model m) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		try {
+			student_dto onedata = this.stdSrvc.getOneStudent(authentication.getName());
+			m.addAttribute("std_data", onedata);
 			m.addAttribute("napproveList", this.stdSrvc.getAllListNonApproveCounsel(authentication.getName()));
 			m.addAttribute("approveList", this.stdSrvc.getAllListApproveCounsel(authentication.getName()));
 			m.addAttribute("counselingList", this.stdSrvc.getAllListCounseling(authentication.getName()));
@@ -136,6 +141,8 @@ public class StudentController {
 	public String std_counsel_reserve(Model m) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		try {
+			student_dto onedata = this.stdSrvc.getOneStudent(authentication.getName());
+			m.addAttribute("std_data", onedata);
 			m.addAttribute("counseler_list", this.stdSrvc.getAllCounseler());
 			m.addAttribute("professor_number", this.stdSrvc.getProfessorNumber(authentication.getName()));
 			this.viewName = "student/std_counsel_reserve";
@@ -180,6 +187,9 @@ public class StudentController {
 	@GetMapping("/std_counsel_selftestlist")
 	public String std_counsel_selftestlist(Model m) {
 		try {
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			student_dto onedata = this.stdSrvc.getOneStudent(authentication.getName());
+			m.addAttribute("std_data", onedata);
 			m.addAttribute("inspList", this.inspSrvc.getAllListInsp());
 			this.viewName = "student/std_counsel_selftestlist";
 		} catch (Exception e) {

@@ -135,7 +135,7 @@
 							                <td th:text="${counsel.getStdnt_no}"/>
 							                <td th:text="${counsel.getDscsn_knd}"/>
 							                <td>[[${counsel.getDscsn_mthd}]]
-												<button type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;" th:onclick="changeCounselStatue('취소', [[${counsel.getAply_sn}]], '취소')">취소</button>
+												<button th:if="${employee_job}=='P'" type="button" class="btn btn-danger btn-sm rounded-pill" style="float: right; margin-left: 5px;" th:onclick="changeCounselStatue('취소', [[${counsel.getAply_sn}]], '취소')">취소</button>
 							                    <button type="button" class="btn btn-primary btn-sm rounded-pill" 
 												data-bs-toggle="modal" data-bs-target="#counselDetailModal" 
 												style="float: right; margin-left: 5px;" 

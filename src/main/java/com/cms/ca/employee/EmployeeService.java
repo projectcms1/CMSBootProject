@@ -12,7 +12,7 @@ public interface EmployeeService {
 	employee_dto getEmployeeInfo(String emp_no);
 	int updateEmployeeInfo(employee_dto emp_dto);
 	String getStdntNameFromStdNo(String stdnt_no);
-	int addCounsel(counsel_dto csl_dto, String emp_no);
+	int addCounsel(counsel_dto csl_dto, String emp_no, employee_dto oneData);
 	List<view_counsel_dto> getAllCounsel(String emp_no, String stts_cd, search_dto search_dto);
 	int getAllCounselCount(String emp_no, String stts_cd, search_dto search_dto);
 	List<view_counsel_dto> getOneCounsel(int aply_sn, String stts_cd);

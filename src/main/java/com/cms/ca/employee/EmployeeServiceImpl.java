@@ -53,7 +53,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public int addCounsel(counsel_dto csl_dto, String emp_no) {	//상담 추가(교직원 분류에 따라 장소 변경 및 날짜 포멧 수정)
+	public int addCounsel(counsel_dto csl_dto, String emp_no, employee_dto onedata) {	//상담 추가(교직원 분류에 따라 장소 변경 및 날짜 포멧 수정)
 		csl_dto.setEmp_no(emp_no);
 		csl_dto.setStts_cd("승인");
 		if(csl_dto.getDscsn_mthd().equals("대면")) {
@@ -63,14 +63,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 			csl_dto.setPlc(null);	
 		}
 		csl_dto.setRsvt_dt(csl_dto.getRsvt_dt().substring(0, 4)+csl_dto.getRsvt_dt().substring(5,7)+csl_dto.getRsvt_dt().substring(8,10));
-		/*
-		if(사용자관리권한=="P"){	//교수
+		
+		if(onedata.getMng_authrt()=="P"){	//교수
 			csl_dto.setPlc("교수 연구실");
 		}
-		else if(사용자관리권한=="C"){	//상담사
+		else if(onedata.getMng_authrt()=="C"){	//상담사
 			csl_dto.setPlc("상담 센터");
 		}
-		*/
+		
 		int insertResult=this.empyRepo.addCounsel(csl_dto);
 		return insertResult;
 	}
