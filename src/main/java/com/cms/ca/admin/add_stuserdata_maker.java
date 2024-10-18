@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 public class add_stuserdata_maker {
 
 	// 입학년도로 8자리 학번 만들기
@@ -32,7 +34,8 @@ public class add_stuserdata_maker {
 		String tel = telno.substring(7,11);
 		String bt = brdt.substring(4,8);
 		String pswd = tel+bt;
-		return pswd;
+		
+		return new BCryptPasswordEncoder().encode(pswd);
 	}
 	
 	

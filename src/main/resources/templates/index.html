@@ -70,7 +70,7 @@
 	</div>
 	
 	<!-- 임직원 로그인 시 헤더&사이드바 -->
-	<div th:if="${#authorization.expression('hasRole(''PROFESSOR'') or hasRole(''COUNSELOR'')')}">
+	<div th:if="${#authorization.expression('hasRole(''PROFESSOR'') or hasRole(''COUNSELOR'') or hasRole(''ADMIN'') or hasRole(''SUPER_ADMIN'')')}">
 			<div th:replace="~{/employee/empy_header :: empy_header}"></div>	<!-- Empy Header -->
 			<div th:replace="~{/employee/empy_sidebar :: empy_sidebar}"></div>	<!-- Empy Sidebar -->
 	</div>
@@ -83,7 +83,7 @@
         <div class="left-section" style="align-content: center;">
         
 	        <!-- 일반 사용자 권한이 없을 시 -->
-	        <div th:if="${!#authorization.expression('hasRole(''USER'') or hasRole(''PROFESSOR'') or hasRole(''SUPER_ADMIN'') or hasRole(''COUNSELOR'')')}">
+	        <div th:if="${!#authorization.expression('hasRole(''USER'') or hasRole(''PROFESSOR'') or hasRole(''SUPER_ADMIN'') or hasRole(''COUNSELOR'')or hasRole(''ADMIN'')')}">
 	            <a class="login-button" href="/login">로그인</a>
 	            <button class="login-button secondary">수강신청 전용 로그인</button>
             </div>
@@ -98,6 +98,12 @@
 			<div th:if="${#authorization.expression('hasRole(''PROFESSOR'') or hasRole(''COUNSELOR'')')}">
 			 <h3>Employee Section</h3>
 			    <p>임직원 로그인</p>
+			</div>
+			
+			<!-- 관리자 로그인 성공 -->
+			<div th:if="${#authorization.expression('hasRole(''ADMIN'') or hasRole(''SUPER_ADMIN'')')}">
+			 <h3>Employee Section</h3>
+			    <p>관리자 로그인</p>
 			</div>
 			
             <!-- Information Links 

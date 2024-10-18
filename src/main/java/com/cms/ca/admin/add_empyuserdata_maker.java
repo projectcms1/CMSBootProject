@@ -2,6 +2,8 @@ package com.cms.ca.admin;
 
 import java.util.Random;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 public class add_empyuserdata_maker {
 
 	// 입사년도로 7자리 교번 만들기
@@ -30,7 +32,8 @@ public class add_empyuserdata_maker {
 		String tel = telno.substring(7,11);
 		String bt = brdt.substring(4,8);
 		String pswd = tel+bt;
-		return pswd;
+		
+		return new BCryptPasswordEncoder().encode(pswd);
 	}
 	
 }

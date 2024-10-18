@@ -56,10 +56,11 @@ public class UserController {
         	String counselor="COUNSELOR";
         	String professor="PROFESSOR";
         	String student="USER";
+        	String admin="ADMIN";
         	
         	String auth=authentication.getAuthorities().toArray()[0].toString();
         	employee_dto empy_info=null;
-        	student_dto std_info=null;
+        	student_dto std_info=null;     	
         	
         	model.addAttribute("noticeList", this.notiSrvc.notice_list());
         	
@@ -67,6 +68,11 @@ public class UserController {
             if(auth.contains(professor) || auth.contains(counselor)) {
             	empy_info=this.empyService.getEmployeeInfo(authentication.getName());
             	model.addAttribute("empy_info", empy_info);
+            }
+            else if(auth.contains(admin)) {
+            	empy_info=this.empyService.getEmployeeInfo(authentication.getName());
+            	model.addAttribute("admin_info", empy_info);
+            	
             }
             else if(auth.contains(student)) {
             	std_info=this.stdSrvc.getOneStudent(authentication.getName());
