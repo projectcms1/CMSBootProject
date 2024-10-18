@@ -27,7 +27,9 @@ import com.cms.ca.student_dto;
 import com.cms.ca.view_counsel_dto;
 
 import jakarta.annotation.Resource;
+import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class AdminController {
@@ -496,11 +498,12 @@ public class AdminController {
 	// 공지사항 수정하기
 	@PostMapping("/admin/notice_detail_update")
 	public void notice_detail_update(@ModelAttribute notice_dto ntdto, @RequestPart(name = "attchment_file") MultipartFile mfile,
-			ServletResponse res) {
+			ServletRequest req, ServletResponse res, String is_file_delete) {
 		try {
 			res.setContentType("text/html;charset=utf-8");
 			this.pw=res.getWriter();
-			int result=this.notice_service.notice_modify(mfile, ntdto);
+			String file_url = req.getServletContext().getRealPath("/notice_file/");
+			int result=this.notice_service.notice_modify(mfile, ntdto, file_url, is_file_delete);
 			if(result>0) {
 				this.pw.print("<script>"
 						+ "alert('공지가 정상적으로 수정되었습니다.');"
@@ -528,20 +531,24 @@ public class AdminController {
 	
 	//공지사항 추가 페이지 로드
 	@GetMapping("/admin/notice_add")
-	public String notice_add() {
+	public String notice_add(Model m) {
+		this.authentication = SecurityContextHolder.getContext().getAuthentication();
+		m.addAttribute("adminName", this.aduser_service.amdin_data(this.authentication.getName()).getEmp_flnm());
 		return "admin/notice_add";
 	}
 	
 	//공지사항 추가 (insert)
 	@PostMapping("/admin/notice_insert")
-	public void addnotice(ServletResponse res, notice_dto ntdto, @RequestPart(name = "attchment_file") MultipartFile mfile) {
+	public void addnotice(notice_dto ntdto, @RequestPart(name = "attchment_file") MultipartFile mfile,
+			ServletRequest req, ServletResponse res) {
 		res.setContentType("text/html;charset=utf-8");
 		try {
+			this.pw=res.getWriter();
 			this.authentication = SecurityContextHolder.getContext().getAuthentication();
 			ntdto.setEmp_no(this.authentication.getName());
-			this.pw=res.getWriter();
 			int result = 0;
-			result=this.notice_service.addnotice(mfile, ntdto);
+			String file_url = req.getServletContext().getRealPath("/notice_file/");
+			result=this.notice_service.addnotice(mfile, ntdto, file_url);
 			if(result > 0) {
 				this.pw.print("<script>"
 						+ "alert('공지사항이 정상적으로 등록되었습니다.');"

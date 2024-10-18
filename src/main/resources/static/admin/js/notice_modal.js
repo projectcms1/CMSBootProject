@@ -251,6 +251,10 @@ const existingOriginName = document.getElementById("atchfile_original_name");
 const existingFileName = document.getElementById("atchfile_name");
 const ntc_fix_yn = document.getElementById("ntc_fix_yn");
 
+const changeFileDeleteBtn = document.querySelector("#changeFileDeleteBtn");
+let is_file_delete = false;
+let exFileName = '';
+
 document.querySelectorAll(".notice-modal-button").forEach(function(oneModalButton) {
 	oneModalButton.addEventListener("click", function() {
 		fetch('./admin_notice_detail/' + this.value, {
@@ -279,16 +283,35 @@ function makeOpeningModal(detailData) {
 		document.getElementById("existingFileBlock").style.display = "block";
 		existingOriginName.value = detailData.orgnl_atch_file_nm;
 		existingFileName.value = detailData.atch_file_nm;
+		exFileName = detailData.orgnl_atch_file_nm;
 	}
 	else {
 		document.getElementById("existingFileBlock").style.display = "none";
+		existingOriginName.value = '';
+		existingFileName.value = '';
+		exFileName = '';
 	}
 	editor.setData(detailData.ntc_cn);
 }
 
+// 이미 올라간 첨부파일 핸들링 버튼
+changeFileDeleteBtn.addEventListener("click", function() {
+	if (is_file_delete) {
+		is_file_delete = false;
+		changeFileDeleteBtn.innerHTML = "삭제";
+		existingOriginName.value = exFileName;
+	}
+	else {
+		is_file_delete = true;
+		changeFileDeleteBtn.innerHTML = "취소";
+		existingOriginName.value = '';
+	}
+});
+
 //공지사항 상세정보 수정 기능
 document.querySelector("#update_noticedata").addEventListener('click', function() {
 	if (confirm("정말로 정보를 수정하시겠습니까?")) {
+		document.getElementById("is_file_delete").value = is_file_delete;
 		notice_detail_frm.submit();
 	}
 });

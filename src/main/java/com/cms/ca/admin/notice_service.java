@@ -14,7 +14,7 @@ public interface notice_service {
 	
 	notice_dto notice_modal(Integer ntc_mttr_sn);
 	
-	int addnotice(MultipartFile mfile, notice_dto ntdto) throws Exception;
+	int addnotice(MultipartFile mfile, notice_dto ntdto, String file_url) throws Exception;
 	
-	int notice_modify(MultipartFile mfile, notice_dto ntdto) throws Exception;
+	int notice_modify(MultipartFile mfile, notice_dto ntdto, String file_url, String is_file_delete) throws Exception;
 }

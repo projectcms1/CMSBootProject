@@ -40,21 +40,25 @@ public class notice_service_impl implements notice_service {
 	}
 
 	@Override
-	public int addnotice(MultipartFile mfile, notice_dto ntdto) throws Exception {
+	public int addnotice(MultipartFile mfile, notice_dto ntdto, String file_url) throws Exception {
 		if (!mfile.isEmpty()) {
 			ntdto.setOrgnl_atch_file_nm(mfile.getOriginalFilename());
-			ntdto.setAtch_file_nm(new FileHandler().uploadFile(mfile));
+			ntdto.setAtch_file_nm(new FileHandler().uploadFile(mfile, file_url));
 		}
 		return this.notice_repo.notice_add(ntdto);
 	}
 
 	@Override
-	public int notice_modify(MultipartFile mfile, notice_dto ntdto) throws Exception {
-		if (!mfile.isEmpty()) {
-			ntdto.setOrgnl_atch_file_nm(mfile.getOriginalFilename());
+	public int notice_modify(MultipartFile mfile, notice_dto ntdto, String file_url, String is_file_delete) throws Exception {
+		if (is_file_delete.equals("true") || !mfile.isEmpty()) {
 			FileHandler fh = new FileHandler();
-			fh.deletFile(ntdto.getAtch_file_nm());
-			ntdto.setAtch_file_nm(fh.uploadFile(mfile));
+			if (is_file_delete.equals("true") || (ntdto.getOrgnl_atch_file_nm() != null && !mfile.isEmpty())) {
+				fh.deletFile(ntdto.getAtch_file_nm(), file_url);
+			}
+			if (!mfile.isEmpty()) {
+				ntdto.setOrgnl_atch_file_nm(mfile.getOriginalFilename());
+				ntdto.setAtch_file_nm(fh.uploadFile(mfile, file_url));
+			}
 		}
 		return this.notice_repo.notice_modify(ntdto);
 	}

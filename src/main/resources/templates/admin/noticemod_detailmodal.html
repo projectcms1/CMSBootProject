@@ -67,16 +67,23 @@
 		        						<textarea id="editor" class="form-control notice_input3" name="ntc_cn"></textarea>
 		        					</div>
 	        					</div>
-        					</div>
+        						</div>
 							</div>
-
 							<div class="col-md-12 mb-2" id="existingFileBlock">
-								<label class="col-form-label">기존 첨부파일</label> <input type="text"
-									name="orgnl_atch_file_nm" id="atchfile_original_name" class="form-control" readonly>
+								<label class="col-form-label">기존 첨부파일</label>
+								<div class="row mb-3">
+									<div class="col-md-11">
+										<input type="text" name="orgnl_atch_file_nm" id="atchfile_original_name" class="form-control" readonly>
+									</div>
+									<div class="col-md-1">
+										<button type="button" class="btn btn-secondary" id="changeFileDeleteBtn">삭제</button>
+									</div>
+								</div>
 								<input type="hidden" name="atch_file_nm" id="atchfile_name">
+								<input type="hidden" name="is_file_delete" id="is_file_delete">
 							</div>
 							<div class="col-md-12 mb-2">
-								<label class="col-form-label">첨부파일 변경</label> <input type="file"
+								<label class="col-form-label">첨부파일 변경 (기존 첨부파일이 있으면 자동으로 삭제됩니다.)</label> <input type="file"
 									name="attchment_file" class="form-control">
 							</div>
 
