@@ -27,7 +27,7 @@ public class CDNFileUploader {
 	//private int port = 21;
 	
 	// 모든 이용자의 사진을 한 폴더에 올리기 때문에 String 변수에 폴더명을 적어둠
-	private String file_path_url = "http://cdn.seongmin.site/cacms/";
+	private String file_path_url = "";
 	
 	// 파일과 파일명을 필드에 올리는 즉시 실행 메소드
 	public CDNFileUploader(MultipartFile mfile) {

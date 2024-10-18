@@ -181,6 +181,7 @@ document.addEventListener('DOMContentLoaded', function () {
         	}
         	else {
 				USER_PHOTO.innerHTML = "";
+				document.getElementById("prev_file").value = '';
 			}
         }
         if (BRDT) {
