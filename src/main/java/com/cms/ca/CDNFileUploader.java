@@ -17,7 +17,7 @@ public class CDNFileUploader {
 	private FTPClient ftp = null;
 	private FTPClientConfig cf = null;
 	
-	private String host = "34.64.71.130";
+	private String host = "";
 	//private String host = "172.17.0.4";
 	
 	private String user = "sej";
@@ -47,13 +47,13 @@ public class CDNFileUploader {
 			this.ftp.connect(this.host, this.port);
 			
 			if (this.ftp.login(user, pass)) {
+				this.ftp.enterLocalPassiveMode();
 				this.ftp.setFileType(FTP.BINARY_FILE_TYPE);
 				
 				String pro = this.fileOriginName.substring(this.fileOriginName.lastIndexOf("."));
 				String randomname = UUID.randomUUID().toString() +  pro; // 랜덤한 이름에 확장자 추가
-				
 				// FTP 파일 업로드 처리
-				boolean ok = ftp.storeFile("/cacms/" + randomname, this.userFile.getInputStream());
+				boolean ok = ftp.storeFile("/cms_cdn_server/cacms/" + randomname, this.userFile.getInputStream());
 				if (ok) {
 					imgdto = new imgfile_dto();
 					imgdto.setImg_orgnl_file_nm(this.fileOriginName); // 파일 원본 명
@@ -87,10 +87,10 @@ public class CDNFileUploader {
 		this.ftp.configure(this.cf);
 		this.ftp.connect(this.host, this.port);
 		
-		if (this.ftp.login(user, pass)) {
-			ck = ftp.deleteFile("/cacms/" + filename);
+		if (this.ftp.login(this.user, this.pass)) {
+			ck = this.ftp.deleteFile("/cacms/" + filename);
 		}
-		ftp.disconnect();
+		this.ftp.disconnect();
 		return ck;
 	}
 }

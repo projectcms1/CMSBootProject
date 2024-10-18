@@ -42,14 +42,15 @@ public class CDNImageViewerCtrl {
 			imgByte = null;
 		} finally {
 			try {
+				if (httpcon != null) {
+					httpcon.disconnect();	//프로토콜을 종료
+				}
 				if (is != null) {
 					is.close(); //I/O 종료
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			httpcon.disconnect();	//프로토콜을 종료
 		}
 		return imgByte;
 	}

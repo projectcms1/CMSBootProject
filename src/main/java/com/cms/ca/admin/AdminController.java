@@ -110,7 +110,6 @@ public class AdminController {
 			} else {
 				this.pw.print("<script>" + "alert('오류로 인해 학생정보가 수정되지 않았습니다.');" + "history.go(-1);" + "</script>");
 			}
-
 		} catch (Exception e) {
 			this.pw.print("<script>" + "alert('오류로 인해 학생정보가 수정되지 않았습니다. 확인해주세요!');" + "history.go(-1);" + "</script>");
 		} finally {
