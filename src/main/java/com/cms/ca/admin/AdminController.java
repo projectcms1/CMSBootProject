@@ -498,12 +498,11 @@ public class AdminController {
 	// 공지사항 수정하기
 	@PostMapping("/admin/notice_detail_update")
 	public void notice_detail_update(@ModelAttribute notice_dto ntdto, @RequestPart(name = "attchment_file") MultipartFile mfile,
-			ServletRequest req, ServletResponse res, String is_file_delete) {
+			ServletResponse res, String is_file_delete) {
 		try {
 			res.setContentType("text/html;charset=utf-8");
 			this.pw=res.getWriter();
-			String file_url = req.getServletContext().getRealPath("/notice_file/");
-			int result=this.notice_service.notice_modify(mfile, ntdto, file_url, is_file_delete);
+			int result=this.notice_service.notice_modify(mfile, ntdto, is_file_delete);
 			if(result>0) {
 				this.pw.print("<script>"
 						+ "alert('공지가 정상적으로 수정되었습니다.');"
@@ -521,9 +520,7 @@ public class AdminController {
 					+ "alert('오류가 발생하여 공지사항 수정에 실패하였습니다.\\n다시 시도해주세요.');"
 					+ "history.go(-1);"
 					+ "</script>");
-			
 			System.out.println(e);
-			e.printStackTrace();
 		} finally {
 			this.pw.close();
 		}
@@ -540,15 +537,14 @@ public class AdminController {
 	//공지사항 추가 (insert)
 	@PostMapping("/admin/notice_insert")
 	public void addnotice(notice_dto ntdto, @RequestPart(name = "attchment_file") MultipartFile mfile,
-			ServletRequest req, ServletResponse res) {
+			ServletResponse res) {
 		res.setContentType("text/html;charset=utf-8");
 		try {
 			this.pw=res.getWriter();
 			this.authentication = SecurityContextHolder.getContext().getAuthentication();
 			ntdto.setEmp_no(this.authentication.getName());
 			int result = 0;
-			String file_url = req.getServletContext().getRealPath("/notice_file/");
-			result=this.notice_service.addnotice(mfile, ntdto, file_url);
+			result=this.notice_service.addnotice(mfile, ntdto);
 			if(result > 0) {
 				this.pw.print("<script>"
 						+ "alert('공지사항이 정상적으로 등록되었습니다.');"
