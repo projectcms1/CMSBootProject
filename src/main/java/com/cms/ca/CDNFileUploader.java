@@ -17,17 +17,17 @@ public class CDNFileUploader {
 	private FTPClient ftp = null;
 	private FTPClientConfig cf = null;
 	
-	private String host = "";
+	private String host = "아이피";
 	//private String host = "172.17.0.4";
 	
 	private String user = "sej";
-	private String pass = "";
+	private String pass = "비번";
 	
 	private int port = 9005;
 	//private int port = 21;
 	
 	// 모든 이용자의 사진을 한 폴더에 올리기 때문에 String 변수에 폴더명을 적어둠
-	private String file_path_url = "http://cdn..site/cacms/";
+	private String file_path_url = "http://cdn.이름.site/cacms/";
 	
 	// 파일과 파일명을 필드에 올리는 즉시 실행 메소드
 	public CDNFileUploader(MultipartFile mfile) {
