@@ -53,14 +53,14 @@ public class notice_service_impl implements notice_service {
 		if (is_file_delete.equals("true") || !mfile.isEmpty()) {
 			FileHandler fh = new FileHandler();
 			if (is_file_delete.equals("true") || (ntdto.getOrgnl_atch_file_nm() != null && !mfile.isEmpty())) {
-				//fh.deletFile(ntdto.getAtch_file_nm());
+				fh.deletFile(ntdto.getAtch_file_nm());
 			}
 			if (!mfile.isEmpty()) {
 				ntdto.setOrgnl_atch_file_nm(mfile.getOriginalFilename());
 				ntdto.setAtch_file_nm(fh.uploadFile(mfile));
 			}
 		}
-		return 0;//this.notice_repo.notice_modify(ntdto);
+		return this.notice_repo.notice_modify(ntdto);
 	}
 	
 }
