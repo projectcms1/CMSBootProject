@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FileHandler {
 
-	private String file_url = "/home/sej/cms_notice_file";
+	private String file_url = "/home/sej/cms_notice_file/";
 	
 	private String orgn_name = null;
 	
