@@ -516,8 +516,8 @@ public class AdminController {
 						+ "</script>");
 			}	
 		} catch (Exception e) {
-			this.pw.print("<script>" // ('오류가 발생하여 공지사항 수정에 실패하였습니다.\\n다시 시도해주세요.')
-					+ "alert('" + e + "');"
+			this.pw.print("<script>"
+					+ "alert('오류가 발생하여 공지사항 수정에 실패하였습니다.\\\\n다시 시도해주세요.');"
 					+ "history.go(-1);"
 					+ "</script>");
 		} finally {

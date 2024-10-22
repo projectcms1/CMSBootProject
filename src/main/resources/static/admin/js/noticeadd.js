@@ -243,6 +243,7 @@ ClassicEditor.create(document.querySelector('#editor'), editorConfig).then(newEd
 document.querySelector("#add_notice_btn").addEventListener("click", function() {
 	let noticeFile = document.getElementById("notice_file");
 	var editorData = editor.getData();
+	
 	if (notice_add_frm.ntc_mttr_ttl.value == "") {
 		alert("공지사항 제목을 입력해주세요.");
 		notice_add_frm.ntc_mttr_ttl.focus();
@@ -251,7 +252,7 @@ document.querySelector("#add_notice_btn").addEventListener("click", function() {
 		alert("공지 내용을 입력해주세요.");
 		document.querySelector(".ck-editor__editable_inline").focus();
 	}
-	else if (noticeFile.files[0].size > 5242880) {
+	else if (noticeFile.files.length != 0 && noticeFile.files[0].size > 5242880) {
 		alert("첨부 파일은 5MB 이하만 가능합니다.");
 		noticeFile.value = "";
 	}

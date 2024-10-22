@@ -311,7 +311,7 @@ changeFileDeleteBtn.addEventListener("click", function() {
 //공지사항 상세정보 수정 기능
 document.querySelector("#update_noticedata").addEventListener('click', function() {
 	let new_notice_file = document.getElementById("new_notice_file");
-	if (new_notice_file.files[0].size > 5242880) {
+	if (new_notice_file.files.length != 0 && new_notice_file.files[0].size > 5242880) {
 		alert("첨부 파일은 5MB 이하만 가능합니다.");
 		new_notice_file.value = "";
 	}

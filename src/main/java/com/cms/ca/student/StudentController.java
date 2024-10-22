@@ -180,8 +180,16 @@ public class StudentController {
 	}
 	
 	@GetMapping("/std_counsel_chatting")
-	public String std_counsel_chatting() {
-		return "student/std_counsel_chatting";
+	public String std_counsel_chatting(Model m) {
+		try {
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			student_dto onedata = this.stdSrvc.getOneStudent(authentication.getName());
+			m.addAttribute("std_data", onedata);
+			this.viewName = "student/std_counsel_chatting";
+		} catch (Exception e) {
+			this.viewName = "error";
+		}
+		return this.viewName;
 	}
 	
 	@GetMapping("/std_counsel_selftestlist")
@@ -193,7 +201,6 @@ public class StudentController {
 			m.addAttribute("inspList", this.inspSrvc.getAllListInsp());
 			this.viewName = "student/std_counsel_selftestlist";
 		} catch (Exception e) {
-			e.printStackTrace();
 			this.viewName = "error";
 		}
 		return this.viewName;
