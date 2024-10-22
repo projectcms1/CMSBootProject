@@ -498,11 +498,11 @@ public class AdminController {
 	// 공지사항 수정하기
 	@PostMapping("/admin/notice_detail_update")
 	public void notice_detail_update(@ModelAttribute notice_dto ntdto, @RequestPart(name = "attchment_file") MultipartFile mfile,
-			ServletResponse res, String is_file_delete) {
+			ServletResponse res) {
 		try {
 			res.setContentType("text/html;charset=utf-8");
 			this.pw=res.getWriter();
-			int result=this.notice_service.notice_modify(mfile, ntdto, is_file_delete);
+			int result=this.notice_service.notice_modify(mfile, ntdto);
 			if(result>0) {
 				this.pw.print("<script>"
 						+ "alert('공지가 정상적으로 수정되었습니다.');"
@@ -516,11 +516,10 @@ public class AdminController {
 						+ "</script>");
 			}	
 		} catch (Exception e) {
-			this.pw.print("<script>"
-					+ "alert('오류가 발생하여 공지사항 수정에 실패하였습니다.\\n다시 시도해주세요.');"
+			this.pw.print("<script>" // ('오류가 발생하여 공지사항 수정에 실패하였습니다.\\n다시 시도해주세요.')
+					+ "alert('" + e + "');"
 					+ "history.go(-1);"
 					+ "</script>");
-			System.out.println(e);
 		} finally {
 			this.pw.close();
 		}

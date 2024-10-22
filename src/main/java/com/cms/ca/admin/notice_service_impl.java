@@ -49,15 +49,31 @@ public class notice_service_impl implements notice_service {
 	}
 
 	@Override
-	public int notice_modify(MultipartFile mfile, notice_dto ntdto, String is_file_delete) throws Exception {
-		if (is_file_delete.equals("true") || !mfile.isEmpty()) {
+	public int notice_modify(MultipartFile mfile, notice_dto ntdto) throws Exception {
+		if (!mfile.isEmpty()) { // 새로운 파일이 있을 때
 			FileHandler fh = new FileHandler();
-			if (is_file_delete.equals("true") || (ntdto.getOrgnl_atch_file_nm() != null && !mfile.isEmpty())) {
-				fh.deletFile(ntdto.getAtch_file_nm());
-			}
-			if (!mfile.isEmpty()) {
+			if (ntdto.getOrgnl_atch_file_nm().equals("") || ntdto.getAtch_file_nm().equals("")) {
 				ntdto.setOrgnl_atch_file_nm(mfile.getOriginalFilename());
 				ntdto.setAtch_file_nm(fh.uploadFile(mfile));
+			}
+			else {
+				fh.deletFile(ntdto.getAtch_file_nm());
+				
+				ntdto.setOrgnl_atch_file_nm(mfile.getOriginalFilename());
+				ntdto.setAtch_file_nm(fh.uploadFile(mfile));
+			}
+		}
+		else { // 새로운 파일이 없을 때
+			if (ntdto.getIs_file_delete().equals("true")) { // 기존 파일 삭제
+				FileHandler fh = new FileHandler();
+				fh.deletFile(ntdto.getAtch_file_nm());
+				
+				ntdto.setOrgnl_atch_file_nm(null);
+				ntdto.setAtch_file_nm(null);
+			}
+			else if (ntdto.getOrgnl_atch_file_nm().equals("") || ntdto.getAtch_file_nm().equals("")) {
+				ntdto.setOrgnl_atch_file_nm(null);
+				ntdto.setAtch_file_nm(null);
 			}
 		}
 		return this.notice_repo.notice_modify(ntdto);
